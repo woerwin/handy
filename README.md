@@ -1,4 +1,3 @@
-
 设计原则
 ----
 
@@ -8,7 +7,7 @@
 
 ### 细则
 
-1. API 设计不与 jQuery 冲突
+1. API 设计不与 Zepto 冲突
 1. 支持 DATA-ATTRIBUTE API
 
 
