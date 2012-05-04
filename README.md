@@ -19,5 +19,4 @@
 3. Stay focused and keep shipping.
 4. Code wins arguments.
 
-更详细的设计思想和目标可访问[Arale](/alipay/arale "arale")
----
+**更详细的设计思想和目标可访问[Arale](/alipay/arale "arale")**
