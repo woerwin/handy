@@ -1,10 +1,104 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>storage - handy</title>
+    <style type="text/css">
+        .box{
+            width:200px;
+            margin:0 auto;
+        }
+    </style>
+    <script src="../../../tools/seajs-and-its-friends.js"></script>
 </head>
 <body>
+<div class="box">
+    <table width="100%">
+        <caption>第一组</caption>
+        <tr>
+            <td>Key:</td>
+            <td><input type="text" id="J-key1" /></td>
+        </tr>
+        <tr>
+            <td>Value:</td>
+            <td><input type="text" id="J-value1" /></td>
+        </tr>
+    </table>
+    <table width="100%">
+        <caption>第二组</caption>
+        <tr>
+            <td>Key:</td>
+            <td><input type="text" id="J-key2" /></td>
+        </tr>
+        <tr>
+            <td>Value:</td>
+            <td><input type="text" id="J-value2" /></td>
+        </tr>
+    </table>
+    <a href="javascript:void(0)" id="J-sava">保存全部数据</a><br />
+    <a href="javascript:void(0)" id="J-cleanTheFirst">清除第一组</a><br />
+    <a href="javascript:void(0)" id="J-cleanAll">清除所有数据</a><br />
+    <p id="J-output"></p>
+</div>
+  <script>
+      var getDom = function (dom){return document.querySelector(dom);};
 
+      seajs.use('../src/storage',function (storage){
+          if(!storage.available){
+            return alert('您的浏览器不支持数据存储。');
+          }
+
+          var html = '',
+              theFirstKey = null,
+              theSecondKey = null;
+
+          getDom('#J-sava').addEventListener('click',function (e){
+              theFirstKey = getDom('#J-key1').value;
+              theSecondKey = getDom('#J-key2').value;
+              storage.set(theFirstKey,getDom('#J-value1').value);
+              storage.set(theSecondKey,getDom('#J-value2').value);
+
+              var data = {};
+              data[theFirstKey] = storage.get(theFirstKey);
+              data[theSecondKey] = storage.get(theSecondKey);
+              output(data);
+          },false);
+          getDom('#J-cleanTheFirst').addEventListener('click',function (e){
+              storage.deleteKey(theFirstKey);
+              var key = storage.getKeys()[0],
+                  data = storage.get(key),
+                  param = {};
+
+              if(key){
+                  param[key] = data;
+              }
+
+              output(param);
+          },false);
+          getDom('#J-cleanAll').addEventListener('click',function (e){
+              storage.clearAll();
+              var key = storage.getKeys();
+
+              if(key.length === 0){
+                  output({});
+              }
+          },false);
+
+          function output(data){
+              var html = '<span>您刚存储的数据：</span><br />';
+
+              for(i in data){
+                  html += '<sapn>'+i+' : '+data[i]+'</span><br />';
+              }
+
+              getDom('#J-output').innerHTML = html;
+          }
+      });
+  </script>
 </body>
 </html>
