@@ -51,8 +51,8 @@
         <h1>Example：Storage</h1>
         Storage提供一套在移动平台处理数据存储的解决方案，Storage对localStorage作了一层封装，目前仅支持localStorage，不支持sessionStorage。
         <article class="des">
-            1、分别在下面的文本框中输入您要保存的数据，然后点击保存全部数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果生成到页面末尾<br />
-            2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然后生成到页面末尾<br />
+            1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果显示在页面末尾<br />
+            2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然显示在页面末尾<br />
             3、点击清除已保存的所有数据，将从localStorage中清除您刚保存的所有数据，从localStorage中读取数据为空。<br />
             4、存储数据后，您还可以在另一个页面中修改数据，此时storage会提醒您: "有人修改了XXX的数据"<br />
             建议您使用移动设备内置浏览器访问这个页面
@@ -81,38 +81,19 @@
                     <td><input type="text" id="J-value2"/></td>
                 </tr>
             </table>
-            <a href="javascript:void(0)" id="J-sava">保存全部数据</a><br/>
+            <a href="javascript:void(0)" id="J-sava">保存数据</a><br/>
             <a href="javascript:void(0)" id="J-cleanTheFirst">清除已保存的第一组数据</a><br/>
             <a href="javascript:void(0)" id="J-cleanAll">清除已保存的所有数据</a><br/>
 
             <table width="100%">
                 <caption>修改已保存的第一组数据</caption>
                 <tr>
-                    <td>新的数据:</td>
+                    <td>Value:</td>
                     <td><input type="text" id="J-key1-new"/><a href="javascript:void(0)" id="J-updateTheFirst">修改已保存的第一组数据</a></td>
                 </tr>
             </table>
 
             <p id="J-output"></p>
-            <section>
-                <h4>1、首先我们需要引入seajs</h4>
-                <pre>
-&lt;script src="sea.js"&gt;&lt;/script&gt;
-                </pre>
-                <h4>2、引入storage模块</h4>
-                <pre>
-seajs.use('../storage',function (storage){
-  //...
-});
-                </pre>
-                <h4>3、管理数据</h4>
-                <pre>
-seajs.use('../storage',function (storage){
-  storage.set(key,value);
-  storage.get(key);
-});
-                </pre>
-            </section>
 </div>
 <script>
     var getDom = function (dom) {
@@ -136,8 +117,8 @@ seajs.use('../storage',function (storage){
                 return alert('请输入您要保存的数据');
             }
 
-            storage.on(theFirstKey+':change',function (e){console.log(e)
-              alert('有人修改了'+theFirstKey+'的数据！')
+            storage.on(theFirstKey+':change',function (e){
+              alert('有人修改了'+theFirstKey+'的数据！');
             });
 
             storage.set(theFirstKey, getDom('#J-value1').value);
@@ -179,13 +160,18 @@ seajs.use('../storage',function (storage){
             var newValue = getDom('#J-key1-new').value;
             storage.set(theFirstKey,newValue);
             storage.trigger(theFirstKey+':change');
+            var data = {};
+            data[theFirstKey] = storage.get(theFirstKey);
+            output(data);
         },false);
 
         function output(data) {
             var html = '<span>您刚存储的数据：</span><br />';
 
             for (i in data) {
-                html += '<sapn>' + i + ' : ' + data[i] + '</span><br />';
+                if(i && data[i]){
+                  html += '<sapn>' + i + ' : ' + data[i] + '</span><br />';
+                }
             }
 
             getDom('#J-output').innerHTML = html;
