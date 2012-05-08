@@ -144,7 +144,7 @@ define(function (require){
 - [runner.html](../lib/storage/tests/runner.html)
 
 ##演示地址
-- [Demo](../lib/examples/storage.html)
+- [Demo](../lib/storage/examples/storage.html)
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
