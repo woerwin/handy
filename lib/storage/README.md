@@ -4,6 +4,12 @@
 ##模块依赖
 - [event](http://github.com/alipay/arale/tree/master/lib/events)
 
+##平台兼容
+- iOS 3.0+
+- Windows Phone 7
+- Android 1.5+
+- UC浏览器 7.9+ 部分平台的UC U3内核的浏览器对`storage`事件支持存在怪异(有时不能触发)
+
 ##使用说明
 `storage` 是一个单例，可直接使用
 
