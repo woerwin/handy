@@ -12,7 +12,7 @@
 
 ```js
 define(function (require,exports,module){
-    var Storage = require('Storage');
+    var Storage = require('storage');
 });
 ```
 ###available属性 `Storage.available`
@@ -20,7 +20,7 @@ define(function (require,exports,module){
 
 ```js
 define(function (require){
-  var Storage = require('Storage');
+  var Storage = require('storage');
   if(Storage.available){
       //...
   }else{
@@ -35,7 +35,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
 });
 ```
@@ -51,7 +51,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     var name = Storage.get('name');
 });
 ```
@@ -61,7 +61,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
     Storage.set('version','0.9.0');
     
@@ -73,7 +73,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
     Storage.set('version','0.9.0');
     
@@ -89,7 +89,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
     Storage.set('version','0.9.0');
     
@@ -107,7 +107,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
     Storage.on('name:change',function (e){
         alert('有人修改了'+e.key);
@@ -122,7 +122,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
     Storage.on('name:delete',function (e){
         alert('有人修改了'+e.key);
@@ -133,7 +133,7 @@ define(function (require){
 
 ```js
 define(function (require){
-    var Storage = require('Storage');
+    var Storage = require('storage');
     Storage.set('name','handy');
     Storage.on('clear',function (e){
         alert('您通过Storage保存的数据被全部清除。');
@@ -142,6 +142,9 @@ define(function (require){
 ```
 ##测试用例
 - [runner.html](../lib/storage/tests/runner.html)
+
+##演示地址
+- [Demo](../lib/examples/storage.html)
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
