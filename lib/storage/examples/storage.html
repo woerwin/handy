@@ -121,6 +121,10 @@
               alert('有人修改了'+theFirstKey+'的数据！');
             });
 
+            storage.on('clearAll',function (){
+                alert('数据被全部清除');
+            });
+
             storage.set(theFirstKey, getDom('#J-value1').value);
             storage.set(theSecondKey, getDom('#J-value2').value);
 

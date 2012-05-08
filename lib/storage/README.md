@@ -143,3 +143,8 @@ define(function (require){
     });
 });
 ```
+##测试用例
+- [runner.html](tests/runner.html)
+
+##反馈意见
+欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
