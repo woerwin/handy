@@ -1,5 +1,5 @@
 #Storage
-提供一套移动平台数据存储解决方案
+提供一套移动平台浏览器端数据存储解决方案
 
 ##模块依赖
 - [event](http://github.com/alipay/arale/tree/master/lib/events)
