@@ -5,7 +5,7 @@
 - [event](http://github.com/alipay/arale/tree/master/lib/events)
 
 ##平台兼容
-- UC浏览器 7.9+ 部分平台的UC U3内核的浏览器对`Storage`事件支持存在怪异(有时不能触发)
+- UC浏览器 7.9+ 部分平台的 UC U3 内核的浏览器对 `Storage` 事件支持存在怪异(有时不能触发)
 
 ##使用说明
 `Storage` 是一个单例，可直接使用
@@ -15,8 +15,8 @@ define(function (require,exports,module){
     var Storage = require('storage');
 });
 ```
-###available属性 `Storage.available`
-`available`返回Boolean，如果浏览器支持`localStorage`或`sessionStorage`返回`true`，否则返回`false`
+###available `Storage.available`
+`available` 返回 Boolean，如果浏览器支持 `localStorage` 或 `sessionStorage` 返回 `true`，否则返回 `false`。
 
 ```js
 define(function (require){
@@ -39,15 +39,15 @@ define(function (require){
     Storage.set('name','handy');
 });
 ```
-上面的代码将通过localStorage向本地存储一条key为name，value为handy的数据，
+上面的代码将通过 localStorage 向本地存储一条 key 为 name，value 为 handy 的数据，
 
-`Storage`当前只允许存储`String`数据。
+`Storage` 当前只允许存储 `String` 数据。
 
 ###get `Storage.get(key)`
 
-通过指定的key获取一条数据
+通过指定的 `key` 获取一条数据
 
-`get`方法返回一条数据
+`get` 方法返回一条数据
 
 ```js
 define(function (require){
@@ -57,7 +57,7 @@ define(function (require){
 ```
 ###keys `Storage.keys()`
 
-返回通过`Storage`保存的所有key
+返回通过 `Storage` 保存的所有 key
 
 ```js
 define(function (require){
@@ -69,7 +69,7 @@ define(function (require){
 });
 ```
 ###delete `Storage.delete(key)`
-删除指定的key及key对应的value
+删除指定的 key 及 key 对应的 value
 
 ```js
 define(function (require){
@@ -82,10 +82,10 @@ define(function (require){
     Storage.keys();//['name'];
 });
 ```
-`delete`方法调用时会触发`Storage.on(key:delete)`事件
+`delete` 方法调用时会触发 `Storage.on(key:delete)` 事件
 
-###clear方法 `Storage.clear()`
-清除通过`Storage`存储的所有数据
+###clear `Storage.clear()`
+清除通过 `Storage` 存储的所有数据
 
 ```js
 define(function (require){
@@ -98,10 +98,10 @@ define(function (require){
     Storage.keys();//[]
 });
 ```
-值得注意`clear`只清除通过`Storage`存储的数据，并不是指清除`localStorage`和`sessionStorage`对象中的所有数据
-`clear`方法调用时会触发`Storage.on('clear')`事件
+值得注意 `clear` 只清除通过 `Storage` 存储的数据，并不是指清除 `localStorage` 和 `sessionStorage` 对象中的所有数据
+`clear` 方法调用时会触发 `Storage.on('clear')` 事件
 
-###`Storage`混入了`event`模块，因此它也有一套自定义事件机制。
+###`Storage` 混入了 `event` 模块，因此它也有一套自定义事件机制。
 
 ###监听某条数据被修改 `Storage.on(key:change,callback)`
 
@@ -116,7 +116,7 @@ define(function (require){
     });
 });
 ```
-如果要尝试`Storage.on`，你需要打开两个浏览器窗口(A,B)，在A窗口保存一条数据，在B窗口修改A窗口所保存的数据(请注意一定要修改同名的key)
+如果要尝试 `Storage.on`，你需要打开两个浏览器窗口 (A,B)，在 A 窗口保存一条数据，在 B 窗口修改 A 窗口所保存的数据(请注意一定要修改同名的 key )
 
 ###监听某条数据被删除 `Storage.on(key:delete,callback)`
 
@@ -129,7 +129,7 @@ define(function (require){
     });
 });
 ```
-###监听`Storage`保存的所有数据被清除 `Storage.on('clear',callback)`
+###监听 `Storage` 保存的所有数据被清除 `Storage.on('clear',callback)`
 
 ```js
 define(function (require){

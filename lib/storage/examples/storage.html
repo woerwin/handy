@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
-    <title>storage - handy</title>
+    <title>Storage - handy</title>
     <style type="text/css">
         .box {
             width: auto;
@@ -54,7 +54,7 @@
             1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果显示在页面末尾<br />
             2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然显示在页面末尾<br />
             3、点击清除已保存的所有数据，将从localStorage中清除您刚保存的所有数据，从localStorage中读取数据为空。<br />
-            4、存储数据后，您还可以在另一个页面中修改数据，此时storage会提醒您: "有人修改了XXX的数据"<br />
+            4、存储数据后，您还可以在另一个页面中修改数据，此时Storage会提醒您: "有人修改了XXX的数据"<br />
             建议您使用移动设备内置浏览器访问这个页面
         </article>
         <section>
@@ -100,8 +100,8 @@
         return document.querySelector(dom);
     };
 
-    seajs.use('../src/storage', function (storage) {
-        if (!storage.available) {
+    seajs.use('../src/storage', function (Storage) {
+        if (!Storage.available) {
             return alert('您的浏览器不支持数据存储。');
         }
 
@@ -117,27 +117,27 @@
                 return alert('请输入您要保存的数据');
             }
 
-            storage.on(theFirstKey+':change',function (e){
+            Storage.on(theFirstKey+':change',function (e){
               alert('有人修改了'+theFirstKey+'的数据！');
             });
 
-            storage.on('clearAll',function (){
+            Storage.on('clear',function (){
                 alert('数据被全部清除');
             });
 
-            storage.set(theFirstKey, getDom('#J-value1').value);
-            storage.set(theSecondKey, getDom('#J-value2').value);
+            Storage.set(theFirstKey, getDom('#J-value1').value);
+            Storage.set(theSecondKey, getDom('#J-value2').value);
 
             var data = {};
-            data[theFirstKey] = storage.get(theFirstKey);
-            data[theSecondKey] = storage.get(theSecondKey);
+            data[theFirstKey] = Storage.get(theFirstKey);
+            data[theSecondKey] = Storage.get(theSecondKey);
             output(data);
         }, false);
 
         getDom('#J-cleanTheFirst').addEventListener('click', function (e) {
-            storage.deleteKey(theFirstKey);
-            var key = storage.getKeys()[0],
-                    data = storage.get(key),
+            Storage.delete(theFirstKey);
+            var key = Storage.keys()[0],
+                    data = Storage.get(key),
                     param = {};
 
             if (key) {
@@ -152,8 +152,8 @@
                 return alert('您还没有保存数据');
             }
 
-            storage.clearAll();
-            var key = storage.getKeys();
+            Storage.clear();
+            var key = Storage.keys();
 
             if (key.length === 0) {
                 output({'提示':'数据已清空'});
@@ -162,10 +162,10 @@
 
         getDom('#J-updateTheFirst').addEventListener('click',function (e){
             var newValue = getDom('#J-key1-new').value;
-            storage.set(theFirstKey,newValue);
-            storage.trigger(theFirstKey+':change');
+            Storage.set(theFirstKey,newValue);
+            Storage.trigger(theFirstKey+':change');
             var data = {};
-            data[theFirstKey] = storage.get(theFirstKey);
+            data[theFirstKey] = Storage.get(theFirstKey);
             output(data);
         },false);
 
