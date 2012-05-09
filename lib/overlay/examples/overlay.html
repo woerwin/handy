@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>Overlay - handy</title>
+    <style type="text/css">
+        .box {
+            width: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        caption {
+            text-align: left;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        table {
+            margin: 10px 0;
+        }
+
+        table td:first-child {
+            width: 100px;
+        }
+        .des{
+            background:#F0F1F8;
+            border:1px solid #D4D8EB;
+            padding:10px;
+            line-height:22px;
+        }
+        pre,code{
+            padding:10px;
+            background:#FCFBFA;
+            border:1px solid #EFEEED;
+            border-left-width:5px;
+        }
+    </style>
+    <script src="../../../tools/seajs-and-its-friends.js"></script>
+</head>
+<body>
+<div class="box">
+        <h1>Example：Storage</h1>
+        Storage提供一套在移动平台处理数据存储的解决方案，Storage对localStorage作了一层封装，目前仅支持localStorage，不支持sessionStorage。
+        <article class="des">
+            1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果显示在页面末尾<br />
+            2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然显示在页面末尾<br />
+            3、点击清除已保存的所有数据，将从localStorage中清除您刚保存的所有数据，从localStorage中读取数据为空。<br />
+            4、存储数据后，您还可以在另一个页面中修改数据，此时Storage会提醒您: "有人修改了XXX的数据"<br />
+            建议您使用移动设备内置浏览器访问这个页面
+        </article>
+        <table width="100%">
+            <caption>第一组数据</caption>
+            <tr>
+                <td>Key:</td>
+                <td><input type="text" id="J-key1"/></td>
+            </tr>
+            <tr>
+                <td>Value:</td>
+                <td><input type="text" id="J-value1"/></td>
+            </tr>
+        </table>
+        <table width="100%">
+            <caption>第二组数据</caption>
+            <tr>
+                <td>Key:</td>
+                <td><input type="text" id="J-key2"/></td>
+            </tr>
+            <tr>
+                <td>Value:</td>
+                <td><input type="text" id="J-value2"/></td>
+            </tr>
+        </table>
+        <a href="javascript:void(0)" id="J-sava">保存数据</a><br/>
+        <a href="javascript:void(0)" id="J-cleanTheFirst">清除已保存的第一组数据</a><br/>
+        <a href="javascript:void(0)" id="J-cleanAll">清除已保存的所有数据</a><br/>
+
+        <table width="100%">
+            <caption>修改已保存的第一组数据</caption>
+            <tr>
+                <td>Value:</td>
+                <td><input type="text" id="J-key1-new"/><a href="javascript:void(0)" id="J-updateTheFirst">修改已保存的第一组数据</a></td>
+            </tr>
+        </table>
+
+        <p id="J-output"></p>
+</div>
+<script>
+    var getDom = function (dom) {
+        return document.querySelector(dom);
+    };
+
+    seajs.use('../src/storage', function (Storage) {
+        if (!Storage.available) {
+            return alert('您的浏览器不支持数据存储。');
+        }
+
+        var html = '',
+            theFirstKey = null,
+            theSecondKey = null;
+
+        getDom('#J-sava').addEventListener('click', function (e) {
+            theFirstKey = getDom('#J-key1').value;
+            theSecondKey = getDom('#J-key2').value;
+
+            if(!theFirstKey && !theSecondKey){
+                return alert('请输入您要保存的数据');
+            }
+
+            Storage.on(theFirstKey+':change',function (e){
+              alert('有人修改了'+theFirstKey+'的数据！');
+            });
+
+            Storage.on('clear',function (){
+                alert('数据被全部清除');
+            });
+
+            Storage.set(theFirstKey, getDom('#J-value1').value);
+            Storage.set(theSecondKey, getDom('#J-value2').value);
+
+            var data = {};
+            data[theFirstKey] = Storage.get(theFirstKey);
+            data[theSecondKey] = Storage.get(theSecondKey);
+            output(data);
+        }, false);
+
+        getDom('#J-cleanTheFirst').addEventListener('click', function (e) {
+            Storage.remove(theFirstKey);
+            var key = Storage.keys()[0],
+                    data = Storage.get(key),
+                    param = {};
+
+            if (key) {
+                param[key] = data;
+            }
+
+            output(param);
+        }, false);
+
+        getDom('#J-cleanAll').addEventListener('click', function (e) {
+            if(!theFirstKey && !theSecondKey){
+                return alert('您还没有保存数据');
+            }
+
+            Storage.clear();
+            var key = Storage.keys();
+
+            if (key.length === 0) {
+                output({'提示':'数据已清空'});
+            }
+        }, false);
+
+        getDom('#J-updateTheFirst').addEventListener('click',function (e){
+            var newValue = getDom('#J-key1-new').value;
+            Storage.set(theFirstKey,newValue);
+            Storage.trigger(theFirstKey+':change');
+            var data = {};
+            data[theFirstKey] = Storage.get(theFirstKey);
+            output(data);
+        },false);
+
+        function output(data) {
+            var html = '<span>您刚存储的数据：</span><br />';
+
+            for (i in data) {
+                if(i && data[i]){
+                  html += '<sapn>' + i + ' : ' + data[i] + '</span><br />';
+                }
+            }
+
+            getDom('#J-output').innerHTML = html;
+        }
+    });
+</script>
+</body>
+</html>
