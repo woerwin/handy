@@ -57,8 +57,7 @@
         </article>
         <div id="J-output">
         </div>
-        <a href="javascript:void(0)" id="J-stop">停止网络状态检测</a><br />
-        <a href="javascript:void(0)" id="J-start">重新启动网络状态检测</a>
+        <a href="javascript:void(0)" id="J-stop">停止网络状态检测</a>
 </div>
 <script>
     function getDOM(dom){return document.querySelector(dom);}
@@ -66,20 +65,16 @@
     seajs.use('../src/network', function (Network) {
         var startTime = new Date().getTime();
 
-        Network.start();
-        Network.on('online',function (){
+        Network.online(function (){
             getDOM('#J-output').innerHTML = '网络状态：<span class="green">在线</span>';
         });
-        Network.on('offline',function (){
+
+        Network.offline(function (){
             getDOM('#J-output').innerHTML = '网络状态：<span class="red">离线</span>';
         });
 
         getDOM('#J-stop').addEventListener('click',function (){
-            Network.stop();
-        },false);
-
-        getDOM('#J-start').addEventListener('click',function (){
-            Network.start();
+            Network.destroy();
         },false);
     });
 </script>

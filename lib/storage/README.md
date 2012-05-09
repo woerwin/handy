@@ -68,7 +68,7 @@ define(function (require){
     var keys = Storage.keys();//['name','version']
 });
 ```
-###delete `Storage.delete(key)`
+###deleteKey `Storage.deleteKey(key)`
 删除指定的 key 及 key 对应的 value
 
 ```js
@@ -78,11 +78,11 @@ define(function (require){
     Storage.set('version','0.9.0');
     
     Storage.keys();//['name','version'];
-    Storage.delete('version');
+    Storage.deleteKey('version');
     Storage.keys();//['name'];
 });
 ```
-`delete` 方法调用时会触发 `Storage.on(key:delete)` 事件
+`deleteKey` 方法调用时会触发 `Storage.on(key:delete)` 事件
 
 ###clear `Storage.clear()`
 清除通过 `Storage` 存储的所有数据
