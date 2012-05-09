@@ -87,8 +87,7 @@ define(function (require){
 ###后续需补充的
 -    **兼容到 Phonegap 的 navigator.connection,用于检测当前的网络连接类型：WIFI,2G,3G,none**
 
-
-     3
+     `Network` 当前只能检测到连接状态，还不能获取网络连接类型，如果通过中间件 (Phonegap) 是可能获取到网络连接类型
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
