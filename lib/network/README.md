@@ -85,7 +85,9 @@ define(function (require){
 - [Demo](../lib/network/examples/network.html)
 
 ###后续需补充的
--    *兼容到 Phonegap 的 navigator.connection,用于检测当前的网络连接类型：WIFI,2G,3G,none*
+-    **兼容到 Phonegap 的 navigator.connection,用于检测当前的网络连接类型：WIFI,2G,3G,none**
+
+
      3
 
 ##反馈意见
