@@ -9,6 +9,9 @@
     <meta name="format-detection" content="email=no"/>
     <title>PageTransition - handy</title>
     <style type="text/css">
+        a{
+            text-decoration:none;
+        }
         .box {
             width: auto;
             margin: 0;
@@ -42,6 +45,29 @@
             border:1px solid #EFEEED;
             border-left-width:5px;
         }
+        .bar{
+            height:40px;
+            background:black;
+            color:#fff;
+            text-align:center;
+            margin:0 0 20px 0;
+        }
+        body{
+            padding:0;
+            margin:0;
+        }
+        .des{
+            margin:0 30px;
+        }
+        .back{
+            float:left;
+            color:#f50;
+            font-size:14px;
+            margin:5px 0 0 30px;
+            background:yellow;
+            padding:3px 10px;
+            -webkit-border-radius:5px;
+        }
     </style>
     <script src="../../../tools/seajs-and-its-friends.js"></script>
 </head>
@@ -49,22 +75,25 @@
 <div class="box">
     <div id="J-page-box">
         <section data-role="page">
-            <h1>Example：Storage</h1>
-            Storage提供一套在移动平台处理数据存储的解决方案，Storage对localStorage作了一层封装，目前仅支持localStorage，不支持sessionStorage。
+            <h1 class="bar">Example：PageTransition</h1>
+            <p class="des" style="border-bottom:none;">Storage提供一套在移动平台处理数据存储的解决方案，Storage对localStorage作了一层封装，目前仅支持localStorage，不支持sessionStorage。</p>
             <article class="des">
                 1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果显示在页面末尾<br />
                 2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然显示在页面末尾<br />
                 3、点击清除已保存的所有数据，将从localStorage中清除您刚保存的所有数据，从localStorage中读取数据为空。<br />
                 4、存储数据后，您还可以在另一个页面中修改数据，此时Storage会提醒您: "有人修改了XXX的数据"<br />
                 建议您使用移动设备内置浏览器访问这个页面
+                <p><a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">查看PageTransition所需的HTML结构</a></p>
             </article>
-            <a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">下一页</a>
         </section>
     </div>
 </div>
 
 <article id="J-page-box-nextPage" style="display:none;" data-role="page">
-    <a href="javascript:void(0)" data-role="trigger" data-action="prev">返回</a>
+    <h1 class="bar"><a href="javascript:void(0)" data-role="trigger" data-action="prev" class="back">返回</a>Example：PageTransition所需的HTML结构</h1>
+    <article class="des">
+
+    </article>
 </article>
 
 <script>
