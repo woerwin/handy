@@ -51,6 +51,8 @@
             color:#fff;
             text-align:center;
             margin:0 0 20px 0;
+            font-size:14px;
+            line-height:40px;
         }
         body{
             padding:0;
@@ -60,13 +62,7 @@
             margin:0 30px;
         }
         .back{
-            float:left;
-            color:#f50;
             font-size:14px;
-            margin:5px 0 0 30px;
-            background:yellow;
-            padding:3px 10px;
-            -webkit-border-radius:5px;
         }
     </style>
     <script src="../../../tools/seajs-and-its-friends.js"></script>
@@ -76,42 +72,85 @@
     <div id="J-page-box">
         <section data-role="page">
             <h1 class="bar">Example：PageTransition</h1>
-            <p class="des" style="border-bottom:none;">Storage提供一套在移动平台处理数据存储的解决方案，Storage对localStorage作了一层封装，目前仅支持localStorage，不支持sessionStorage。</p>
+            <p class="des" style="border-bottom:none;">PageTransition 提供一个模拟 iOS 原生应用页面过渡效果的 UI 组件。</p>
             <article class="des">
-                1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果显示在页面末尾<br />
-                2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然显示在页面末尾<br />
-                3、点击清除已保存的所有数据，将从localStorage中清除您刚保存的所有数据，从localStorage中读取数据为空。<br />
-                4、存储数据后，您还可以在另一个页面中修改数据，此时Storage会提醒您: "有人修改了XXX的数据"<br />
+                PageTransition 暂时只提供水平过渡效果，未来的版本会增加过渡模式 (transition mode) 配置<br />
+                PageTransition 水平过渡效果使用了 margin-left 动画，并没有使用 translate-x ，由此带来的问题是：<a href="http://qiqicartoon.com/?p=1023" target="_blank">动画运动不够平滑</a>,
+                既然 margin-left 在移动平台的动画不够平滑，为何还要使用 margin-left 呢？您可以参考 <a href="http://qiqicartoon.com/?p=785" target="_blank">Android平台中CSS3 transition和animation问题</a><br />
+                1、您可以<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
+                2、您可以<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage2">查看 pageTransition 组件的基本配置</a><br />
                 建议您使用移动设备内置浏览器访问这个页面
-                <p><a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">查看PageTransition所需的HTML结构</a></p>
             </article>
         </section>
     </div>
+    <p style="margin:10px 30px;text-align:center;">@copy <a href="http://aralejs.org" target="_blank">arale.org</a></p>
 </div>
 
 <article id="J-page-box-nextPage" style="display:none;" data-role="page">
-    <h1 class="bar"><a href="javascript:void(0)" data-role="trigger" data-action="prev" class="back">返回</a>Example：PageTransition所需的HTML结构</h1>
+    <h1 class="bar">Example: PageTransition 所需的 HTML 结构</h1>
     <article class="des">
-
-    </article>
+        <a href="javascript:void(0)" data-role="trigger" data-action="prev" class="back">返回</a><br />
+ <pre>
+ &lt;div id="J-page-box"&gt;这是最外层的容器
+     &lt;section data-role="page"&gt;标识这个标签是 pageTransition 的页面
+         &lt;a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此&lt;/a&gt;
+         这是超链接是一个触点，它必须有 action，next 和 role 配置，这是 pageTransition 组件的触点最基本的参数
+     &lt;/section&gt;
+ &lt;/div&gt;
+ </pre>
+     </article>
 </article>
 
+<article id="J-page-box-nextPage2" style="display:none;" data-role="page">
+        <h1 class="bar">Example: PageTransition 的基本配置参数</h1>
+        <article class="des">
+            <a href="javascript:void(0)" data-role="trigger" data-action="prev" class="back">返回</a><br />
+            <a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
+            <a href="javascript:void(0)" id="J-destroy">点击此处销毁 pageTransition </a><br />
+<pre>
+实例化配置参数：
+{
+  srcNode:
+}
+pageTransition 还需要trigger及page参数，这些参数是通过 data-attribute 定义在 html 标签上的
+trigger:
+  当在 html 中定义一个 PageTransition trigger 时，必须定义它的 action,role 和 next/prev 指向的目标元素，这些定义必须以 data 做前缀
+  &lt;a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage"&gt;点击此&lt;/a&gt;
+  如果你的触发器的作用是返回，则不需要指定返回的目标元素，PageTransition 会记录你上一张页面。
+
+page:
+  PageTransition 只需要一个 page 即可，它同样以 data 做前缀，以 role 做名称
+  data-role="page"
+  值得注意的是：凡是要做为 trigger 的 data-next 属性值的目标元素，必须要定义 data-role="page"。
+</pre>
+        </article>
+</article>
+<a href="javascript:void(0)" id="J-getPage" style="text-align:center;display:block;padding:10px;">获取 PageTransition 当前页面</a>
 <script>
     var getDom = function (dom) {
         return document.querySelector(dom);
     };
 
-    seajs.use('../src/pageTransition', function (PageTransition) {
+    seajs.use(['../src/pageTransition'], function (PageTransition) {
         var pageTransition = new PageTransition({
             srcNode: '#J-page-box'
         });
         pageTransition.render();
+        window.addEventListener('resize',function (){
+            pageTransition.sync();
+        },false);
+        getDom('#J-destroy').addEventListener('click',function (){
+            pageTransition.destroy();
+        },false);
         pageTransition.on('transitionStart',function (type,page,o){
-            console.log(type,page,o)
-        })
+            //console.log(type,page,o)
+        });
         pageTransition.on('transitionEnd',function (type,page,o){
-            console.log(type,page,o)
-        })
+            //console.log(type,page,o)
+        });
+        getDom('#J-getPage').addEventListener('click',function (e){
+            alert(pageTransition.getPage().html())
+        },false);
     });
 </script>
 </body>
