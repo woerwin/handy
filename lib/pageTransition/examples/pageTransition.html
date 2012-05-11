@@ -64,6 +64,18 @@
         .back{
             font-size:14px;
         }
+        #J-bottom-btns{
+            margin-top:50px;
+            text-align:center;
+        }
+        #J-bottom-btns a{
+            color:#fff;
+            text-align:center;
+            display:block;
+            margin-bottom:10px;
+            background:#000;
+            padding:5px;
+        }
     </style>
     <script src="../../../tools/seajs-and-its-friends.js"></script>
 </head>
@@ -77,10 +89,11 @@
                 PageTransition 暂时只提供水平过渡效果，未来的版本会增加过渡模式 (transition mode) 配置<br />
                 PageTransition 水平过渡效果使用了 margin-left 动画，并没有使用 translate-x ，由此带来的问题是：<a href="http://qiqicartoon.com/?p=1023" target="_blank">动画运动不够平滑</a>,
                 既然 margin-left 在移动平台的动画不够平滑，为何还要使用 margin-left 呢？您可以参考 <a href="http://qiqicartoon.com/?p=785" target="_blank">Android平台中CSS3 transition和animation问题</a><br />
-                1、您可以<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
-                2、您可以<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage2">查看 pageTransition 组件的基本配置</a><br />
-                3、<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-subPage-box">PageTransition 嵌套</a>
-                建议您使用移动设备内置浏览器访问这个页面
+                1、您可以<a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
+                2、您可以<a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-page-box-nextPage2">查看 pageTransition 组件的基本配置</a><br />
+                3、<a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-subPage-box">PageTransition 嵌套</a>
+                建议您使用移动设备内置浏览器访问这个页面<br />
+                <a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-page-box-nextPage">下一页</a>
             </article>
         </section>
     </div>
@@ -90,11 +103,11 @@
 <article id="J-page-box-nextPage" style="display:none;" data-role="page">
     <h1 class="bar">Example: PageTransition 所需的 HTML 结构</h1>
     <article class="des">
-        <a href="javascript:void(0)" data-role="trigger" data-action="prev" class="back">返回</a><br />
+        <a href="javascript:void(0)" data-role="trigger" data-action="back" class="back">返回</a><br />
  <pre>
  &lt;div id="J-page-box"&gt;这是最外层的容器
      &lt;section data-role="page"&gt;标识这个标签是 pageTransition 的页面
-         &lt;a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此&lt;/a&gt;
+         &lt;a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-page-box-nextPage">点击此&lt;/a&gt;
          这是超链接是一个触点，它必须有 action，next 和 role 配置，这是 pageTransition 组件的触点最基本的参数
      &lt;/section&gt;
  &lt;/div&gt;
@@ -105,8 +118,8 @@
 <article id="J-page-box-nextPage2" style="display:none;" data-role="page">
         <h1 class="bar">Example: PageTransition 的基本配置参数</h1>
         <article class="des">
-            <a href="javascript:void(0)" data-role="trigger" data-action="prev" class="back">返回</a><br />
-            <a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
+            <a href="javascript:void(0)" data-role="trigger" data-action="back" class="back">返回</a><br />
+            <a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
             <a href="javascript:void(0)" id="J-destroy">点击此处销毁 pageTransition </a><br />
 <pre>
 实例化配置参数：
@@ -116,7 +129,7 @@
 pageTransition 还需要trigger及page参数，这些参数是通过 data-attribute 定义在 html 标签上的
 trigger:
   当在 html 中定义一个 PageTransition trigger 时，必须定义它的 action,role 和 next/prev 指向的目标元素，这些定义必须以 data 做前缀
-  &lt;a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage"&gt;点击此&lt;/a&gt;
+  &lt;a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-page-box-nextPage"&gt;点击此&lt;/a&gt;
   如果你的触发器的作用是返回，则不需要指定返回的目标元素，PageTransition 会记录你上一张页面。
 
 page:
@@ -141,19 +154,25 @@ page:
                 <input type="radio" /><br />
                 <input type="checkbox" />
             </form><br />
-            <a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-subPage1">下一页</a>
+            <a href="javascript:void(0)" data-role="trigger" data-action="forward" data-next="#J-subPage1">下一页</a>
         </div>
     </section>
     <br />
-    <a href="javascript:void(0)" data-action="prev" data-role="trigger" style="margin-left:30px;">返回上一页</a>
+    <a href="javascript:void(0)" data-action="back" data-role="trigger" style="margin-left:30px;">返回上一页</a>
 </article>
 
 <p id="J-subPage1" style="display:none;" data-role="page">
-    <a href="javascript:void(0)" data-action="prev" data-role="trigger">返回</a>
+    <a href="javascript:void(0)" data-action="back" data-role="trigger">返回</a>
     <a href="javascript:void(0)" id="J-subPage-destroy">销毁</a>
 </p>
 
 <a href="javascript:void(0)" id="J-getPage" style="text-align:center;display:block;padding:10px;">获取 PageTransition 当前页面</a>
+
+<nav id="J-bottom-btns">
+    <a href="javascript:void(0)" data-role="1">查看 PageTransition 组件所需的 HTML 结构</a>
+    <a href="javascript:void(0)" data-role="2">查看 pageTransition 组件的基本配置</a>
+    <a href="javascript:void(0)" data-role="3">PageTransition 嵌套</a>
+</nav>
 <script>
     var getDom = function (dom) {
         return document.querySelector(dom);
@@ -175,10 +194,25 @@ page:
         getDom('#J-subPage-destroy').addEventListener('click',function (){
             subPage.destroy();
         },false);
+        getDom('#J-bottom-btns').addEventListener('click',function (e){
+            if(!e.target.getAttribute('data-role')){return;}
+            switch(parseInt(e.target.getAttribute('data-role'),10)){
+                case 1:
+                    pageTransition.transition('#J-page-box-nextPage');
+                break;
+                case 2:
+                    pageTransition.transition('#J-page-box-nextPage2');
+                break;
+                case 3:
+                    pageTransition.transition('#J-subPage-box');
+                break;
+            }
+        },false);
         pageTransition.on('transitionStart',function (type,page,o){
-            //console.log(type,page,o)
+            console.log(type,page,o)
         });
         pageTransition.on('transitionEnd',function (type,page,o){
+            console.log(type,page,o)
             if(page === document.querySelector('#J-subPage-box')){
                 subPage = subPage || new PageTransition({
                     srcNode: '#J-subPage'
@@ -187,7 +221,7 @@ page:
             }
         });
         getDom('#J-getPage').addEventListener('click',function (e){
-            alert(pageTransition.getPage().html())
+            alert(pageTransition.getPage().innerHTML)
         },false);
     });
 </script>
