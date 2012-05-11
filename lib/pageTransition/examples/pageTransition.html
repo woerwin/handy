@@ -79,6 +79,7 @@
                 既然 margin-left 在移动平台的动画不够平滑，为何还要使用 margin-left 呢？您可以参考 <a href="http://qiqicartoon.com/?p=785" target="_blank">Android平台中CSS3 transition和animation问题</a><br />
                 1、您可以<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
                 2、您可以<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-page-box-nextPage2">查看 pageTransition 组件的基本配置</a><br />
+                3、<a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-subPage-box">PageTransition 嵌套</a>
                 建议您使用移动设备内置浏览器访问这个页面
             </article>
         </section>
@@ -125,6 +126,33 @@ page:
 </pre>
         </article>
 </article>
+
+<article id="J-subPage-box" data-role="page" style="display:none;">
+    <h1 class="bar">Example: PageTransition 嵌套</h1>
+    <section data-role="page" class="des" id="J-subPage">
+        <div data-role="page">
+            PageTransition 支持深层嵌套<br />
+            <form>
+                <input type="text" /><br />
+                <select>
+                    <option>one</option>
+                    <option>one</option>
+                </select><br />
+                <input type="radio" /><br />
+                <input type="checkbox" />
+            </form><br />
+            <a href="javascript:void(0)" data-role="trigger" data-action="next" data-next="#J-subPage1">下一页</a>
+        </div>
+    </section>
+    <br />
+    <a href="javascript:void(0)" data-action="prev" data-role="trigger" style="margin-left:30px;">返回上一页</a>
+</article>
+
+<p id="J-subPage1" style="display:none;" data-role="page">
+    <a href="javascript:void(0)" data-action="prev" data-role="trigger">返回</a>
+    <a href="javascript:void(0)" id="J-subPage-destroy">销毁</a>
+</p>
+
 <a href="javascript:void(0)" id="J-getPage" style="text-align:center;display:block;padding:10px;">获取 PageTransition 当前页面</a>
 <script>
     var getDom = function (dom) {
@@ -134,7 +162,9 @@ page:
     seajs.use(['../src/pageTransition'], function (PageTransition) {
         var pageTransition = new PageTransition({
             srcNode: '#J-page-box'
-        });
+        }),
+        subPage = null;
+
         pageTransition.render();
         window.addEventListener('resize',function (){
             pageTransition.sync();
@@ -142,11 +172,19 @@ page:
         getDom('#J-destroy').addEventListener('click',function (){
             pageTransition.destroy();
         },false);
+        getDom('#J-subPage-destroy').addEventListener('click',function (){
+            subPage.destroy();
+        },false);
         pageTransition.on('transitionStart',function (type,page,o){
             //console.log(type,page,o)
         });
         pageTransition.on('transitionEnd',function (type,page,o){
-            //console.log(type,page,o)
+            if(page === document.querySelector('#J-subPage-box')){
+                subPage = subPage || new PageTransition({
+                    srcNode: '#J-subPage'
+                })
+                subPage.render();
+            }
         });
         getDom('#J-getPage').addEventListener('click',function (e){
             alert(pageTransition.getPage().html())
