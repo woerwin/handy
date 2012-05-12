@@ -5,7 +5,7 @@ Handy 源于 [Arale](https://github.com/alipay/arale)
 Handy 提供 iOS & Android OS WAP 平台常用的工具、组件。
 
 ![xcode logo](/alipay/handy/raw/master/docs/assets/xcode.jpeg)
-![android logo](/alipay/handy/raw/master/docs/assets/android.jpeg)
+![android logo](/alipay/handy/raw/master/docs/assets/android.jpg)
 
 Handy 建议您尽可能使用操作系统原生工具、控件，以保持移动平台的体验统一化，这也是 Handy 的设计原则之一：**如勿必要，勿增实体**
 
