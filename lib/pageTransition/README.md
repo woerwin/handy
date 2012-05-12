@@ -148,7 +148,7 @@ define(function (require){
 调用 `destroy` 方法，`pageTransition` 对象中的数据将被清除，
 同时动态添加的样式也会被清除，`pageTransition` 视口中的页面也将全部释放到各自原来的容器中
 
-- **PageTransition 支持深层嵌套**
+- **PageTransition 支持深层嵌套。意思是你可以在 PageTransition 中嵌套一个 PageTransition **
 
 ##测试用例
 - [runner.html](../lib/pageTransition/tests/runner.html)
