@@ -34,11 +34,11 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 ##使用说明
 `pageTransition` 所需的 HTML 结构：
 
-```
-&lt;div id="J-page-box"&gt;
-        &lt;section data-role="page"&gt;
-        &lt;/section&gt;
-&lt;/div&gt;
+```html
+<div id="J-page-box">
+        <section data-role="page">
+        </section>
+</div>
 ```
 实例化 `PageTransition`
 ```js
