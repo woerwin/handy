@@ -42,9 +42,9 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
         </section>
 </div>
 
-<div id="J-nextPage" data-role="page">
-  <a href="javascript:void(0)" data-role="trigger" data-action="prev">返回</a>
-  当指定 data-action="prev" 时不需要指定 data-prev ，PageTransition 会自动保存前一张页面
+<div id="J-nextPage" data-role="page">通过 data-role="page" 告诉 PageTransition，请把我看作一个页面
+  <a href="javascript:void(0)" data-role="trigger" data-action="back">返回</a>
+  当指定 data-action="back" 时不需要指定 data-back ，PageTransition 会自动保存前一张页面
 </div>
 ```
 实例化 `PageTransition`
@@ -58,5 +58,13 @@ define(function (require){
 });
 ```
 `pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法。
-每配置一个 `trigger` ，必须要定义它的 `data-role` 和 `data-action`，如果 action 是 forward，必须要指定 data-forward
+每配置一个 `trigger` ，必须要定义它的 `data-role` 和 `data-action`，如果 action 是 forward，必须要指定 data-forward。
+您还可以在每个页面中添加多个行为
+```html
+<div id="J-nextPage" data-role="page">
+  <a href="javascript:void(0)" data-role="trigger" data-action="back">返回</a>
+  <a href="javascript:void(0)" data-role="trigger" data-action="forward" data-forward="#J-nextPage2">下一张</a>
+  <a href="javascript:void(0)" data-role="trigger" data-action="back">点击这里也可以返回</a>
+</div>
+```
 

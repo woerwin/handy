@@ -37,7 +37,7 @@
  &lt;div id="J-page-box"&gt;这是最外层的容器
      &lt;section data-role="page"&gt;标识这个标签是 pageTransition 的页面
          &lt;a href="javascript:void(0)" data-role="trigger" data-action="forward" data-forward="#J-page-box-nextPage">点击此&lt;/a&gt;
-         这是超链接是一个触点，它必须有 action，next 和 role 配置，这是 pageTransition 组件的触点最基本的参数
+         这是超链接是一个触点，它必须有 action，forward 和 role 配置，这是 pageTransition 组件的触点最基本的参数
      &lt;/section&gt;
  &lt;/div&gt;
  </pre>
@@ -57,7 +57,7 @@
 }
 pageTransition 还需要trigger及page参数，这些参数是通过 data-attribute 定义在 html 标签上的
 trigger:
-  当在 html 中定义一个 PageTransition trigger 时，必须定义它的 action,role 和 next/prev 指向的目标元素，这些定义必须以 data 做前缀
+  当在 html 中定义一个 PageTransition trigger 时，必须定义它的 action,role 和 forward/back 指向的目标元素，这些定义必须以 data 做前缀
   &lt;a href="javascript:void(0)" data-role="trigger" data-action="forward" data-forward="#J-page-box-nextPage"&gt;点击此&lt;/a&gt;
   如果你的触发器的作用是返回，则不需要指定返回的目标元素，PageTransition 会记录你上一张页面。
 
