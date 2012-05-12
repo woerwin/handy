@@ -44,9 +44,9 @@ define(function (require){
 `pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法, `pageTransition` 所需的 HTML 结构：
 
 ```html
-<div id="J-page-box">
-        <section data-role="page">
-        </section>
-</div>
+&lt;div id="J-page-box"&gt;
+        &lt;section data-role="page"&gt;
+        &lt;/section&gt;
+&lt;/div>
 ```
 
