@@ -1,6 +1,20 @@
 Handy 是一个开放、简单、易用的无线前端基础类库。
 
-Handy源于[Arale](https://github.com/arale)
+Handy 源于 [Arale](https://github.com/alipay/arale)
+
+Handy 提供 iOS & Android OS WAP 平台常用的工具、组件。
+
+![xcode logo](/alipay/handy/raw/master/docs/assets/xcode.jpeg)
+![android logo](/alipay/handy/raw/master/docs/assets/android.jpeg)
+
+Handy 建议您尽可能使用操作系统原生工具、控件，以保持移动平台的体验统一化，这也是 Handy 的设计原则之一：**如勿必要，勿增实体**
+
+Handy 不会像 [sencha](http://www.sencha.com/) 那样的庞大、笨重，
+也不会像 [jQuery Mobile](http://jquerymobile.com) 那样的死板、冗余，
+当然也不会像 [jqtouch](http://jqtouch.com/) 那样的太过简单又不够明了。
+
+Handy 基于 [zeptojs](http://zeptojs.com) & [seajs](http://seajs.org)，**Handy 是一个类库**，Handy 的每个组件是独立的模块，
+可以灵活使用、卸载。但愿您喜欢它 :-)
 
 ---
 
@@ -17,10 +31,10 @@ Handy源于[Arale](https://github.com/arale)
 1. **合理抽象，最佳实践。**组件要丰富，也要合理抽象，追求最佳实践。
 1. **适度灵活，适量重复。**不过度设计，只预留必要的可扩展接口。不追求代码的零重复，更追求组件的合理解耦。
 
-### 设计原则
+### 细则
 
 1. API 设计不与 Zepto 冲突
-2. 支持 DATA-ATTRIBUTE API
+2. 支持 data-attribute API
 
 ## 团队风貌
 
