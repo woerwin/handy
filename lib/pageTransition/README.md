@@ -37,7 +37,14 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 ```html
 <div id="J-page-box">
         <section data-role="page">
+          <a href="javascript:void(0)" data-role="trigger" data-action="forward" data-forward="#J-nextPage">下一张</a>
+          定义了一个 trigger ，它带有 forward 行为，它要过渡的目标元素为 id＝J-nextPage
         </section>
+</div>
+
+<div id="J-nextPage" data-role="page">
+  <a href="javascript:void(0)" data-role="trigger" data-action="prev">返回</a>
+  当指定 data-action="prev" 时不需要指定 data-prev ，PageTransition 会自动保存前一张页面
 </div>
 ```
 实例化 `PageTransition`
@@ -50,5 +57,6 @@ define(function (require){
   pageTransition.render();
 });
 ```
-`pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法,
+`pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法。
+每配置一个 `trigger` ，必须要定义它的 `data-role` 和 `data-action`，如果 action 是 forward，必须要指定 data-forward
 
