@@ -11,7 +11,7 @@
 - 由于 `zepto` 仅兼容 `iOS` 和 `Android OS` ，因此 `PageTransition` 当前也仅兼容这两个平台，未来的版本会兼容到 `windows phone7`
 
 ##PageTransition 工作原理
-`PageTransition` 包含了一套简单的 `data-attribute` 配置机制，有一部分参数的配置将通过 `data-attribute` 完成；
+`PageTransition` 包含了一套简单的 `data-attribute` 配置机制，有一部分参数的配置将通过 `data-attribute` 完成。
 
 `PageTransition` 默认把您需要过渡的每个元素看做为一个 `role` (角色)为 `page` 的页面，
 把触发器(也叫触点)看做为一个 `role` 为 `trigger` 的行为对象，把具体的行为通过 `action` 标识，然后通过 `data` 前缀配置这些参数。
@@ -49,6 +49,7 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 </div>
 ```
 实例化 `PageTransition`
+
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
@@ -61,7 +62,9 @@ define(function (require){
 `pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法。
 
 每配置一个 `trigger` ，必须要定义它的 `data-role` 和 `data-action`，如果 action 是 forward，必须要指定 data-forward。
+
 您还可以在每个页面中添加多个行为
+
 ```html
 <div id="J-nextPage" data-role="page">
   <a href="javascript:void(0)" data-role="trigger" data-action="back">返回</a>
