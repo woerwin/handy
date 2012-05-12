@@ -33,6 +33,15 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 
 ##使用说明
 ```js
+`pageTransition` 所需的 HTML 结构：
+
+```html
+&lt;div id="J-page-box"&gt;
+        &lt;section data-role="page"&gt;
+        &lt;/section&gt;
+&lt;/div>
+```
+实例化 `PageTransition` 
 define(function (require){
   var PageTransition = require('pageTransition');
   var pageTransition = new PageTransition({
@@ -41,12 +50,5 @@ define(function (require){
   pageTransition.render();
 });
 ```
-`pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法, `pageTransition` 所需的 HTML 结构：
-
-```html
-&lt;div id="J-page-box"&gt;
-        &lt;section data-role="page"&gt;
-        &lt;/section&gt;
-&lt;/div>
-```
+`pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法,
 
