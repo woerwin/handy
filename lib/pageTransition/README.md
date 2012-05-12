@@ -72,4 +72,57 @@ define(function (require){
   <a href="javascript:void(0)" data-role="trigger" data-action="back">点击这里也可以返回</a>
 </div>
 ```
+###render `pageTransition.render()`
+渲染 pageTransition 实例化对象
+
+###getPage `pageTransition.getPage()`
+返回 pageTransition 的当前页面，是一个 DOM Element
+```js
+define(function (require){
+  var PageTransition = require('pageTransition');
+  var pageTransition = new PageTransition({
+                srcNode: '#J-page-box'
+            });
+  pageTransition.render();
+
+  console.log(pageTransition.getPage().innerHTML);//...
+});
+```
+
+###transition `pageTransition.transition(DOM Element)`
+执行一次页面过渡。其实就是调用 `forward` 行为
+
+参数 DOM Element 可以传入选择器 / DOM 对象 / zepto 对象
+```js
+define(function (require){
+  var PageTransition = require('pageTransition');
+  var pageTransition = new PageTransition({
+                srcNode: '#J-page-box'
+            });
+  pageTransition.render();
+
+  document.querySelector('#J-next').addEventListener('click',function (){
+      pageTransition.transition('#J-nextPage');
+  },false);
+});
+```
+
+###sync `pageTransition.sync()`
+更新 UI
+
+调用 sync 方法时，对 `pageTransition` 的视口及页面做样式更新
+```js
+define(function (require){
+  var PageTransition = require('pageTransition');
+  var pageTransition = new PageTransition({
+                srcNode: '#J-page-box'
+            });
+  pageTransition.render();
+
+  window.addEventListener('resize',function (){
+      pageTransition.sync();
+  },false);
+});
+```
+**最佳实践:您应该在设备方向或窗口发生变化时，调用 sync 方法**
 
