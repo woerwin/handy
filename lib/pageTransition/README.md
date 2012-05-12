@@ -32,6 +32,12 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 过渡结束后，会从视口中清除多余的页面，始终保持视口中只有一个页面，当然这些被清除的页面会被保存下来，以便**所有** `data-role="back"` 的触发器返回上一步，
 在调用 `back` 行为时的处理和 `forward` 相似，只是动态的向视口的首部插入(prepend)插入被保存的上一张页面
 
+`PageTransition` 过渡效果使用了 margin-left 动画，并没有使用 translate-x ，
+
+由此带来的体验问题是：<a href="http://qiqicartoon.com/?p=1023" target="_blank">动画运动不够平滑</a>
+
+既然 margin-left 在移动平台的动画不够平滑，为何还要使用 margin-left 呢？您可以参考 <a href="http://qiqicartoon.com/?p=785" target="_blank">Android平台中CSS3 transition和animation问题</a>
+
 ##使用说明
 `pageTransition` 所需的 HTML 结构：
 
@@ -73,10 +79,10 @@ define(function (require){
 </div>
 ```
 ###render `pageTransition.render()`
-渲染 pageTransition 实例化对象
+渲染 `pageTransition` 实例化对象
 
 ###getPage `pageTransition.getPage()`
-返回 pageTransition 的当前页面，是一个 DOM Element
+返回 `pageTransition` 的当前页面，是一个 `DOM Element`
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
@@ -92,7 +98,7 @@ define(function (require){
 ###transition `pageTransition.transition(DOM Element)`
 执行一次页面过渡。其实就是调用 `forward` 行为
 
-参数 DOM Element 可以传入选择器 / DOM 对象 / zepto 对象
+参数 `DOM Element` 可以传入选择器 / DOM 对象 / zepto 对象
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
@@ -110,11 +116,10 @@ define(function (require){
 ###sync `pageTransition.sync()`
 更新 UI
 
-调用 sync 方法时，对 `pageTransition` 的视口及页面做样式更新
+调用 `sync` 方法时，对 `pageTransition` 的视口及页面做样式更新
 ```js
 define(function (require){
-  var PageTransition = require('pageTransition');
-  var pageTransition = new PageTransition({
+  var pageTransition = new require('pageTransition')({
                 srcNode: '#J-page-box'
             });
   pageTransition.render();
@@ -124,5 +129,31 @@ define(function (require){
   },false);
 });
 ```
-**最佳实践:您应该在设备方向或窗口发生变化时，调用 sync 方法**
+**最佳实践:您应该在设备方向或窗口发生变化时，调用 `sync` 方法**
+
+###destroy `pageTransition.destroy()`
+销毁 `pageTransition` 对象，释放内存
+```js
+define(function (require){
+  var pageTransition = new require('pageTransition')({
+                srcNode: '#J-page-box'
+            });
+  pageTransition.render();
+
+  document.querySelector('#J-destroy').addEventListener('click',function (){
+      pageTransition.destroy();
+  },false);
+});
+```
+调用 `destroy` 方法，`pageTransition` 对象中的数据将被清除，
+同时动态添加的样式也会被清除，`pageTransition` 视口中的页面也将全部释放到各自原来的容器中
+
+##测试用例
+- [runner.html](../lib/pageTransition/tests/runner.html)
+
+##演示地址
+- [Demo](../lib/pageTransition/examples/pageTransition.html)
+
+##反馈意见
+欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
 
