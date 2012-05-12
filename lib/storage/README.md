@@ -132,7 +132,7 @@ define(function (require){
 ###监听 `Storage` 保存的所有数据被清除 `Storage.on('clear',callback)`
 
 ```js
-define(function (require){
+define(function (requirze){
     var Storage = require('storage');
     Storage.set('name','handy');
     Storage.on('clear',function (e){
