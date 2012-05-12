@@ -22,8 +22,13 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
                            // PageTransition 会在当前的触发器上查找需要过渡的目标元素
 ```
 `PageTransition` 首先会在用户传入的 `srcNode` 这个 `DOM` 参数中查找带有 `data-role="page"` 的元素，
-`PageTransition` 将查找到的**第一个** `page` 元素做为初始化页面，其它的 `data-role="page"` 将被忽略，然后向这个初始化页的父层动态插入
+`PageTransition` 将查找到的**第一个** `page` 元素做为初始化页面，其它的 `data-role="page"` 将被忽略，然后向这个初始化页面的父层动态插入
 一个带有 `data-role="viewport"` 属性的元素，这个元素就是 `PageTransition` 的视口，紧接着 `PageTransition` 会在当前视口下查找**所有**
-带有 `data-role="trigger"` 的元素，为它们绑定 `click.pageTransition` 事件
+带有 `data-role="trigger"` 的元素，为它们绑定 `click.pageTransition` 事件，每个视口都是独立的，因此您可能在 `PageTransition` 的页面
+中嵌套 `PageTransition` 。当调用 `forward` 行为时，`PageTransition` 会动态向视口的末尾插入(append)触发器的 `data-forward` 属性指向的元素，
+这个元素需要通过配置 `data-role="page"` 告诉 `PageTransition`：我也是一个页面，你可以在你的视口中对我做任何操作(过渡、绑定事件等)，所以
+如果想在这个元素中绑定 `PageTransition` 行为(比如返回上一步)，你可以使用 `data-role="trigger" data-action="back"`，这和上述描述相同，
+过渡结束后，会从视口中清除多余的页面，始终保持视口中只有一个页面，当然这些被清除的页面会被保存下来，以便**所有** `data-role="back"` 的触发器返回上一步，
+在调用 `back` 行为时的处理和 `forward` 相似，只是动态的向视口的首部插入(prepend)插入被保存的上一张页面
 
 ##使用说明
