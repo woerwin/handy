@@ -38,7 +38,7 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 &lt;div id="J-page-box"&gt;
         &lt;section data-role="page"&gt;
         &lt;/section&gt;
-&lt;/div>
+&lt;/div&gt;
 ```
 实例化 `PageTransition`
 ```js
