@@ -32,7 +32,6 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
 在调用 `back` 行为时的处理和 `forward` 相似，只是动态的向视口的首部插入(prepend)插入被保存的上一张页面
 
 ##使用说明
-```js
 `pageTransition` 所需的 HTML 结构：
 
 ```html
@@ -41,7 +40,8 @@ data-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标�
         &lt;/section&gt;
 &lt;/div>
 ```
-实例化 `PageTransition` 
+实例化 `PageTransition`
+```js
 define(function (require){
   var PageTransition = require('pageTransition');
   var pageTransition = new PageTransition({
