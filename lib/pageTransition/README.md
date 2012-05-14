@@ -152,8 +152,28 @@ define(function (require){
 
 ###自定义事件
 ####transitionStart `pageTransition.on('transitionStart',callback)`
+####transitionEnd `pageTransition.on('transitionEnd',callback)`
 ```js
+define(function (require){
+  var pageTransition = new require('pageTransition')({
+                srcNode: '#J-page-box'
+            });
+  pageTransition.render();
+
+  pageTransition.on('transitionStart',function (type,page,o){
+      console.log(type);// forward or back
+      console.log(page);// 当前 DOM Element
+      console.log(o);// 当前实例化对象
+  });
+
+  pageTransition.on('transitionEnd',function (type,page,o){
+        console.log(type);// forward or back
+        console.log(page);// 当前 DOM Element
+        console.log(o);// 当前实例化对象
+    });
+});
 ```
+自定义事件回调将带有三个参数：过渡类型、当前页面、当前对象。
 
 - **PageTransition 支持深层嵌套。意思是你可以在 PageTransition 中嵌套另一个 PageTransition**
 
