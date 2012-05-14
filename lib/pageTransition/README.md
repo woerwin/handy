@@ -16,7 +16,7 @@
 `PageTransition` 默认把您需要过渡的每个元素看做为一个 `role` (角色)为 `page` 的页面，
 把触发器(也叫触点)看做为一个 `role` 为 `trigger` 的行为对象，把具体的行为通过 `action` 标识，然后通过 `data` 前缀配置这些参数。
 
-在 `Handy` 中，每个组件的 `data-attribute` 属性将由 data 前缀 + 组件名(小驼峰格式) + 具体的属性名
+在 `Handy` 中，每个组件的 `data-attribute` 属性将由 data 前缀 + 组件名(小驼峰格式) + 具体的属性名构成
 ```js
 data-pageTransition-role="page" // 这是一个过渡页面
 data-pageTransition-role="trigger" // 这是一个触发器
@@ -149,6 +149,11 @@ define(function (require){
 ```
 调用 `destroy` 方法，`pageTransition` 对象中的数据将被清除，
 同时动态添加的样式也会被清除，`pageTransition` 视口中的页面也将全部释放到各自原来的容器中
+
+###自定义事件
+####transitionStart `pageTransition.on('transitionStart',callback)`
+```js
+```
 
 - **PageTransition 支持深层嵌套。意思是你可以在 PageTransition 中嵌套另一个 PageTransition**
 
