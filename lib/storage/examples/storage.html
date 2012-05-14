@@ -132,7 +132,7 @@
         }, false);
 
         getDom('#J-cleanTheFirst').addEventListener('click', function (e) {
-            Storage.deleteKey(theFirstKey);
+            Storage.remove(theFirstKey);
             var key = Storage.keys()[0],
                     data = Storage.get(key),
                     param = {};
