@@ -17,7 +17,8 @@
 seajs.config({
     alias: {
         'events': 'events/0.9.1/events',
-        'zepto': 'zepto/0.8.0/zepto'
+        'zepto': 'zepto/0.8.0/zepto',
+        'base': 'base/0.9.1/base'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2
