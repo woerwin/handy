@@ -44,18 +44,64 @@
         }
         .green{color:green;}
         .red{color:red;}
+        #J-confirm{
+            background:#d4d4d4;
+            padding:10px;
+            border:1px solid gray;
+            color:#fff;
+        }
+        #J-confirm a{
+            color: #f50;
+        }
+        a{
+            text-decoration:none;
+            display:block;
+            margin-bottom:20px;
+        }
     </style>
     <script src="../../../tools/seajs-and-its-friends.js"></script>
 </head>
 <body>
 <div class="box">
-
+  <a href="javascript:void(0)" id="J-simple-confirm">一个简单的 confirm</a>
+    <a href="javascript:void(0)" id="J-ui-confirm">一个带有自定义 UI 的 confirm</a>
+  <div id="J-confirm" style="display:none;">
+      <h2>Confirm 标题</h2>
+      <section>Confirm 内容<br /><a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></section>
+  </div>
 </div>
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
     seajs.use('../src/confirm', function (Confirm) {
+        var uiConfirm = new Confirm({
+            tpl: '#J-confirm',
+            message: 'handy confirm 演示',
+            onConfirm: function (o){
+                alert('您点击了确定')
+            },
+            onCancel: function (o){
+                alert('您点击了取消')
+            }
+        })/*,
+        confirm = new Confirm({
+            message: 'handy confirm 演示',
+            onConfirm: function (o){
+                alert('您点击了确定')
+            },
+            onCancel: function (o){
+                alert('您点击了取消')
+            }
+        })*/;
+        //confirm.render();
+        uiConfirm.render();
+        getDOM('#J-simple-confirm').addEventListener('click',function (){
+            confirm.show();
+        },false);
 
+        getDOM('#J-ui-confirm').addEventListener('click',function (){
+            uiConfirm.show();
+        },false);
     });
 </script>
 </body>
