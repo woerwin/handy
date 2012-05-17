@@ -12,16 +12,20 @@
     l.insertBefore(u, l.firstChild);
 })(window, document, 'seajs');
 
-
 // and its friends
+(function(){
+var handy = '../../../dist/';
+
 seajs.config({
     alias: {
         'events': 'events/0.9.1/events',
         'zepto': 'zepto/0.8.0/zepto',
         'base': 'base/0.9.1/base',
         'class': 'class/0.9.0/class',
-        'jquery': 'jquery/1.7.2/jquery'
+        'overlay': handy+'overlay/0.9.0/overlay'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2
 });
+})();
+
