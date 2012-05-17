@@ -24,7 +24,6 @@ define("#overlay/0.9.0/overlay", ["base","events","zepto"], function(require, ex
                 return;
             }
 
-            this.setCSS();
             this.trigger('sync',this);
         },
         render: function (){
