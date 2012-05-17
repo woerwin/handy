@@ -21,7 +21,7 @@ seajs.config({
         'events': 'events/0.9.1/events',
         'zepto': 'zepto/0.8.0/zepto',
         'base': 'base/0.9.1/base',
-        'class': 'class/0.9.0/class',
+        'class': 'class/0.9.1/class',
         'overlay': handy+'overlay/0.9.0/overlay'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],

@@ -68,17 +68,24 @@
 </head>
 <body>
 <div class="box">
-
+  <a href="javascript:void(0)" id="J-c-s">将 select 浮在我的右侧</a>
+  <select>
+      <option>one</option>
+  </select>
 </div>
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
     seajs.use('../src/overlay', function (Overlay) {
-        var Overlay = new Overlay({
-            srcNode: '.box'
+        var select = new Overlay({
+            srcNode: 'select'
         });
 
-        Overlay.render();
+        select.render();
+
+        getDOM('#J-c-s').addEventListener('click',function (){
+            select.show();
+        },false);
     });
 </script>
 </body>
