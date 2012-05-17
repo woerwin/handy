@@ -20,7 +20,7 @@ seajs.config({
         'zepto': 'zepto/0.8.0/zepto',
         'base': 'base/0.9.1/base',
         'class': 'class/0.9.0/class',
-        'position': 'position/0.9.0/position'
+        'jquery': 'jquery/1.7.2/jquery'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2

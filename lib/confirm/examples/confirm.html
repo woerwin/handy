@@ -105,6 +105,17 @@
             },
             zIndex: 99
         }),
+        uiConfirm2 = new Confirm({
+            tpl: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
+            message: 'handy confirm 演示',
+            onConfirm: function (o){
+                alert('您点击了确定');
+            },
+            onHide: function (o){
+                alert('confirm 浮层已关闭');
+            },
+            zIndex: 99
+        }),
         confirm = new Confirm({
             message: 'handy confirm 演示',
             onConfirm: function (o){
@@ -117,6 +128,7 @@
 
         confirm.render();
         uiConfirm.render();
+        uiConfirm2.render();
 
         getDOM('#J-simple-confirm').addEventListener('click',function (){
             confirm.show();
@@ -126,19 +138,37 @@
             uiConfirm.show();
         },false);
         getDOM('#J-ui-confirm-anim').addEventListener('click',function (){
-            uiConfirm.on('beforeShow',function (o){
-                o.getMask().get(0).style.webkitTransition = '-webkit-transform 0.5s ease';
-                o.getMask().get(0).style.webkitTransform = 'scale(0)';
-                o.getTpl().get(0).style.webkitTransition = '-webkit-transform 0.5s ease';
+            uiConfirm2.showTpl = function (){
+                this.getMask().css({
+                    '-webkit-transition': '-webkit-transform 0.5s ease',
+                    '-webkit-transform': 'scale(0)'
+                });
 
-                o.getTpl().get(0).style.webkitTransform = 'scale(0)';
-            });
-            uiConfirm.on('afterShow',function (o){
-                o.getTpl().get(0).style.webkitTransformOrigin = '50% 50%';
-                o.getMask().get(0).style.webkitTransform = 'scale(1)';
-                o.getTpl().get(0).style.webkitTransform = 'scale(1)';
-            });
-            uiConfirm.show();
+                this.getTpl().css({
+                    '-webkit-transition': '-webkit-transform 0.5s ease',
+                    '-webkit-transform': 'scale(0)'
+                });
+
+                this.getTpl().show().css({
+                    '-webkit-transform-origin': '50% 50%',
+                    '-webkit-transform': 'scale(1)'
+                });
+
+                this.getMask().show().css({
+                    '-webkit-transform-origin': '50% 50%',
+                    '-webkit-transform': 'scale(1)'
+                });
+            };
+            uiConfirm2.hideTpl = function (){
+                this.getTpl().animate({
+                    scale: 0
+                });
+
+                this.getMask().animate({
+                    scale: 0
+                });
+            };
+            uiConfirm2.show();
         },false);
         getDOM('#J-simple-confirm-destroy').addEventListener('click',function (){
             confirm.destroy();
@@ -148,9 +178,10 @@
             uiConfirm.destroy();
         },false);
 
-        window.addEventListener('resize',function (){
+        window.addEventListener('orientationchange',function (){
             confirm.sync();
             uiConfirm.sync();
+            uiConfirm2.sync();
         },false);
     });
 </script>
