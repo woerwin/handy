@@ -11,18 +11,38 @@
     <style type="text/css"></style>
 
     <script src="../../../tools/seajs-and-its-friends.js"></script>
+    <style type="text/css">
+        .flips {
+            position: relative;
+            width: 90px;
+        }
+
+        a {
+            display: block;
+        }
+
+        img {
+            display: block;
+        }
+
+        #flip2 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+    </style>
 </head>
 <body>
+<div class="flips">
+    <div id="flip1"><a href="javascript:flip.flip('#flip2');"><img src="img/logined_head.png" width="90"></a></div>
+    <div id="flip2"><a href="javascript:flip.flip('#flip1');"><img src="img/logined_daily.png" width="90"></a></div>
+</div>
 <script type="text/javascript">
-    var myObj = function(){
-        if(!(this instanceof myObj)){
-            myObj = new myObj();
-        }
-    }
-    myObj.prototype.show = function(){
-        alert(1);
-    }
-    myObj.show();
+    var flip;
+    seajs.use('../src/flip', function (Flip) {
+        flip = new Flip(["#flip1", "#flip2"]);
+    });
 </script>
 </body>
 </html>
