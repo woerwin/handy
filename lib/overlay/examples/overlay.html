@@ -13,7 +13,6 @@
             width: auto;
             margin: 0;
             padding: 20px;
-            text-align:center;
         }
 
         caption {
@@ -56,7 +55,6 @@
         }
         a{
             text-decoration:none;
-            display:block;
             margin-bottom:20px;
         }
         body{
@@ -68,23 +66,61 @@
 </head>
 <body>
 <div class="box">
-  <a href="javascript:void(0)" id="J-c-s">将 select 浮在我的右侧</a>
-  <select>
+  <a href="javascript:void(0)" id="J-c-s">将 select 浮在我的右侧</a><br /><br /><br />
+  <input type="radio" /><br />
+  <input type="checkbox" /><br />
+  <input type="text" /><br />
+  <a href="javascript:void(0)" id="J-c-t">将自定义浮层显示在我的右上方</a><br /><br /><br />
+  <select style="display:-webkit-box;">
       <option>one</option>
-  </select>
+      <option>two</option>
+  </select><br />
+  <div style="color:#fff;text-align:left;background:rgba(0,0,0,0.5);padding:5px 130px 90px 10px;border:1px solid rgba(0,0,0,0.8);" id="J-custom-div">
+      自定义浮层<br />
+      <a href="javascript:void(0)" class="hide">隐藏</a>
+      <a href="javascript:void(0)" class="destroy">销毁</a>
+  </div>
 </div>
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
-    seajs.use('../src/overlay', function (Overlay) {
+    seajs.use(['../src/overlay','zepto'], function (Overlay,$) {
         var select = new Overlay({
-            srcNode: 'select'
+            tpl: 'select',
+            css: {
+                display: 'none',
+                position: 'absolute',
+                left: $('#J-c-s').offset().left+$('#J-c-s').offset().width,
+                top: $('#J-c-s').offset().top
+            }
+        }),
+        customDiv = new Overlay({
+            tpl: '#J-custom-div',
+            css: {
+                display: 'none',
+                zIndex: 88888,
+                position: 'absolute',
+                left: $('#J-c-t').offset().left,
+                top: $('#J-c-t').offset().top - $('#J-custom-div').offset().height
+            }
         });
 
         select.render();
+        customDiv.render();
 
+        customDiv.on('shown',function (o){
+            o.options.tpl.find('.hide').unbind('click').click(function (){
+                o.hide();
+            });
+            o.options.tpl.find('.destroy').unbind('click').click(function (){
+                o.destroy();
+            });
+        });
         getDOM('#J-c-s').addEventListener('click',function (){
             select.show();
+        },false);
+        getDOM('#J-c-t').addEventListener('click',function (){
+            customDiv.show();
         },false);
     });
 </script>
