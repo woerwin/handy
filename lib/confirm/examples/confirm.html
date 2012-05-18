@@ -12,7 +12,8 @@
         .box {
             width: auto;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            text-align:center;
         }
 
         caption {
@@ -44,13 +45,13 @@
         }
         .green{color:green;}
         .red{color:red;}
-        #J-confirm{
+        .J-confirm{
             background:#d4d4d4;
             padding:10px;
             border:1px solid gray;
             color:#fff;
         }
-        #J-confirm a{
+        .J-confirm a{
             color: #f50;
         }
         a{
@@ -58,49 +59,127 @@
             display:block;
             margin-bottom:20px;
         }
+        body{
+            margin:0;
+            padding:0;
+        }
     </style>
     <script src="../../../tools/seajs-and-its-friends.js"></script>
 </head>
 <body>
 <div class="box">
   <a href="javascript:void(0)" id="J-simple-confirm">一个简单的 confirm</a>
-    <a href="javascript:void(0)" id="J-ui-confirm">一个带有自定义 UI 的 confirm</a>
-  <div id="J-confirm" style="display:none;">
+  <a href="javascript:void(0)" id="J-ui-confirm">一个带有自定义 UI 的 confirm</a>
+  <a href="javascript:void(0)" id="J-ui-confirm-anim">显示前为自定义 UI 增加动画效果</a>
+  <div id="J-confirm" class="J-confirm" style="display:none;">
       <h2>Confirm 标题</h2>
       <section>Confirm 内容<br /><a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></section>
   </div>
+  <img src="https://img.alipay.com/life/cpicon/ico-payment-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/20110614144509_36x36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/ico-ccr-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/20110617160826_20110613173040_ico-perloan-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/gas_1-3.jpg" /><br />
+  <img src="https://img.alipay.com/images/cms2/201109/20110919873366.png" /><br />
+  <a href="javascript:void(0)" id="J-simple-confirm-destroy">销毁简单的 confirm</a>
+  <a href="javascript:void(0)" id="J-ui-confirm-destroy">销毁带有自定义 UI 的 confirm</a>
+  <img src="https://img.alipay.com/life/cpicon/ico-payment-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/20110614144509_36x36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/ico-ccr-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/20110617160826_20110613173040_ico-perloan-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/gas_1-3.jpg" /><br />
+  <img src="https://img.alipay.com/images/cms2/201109/20110919873366.png" /><br />
 </div>
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
     seajs.use('../src/confirm', function (Confirm) {
         var uiConfirm = new Confirm({
-            tpl: '#J-confirm',
+            tpl: '#J-confirm',//'<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
             message: 'handy confirm 演示',
             onConfirm: function (o){
-                alert('您点击了确定')
+                alert('您点击了确定');
             },
-            onCancel: function (o){
-                alert('您点击了取消')
+            onHide: function (o){
+                alert('confirm 浮层已关闭');
             }
-        })/*,
+        }),
+        uiConfirm2 = new Confirm({
+            tpl: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
+            message: 'handy confirm 演示',
+            onConfirm: function (o){
+                alert('您点击了确定');
+            },
+            onHide: function (o){
+                alert('confirm 浮层已关闭');
+            }
+        }),
         confirm = new Confirm({
             message: 'handy confirm 演示',
             onConfirm: function (o){
                 alert('您点击了确定')
             },
-            onCancel: function (o){
+            onHide: function (o){
                 alert('您点击了取消')
             }
-        })*/;
-        //confirm.render();
+        });
+
+        confirm.render();
         uiConfirm.render();
+        uiConfirm2.render();
+
         getDOM('#J-simple-confirm').addEventListener('click',function (){
             confirm.show();
         },false);
 
         getDOM('#J-ui-confirm').addEventListener('click',function (){
             uiConfirm.show();
+        },false);
+        getDOM('#J-ui-confirm-anim').addEventListener('click',function (){
+            uiConfirm2.showTpl = function (){
+                this.getMask().css({
+                    '-webkit-transition': '-webkit-transform 0.5s ease',
+                    '-webkit-transform': 'scale(0)'
+                });
+
+                this.getTpl().css({
+                    '-webkit-transition': '-webkit-transform 0.5s ease',
+                    '-webkit-transform': 'scale(0)'
+                });
+
+                this.getTpl().show().css({
+                    '-webkit-transform-origin': '50% 50%',
+                    '-webkit-transform': 'scale(1)'
+                });
+
+                this.getMask().show().css({
+                    '-webkit-transform-origin': '50% 50%',
+                    '-webkit-transform': 'scale(1)'
+                });
+            };
+            uiConfirm2.hideTpl = function (){
+                this.getTpl().animate({
+                    scale: 0
+                });
+
+                this.getMask().animate({
+                    scale: 0
+                });
+            };
+            uiConfirm2.show();
+        },false);
+        getDOM('#J-simple-confirm-destroy').addEventListener('click',function (){
+            confirm.destroy();
+        },false);
+
+        getDOM('#J-ui-confirm-destroy').addEventListener('click',function (){
+            uiConfirm.destroy();
+        },false);
+
+        window.addEventListener('orientationchange',function (){
+            confirm.sync();
+            uiConfirm.sync();
+            uiConfirm2.sync();
         },false);
     });
 </script>

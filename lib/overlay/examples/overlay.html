@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>Overlay - handy</title>
+    <style type="text/css">
+        .box {
+            width: auto;
+            margin: 0;
+            padding: 20px;
+        }
+
+        caption {
+            text-align: left;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        table {
+            margin: 10px 0;
+        }
+
+        table td:first-child {
+            width: 100px;
+        }
+        .des{
+            background:#F0F1F8;
+            border:1px solid #D4D8EB;
+            padding:10px;
+            line-height:22px;
+        }
+        pre,code{
+            padding:10px;
+            background:#FCFBFA;
+            border:1px solid #EFEEED;
+            border-left-width:5px;
+        }
+        .green{color:green;}
+        .red{color:red;}
+        .J-confirm{
+            background:#d4d4d4;
+            padding:10px;
+            border:1px solid gray;
+            color:#fff;
+        }
+        .J-confirm a{
+            color: #f50;
+        }
+        a{
+            text-decoration:none;
+            margin-bottom:20px;
+        }
+        body{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    <script src="../../../tools/seajs-and-its-friends.js"></script>
+</head>
+<body>
+<div class="box">
+  <a href="javascript:void(0)" id="J-c-s">将 select 浮在我的右侧</a><br /><br /><br />
+  <input type="radio" /><br />
+  <input type="checkbox" /><br />
+  <input type="text" /><br />
+  <a href="javascript:void(0)" id="J-c-t">将自定义浮层显示在我的右上方</a><br /><br /><br />
+  <select style="display:-webkit-box;">
+      <option>one</option>
+      <option>two</option>
+  </select><br />
+  <div style="color:#fff;text-align:left;background:rgba(0,0,0,0.5);padding:5px 130px 90px 10px;border:1px solid rgba(0,0,0,0.8);" id="J-custom-div">
+      自定义浮层<br />
+      <a href="javascript:void(0)" class="hide">隐藏</a>
+      <a href="javascript:void(0)" class="destroy">销毁</a>
+  </div>
+</div>
+<script>
+    function getDOM(dom){return document.querySelector(dom);}
+
+    seajs.use(['../src/overlay','zepto'], function (Overlay,$) {
+        var select = new Overlay({
+            tpl: 'select',
+            css: {
+                display: 'none',
+                position: 'absolute',
+                left: $('#J-c-s').offset().left+$('#J-c-s').offset().width,
+                top: $('#J-c-s').offset().top
+            }
+        }),
+        customDiv = new Overlay({
+            tpl: '#J-custom-div',
+            css: {
+                display: 'none',
+                zIndex: 88888,
+                position: 'absolute',
+                left: $('#J-c-t').offset().left,
+                top: $('#J-c-t').offset().top - $('#J-custom-div').offset().height
+            }
+        });
+
+        select.render();
+        customDiv.render();
+
+        customDiv.on('shown',function (o){
+            o.options.tpl.find('.hide').unbind('click').click(function (){
+                o.hide();
+            });
+            o.options.tpl.find('.destroy').unbind('click').click(function (){
+                o.destroy();
+            });
+        });
+        getDOM('#J-c-s').addEventListener('click',function (){
+            select.show();
+        },false);
+        getDOM('#J-c-t').addEventListener('click',function (){
+            customDiv.show();
+        },false);
+    });
+</script>
+</body>
+</html>

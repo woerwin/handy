@@ -7,21 +7,25 @@
     m.define = f(2);
     u = o.createElement('script');
     u.id = d + 'node';
-    u.src = '../../../dist/seajs/1.1.0/sea.js';
+    u.src = '../../../../arale/dist/seajs/1.1.0/sea.js';
     l = o.getElementsByTagName('head')[0];
     l.insertBefore(u, l.firstChild);
 })(window, document, 'seajs');
 
-
 // and its friends
+(function(){
+var handy = '../../../dist/';
+
 seajs.config({
     alias: {
         'events': 'events/0.9.1/events',
         'zepto': 'zepto/0.8.0/zepto',
         'base': 'base/0.9.1/base',
-        'class': 'class/0.9.0/class',
-        'position': 'position/0.9.0/position'
+        'class': 'class/0.9.1/class',
+        'overlay': handy+'overlay/0.9.0/overlay'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2
 });
+})();
+
