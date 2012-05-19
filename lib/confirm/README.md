@@ -131,7 +131,7 @@ seajs.use('../src/confirm', function (Confirm) {
       display: 'none'
   }
 ```
-这和 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay) 是的参数是一样的
+这和 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay) 的参数是一样的
 
 `Confirm` 带有一套 data-attribute，它也继承了 `Overlay` data-attribute：
 
@@ -142,7 +142,7 @@ seajs.use('../src/confirm', function (Confirm) {
 `Confirm` 模块的 `data-confirm-role` 和 `data-confirm-action` 必需同时出现:
 ```html
 <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">取消</a>
-<a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="destroy">销毁</a>
+<a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
 <a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="confirm">确定</a>
 ```
 `Confirm` 会自动为 `element` 元素中的所有定义了 Confirm data-attribute 参数的节点注册事件。
