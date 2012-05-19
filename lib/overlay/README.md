@@ -17,7 +17,7 @@
 - 有效的解决了 Android OS 平台下浮层事件穿透问题
 
 ##代码片段
-###将当前页面中第一个 select 显示在页面的左上角
+#####将当前页面中第一个 select 显示在页面的左上角
 ```js
 define(function (require,exports,module){
    var Overlay = require('overlay');
@@ -37,7 +37,7 @@ define(function (require,exports,module){
    },false);
 });
 ```
-###将 id 为 userInfo 的节点显示在某个超链接的右上角，并且在显示后为 `element` 添加阴影样式，以及为 `element` 中的节点绑定事件
+#####将 id 为 userInfo 的节点显示在某个超链接的右上角，并且在显示后为 `element` 添加阴影样式，以及为 `element` 中的节点绑定事件
 ```js
     userInfoOverlay = new Overlay({
         element: '#J-userInfo',
@@ -60,6 +60,9 @@ define(function (require,exports,module){
     document.querySelector('##J-userInfo-trigger').addEventListener('click',function (){
         userInfoOverlay.show();
     },false);
+```
+####继承使用
+```js
 ```
 
 ##API 参考
