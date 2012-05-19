@@ -18,19 +18,24 @@
 
 ##使用说明
 ```js
-var overlay = new Overlay({
-            element: 'select',
-            styles: {
-                position: 'absolute',
-                left: 0,
-                top: 0
-            }
-        });
-    overlay.render();
+define(function (require,exports,module){
+  var Overlay = require('overlay');
 
-document.querySelector('#J-overlay-trigger').addEventListener('click',function (){
-            overlay.show();
-},false);
+  var selectOverlay = new Overlay({
+              element: 'select',
+              styles: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 0
+              }
+          });
+      selectOverlay.render();
+
+  document.querySelector('#J-overlay-trigger').addEventListener('click',function (){
+              selectOverlay.show();
+  },false);
+
+});
 ```
 ###参数说明
 `element` Overlay 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
@@ -71,6 +76,11 @@ shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 ifra
 ###自定义的事件
 ####shown `instance.on('shown',callback)`
 `Overlay` 显示后调用，`callback` 带有一个参数指向当前 `Ovelay` 对象
+```js
+  selectOverlay.on('shown',function (o){
+    o.options.element.append('已显示');//显示后向 element 末尾插入内容
+  });
+```
 ###hide `instance.on('hide',callback)`
 与 shown 事件的用法一样
 
