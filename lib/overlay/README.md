@@ -33,4 +33,17 @@ document.querySelector('#J-overlay-trigger').addEventListener('click',function (
 },false);
 ```
 ###参数说明
-`element` DOM Element、CSS Selector、Zepto Object、HTML String(&gt;div&lt;XXX&gt;/div&lt;)
+`element` Overlay 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String(&lt;div&gt;XXX&lt;/div&gt;)
+
+`parentNode` element 将渲染 (appendTo) 到这个节点里，默认是 `$('body')`。参数数据类型和 element 一样
+
+`styles` element 的样式集，对象字面量格式，默认的值是
+```js
+  styles: {
+      zIndex: 9999,
+      display: 'none'
+  }
+```
+
+###render `instance.render()`
+执行 Overlay 对象的渲染工作
