@@ -107,10 +107,10 @@ seajs.use('../src/confirm', function (Confirm) {
         });
 
 var uiConfirm2 = new scaleConfirm({
-        element: '<div style="background:#fff;padding:40px;">'+
-                   '<a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a>'+
-                   '<a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>'+
-                 '</div>',
+        element: '&lt;div style="background:#fff;padding:40px;"&gt;'+
+                   '&lt;a href="#" data-confirm-role="trigger" data-confirm-action="confirm"&gt;确定&lt;/a&gt;'+
+                   '&lt;a href="#" data-overlay-role="trigger" data-overlay-action="hide"&gt;关闭&lt;/a&gt;'+
+                 '&lt;/div&gt;',
         message: 'handy confirm 演示'
     });
 uiConfirm2.render();
