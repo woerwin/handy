@@ -73,18 +73,25 @@
   <a href="javascript:void(0)" id="J-ui-confirm-anim">显示前为自定义 UI 增加动画效果</a>
   <div id="J-confirm" class="J-confirm" style="display:none;">
       <h2>Confirm 标题</h2>
-      <section>Confirm 内容<br /><a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></section>
-  </div>
+      <section>Confirm 内容<br /><a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></section>
+  </div><br /><br />
+  <input type="radio" /><br /><br />
   <img src="https://img.alipay.com/life/cpicon/ico-payment-36.png" /><br />
   <img src="https://img.alipay.com/life/cpicon/20110614144509_36x36.png" /><br />
-  <img src="https://img.alipay.com/life/cpicon/ico-ccr-36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/ico-ccr-36.png" /><br /><br />
+  <select>
+      <option>one</option>
+      <option>two</option>
+  </select><br /><br />
   <img src="https://img.alipay.com/life/cpicon/20110617160826_20110613173040_ico-perloan-36.png" /><br />
   <img src="https://img.alipay.com/life/cpicon/gas_1-3.jpg" /><br />
-  <img src="https://img.alipay.com/images/cms2/201109/20110919873366.png" /><br />
+  <img src="https://img.alipay.com/images/cms2/201109/20110919873366.png" /><br /><br />
+  <input type="checkbox" /><br /><br />
   <a href="javascript:void(0)" id="J-simple-confirm-destroy">销毁简单的 confirm</a>
   <a href="javascript:void(0)" id="J-ui-confirm-destroy">销毁带有自定义 UI 的 confirm</a>
   <img src="https://img.alipay.com/life/cpicon/ico-payment-36.png" /><br />
-  <img src="https://img.alipay.com/life/cpicon/20110614144509_36x36.png" /><br />
+  <img src="https://img.alipay.com/life/cpicon/20110614144509_36x36.png" /><br /><br />
+  <input type="text" /><br /><br />
   <img src="https://img.alipay.com/life/cpicon/ico-ccr-36.png" /><br />
   <img src="https://img.alipay.com/life/cpicon/20110617160826_20110613173040_ico-perloan-36.png" /><br />
   <img src="https://img.alipay.com/life/cpicon/gas_1-3.jpg" /><br />
@@ -95,17 +102,7 @@
 
     seajs.use('../src/confirm', function (Confirm) {
         var uiConfirm = new Confirm({
-            tpl: '#J-confirm',//'<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
-            message: 'handy confirm 演示',
-            onConfirm: function (o){
-                alert('您点击了确定');
-            },
-            onHide: function (o){
-                alert('confirm 浮层已关闭');
-            }
-        }),
-        uiConfirm2 = new Confirm({
-            tpl: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
+            element: '#J-confirm',//'<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
             message: 'handy confirm 演示',
             onConfirm: function (o){
                 alert('您点击了确定');
@@ -124,6 +121,61 @@
             }
         });
 
+        var scaleConfirm = Confirm.extend({
+            show: function (){
+                scaleConfirm.superclass.show.call(this);
+                var that = this;
+                this.mask.css({
+                    '-webkit-transform-origin': '50% 50%',
+                    '-webkit-transform': 'scale(0)',
+                    display: 'none'
+                });
+
+                this.options.element.css({
+                    '-webkit-transform': 'scale(0)',
+                    display: 'none'
+                });
+                setTimeout(function (){
+                    that.mask.css('display','block').animate({
+                        scale: 1
+                    },150,'ease',function (){
+                        that.sync();
+                    });
+                    that.options.element.css('display','block').animate({
+                        scale: 1
+                    },500,'ease');
+                },0);
+            },
+            hide: function (){
+                scaleConfirm.superclass.hide.call(this);
+
+                this.mask.css({
+                    display: 'block'
+                });
+
+                this.options.element.css({
+                    display: 'block'
+                });
+                this.mask.animate({
+                    scale: 0
+                });
+                this.options.element.animate({
+                    scale: 0
+                });
+            }
+        });
+
+        var uiConfirm2 = new scaleConfirm({
+                element: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></div>',
+                message: 'handy confirm 演示',
+                onConfirm: function (o){
+                    alert('您点击了确定');
+                },
+                onHide: function (o){
+                    alert('confirm 浮层已关闭');
+                }
+            })
+
         confirm.render();
         uiConfirm.render();
         uiConfirm2.render();
@@ -131,41 +183,10 @@
         getDOM('#J-simple-confirm').addEventListener('click',function (){
             confirm.show();
         },false);
-
         getDOM('#J-ui-confirm').addEventListener('click',function (){
             uiConfirm.show();
         },false);
         getDOM('#J-ui-confirm-anim').addEventListener('click',function (){
-            uiConfirm2.showTpl = function (){
-                this.getMask().css({
-                    '-webkit-transition': '-webkit-transform 0.5s ease',
-                    '-webkit-transform': 'scale(0)'
-                });
-
-                this.getTpl().css({
-                    '-webkit-transition': '-webkit-transform 0.5s ease',
-                    '-webkit-transform': 'scale(0)'
-                });
-
-                this.getTpl().show().css({
-                    '-webkit-transform-origin': '50% 50%',
-                    '-webkit-transform': 'scale(1)'
-                });
-
-                this.getMask().show().css({
-                    '-webkit-transform-origin': '50% 50%',
-                    '-webkit-transform': 'scale(1)'
-                });
-            };
-            uiConfirm2.hideTpl = function (){
-                this.getTpl().animate({
-                    scale: 0
-                });
-
-                this.getMask().animate({
-                    scale: 0
-                });
-            };
             uiConfirm2.show();
         },false);
         getDOM('#J-simple-confirm-destroy').addEventListener('click',function (){

@@ -13,6 +13,22 @@
 当显示 `Overlay` 的 `element` 时，`Overlay` 会动态的在 `element` 后面添加一个 `shim` (垫片)，这个 `shim` 的作用将用来
 解决 android 平台下事件穿透的问题，这也是 **`Overlay`** 组件的一大亮点。
 
+##Overlay 内部数据
+@public 公用类型
+```js
+  this.options = {
+    element: null,
+    parentNode: null,
+    styles: {
+       //
+    }
+  }
+```
+@protected 受保护的数据，只在当前类和 Overlay 的子类中才能使用
+```js
+  this.shim = null;// 为解决 android os 平台事件穿透问题而动态生成的垫片
+```
+
 ##Overlay 的亮点
 - 有效的解决了 Android OS 平台下浮层事件穿透问题
 
@@ -62,7 +78,48 @@ define(function (require,exports,module){
     },false);
 ```
 ####继承使用
+`Overlay` 也可以做为超类，以 [`Confirm`](../lib/confirm) 模块为例
 ```js
+define(function (require,exports,module){
+    var Overlay = require('overlay'),
+        $ = require('zepto');
+
+    var Confirm = Overlay.extend({
+        options: {
+            message: null, // confirm 消息。如果指定了 element，message 将被忽略
+            styles: {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                margin: 0
+            }
+        },
+        initialize: function (options){
+            Confirm.superclass.initialize.call(this,options);
+
+            if(this.options.element){
+                this.__mask = $('<div></div>');
+            }
+        },
+        sync: function (){
+            // ...
+        },
+        bindUI: function (){
+            Confirm.superclass.bindUI.call(this);
+        },
+        show: function (){
+            // ...
+        },
+        hide: function (){
+            this.__mask && this.__mask.hide();
+            Confirm.superclass.hide.call(this);
+            return this;
+        },
+        setStyles: function (styles){
+            Confirm.superclass.setStyles.call(this,styles);
+        }
+    });
+});
 ```
 
 ##API 参考

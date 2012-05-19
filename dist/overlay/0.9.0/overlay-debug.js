@@ -1,63 +1,137 @@
-// Overlay 提供基于浮层表现的 UI 组件，提供浮层的显示、隐藏、定位
-define("#overlay/0.9.0/overlay", ["base","events","zepto"], function(require, exports, module) {
+// Overlay 提供基于浮层表现的 UI 组件。
+// 提供浮层的显示、隐藏、定位
+define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, module) {
     var Base = require('base'),
-        Events = require('events'),
         $ = require('zepto');
 
     var Overlay = Base.extend({
         options: {
-            tpl: null, // HTML 模版。如果提供 tpl ，tpl 将做为 confirm 的 UI ，默认使用 window.confirm
-            zIndex: 9999,
-            parentNode: $('body'), // 将 tpl 动态插入到 parentNode
-            css: {} // 浮层样式
+            element: null,
+            parentNode: $('body'), // 将 element 动态插入到 parentNode
+            styles: { // 浮层样式
+                zIndex: 9999,
+                display: 'none'
+            }
         },
-        NAME: 'Overlay',
         initialize: function (options){
             this.setOptions(options);
         },
-        sync: function (){
-            // 如果没有提供 tpl 或者当前模版已经隐藏
-            if(
-                (this.options.tpl && $(this.options.tpl).css('display') === 'none')
-                ||
-                (!this.options.tpl)
-              ){
+        render: function (){
+            // element 定义为 HTML 字符串时
+            if(this.options.element && !$(this.options.element).parent().get(0)){
+                this.options.element = $(this.options.element).hide();
+            }
+
+            // 复制一份用户提供的 element ，并且去除 id
+            this.options.element = $(this.options.element).appendTo(this.options.parentNode);
+
+            this.setStyles(this.options.styles);
+
+            this.bindUI();
+
+            return this;
+        },
+        bindUI: function (){
+            var triggers = this.options.element.find('*[data-overlay-role="trigger"]'),
+                that = this;
+
+            Array.prototype.slice.call(triggers);
+
+            triggers.forEach(function (trigger){
+                if(trigger && (action = $(trigger).attr('data-overlay-action'))){
+                    switch(action){
+                        case 'hide':
+                            $(trigger).unbind('click.overlay').bind('click.overlay',$.proxy(function (e){
+                                e.preventDefault();
+                                this.hide();
+                            },that));
+                            break;
+                        case 'show':
+                            $(trigger).unbind('click.overlay').bind('click.overlay',$.proxy(function (e){
+                                e.preventDefault();
+                                this.show();
+                            },that));
+                            break;
+                        case 'destroy':
+                            $(trigger).unbind('click.overlay').bind('click.overlay',$.proxy(function (e){
+                                e.preventDefault();
+                                this.destroy();
+                            },that));
+                            break;
+                    }
+                }
+            });
+
+            return this;
+        },
+        destroy: function (){
+            this.options.element && $(this.options.element).remove();
+            $(this.__shim).remove();
+            this.options.element = null;
+            this.__shim = null;
+            this.options.parentNode = $('body');
+            this.options.styles = {
+                zIndex: 9999
+            };
+        },
+        show: function (){
+            var display = '';
+
+            if($(this.options.element).css('display') === 'block'){
+                display = 'block';
+            }else if($(this.options.element).css('display') === '-webkit-box'){
+                display = '-webkit-box';
+            }
+
+            $(this.options.element).css({
+                'display': display
+            });
+
+            // 本来 handy 对 overlay addShim 方法的设计是: 如果是 android 设备再添加一个 shim
+            // 但后来发现某些 android 刷机用户的 UA 通过 zepto 无法准确获取
+            // 所以我们去除了这层判断处理，直接添加 shim
+            /*if($.os.android){
+                this.addShim();
+            }*/
+            this.addShim();
+
+            this.trigger('shown',this);
+
+            return this;
+        },
+        hide: function (){
+            $(this.options.element).hide();
+            this.trigger('hide',this);
+            this.__shim && $(this.__shim).remove();
+            this.__shim = null;
+
+            return this;
+        },
+        setStyles: function (styles){
+            $(this.options.element).css(styles);
+
+            return this;
+        },
+        // 解决 Android OS 部分机型中事件穿透问题
+        // 如果子类覆盖 show 方法，强烈建议大子类的 show 方法中调用 addShim
+        addShim: function (){
+            if(this.__shim){
                 return;
             }
 
-            this.trigger('sync',this);
-        },
-        render: function (){
-            // tpl 定义为 HTML 字符串时
-            if(this.options.tpl && !$(this.options.tpl).parent().get(0)){
-                this.options.tpl = $(this.options.tpl).hide();
-            }
+            var element = $(this.options.element),
+                offset = element.offset();
 
-            // 复制一份用户提供的 tpl ，并且去除 id
-            this.options.tpl = $(this.options.tpl).clone().appendTo(this.options.parentNode).attr('id','');
+            var shim = $('<div data-overlay-role="shim" style="position:absolute;pointer-events:none;'+
+                         'margin:0;padding:0;border:none;background:none;-webkit-tap-highlight-color:rgba(0,0,0,0);'+
+                         'width:'+offset.width+'px;height:'+offset.height+'px;'+
+                         'top:'+offset.top+'px;left:'+offset.left+'px;'+
+                         'z-index:'+((parseInt(element.css('zIndex'),10)-1) || 1)+';"></div>');
+            this.__shim = shim.appendTo(element.parent());
 
-            this.setCSS();
-        },
-        destroy: function (){
-            $(this.options.tpl).remove();
-            this.options.tpl = null;
-            this.options.parentNode = $('body');
-            this.options.css = {};
-        },
-        show: function (){
-            $(this.options.tpl).show();
-            this.trigger('shown',this);
-        },
-        hide: function (){
-            $(this.options.tpl).hide();
-            this.trigger('hide',this);
-        },
-        setCSS: function (){
-            $(this.options.tpl).css(this.options.css);
+            return this;
         }
     });
-
-    Events.mixTo(Overlay);
 
     module.exports = Overlay;
 });
