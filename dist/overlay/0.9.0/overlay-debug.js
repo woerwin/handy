@@ -15,6 +15,9 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
         },
         initialize: function (options){
             this.setOptions(options);
+
+            // protected
+            this.shim = null;
         },
         render: function (){
             // element 定义为 HTML 字符串时
@@ -66,9 +69,9 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
         },
         destroy: function (){
             this.options.element && $(this.options.element).remove();
-            $(this.__shim).remove();
+            $(this.shim).remove();
             this.options.element = null;
-            this.__shim = null;
+            this.shim = null;
             this.options.parentNode = $('body');
             this.options.styles = {
                 zIndex: 9999
@@ -102,8 +105,8 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
         hide: function (){
             $(this.options.element).hide();
             this.trigger('hide',this);
-            this.__shim && $(this.__shim).remove();
-            this.__shim = null;
+            this.shim && $(this.shim).remove();
+            this.shim = null;
 
             return this;
         },
@@ -115,7 +118,7 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
         // 解决 Android OS 部分机型中事件穿透问题
         // 如果子类覆盖 show 方法，强烈建议大子类的 show 方法中调用 addShim
         addShim: function (){
-            if(this.__shim){
+            if(this.shim){
                 return;
             }
 
@@ -127,7 +130,7 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
                          'width:'+offset.width+'px;height:'+offset.height+'px;'+
                          'top:'+offset.top+'px;left:'+offset.left+'px;'+
                          'z-index:'+((parseInt(element.css('zIndex'),10)-1) || 1)+';"></div>');
-            this.__shim = shim.appendTo(element.parent());
+            this.shim = shim.appendTo(element.parent());
 
             return this;
         }
