@@ -35,11 +35,15 @@
 ```html
 <div id="J-confirm" class="J-confirm" style="display:none;">
       <h2>Confirm 标题</h2>
-      <section>Confirm 内容<br /><a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></section>
+      <section>
+          Confirm 内容<br />
+          <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>
+      </section>
 </div>
 ```
 ```js
-var var uiConfirm = new Confirm({
+seajs.use('../src/confirm', function (Confirm) {
+   var uiConfirm = new Confirm({
         element: '#J-confirm',
         message: 'handy confirm 演示',
         onConfirm: function (o){
@@ -48,6 +52,82 @@ var var uiConfirm = new Confirm({
         onHide: function (o){
             alert('confirm 浮层已关闭');
         }
-    });
+       });
+    uiConfirm.render();
+});
 ```
+- 继承 `Confirm`，创建一个带有缩放 (scale) 动画的 `Confirm`
+```js
+seajs.use('../src/confirm', function (Confirm) {
+   var scaleConfirm = Confirm.extend({
+            show: function (){
+                // 调用父类的 show 方法
+                scaleConfirm.superclass.show.call(this);
+
+                var that = this;
+                this.mask.css({
+                    '-webkit-transform-origin': '50% 50%',
+                    '-webkit-transform': 'scale(0)',
+                    display: 'none'
+                });
+
+                this.options.element.css({
+                    '-webkit-transform': 'scale(0)',
+                    display: 'none'
+                });
+                setTimeout(function (){
+                    that.mask.css('display','block').animate({
+                        scale: 1
+                    },150,'ease',function (){
+                        that.sync();
+                    });
+                    that.options.element.css('display','block').animate({
+                        scale: 1
+                    },500,'ease');
+                },0);
+            },
+            hide: function (){
+                // 调用父类的 hide 方法
+                scaleConfirm.superclass.hide.call(this);
+
+                this.mask.css({
+                    display: 'block'
+                });
+
+                this.options.element.css({
+                    display: 'block'
+                });
+                this.mask.animate({
+                    scale: 0
+                });
+                this.options.element.animate({
+                    scale: 0
+                });
+            }
+        });
+
+var uiConfirm2 = new scaleConfirm({
+        element: '<div style="background:#fff;padding:40px;">'+
+                   '<a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a>'+
+                   '<a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>'+
+                 '</div>',
+        message: 'handy confirm 演示'
+    });
+uiConfirm2.render();
+uiConfirm2.on('confirm',function (o){ alert('您点击了确定');});
+});
+```
+##API 参考
+###参数说明
+`element` Confirm 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
+
+`parentNode` element 将渲染 (appendTo) 到这个节点里，默认是 `$('body')`。参数数据类型和 element 一样
+
+`styles` element 的样式集，对象字面量格式，默认的值是:
+```js
+  styles: {
+      zIndex: 9999,
+      display: 'none'
+  }
+这和 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay) 是的参数是一样的
 
