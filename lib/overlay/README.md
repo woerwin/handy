@@ -16,7 +16,7 @@
 ##Overlay 的亮点
 - 有效的解决了 Android OS 平台下浮层事件穿透问题
 
-##代码片段
+##使用说明
 ###将一个 select 显示在页面的左上角
 ```js
 define(function (require,exports,module){
@@ -38,7 +38,7 @@ define(function (require,exports,module){
 });
 ```
 
-##使用说明
+##API 参考
 ###参数说明
 `element` Overlay 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
 
