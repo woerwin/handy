@@ -106,16 +106,16 @@ seajs.use('../src/confirm', function (Confirm) {
             }
         });
 
-var uiConfirm2 = new scaleConfirm({
-        element: '&lt;div style="background:#fff;padding:40px;"&gt;'+
-                   '&lt;a href="#" data-confirm-role="trigger" data-confirm-action="confirm"&gt;确定&lt;/a&gt;'+
-                   '&lt;a href="#" data-overlay-role="trigger" data-overlay-action="hide"&gt;关闭&lt;/a&gt;'+
-                 '&lt;/div&gt;',
-        message: 'handy confirm 演示'
-    });
-uiConfirm2.render();
-uiConfirm2.on('confirm',function (o){ alert('您点击了确定');});
-});
+   var uiConfirm2 = new scaleConfirm({
+            element: '&lt;div style="background:#fff;padding:40px;"&gt;'+
+                       '&lt;a href="#" data-confirm-role="trigger" data-confirm-action="confirm"&gt;确定&lt;/a&gt;'+
+                       '&lt;a href="#" data-overlay-role="trigger" data-overlay-action="hide"&gt;关闭&lt;/a&gt;'+
+                     '&lt;/div&gt;',
+            message: 'handy confirm 演示'
+        });
+    uiConfirm2.render();
+    uiConfirm2.on('confirm',function (o){ alert('您点击了确定');});
+   });
 ```
 ##API 参考
 ###参数说明
