@@ -65,6 +65,8 @@ define(function (require,exports,module){
         }
     });
     userInfoOverlay.render();
+
+    // overlay 显示后调用
     userInfoOverlay.on('shown',function (o){
       o.setStyles({
           '-webkit-box-shadow': '0px 0px 10px rgba(0,0,0,.7)'
@@ -95,6 +97,7 @@ define(function (require,exports,module){
             }
         },
         initialize: function (options){
+            // 调用父类的 initialize 方法
             Confirm.superclass.initialize.call(this,options);
 
             if(this.options.element){
