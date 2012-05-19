@@ -33,11 +33,11 @@ document.querySelector('#J-overlay-trigger').addEventListener('click',function (
 },false);
 ```
 ###参数说明
-`element` Overlay 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String(&lt;div&gt;XXX&lt;/div&gt;)
+`element` Overlay 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
 
 `parentNode` element 将渲染 (appendTo) 到这个节点里，默认是 `$('body')`。参数数据类型和 element 一样
 
-`styles` element 的样式集，对象字面量格式，默认的值是
+`styles` element 的样式集，对象字面量格式，默认的值是:
 ```js
   styles: {
       zIndex: 9999,
@@ -47,3 +47,32 @@ document.querySelector('#J-overlay-trigger').addEventListener('click',function (
 
 ###render `instance.render()`
 执行 Overlay 对象的渲染工作
+
+###bindUI `instance.bindUI()`
+绑定 Overlay 对象的 UI 事件。支持链式调用
+
+###destroy `instance.destroy()`
+销毁 `Overlay` 对象。调用 `destroy` 方法应**特别小心**，它会清除当前 `Overlay` 对象的所有数据，并且从文档流中把 `element` **删除**
+
+###show `instance.show()`
+显示 `Overlay` 。默认的显示方法是更新 `element` 的 display 的样式值，如果你需要使用动画模式显示，你可以覆盖这个 show 方法。支持链式调用
+
+###hide `instance.hide()`
+隐藏 `Overlay` 。和 show 方法类似，你可以覆盖它，以便使用其它方式隐藏 `Overlay`。支持链式调用
+
+###setStyles `instance.setStyles(styles)`
+设置 `element` 的样式。styles 是字面量对象数据格式。支持链式调用
+
+###addShim `instance.addShim()`
+添加 shim(垫片)，主要为了解决 android os 平台浏览器事件穿问题，这个方法在 `show` 方法调用时会被调用，如果覆盖了 `show` 方法，请勿必调用 `addShim` 方法，
+调用 `addShim` 时，会向 `element` 的父元素动态插入一个带有 `data-overlay-role="shim"` 的 div 标签，这个标签将绝对定位在 `element` 的后一层，意思就是：
+shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 iframe 做 shim 解 ie6 的浮层无法遮住表单控件问题 :-)
+
+##测试用例
+- [runner.html](../lib/overlay/tests/runner.html)
+
+##演示地址
+- [Demo](../lib/overlay/examples/overlay.html)
+
+##反馈意见
+欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
