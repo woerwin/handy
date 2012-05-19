@@ -13,6 +13,19 @@
 当显示 `Overlay` 的 `element` 时，`Overlay` 会动态的在 `element` 后面添加一个 `shim` (垫片)，这个 `shim` 的作用将用来
 解决 android 平台下事件穿透的问题，这也是 **`Overlay`** 组件的一大亮点。
 
+`Overlay` 带有一套 data-attribute：
+
+`data-overlay-role` 表示 overlay 模块中的角色，当前只有一个可选参数 `trigger`
+
+`data-overlay-action` 表示 overlay 模块中的角色的行为，当前可选参数有 `show`、`hide`、`destroy`
+
+`Overlay` 模块的 `data-overlay-role` 和 `data-overlay-action` 必需同时出现:
+```html
+<a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>
+<a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
+```
+`Overlay` 会自动为 `element` 元素中的所有定义了 Overlay data-attribute 参数的节点注册事件
+
 ##Overlay 内部数据
 @public 公用类型
 ```js
@@ -26,14 +39,14 @@
 ```
 @protected 受保护的数据，只在当前类和 Overlay 的子类中才能使用
 ```js
-  this.shim = null;// 为解决 android os 平台事件穿透问题而动态生成的垫片
+  this.shim = null;// 一个 zepto 对象。为解决 android os 平台事件穿透问题而动态生成的垫片
 ```
 
 ##Overlay 的亮点
 - 有效的解决了 Android OS 平台下浮层事件穿透问题
 
 ##代码片段
-#####将当前页面中第一个 select 显示在页面的左上角
+- 将当前页面中第一个 select 显示在页面的左上角
 ```js
 define(function (require,exports,module){
    var Overlay = require('overlay');
@@ -53,7 +66,7 @@ define(function (require,exports,module){
    },false);
 });
 ```
-#####将 id 为 userInfo 的节点显示在某个超链接的右上角，并且在显示后为 `element` 添加阴影样式，以及为 `element` 中的节点绑定事件
+- 将 id 为 userInfo 的节点显示在某个超链接的右上角，并且在显示后为 `element` 添加阴影样式，以及为 `element` 中的节点绑定事件
 ```js
     userInfoOverlay = new Overlay({
         element: '#J-userInfo',
@@ -79,7 +92,7 @@ define(function (require,exports,module){
         userInfoOverlay.show();
     },false);
 ```
-####继承使用
+- 继承使用
 `Overlay` 也可以做为超类，以 [`Confirm`](../lib/confirm) 模块为例
 ```js
 define(function (require,exports,module){
