@@ -68,6 +68,12 @@ document.querySelector('#J-overlay-trigger').addEventListener('click',function (
 调用 `addShim` 时，会向 `element` 的父元素动态插入一个带有 `data-overlay-role="shim"` 的 div 标签，这个标签将绝对定位在 `element` 的后一层，意思就是：
 shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 iframe 做 shim 解 ie6 的浮层无法遮住表单控件问题 :-)
 
+###自定义的事件
+####shown `instance.on('shown',callback)`
+`Overlay` 显示后调用，`callback` 带有一个参数指向当前 `Ovelay` 对象
+###hide `instance.on('hide',callback)`
+与 shown 事件的用法一样
+
 ##测试用例
 - [runner.html](../lib/overlay/tests/runner.html)
 
