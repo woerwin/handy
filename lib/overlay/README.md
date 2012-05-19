@@ -16,13 +16,13 @@
 ##Overlay 的亮点
 - 有效的解决了 Android OS 平台下浮层事件穿透问题
 
-##使用说明
-###将一个 select 显示在页面的左上角
+##代码片段
+###将当前页面中第一个 select 显示在页面的左上角
 ```js
 define(function (require,exports,module){
-  var Overlay = require('overlay');
+   var Overlay = require('overlay');
 
-  var selectOverlay = new Overlay({
+   var selectOverlay = new Overlay({
               element: 'select',
               styles: {
                   position: 'absolute',
@@ -30,12 +30,36 @@ define(function (require,exports,module){
                   top: 0
               }
           });
-      selectOverlay.render();
+   selectOverlay.render();
 
-  document.querySelector('#J-overlay-trigger').addEventListener('click',function (){
-              selectOverlay.show();
-  },false);
+   document.querySelector('#J-overlay-trigger').addEventListener('click',function (){
+      selectOverlay.show();
+   },false);
 });
+```
+###将 id 为 userInfo 的节点显示在某个超链接的右上角，并且在显示后为 `element` 添加阴影样式，以及为 `element` 中的节点绑定事件
+```js
+    userInfoOverlay = new Overlay({
+        element: '#J-userInfo',
+        styles: {
+            zIndex: 88888,
+            position: 'absolute',
+            left: $('#J-userInfo-trigger').offset().left + $('#J-userInfo-trigger').offset().width,
+            top: $('#J-userInfo-trigger').offset().top - $('#J-userInfo').offset().height
+        }
+    });
+    userInfoOverlay.render();
+    userInfoOverlay.on('shown',function (o){
+      o.setStyles({
+          '-webkit-box-shadow': '0px 0px 10px rgba(0,0,0,.7)'
+      });
+      o.options.element.find('.hide').unbind('click').click(function (){
+          o.hide();
+      });
+    });
+    document.querySelector('##J-userInfo-trigger').addEventListener('click',function (){
+        userInfoOverlay.show();
+    },false);
 ```
 
 ##API 参考
