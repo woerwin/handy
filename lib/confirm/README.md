@@ -1,6 +1,8 @@
 #Confirm
 提供移动平台 Confirm [模态对话框](http://zh.wikipedia.org/wiki/%E5%AF%B9%E8%AF%9D%E6%A1%86)
 
+在阅读 `Confirm` 之前建议您先阅读 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay)
+
 ##模块依赖
 - [overlay](http://github.com/alipay/handy/tree/master/lib/overlay)
 - [zepto](http://github.com/alipay/arale/tree/master/lib/zepto)
@@ -8,7 +10,8 @@
 ##Confirm 内部数据
 @protected 受保护的数据，只在当前类和 Confirm 的子类中才能使用
 ```js
-  this.mask = null;// 一个 zepto 对象。半透明遮照元素
+  this.mask // 一个 zepto 对象。半透明遮照元素
+  this.syncShim // 一个受保护的方法，用于同步垫片的样式
 ```
 
 ##代码片段
@@ -146,5 +149,24 @@ seajs.use('../src/confirm', function (Confirm) {
 <a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="confirm">确定</a>
 ```
 `Confirm` 会自动为 `element` 元素中的所有定义了 Confirm data-attribute 参数的节点注册事件。
+
+##sync `instance.sync()`
+在浏览器窗口或设备方向发生变化时用于更新 confirm 浮层的布局
+```js
+window.addEventListener('orientationchange',function (){
+    confirm.sync();
+},false);
+```
+
+更多的方法请阅读 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay)
+
+##测试用例
+- [runner.html](../lib/confirm/tests/runner.html)
+
+##演示地址
+- [Demo](../lib/confirm/examples/confirm.html)
+
+##反馈意见
+欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
 
 
