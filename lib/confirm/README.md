@@ -117,6 +117,7 @@ seajs.use('../src/confirm', function (Confirm) {
     uiConfirm2.on('confirm',function (o){ alert('您点击了确定');});
    });
 ```
+
 ##API 参考
 ###参数说明
 `element` Confirm 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
@@ -129,5 +130,6 @@ seajs.use('../src/confirm', function (Confirm) {
       zIndex: 9999,
       display: 'none'
   }
+```
 这和 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay) 是的参数是一样的
 
