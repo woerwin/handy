@@ -8,7 +8,7 @@
 ##Confirm 内部数据
 @protected 受保护的数据，只在当前类和 Confirm 的子类中才能使用
 ```js
-  this.mask = null;// 半透明遮照元素
+  this.mask = null;// 一个 zepto 对象。半透明遮照元素
 ```
 
 ##代码片段
@@ -132,4 +132,19 @@ seajs.use('../src/confirm', function (Confirm) {
   }
 ```
 这和 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay) 是的参数是一样的
+
+`Confirm` 带有一套 data-attribute，它也继承了 `Overlay` data-attribute：
+
+`data-confirm-role` 表示 confirm 模块中的角色，当前只有一个可选参数 `trigger`
+
+`data-confirm-action` 表示 overlay 模块中的角色的行为，当前可选参数有 `confirm`
+
+`Confirm` 模块的 `data-confirm-role` 和 `data-confirm-action` 必需同时出现:
+```html
+<a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">取消</a>
+<a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="destroy">销毁</a>
+<a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="confirm">确定</a>
+```
+`Confirm` 会自动为 `element` 元素中的所有定义了 Confirm data-attribute 参数的节点注册事件。
+
 
