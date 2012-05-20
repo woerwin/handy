@@ -102,7 +102,7 @@
 
     seajs.use('../src/confirm', function (Confirm) {
         var uiConfirm = new Confirm({
-            element: '#J-confirm',//'<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-confirm-role="trigger" data-confirm-action="hide">关闭</a></div>',
+            element: '#J-confirm',
             message: 'handy confirm 演示',
             onConfirm: function (o){
                 alert('您点击了确定');
@@ -144,7 +144,7 @@
                     that.options.element.css('display','block').animate({
                         scale: 1
                     },500,'ease');
-                },0);
+                },100);
             },
             hide: function (){
                 scaleConfirm.superclass.hide.call(this);
@@ -167,18 +167,13 @@
 
         var uiConfirm2 = new scaleConfirm({
                 element: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></div>',
-                message: 'handy confirm 演示',
-                onConfirm: function (o){
-                    alert('您点击了确定');
-                },
-                onHide: function (o){
-                    alert('confirm 浮层已关闭');
-                }
-            })
+                message: 'handy confirm 演示'
+            });
 
         confirm.render();
         uiConfirm.render();
         uiConfirm2.render();
+        uiConfirm2.on('confirm',function (o){ alert('您点击了确定');});
 
         getDOM('#J-simple-confirm').addEventListener('click',function (){
             confirm.show();
