@@ -12,9 +12,20 @@
 
     <script src="../../../tools/seajs-and-its-friends.js"></script>
     <style type="text/css">
+        body {
+            -webkit-perspective: 1000;
+            -webkit-perspective-origin: 0 50%;
+        }
+
         .flips {
             position: relative;
-            width: 90px;
+            width: 190px;
+            font-size: 14px;
+            height: 143px;
+            overflow: hidden;
+            -webkit-border-radius: 5px;
+            -webkit-backface-visibility: hidden;
+            border: 1px solid #CCC;
         }
 
         a {
@@ -23,25 +34,50 @@
 
         img {
             display: block;
+            -webkit-border-radius: 5px;
+        }
+
+        #flip1 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
         }
 
         #flip2 {
             position: absolute;
             left: 0;
             top: 0;
-            display: none;
+            background: #eee;
+            padding: 10px;
+            line-height: 1.9;
+            width: 168px;
+            height: 121px;
+            -webkit-border-radius: 5px;
+            border: 1px solid #CCC;
+            color: #999;
         }
+
     </style>
 </head>
 <body>
-<div class="flips">
-    <div id="flip1"><a href="javascript:flip.flip('#flip2');"><img src="img/logined_head.png" width="90"></a></div>
-    <div id="flip2"><a href="javascript:flip.flip('#flip1');"><img src="img/logined_daily.png" width="90"></a></div>
+<div class="flips" data-module-name="flip" data-module-id="mFilp">
+    <div id="flip1" data-flip-role="front">
+        <div><img src="img/2.jpg" width="190"></div>
+    </div>
+    <div id="flip2" data-flip-role="back">
+        <div>照片名：城堡</div>
+        <div>拍摄时间：2001年12月5日</div>
+        <div>拍摄地点：摩洛哥</div>
+        <div>拍摄人：***</div>
+    </div>
 </div>
+<div style="margin-top: 5px;"><a href="javascript:flip.flip('back');">查看照片明细</a></div>
+<div style="margin-top: 5px;"><a href="javascript:flip.flip('front');">查看照片</a></div>
 <script type="text/javascript">
     var flip;
     seajs.use('../src/flip', function (Flip) {
-        flip = new Flip(["#flip1", "#flip2"]);
+        flip = new Flip(".flips",{direction:"utd"});
     });
 </script>
 </body>
