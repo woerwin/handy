@@ -12,19 +12,11 @@
 
     <script src="../../../tools/seajs-and-its-friends.js"></script>
     <style type="text/css">
-        body {
-            -webkit-perspective: 1000;
-            -webkit-perspective-origin: 0 50%;
-        }
+        .flip_container {
 
-        .flips {
-            position: relative;
             width: 190px;
             font-size: 14px;
             height: 143px;
-
-            -webkit-border-radius: 5px;
-            border: 1px solid #CCC;
         }
 
         a {
@@ -36,16 +28,8 @@
             -webkit-border-radius: 5px;
         }
 
-        #flip1 {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
 
         #flip2 {
-            position: absolute;
-            left: 0;
-            top: 0;
             background: #eee;
             padding: 10px;
             line-height: 1.9;
@@ -59,7 +43,7 @@
     </style>
 </head>
 <body>
-<div class="flips" data-module-name="flip" data-module-id="mFilp">
+<div class="flip_container" data-module-name="flip" data-module-id="mFilp">
     <div id="flip1" data-flip-role="front">
         <div><img src="img/2.jpg" width="190"></div>
     </div>
@@ -75,7 +59,7 @@
 <script type="text/javascript">
     var flip;
     seajs.use('../src/flip', function (Flip) {
-        flip = new Flip(".flips");
+        flip = new Flip(".flip_container");
     });
 </script>
 </body>
