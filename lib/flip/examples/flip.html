@@ -22,9 +22,8 @@
             width: 190px;
             font-size: 14px;
             height: 143px;
-            overflow: hidden;
+
             -webkit-border-radius: 5px;
-            -webkit-backface-visibility: hidden;
             border: 1px solid #CCC;
         }
 
@@ -41,7 +40,6 @@
             position: absolute;
             left: 0;
             top: 0;
-            z-index: 10;
         }
 
         #flip2 {
@@ -77,7 +75,7 @@
 <script type="text/javascript">
     var flip;
     seajs.use('../src/flip', function (Flip) {
-        flip = new Flip(".flips",{direction:"utd"});
+        flip = new Flip(".flips");
     });
 </script>
 </body>
