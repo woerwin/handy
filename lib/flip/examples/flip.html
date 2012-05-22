@@ -7,13 +7,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
-    <title>iScroll - handy</title>
+    <title>flip - handy</title>
     <style type="text/css"></style>
 
     <script src="../../../tools/seajs-and-its-friends.js"></script>
     <style type="text/css">
         .flip_container {
-
             width: 190px;
             font-size: 14px;
             height: 143px;
@@ -44,10 +43,12 @@
 </head>
 <body>
 <div class="flip_container" data-module-name="flip" data-module-id="mFilp">
-    <div id="flip1" data-flip-role="front">
-        <div><img src="img/2.jpg" width="190"></div>
+    <div id="flip1" data-flip-role="frontFace">
+        <div>
+            <a href="javascript:void(0);" data-flip-role="trigger" data-flip-action="backFace"><img src="img/2.jpg" width="190"></a>
+        </div>
     </div>
-    <div id="flip2" data-flip-role="back">
+    <div id="flip2" data-flip-role="backFace" style="display: none;">
         <div>照片名：城堡</div>
         <div>拍摄时间：2001年12月5日</div>
         <div>拍摄地点：摩洛哥</div>
