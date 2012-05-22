@@ -1,5 +1,6 @@
-// Overlay 提供基于浮层表现的 UI 组件。
-// 提供浮层的显示、隐藏、定位
+// Overlay
+// -------
+// 提供基于浮层表现的 UI 组件，提供浮层的显示、隐藏、定位
 define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, module) {
     var Base = require('base'),
         $ = require('zepto');
@@ -7,7 +8,7 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
     var Overlay = Base.extend({
         options: {
             element: null,
-            parentNode: $('body'), // 将 element 动态插入到 parentNode
+            parent: $('body'), // 将 element 动态插入到 parent
             styles: { // 浮层样式
                 zIndex: 9999,
                 display: 'none'
@@ -26,7 +27,7 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
             }
 
             // 复制一份用户提供的 element ，并且去除 id
-            this.options.element = $(this.options.element).appendTo(this.options.parentNode);
+            this.options.element = $(this.options.element).appendTo(this.options.parent);
 
             this.setStyles(this.options.styles);
 
@@ -72,7 +73,7 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
             $(this.shim).remove();
             this.options.element = null;
             this.shim = null;
-            this.options.parentNode = $('body');
+            this.options.parent = $('body');
             this.options.styles = {
                 zIndex: 9999
             };

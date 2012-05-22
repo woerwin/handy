@@ -124,7 +124,7 @@
 <pre>
 实例化配置参数：
 {
-  srcNode:
+  element:
 }
 pageTransition 还需要trigger及page参数，这些参数是通过 data-pageTransition-attribute 定义在 html 标签上的
 trigger:
@@ -180,14 +180,15 @@ page:
 
     seajs.use(['../src/pageTransition'], function (PageTransition) {
         var pageTransition = new PageTransition({
-            srcNode: '#J-page-box'
+            element: '#J-page-box'
         }),
         subPage = null;
-
         pageTransition.render();
+
         window.addEventListener('resize',function (){
             pageTransition.sync();
         },false);
+
         getDom('#J-destroy').addEventListener('click',function (){
             pageTransition.destroy();
         },false);
@@ -208,21 +209,22 @@ page:
                 break;
             }
         },false);
+        getDom('#J-getPage').addEventListener('click',function (e){
+            alert(pageTransition.getPage().innerHTML)
+        },false);
+
         pageTransition.on('transitionStart',function (type,page,o){
-            console.log(type,page,o)
+            // console.log(type,page,o)
         });
         pageTransition.on('transitionEnd',function (type,page,o){
-            console.log(type,page,o)
+            // console.log(type,page,o)
             if(page === document.querySelector('#J-subPage-box')){
                 subPage = subPage || new PageTransition({
-                    srcNode: '#J-subPage'
+                    element: '#J-subPage'
                 })
                 subPage.render();
             }
         });
-        getDom('#J-getPage').addEventListener('click',function (e){
-            alert(pageTransition.getPage().innerHTML)
-        },false);
     });
 </script>
 </body>

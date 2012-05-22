@@ -66,7 +66,7 @@
 </head>
 <body>
 <div class="box">
-  <a href="javascript:void(0)" id="J-overlay-one">将 select 浮在我的右侧</a>
+  <a href="javascript:void(0)" id="J-overlay-one">把一个 select 显示在我的右侧</a>
   <a href="http://weibo.com/askmarket#1337321564730" target="_blank">
     <img src="http://tp4.sinaimg.cn/1660497691/50/1290994036/1" alt="颂赞" />
   </a>
@@ -74,7 +74,7 @@
   <input type="radio" /><br />
   <input type="checkbox" /><br />
   <input type="text" /><br />
-  <a href="javascript:void(0)" id="J-overlay-two">将自定义浮层显示在我的上方</a><br />
+  <a href="javascript:void(0)" id="J-overlay-two">在我的上方显示一个浮层</a><br />
   <span class="tip">建议您使用 android 观察这个示例</span><br />
   <br /><br /><br />
   <input type="submit" value="有动画的 overlay" id="J-anim-overlay" />
@@ -93,6 +93,7 @@
     function getDOM(dom){return document.querySelector(dom);}
 
     seajs.use(['../src/overlay','zepto'], function (Overlay,$) {
+        // 把一个 select 显示在我的右侧
         var overlayOne = new Overlay({
             element: 'select',
             styles: {
@@ -100,8 +101,19 @@
                 left: $('#J-overlay-one').offset().left+$('#J-overlay-one').offset().width,
                 top: $('#J-overlay-one').offset().top
             }
-        }),
-        overlayTwo = new Overlay({
+        });
+        overlayOne.render();
+        getDOM('#J-overlay-one').addEventListener('click',function (){
+            overlayOne.show();
+        },false);
+        getDOM('#J-overlay-two').addEventListener('click',function (){
+            overlayTwo.show();
+        },false);
+
+
+
+        // 在我的上方显示一个浮层
+        var overlayTwo = new Overlay({
             element: '#J-customise-layer',
             styles: {
                 zIndex: 88888,
@@ -110,10 +122,7 @@
                 top: $('#J-overlay-two').offset().top - $('#J-customise-layer').offset().height
             }
         });
-
-        overlayOne.render();
         overlayTwo.render();
-
         overlayTwo.on('shown',function (o){
             o.setStyles({
                 top: $('#J-overlay-two').offset().top - $('#J-customise-layer').offset().height
@@ -126,21 +135,22 @@
             o.options.element.find('.destroy').unbind('click').click(function (){
                 o.destroy();
             });
-            $.os.android && $('.tip').css('color','red').html('这个浮层在 android 平台下是可以阻止事件的穿透，你可以尝试点击后面的表单控件<br />');
+            $.os.android && $('.tip').css('color','red').html('这个浮层在 android 平台下是可以阻止事件的穿透，'+
+                                                              '你无法点击后面的表单控件<br />');
         });
         overlayTwo.on('hide',function (o){
             $.os.android && $('.tip').css('color','red').html('浮层隐藏，后面的元素可正常点击');
         });
 
-        getDOM('#J-overlay-one').addEventListener('click',function (){
-            overlayOne.show();
-        },false);
-        getDOM('#J-overlay-two').addEventListener('click',function (){
-            overlayTwo.show();
-        },false);
 
+
+        // 有动画模式的 overlay
         var animoverlay = new Overlay({
-            element: '<div style="background:rgba(255,255,255,.7);width:260px;height:350px;padding:10px;border:1px solid gray;"><h2>一个动画模式的扩展</h2>这个浮层带有动画模式，在 android 平台下无法遮住后面元素的事件行为<br /><a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a><a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
+            element: '<div style="background:rgba(255,255,255,.7);width:260px;height:350px;padding:10px;'+
+                     'border:1px solid gray;"><h4>一个带有动画模式的扩展</h4>，'+
+                     '请注意：在 android 平台下无法遮住后面元素的事件行为<br /><a href="javascript:void(0)" style="margin-right:40px;" '+
+                     'data-overlay-role="trigger" data-overlay-action="hide">关闭</a><a href="javascript:void(0)" '+
+                     'data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
             styles: {
                 position: 'absolute',
                 left: ($(window).width() - 280) / 2,

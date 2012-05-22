@@ -70,7 +70,7 @@
 <div class="box">
   <a href="javascript:void(0)" id="J-simple-confirm">一个简单的 confirm</a>
   <a href="javascript:void(0)" id="J-ui-confirm">一个带有自定义 UI 的 confirm</a>
-  <a href="javascript:void(0)" id="J-ui-confirm-anim">显示前为自定义 UI 增加动画效果</a>
+  <a href="javascript:void(0)" id="J-ui-confirm-anim">一个带有动画效果的 confirm</a>
   <div id="J-confirm" class="J-confirm" style="display:none;">
       <h2>Confirm 标题</h2>
       <section>Confirm 内容<br /><a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></section>
@@ -101,6 +101,7 @@
     function getDOM(dom){return document.querySelector(dom);}
 
     seajs.use('../src/confirm', function (Confirm) {
+        // 自定义 UI 的 confirm
         var uiConfirm = new Confirm({
             element: '#J-confirm',
             message: 'handy confirm 演示',
@@ -110,8 +111,14 @@
             onHide: function (o){
                 alert('confirm 浮层已关闭');
             }
-        }),
-        confirm = new Confirm({
+        });
+        uiConfirm.render();
+        getDOM('#J-ui-confirm').addEventListener('click',function (){
+            uiConfirm.show();
+        },false);
+
+        // 简单的 confirm
+        var confirm = new Confirm({
             message: 'handy confirm 演示',
             onConfirm: function (o){
                 alert('您点击了确定')
@@ -120,7 +127,15 @@
                 alert('您点击了取消')
             }
         });
+        confirm.render();
+        getDOM('#J-simple-confirm').addEventListener('click',function (){
+            confirm.show();
+        },false);
+        getDOM('#J-simple-confirm-destroy').addEventListener('click',function (){
+            confirm.destroy();
+        },false);
 
+        // 带有动画效果的 confirm
         var scaleConfirm = Confirm.extend({
             show: function (){
                 scaleConfirm.superclass.show.call(this);
@@ -164,34 +179,20 @@
                 });
             }
         });
-
         var uiConfirm2 = new scaleConfirm({
                 element: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></div>',
                 message: 'handy confirm 演示'
             });
-
-        confirm.render();
-        uiConfirm.render();
         uiConfirm2.render();
         uiConfirm2.on('confirm',function (o){ alert('您点击了确定');});
-
-        getDOM('#J-simple-confirm').addEventListener('click',function (){
-            confirm.show();
-        },false);
-        getDOM('#J-ui-confirm').addEventListener('click',function (){
-            uiConfirm.show();
-        },false);
         getDOM('#J-ui-confirm-anim').addEventListener('click',function (){
             uiConfirm2.show();
         },false);
-        getDOM('#J-simple-confirm-destroy').addEventListener('click',function (){
-            confirm.destroy();
-        },false);
-
         getDOM('#J-ui-confirm-destroy').addEventListener('click',function (){
             uiConfirm.destroy();
         },false);
 
+        // 当设备方向发生变化时，更新 confirm 的布局
         window.addEventListener('resize',function (){
             confirm.sync();
             uiConfirm.sync();

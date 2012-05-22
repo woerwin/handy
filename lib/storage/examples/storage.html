@@ -48,12 +48,12 @@
 <body>
 <div class="box">
         <h1>Example：Storage</h1>
-        Storage提供一套在移动平台处理数据存储的解决方案，Storage对localStorage作了一层封装，目前仅支持localStorage，不支持sessionStorage。
+        Storage 提供一套在移动平台处理数据存储的解决方案。Storage 对 localStorage 作了一层封装，目前仅支持 localStorage，不支持 sessionStorage。
         <article class="des">
-            1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向localStorage读取刚保存的数据，并将读取结果显示在页面末尾<br />
-            2、点击清除已保存的第一组数据，将从localStorage中清除刚刚保存的第一组数据，并重新向localStorage读取数据，然显示在页面末尾<br />
-            3、点击清除已保存的所有数据，将从localStorage中清除您刚保存的所有数据，从localStorage中读取数据为空。<br />
-            4、存储数据后，您还可以在另一个页面中修改数据，此时Storage会提醒您: "有人修改了XXX的数据"<br />
+            1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向 localStorage 读取刚保存的数据，并将读取结果显示在页面末尾<br />
+            2、点击清除已保存的第一组数据，将从 localStorage 中清除刚刚保存的第一组数据，并重新向 localStorage 读取数据，然显示在页面末尾<br />
+            3、点击清除已保存的所有数据，将从 localStorage 中清除您刚保存的所有数据，从 localStorage 中读取数据为空。<br />
+            4、存储数据后，您还可以在另一个页面中修改数据，此时浏览器会提醒您: "有人修改了 XXX 的数据"<br />
             建议您使用移动设备内置浏览器访问这个页面
         </article>
         <table width="100%">
@@ -78,15 +78,14 @@
                 <td><input type="text" id="J-value2"/></td>
             </tr>
         </table>
-        <a href="javascript:void(0)" id="J-sava">保存数据</a><br/>
+        <a href="javascript:void(0)" id="J-sava">保存</a><br/>
         <a href="javascript:void(0)" id="J-cleanTheFirst">清除已保存的第一组数据</a><br/>
-        <a href="javascript:void(0)" id="J-cleanAll">清除已保存的所有数据</a><br/>
+        <a href="javascript:void(0)" id="J-cleanAll">清除所有数据</a><br/>
 
         <table width="100%">
-            <caption>修改已保存的第一组数据</caption>
+            <caption>修改已经保存的第一组数据</caption>
             <tr>
-                <td>Value:</td>
-                <td><input type="text" id="J-key1-new"/><a href="javascript:void(0)" id="J-updateTheFirst">修改已保存的第一组数据</a></td>
+                <td><input type="text" id="J-key1-new"/><a href="javascript:void(0)" id="J-updateTheFirst">修改</a></td>
             </tr>
         </table>
 
@@ -115,7 +114,10 @@
             }
 
             Storage.on(theFirstKey+':change',function (e){
-              alert('有人修改了'+theFirstKey+'的数据！');
+              alert('有人修改了 '+theFirstKey+' 的数据！');
+              var data = {};
+              data[theFirstKey] = e.newValue + '<span style="color:#f50;"> 数据已更新</span>';
+              output(data);
             });
 
             Storage.on('clear',function (){
@@ -160,7 +162,6 @@
         getDom('#J-updateTheFirst').addEventListener('click',function (e){
             var newValue = getDom('#J-key1-new').value;
             Storage.set(theFirstKey,newValue);
-            Storage.trigger(theFirstKey+':change');
             var data = {};
             data[theFirstKey] = Storage.get(theFirstKey);
             output(data);

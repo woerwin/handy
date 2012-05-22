@@ -24,7 +24,7 @@ data-pageTransition-action="forward" // 这是触发器的行为(向前过渡)�
 data-pageTransition-forward="#J-nextPage" // 这是某个触发器需要向前过渡的目标元素，当点击触发器时，
                            // PageTransition 会在当前的触发器上查找需要过渡的目标元素
 ```
-`PageTransition` 首先会在用户传入的 `srcNode` 这个 `DOM` 参数中查找带有 `data-pageTransition-role="page"` 的元素，
+`PageTransition` 首先会在用户传入的 `element` 这个 `DOM` 参数中查找带有 `data-pageTransition-role="page"` 的元素，
 `PageTransition` 将查找到的**第一个** `page` 元素做为初始化页面，其它的 `data-pageTransition-role="page"` 将被忽略，然后向这个初始化页面的父层动态插入
 一个带有 `data-pageTransition-role="viewport"` 属性的元素，这个元素就是 `PageTransition` 的视口，紧接着 `PageTransition` 会在当前视口下查找**所有**
 带有 `data-pageTransition-role="trigger"` 的元素，为它们绑定 `click.pageTransition` 事件，每个视口都是独立的，因此您可能在 `PageTransition` 的页面
@@ -62,12 +62,12 @@ data-pageTransition-forward="#J-nextPage" // 这是某个触发器需要向前�
 define(function (require){
   var PageTransition = require('pageTransition');
   var pageTransition = new PageTransition({
-              srcNode: '#J-page-box'
+              element: '#J-page-box'
           });
   pageTransition.render();
 });
 ```
-`pageTransition` 只需要传入 `srcNode` 参数，然后调用 `render` 方法。
+`pageTransition` 只需要传入 `element` 参数，然后调用 `render` 方法。
 
 每配置一个 `trigger` ，必须要定义它的 `data-pageTransition-role` 和 `data-pageTransition-action`，如果 action 是 forward，必须要指定 data-pageTransition-forward。
 
@@ -89,7 +89,7 @@ define(function (require){
 define(function (require){
   var PageTransition = require('pageTransition');
   var pageTransition = new PageTransition({
-                srcNode: '#J-page-box'
+                element: '#J-page-box'
             });
   pageTransition.render();
 
@@ -105,7 +105,7 @@ define(function (require){
 define(function (require){
   var PageTransition = require('pageTransition');
   var pageTransition = new PageTransition({
-                srcNode: '#J-page-box'
+                element: '#J-page-box'
             });
   pageTransition.render();
 
@@ -122,7 +122,7 @@ define(function (require){
 ```js
 define(function (require){
   var pageTransition = new require('pageTransition')({
-                srcNode: '#J-page-box'
+                element: '#J-page-box'
             });
   pageTransition.render();
 
@@ -138,7 +138,7 @@ define(function (require){
 ```js
 define(function (require){
   var pageTransition = new require('pageTransition')({
-                srcNode: '#J-page-box'
+                element: '#J-page-box'
             });
   pageTransition.render();
 
@@ -156,7 +156,7 @@ define(function (require){
 ```js
 define(function (require){
   var pageTransition = new require('pageTransition')({
-                srcNode: '#J-page-box'
+                element: '#J-page-box'
             });
   pageTransition.render();
 

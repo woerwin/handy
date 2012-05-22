@@ -31,7 +31,7 @@
 ```js
   this.options = {
     element: null,
-    parentNode: null,
+    parent: null,
     styles: {
        //
     }
@@ -142,7 +142,7 @@ define(function (require,exports,module){
 ###参数说明
 `element` Overlay 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
 
-`parentNode` element 将渲染 (appendTo) 到这个节点里，默认是 `$('body')`。参数数据类型和 element 一样
+`parent` element 将渲染 (appendTo) 到这个节点里，默认是 `$('body')`。参数数据类型和 element 一样
 
 `styles` element 的样式集，对象字面量格式，默认的值是:
 ```js

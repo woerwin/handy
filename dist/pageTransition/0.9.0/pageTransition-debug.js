@@ -20,7 +20,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
         $ = require('zepto');
 
     var defaults = {
-        srcNode: null
+        element: null
     };
 
     function PageTransition(options) {
@@ -63,7 +63,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
 
     // 更新 UI
     PageTransition.prototype.sync = function() {
-        var container = $(this.options.srcNode),
+        var container = $(this.options.element),
             containerW = container.css('width'),
             pages = this.viewport.find('*['+this._DATAATTRIBUTENAMESPACE+'-role=page]');
 
@@ -106,7 +106,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
 
         trigger.unbind('click.pageTransition');
 
-        $(this.options.srcNode).attr('style', null).append(this._originPage.attr('style', null));
+        $(this.options.element).attr('style', null).append(this._originPage.attr('style', null));
         this.page.removeAttr('style').appendTo(this._nextPageParent).hide();
         this.viewport.remove();
 
@@ -127,7 +127,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
         this.nextPage.appendTo(this.viewport);
         this.sync();
         this.viewport.animate({
-            marginLeft: -parseInt($(this.options.srcNode).css('width'), 10)
+            marginLeft: -parseInt($(this.options.element).css('width'), 10)
         },300, null, $.proxy(function() {
             this.__transitionForwardEnd();
         },this));
@@ -162,7 +162,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
         this.viewport.prepend(this._prevPages[this._step - 1]);
         this.sync();
         this.viewport.css({
-            marginLeft: -parseInt($(this.options.srcNode).css('width'), 10)
+            marginLeft: -parseInt($(this.options.element).css('width'), 10)
         });
         this.viewport.animate({
             marginLeft: 0
@@ -194,7 +194,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
     };
 
     PageTransition.prototype._insertPageViewport = function() {
-        var container = $(this.options.srcNode),
+        var container = $(this.options.element),
             pageViewPort = $('<div '+this._DATAATTRIBUTENAMESPACE+'-role="viewport"></div>'),
             page = $(container.find('*['+this._DATAATTRIBUTENAMESPACE+'-role=page]')[0]);
         page.wrapAll(pageViewPort);

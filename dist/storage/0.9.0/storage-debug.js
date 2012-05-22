@@ -18,9 +18,7 @@ define("#storage/0.9.0/storage", ["events"], function(require, exports, module) 
     }
 
     // 存储一条数据。
-    // 目前仅支持存储String类型的数剧。
-    // `key`
-    // `value`
+    // 目前仅支持存储 String 类型的数剧。
     Storage.set = function(key, value) {
         if (keys.indexOf(key) === -1) {
             keys.push(key);
@@ -35,11 +33,13 @@ define("#storage/0.9.0/storage", ["events"], function(require, exports, module) 
     };
 
     // 通过指定的 `key` 获取一条数据并返回。
+    // return String data
     Storage.get = function(key) {
         return L.getItem(key);
     };
 
     // 获取所有通过 `Storage` 存储的字段，并返回。
+    // return Array data
     Storage.keys = function() {
         return keys;
     };
@@ -49,7 +49,7 @@ define("#storage/0.9.0/storage", ["events"], function(require, exports, module) 
         var k = key,
             _keys = Storage.keys();
 
-        Storage.trigger(key + ':delete', {
+        Storage.trigger(key + ':remove', {
             key: k
         });
 
@@ -66,7 +66,8 @@ define("#storage/0.9.0/storage", ["events"], function(require, exports, module) 
     };
 
     // 清除所有已存储的数据
-    // 请注意不是清除 `localStorage` 下的所有数据，而是清除通过 `Storage` 单例存储的所有数据
+    // 请注意不是清除 `localStorage` 下的所有数据
+    // 而是清除通过 `Storage` 单例存储的所有数据
     Storage.clear = function() {
         var _keys = Storage.keys();
         _keys.forEach(function(k) {

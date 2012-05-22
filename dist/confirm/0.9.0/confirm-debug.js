@@ -1,4 +1,6 @@
-// Confirm 提供 Confirm 模态对话框
+// Confirm
+// -------
+// 提供 Confirm 模态对话框
 // [理解模态对话框](http://zh.wikipedia.org/wiki/%E5%AF%B9%E8%AF%9D%E6%A1%86)
 define("#confirm/0.9.0/confirm", ["overlay","zepto"], function(require, exports, module) {
     var Overlay = require('overlay'),

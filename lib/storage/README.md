@@ -5,7 +5,8 @@
 - [event](http://github.com/alipay/arale/tree/master/lib/events)
 
 ##平台兼容
-- UC浏览器 7.9+ 部分平台的 UC U3 内核的浏览器对 `Storage` 事件支持存在怪异(有时不能触发)
+- UC浏览器 7.9+
+  部分平台的 UC U3 内核的浏览器对 `Storage` 事件支持存在怪异(有时不能触发 change event)
 
 ##使用说明
 `Storage` 是一个单例，可直接使用
@@ -43,6 +44,8 @@ define(function (require){
 
 `Storage` 当前只允许存储 `String` 数据。
 
+当 `value` 参数为 null 时，`Storage` 会调用 `remove` 方法
+
 ###get `Storage.get(key)`
 
 通过指定的 `key` 获取一条数据
@@ -52,12 +55,12 @@ define(function (require){
 ```js
 define(function (require){
     var Storage = require('storage');
-    var name = Storage.get('name');
+    var name = Storage.get('name'); // handy
 });
 ```
 ###keys `Storage.keys()`
 
-返回通过 `Storage` 保存的所有 key
+返回通过 `Storage` 保存的所有 key. Array 类型
 
 ```js
 define(function (require){
@@ -82,7 +85,7 @@ define(function (require){
     Storage.keys();//['name'];
 });
 ```
-`remove` 方法调用时会触发 `Storage.on(key:delete)` 事件
+`remove` 方法调用时会触发 `Storage.on(key:remove)` 事件
 
 ###clear `Storage.clear()`
 清除通过 `Storage` 存储的所有数据
@@ -101,7 +104,7 @@ define(function (require){
 值得注意 `clear` 只清除通过 `Storage` 存储的数据，并不是指清除 `localStorage` 和 `sessionStorage` 对象中的所有数据
 `clear` 方法调用时会触发 `Storage.on('clear')` 事件
 
-###`Storage` 混入了 `event` 模块，因此它也有一套自定义事件机制。
+###`Storage` 混入了 [`event`](http://github.com/alipay/arale/tree/master/lib/events) 模块，因此有一套自定义事件机制。
 
 ###监听某条数据被修改 `Storage.on(key:change,callback)`
 
@@ -118,13 +121,13 @@ define(function (require){
 ```
 如果要尝试 `Storage.on`，你需要打开两个浏览器窗口 (A,B)，在 A 窗口保存一条数据，在 B 窗口修改 A 窗口所保存的数据(请注意一定要修改同名的 key )
 
-###监听某条数据被删除 `Storage.on(key:delete,callback)`
+###监听某条数据被删除 `Storage.on(key:remove,callback)`
 
 ```js
 define(function (require){
     var Storage = require('storage');
     Storage.set('name','handy');
-    Storage.on('name:delete',function (e){
+    Storage.on('name:remove',function (e){
         alert('有人修改了'+e.key);
     });
 });
