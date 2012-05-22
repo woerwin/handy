@@ -25,7 +25,7 @@
             overflow: hidden;
         }
 
-        #module_dialog_help_iscrollContainer {
+        .module_dialog_help_iscrollContainer {
             border: 1px solid #CCC;
             margin: 20px;
             height: 300px;
@@ -53,14 +53,14 @@
             background: #e3e3e3;
         }
 
-        #example2 #scroller {
+        #example2 #thelist {
             width: 2100px;
             height: 100%;
             float: left;
             padding: 0;
         }
 
-        #example2 #scroller ul {
+        #example2 ul {
             list-style: none;
             display: block;
             float: left;
@@ -71,7 +71,7 @@
             text-align: left;
         }
 
-        #example2 #scroller li {
+        #example2 li {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             -o-box-sizing: border-box;
@@ -99,43 +99,42 @@
 <section>
     演示界面：
     <article id="example1">
-        <div id="module_dialog_help_iscrollContainer">
-            <div class="module_dialog_help_scroller">
-                <h2>常见问题：</h2>
-                <article class="module_list_select">
-                    <section class="listItems"><a href="#" class="flex block">怎样注册支付宝帐户？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">怎样更改支付宝绑定手机号码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何找回登录密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">免费流量是什么？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">话费充值卡充值后为什么不是即时到账？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">为什么我的余额支付功能被关闭了？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">可以货到付款吗？</a></section>
-                </article>
-                <h2>密码管理：</h2>
-                <article class="module_list_select">
-                    <section class="listItems"><a href="#" class="flex block">如何修改登录密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">输入登录密码显示空白页怎么办？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何修改支付密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何找回登录密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何找回支付密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">密码输入错误，账户暂时锁定？</a></section>
-                </article>
-                <h2>密码管理：</h2>
-                <article class="module_list_select">
-                    <section class="listItems"><a href="#" class="flex block">如何修改登录密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">输入登录密码显示空白页怎么办？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何修改支付密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何找回登录密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">如何找回支付密码？</a></section>
-                    <section class="listItems"><a href="#" class="flex block">密码输入错误，账户暂时锁定？</a></section>
-                </article>
-            </div>
+        <div class="module_dialog_help_scroller" data-module-name="iscroll" data-module-id="iscroll_example1"
+             data-iscroll-class="module_dialog_help_iscrollContainer">
+            <h2>常见问题：</h2>
+            <article class="module_list_select">
+                <section class="listItems"><a href="#" class="flex block">怎样注册支付宝帐户？</a></section>
+                <section class="listItems"><a href="#" class="flex block">怎样更改支付宝绑定手机号码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何找回登录密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">免费流量是什么？</a></section>
+                <section class="listItems"><a href="#" class="flex block">话费充值卡充值后为什么不是即时到账？</a></section>
+                <section class="listItems"><a href="#" class="flex block">为什么我的余额支付功能被关闭了？</a></section>
+                <section class="listItems"><a href="#" class="flex block">可以货到付款吗？</a></section>
+            </article>
+            <h2>密码管理：</h2>
+            <article class="module_list_select">
+                <section class="listItems"><a href="#" class="flex block">如何修改登录密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">输入登录密码显示空白页怎么办？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何修改支付密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何找回登录密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何找回支付密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">密码输入错误，账户暂时锁定？</a></section>
+            </article>
+            <h2>密码管理：</h2>
+            <article class="module_list_select">
+                <section class="listItems"><a href="#" class="flex block">如何修改登录密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">输入登录密码显示空白页怎么办？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何修改支付密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何找回登录密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">如何找回支付密码？</a></section>
+                <section class="listItems"><a href="#" class="flex block">密码输入错误，账户暂时锁定？</a></section>
+            </article>
         </div>
     </article>
     <script type="text/javascript">
         var example1;
         seajs.use('../src/iscroll', function (iScroll) {
-            example1 = new iScroll("#module_dialog_help_iscrollContainer");
+            example1 = new iScroll(".module_dialog_help_scroller");
         });
     </script>
     <a href="javascript:example1.scrollTo(0,-100,400,false);">滚动至100像素的地方</a>
@@ -161,27 +160,25 @@
 <section>
     演示界面:(左右进行拖动)
     <div id="example2">
-        <div id="scroller">
-            <ul id="thelist">
-                <li><strong>1.</strong> <em>A robot may not injure a human being or, through inaction, allow a human being to come to harm.</em></li>
-                <li><strong>2.</strong> <em>A robot must obey any orders given to it by human beings, except where such orders would conflict with the
-                    First Law.</em></li>
-                <li><strong>3.</strong> <em>A robot must protect its own existence as long as such protection does not conflict with the First or
-                    Second Law.</em></li>
-                <li><strong>Zeroth Law:</strong> <em>A robot may not harm humanity, or, by inaction, allow humanity to come to harm.</em></li>
-                <li><strong>Lyuben Dilov's Forth law:</strong> <em>A robot must establish its identity as a robot in all cases.</em></li>
-                <li><strong>Harry Harrison's Forth law:</strong> <em>A robot must reproduce. As long as such reproduction does not interfere with the
-                    First or Second or Third Law.</em></li>
-                <li><strong>Nikola Kesarovski's Fifth law:</strong> <em>A robot must know it is a robot.</em></li>
-            </ul>
-        </div>
+        <ul id="thelist" data-iscroll-width="300px">
+            <li><strong>1.</strong> <em>A robot may not injure a human being or, through inaction, allow a human being to come to harm.</em></li>
+            <li><strong>2.</strong> <em>A robot must obey any orders given to it by human beings, except where such orders would conflict with the
+                First Law.</em></li>
+            <li><strong>3.</strong> <em>A robot must protect its own existence as long as such protection does not conflict with the First or
+                Second Law.</em></li>
+            <li><strong>Zeroth Law:</strong> <em>A robot may not harm humanity, or, by inaction, allow humanity to come to harm.</em></li>
+            <li><strong>Lyuben Dilov's Forth law:</strong> <em>A robot must establish its identity as a robot in all cases.</em></li>
+            <li><strong>Harry Harrison's Forth law:</strong> <em>A robot must reproduce. As long as such reproduction does not interfere with the
+                First or Second or Third Law.</em></li>
+            <li><strong>Nikola Kesarovski's Fifth law:</strong> <em>A robot must know it is a robot.</em></li>
+        </ul>
     </div>
-    <a href="javascript:example2.scrollToPage('next','next',500);">滚动至第三页</a>
-    <a href="javascript:example2.scrollToPage(1,0,500);">滚动至页底</a><br/>
+    <a href="javascript:example2.scrollToPage(2,0,500);">滚动至第三页</a>
+    <a href="javascript:example2.scrollToPage(6,0,500);">滚动至页底</a><br/>
     <script type="text/javascript">
         var example2;
         seajs.use('../src/iscroll', function (iScroll) {
-            example2 = new iScroll("#example2", {
+            example2 = new iScroll("#thelist", {
                 snap:true,
                 momentum:false,
                 hScrollbar:false
