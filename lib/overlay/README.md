@@ -43,7 +43,7 @@
 ```
 
 ##Overlay 的亮点
-- 有效的解决了 Android OS 平台下浮层事件穿透问题
+- 有效的解决了 Android OS 平台下浮层事件[穿透问题](docs/assets/overlay-no-shim.mov)
 
 ##代码片段
 - 将当前页面中第一个 select 显示在页面的左上角
@@ -194,8 +194,3 @@ shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 ifra
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
-
-<video controls="controls">
-  <source src="docs/assets/overlay-no-shim.mov" type="video/mov" />
-  Your browser does not support the video tag.
-</video>
