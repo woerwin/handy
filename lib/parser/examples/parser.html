@@ -14,7 +14,7 @@
         }
         .box {
             width: auto;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
         }
 
@@ -92,7 +92,7 @@
 </head>
 <body>
 <!-- the pageTransition module start -->
-    <div class="box">
+<div class="box">
     <div id="J-page-box" data-module-name="pageTransition" data-pageTransition-id="abcd">
         <section data-pageTransition-role="page">
             <h1 class="bar">Example：PageTransition</h1>
@@ -103,14 +103,12 @@
                 既然 margin-left 在移动平台的动画不够平滑，为何还要使用 margin-left 呢？您可以参考 <a href="http://qiqicartoon.com/?p=785" target="_blank">Android平台中CSS3 transition和animation问题</a><br />
                 1、您可以<a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
                 2、您可以<a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-page-box-nextPage2">查看 pageTransition 组件的基本配置</a><br />
-                3、<a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-subPage-box">PageTransition 嵌套</a>
                 建议您使用移动设备内置浏览器访问这个页面<br />
                 <a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-page-box-nextPage">下一页</a>
             </article>
         </section>
     </div>
     <p style="margin:10px 30px;text-align:center;">@copy <a href="http://aralejs.org" target="_blank">arale.org</a></p>
-</div>
 
 <article id="J-page-box-nextPage" style="display:none;" data-pageTransition-role="page">
     <h1 class="bar">Example: PageTransition 所需的 HTML 结构</h1>
@@ -151,40 +149,6 @@ page:
 </pre>
         </article>
 </article>
-
-<article id="J-subPage-box" data-pageTransition-role="page" style="display:none;">
-    <h1 class="bar">Example: PageTransition 嵌套</h1>
-    <section data-pageTransition-role="page" class="des" id="J-subPage">
-        <div data-pageTransition-role="page">
-            PageTransition 支持深层嵌套<br />
-            <form>
-                <input type="text" /><br />
-                <select>
-                    <option>one</option>
-                    <option>one</option>
-                </select><br />
-                <input type="radio" /><br />
-                <input type="checkbox" />
-            </form><br />
-            <a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-subPage1">下一页</a>
-        </div>
-    </section>
-    <br />
-    <a href="javascript:void(0)" data-pageTransition-action="back" data-pageTransition-role="trigger" style="margin-left:30px;">返回上一页</a>
-</article>
-
-<p id="J-subPage1" style="display:none;" data-pageTransition-role="page">
-    <a href="javascript:void(0)" data-pageTransition-action="back" data-pageTransition-role="trigger">返回</a>
-    <a href="javascript:void(0)" id="J-subPage-destroy">销毁</a>
-</p>
-
-<a href="javascript:void(0)" id="J-getPage" style="text-align:center;display:block;padding:10px;">获取 PageTransition 当前页面</a>
-
-<nav id="J-bottom-btns">
-    <a href="javascript:void(0)" data-pageTransition-role="1">查看 PageTransition 组件所需的 HTML 结构</a>
-    <a href="javascript:void(0)" data-pageTransition-role="2">查看 pageTransition 组件的基本配置</a>
-    <a href="javascript:void(0)" data-pageTransition-role="3">PageTransition 嵌套</a>
-</nav>
 <!-- the pageTransition module end -->
 
 <!-- the overlay module start -->
@@ -194,17 +158,18 @@ page:
     <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
 </div>
 <div data-module-name="overlay" data-overlay-id="two">
-    <span data-overlay-parent="ddf"></span>
-    <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>
-    <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
+    <data data-overlay-styles='{"-webkit-box-shadow":"0 0 10px #000","width":"200px","text-align":"center","height":"200px","line-height":"200px","text-shadow":"1px 1px 1px #fff","border":"1px solid #000","position":"absolute","top":0,"left":0,"padding":"10px","background":"gray","color":"#fff"}'></data>
+    <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">取消</a>
 </div>
-<a href="javascript:void(0)" id="J-showOverlay">显示第一个 Overlay </a>
+<a href="javascript:void(0)" id="J-showOverlay" style="margin:0 30px;">右下角显示一个 Overlay </a>
+<a href="javascript:void(0)" id="J-showOverlay2" style="margin:0 30px;">在中央显示一个 Overlay </a>
 <!-- the overlay module end -->
-
+</div>
 
 <div id="J-performance-show"></div>
+
 <script>
-    seajs.use('../src/parser',function (){
+    seajs.use(['../src/parser','zepto'],function (parser,$){
         
 
         var time = HandyParserData.time,
@@ -218,6 +183,16 @@ page:
 
         document.querySelector('#J-showOverlay').addEventListener('click',function (){
             HandyParserData.overlay_one.show();
+        },false);
+
+        HandyParserData.overlay_two.on('shown',function (o){
+            o.setStyles({
+                left: ($(window).width() - o.options.element.offset().width) / 2,
+                top:  ($(window).height() - o.options.element.offset().height) / 2 + window.scrollY
+            });
+        });
+        document.querySelector('#J-showOverlay2').addEventListener('click',function (){
+            HandyParserData.overlay_two.show();
         },false);
     });
 </script>

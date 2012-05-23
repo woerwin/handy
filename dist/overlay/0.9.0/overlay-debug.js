@@ -14,15 +14,15 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
                 display: 'none'
             }
         },
-        initialize: function (options){
+        initialize: function(options) {
             this.setOptions(options);
 
             // protected
             this.shim = null;
         },
-        render: function (){
+        render: function() {
             // element 定义为 HTML 字符串时
-            if(this.options.element && !$(this.options.element).parent().get(0)){
+            if (this.options.element && !$(this.options.element).parent().get(0)) {
                 this.options.element = $(this.options.element).hide();
             }
 
@@ -35,29 +35,29 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
 
             return this;
         },
-        bindUI: function (){
+        bindUI: function() {
             var triggers = this.options.element.find('*[data-overlay-role="trigger"]'),
                 that = this;
 
             Array.prototype.slice.call(triggers);
 
-            triggers.forEach(function (trigger){
-                if(trigger && (action = $(trigger).attr('data-overlay-action'))){
-                    switch(action){
+            triggers.forEach(function(trigger) {
+                if (trigger && (action = $(trigger).attr('data-overlay-action'))) {
+                    switch (action) {
                         case 'hide':
-                            $(trigger).unbind('click.overlay').bind('click.overlay',$.proxy(function (e){
+                            $(trigger).unbind('click.overlay').bind('click.overlay', $.proxy(function(e) {
                                 e.preventDefault();
                                 this.hide();
                             },that));
                             break;
                         case 'show':
-                            $(trigger).unbind('click.overlay').bind('click.overlay',$.proxy(function (e){
+                            $(trigger).unbind('click.overlay').bind('click.overlay', $.proxy(function(e) {
                                 e.preventDefault();
                                 this.show();
                             },that));
                             break;
                         case 'destroy':
-                            $(trigger).unbind('click.overlay').bind('click.overlay',$.proxy(function (e){
+                            $(trigger).unbind('click.overlay').bind('click.overlay', $.proxy(function(e) {
                                 e.preventDefault();
                                 this.destroy();
                             },that));
@@ -68,7 +68,7 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
 
             return this;
         },
-        destroy: function (){
+        destroy: function() {
             this.options.element && $(this.options.element).remove();
             $(this.shim).remove();
             this.options.element = null;
@@ -78,12 +78,12 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
                 zIndex: 9999
             };
         },
-        show: function (){
+        show: function() {
             var display = '';
 
-            if($(this.options.element).css('display') === 'block'){
+            if ($(this.options.element).css('display') === 'block') {
                 display = 'block';
-            }else if($(this.options.element).css('display') === '-webkit-box'){
+            }else if ($(this.options.element).css('display') === '-webkit-box') {
                 display = '-webkit-box';
             }
 
@@ -99,38 +99,46 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
             }*/
             this.addShim();
 
-            this.trigger('shown',this);
+            this.trigger('shown', this);
 
             return this;
         },
-        hide: function (){
+        hide: function() {
             $(this.options.element).hide();
-            this.trigger('hide',this);
+            this.trigger('hide', this);
             this.shim && $(this.shim).remove();
             this.shim = null;
 
             return this;
         },
-        setStyles: function (styles){
+        setStyles: function(styles) {
             $(this.options.element).css(styles);
+            if(this.shim){
+                this.shim.css({
+                    width: parseInt($(this.options.element).get(0).scrollWidth,10),
+                    height: parseInt($(this.options.element).get(0).scrollHeight,10),
+                    left: parseInt($(this.options.element).css('left'),10),
+                    top: parseInt($(this.options.element).css('top'),10) + window.scrollY
+                });
+            }
 
             return this;
         },
         // 解决 Android OS 部分机型中事件穿透问题
         // 如果子类覆盖 show 方法，强烈建议大子类的 show 方法中调用 addShim
-        addShim: function (){
-            if(this.shim){
+        addShim: function() {
+            if (this.shim) {
                 return;
             }
 
             var element = $(this.options.element),
                 offset = element.offset();
 
-            var shim = $('<div data-overlay-role="shim" style="position:absolute;pointer-events:none;'+
-                         'margin:0;padding:0;border:none;background:none;-webkit-tap-highlight-color:rgba(0,0,0,0);'+
-                         'width:'+offset.width+'px;height:'+offset.height+'px;'+
-                         'top:'+offset.top+'px;left:'+offset.left+'px;'+
-                         'z-index:'+((parseInt(element.css('zIndex'),10)-1) || 1)+';"></div>');
+            var shim = $('<div data-overlay-role="shim" style="position:absolute;pointer-events:none;' +
+                         'margin:0;padding:0;border:none;background:none;-webkit-tap-highlight-color:rgba(0,0,0,0);' +
+                         'width:' + offset.width + 'px;height:' + offset.height + 'px;' +
+                         'top:' + offset.top + 'px;left:' + offset.left + 'px;' +
+                         'z-index:' + ((parseInt(element.css('zIndex'), 10) - 1) || 1) + ';"></div>');
             this.shim = shim.appendTo(element.parent());
 
             return this;
