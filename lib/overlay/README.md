@@ -194,3 +194,8 @@ shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 ifra
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
+
+<video controls="controls">
+  <source src="docs/assets/overlay-no-shim.mov" type="video/mov" />
+  Your browser does not support the video tag.
+</video>
