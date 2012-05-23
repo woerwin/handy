@@ -43,7 +43,7 @@
 ```
 
 ##Overlay 的亮点
-- 有效的解决了 Android OS 平台下浮层事件[穿透问题](docs/assets/overlay-no-shim.mov)
+- 有效的解决了 Android OS 平台下浮层事件[穿透问题](/alipay/handy/raw/master/lib/overlay/docs/assets/overlay-no-shim.mov)
 
 ##代码片段
 - 将当前页面中第一个 select 显示在页面的左上角
