@@ -11,7 +11,7 @@
 `Overlay` 只需要传入一个 `element` 参数即可工作。
 找到这个 `element` 后，`Overlay` 会动态修改它的样式，然后为它里面所有配置了以 `data-overlay` 做前缀的节点注册事件。
 当显示 `Overlay` 的 `element` 时，`Overlay` 会动态的在 `element` 后面添加一个 `shim` (垫片)，这个 `shim` 的作用将用来
-解决 android 平台下事件穿透的问题，这也是 **`Overlay`** 组件的一大亮点。
+[解决 android 平台下事件穿透](http://v.youku.com/v_show/id_XNDAxMTMzOTA4.html)的问题，这也是 **`Overlay`** 组件的一大亮点。
 
 `Overlay` 带有一套 data-attribute：
 
@@ -43,7 +43,7 @@
 ```
 
 ##Overlay 的亮点
-- 有效的解决了 Android OS 平台下浮层事件[穿透问题](/alipay/handy/raw/master/lib/overlay/docs/assets/overlay-no-shim.mov)
+- 有效的解决了 Android OS 平台下浮层事件[穿透问题](http://v.youku.com/v_show/id_XNDAxMTE1NTgw.html)
 
 ##代码片段
 - 将当前页面中第一个 select 显示在页面的左上角

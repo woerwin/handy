@@ -5,9 +5,9 @@
 - [event](http://github.com/alipay/arale/tree/master/lib/events)
 
 ##平台兼容
-- UC浏览器 7.9+
+- UC 浏览器 7.9+
   
-  部分平台的 UC U3 内核的浏览器对 `Storage` 事件支持存在怪异(有时不能触发 change event)
+  部分 UC U3 内核的浏览器对 `Storage` 事件支持存在怪异(有时不能触发 change event)
 
 ##使用说明
 `Storage` 是一个单例，可直接使用
