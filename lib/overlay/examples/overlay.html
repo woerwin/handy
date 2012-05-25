@@ -146,15 +146,15 @@
 
         // 有动画模式的 overlay
         var animoverlay = new Overlay({
-            element: '<div style="background:rgba(255,255,255,.7);width:260px;height:350px;padding:10px;'+
-                     'border:1px solid gray;"><h4>一个带有动画模式的扩展</h4>，'+
-                     '请注意：在 android 平台下无法遮住后面元素的事件行为<br /><a href="javascript:void(0)" style="margin-right:40px;" '+
+            element: '<div style="background:rgba(255,255,255,.7);width:260px;height:440px;padding:10px;'+
+                     'border:1px solid gray;"><h4>一个带有动画模式的扩展</h4>'+
+                     '<a href="javascript:void(0)" style="margin-right:40px;" '+
                      'data-overlay-role="trigger" data-overlay-action="hide">关闭</a><a href="javascript:void(0)" '+
                      'data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
             styles: {
                 position: 'absolute',
                 left: ($(window).width() - 280) / 2,
-                top: ($(window).height() - 350) / 2 + window.scrollY,
+                top: ($(window).height() - 440) / 2 + window.scrollY,
                 zIndex: 99999
             }
         });
@@ -162,7 +162,12 @@
             this.options.element.animate({
                 scale: 0
             },300,'ease',$.proxy(function (){
-                this.trigger('hide',this);
+                // 为使用 Overlay 原型方法 show 能够准确取到 element 的宽,高的值
+                // 需要手动清除 scale(0) 的值
+                animoverlay.options.element.css({
+                    '-webkit-transform': 'none'
+                });
+                this.constructor.prototype.hide.call(this);
             },this));
         };
         animoverlay.render();
@@ -176,7 +181,9 @@
             animoverlay.show();
             animoverlay.options.element.animate({
                 scale: 1
-            },300);
+            },300,'ease',function (){
+
+            });
         },false);
     });
 </script>
