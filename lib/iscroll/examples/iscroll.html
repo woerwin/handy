@@ -16,10 +16,24 @@
         }
 
         body > section {
-            padding: 20px 0;
+            padding: 20px;
             border-bottom: 1px solid #CCC;
+            -webkit-box-shadow:2px 2px 2px #ccc;
+            -webkit-border-radius: 4px;
+            background-color: #EEE;
         }
 
+        h3{
+            margin-top: 20px;
+            padding-top:20px;
+            border-top: 1px dashed #333;
+        }
+
+        pre{
+            background-color: white;
+            -webkit-box-shadow:2px 2px 2px #ccc;
+            -webkit-border-radius: 4px;
+        }
         #example1 {
             width: 400px;
             overflow: hidden;
@@ -32,6 +46,8 @@
             background: #EEE;
             border-radius: 4px;
             position: relative; /*重要！！！*/
+            background: white;
+            -webkit-box-shadow:2px 2px 2px #ccc;
         }
 
         .module_dialog_help_scroller {
@@ -41,23 +57,22 @@
         #example2 {
             width: 300px;
             height: 160px;
-            position: relative; /* On older OS versions "position" and "z-index" must be defined, */
-            z-index: 1; /* it seems that recent webkit is less picky and works anyway. */
+            position: relative;
+            z-index: 1;
             overflow: hidden;
+            margin-top: 10px;
 
-            background: #aaa;
+        }
+
+        #example2 > div{
+            background-color: white;
             -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            -o-border-radius: 10px;
-            border-radius: 10px;
-            background: #e3e3e3;
         }
 
         #example2 #thelist {
             width: 2100px;
             height: 100%;
             float: left;
-            padding: 0;
         }
 
         #example2 ul {
@@ -72,18 +87,16 @@
         }
 
         #example2 li {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
             display: block;
             float: left;
             width: 300px;
-            height: 160px;
+            height: 140px;
             text-align: center;
             font-family: georgia;
             font-size: 18px;
             line-height: 140%;
+            padding:20px 0;
         }
 
     </style>
@@ -92,16 +105,24 @@
 <body>
 <h3>对于普通的滚动</h3>
 <section>
-    演示地址：<img valign="middle" src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chld=L|0&chl=http://www.google.com" alt="QR code"
-              widhtHeight="100"
-              widhtHeight="100"/>
+    演示地址：
+        <img valign="middle"
+             src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chld=L|0&chl=http://www.google.com"
+             alt="QR code"
+             widhtHeight="100"
+             widhtHeight="100"/>
+
 </section>
 <section>
-    演示界面：
+    <h4>演示界面：</h4>
+    <a href="javascript:example1.scrollTo(0,-100,400,false);">滚动至100像素的地方</a><br/>
+    <a href="javascript:example1.scrollTo(0,-200,400,false);">滚动至200像素的地方</a><br/>
+    <a href="javascript:example1.scrollTo(0,150,400,true);">滚动当前位置向下150像素</a><br/>
+    <a href="javascript:example1.scrollTo(0,-150,400,true);">滚动当前位置向上150像素</a><br/>
+    <a href="javascript:createiScroll();">创建该对象</a> <a href="javascript:example1.destroy();example1=null;">销毁该对象</a>
     <article id="example1">
-        <div class="module_dialog_help_scroller" data-module-name="iscroll" data-module-id="iscroll_example1"
-             data-iscroll-class="module_dialog_help_iscrollContainer">
-            <h2>常见问题：</h2>
+        <div class="module_dialog_help_scroller" data-iscroll-class="module_dialog_help_iscrollContainer">
+            <h5>常见问题：</h5>
             <article class="module_list_select">
                 <section class="listItems"><a href="#" class="flex block">怎样注册支付宝帐户？</a></section>
                 <section class="listItems"><a href="#" class="flex block">怎样更改支付宝绑定手机号码？</a></section>
@@ -111,7 +132,7 @@
                 <section class="listItems"><a href="#" class="flex block">为什么我的余额支付功能被关闭了？</a></section>
                 <section class="listItems"><a href="#" class="flex block">可以货到付款吗？</a></section>
             </article>
-            <h2>密码管理：</h2>
+            <h5>密码管理：</h5>
             <article class="module_list_select">
                 <section class="listItems"><a href="#" class="flex block">如何修改登录密码？</a></section>
                 <section class="listItems"><a href="#" class="flex block">输入登录密码显示空白页怎么办？</a></section>
@@ -120,7 +141,7 @@
                 <section class="listItems"><a href="#" class="flex block">如何找回支付密码？</a></section>
                 <section class="listItems"><a href="#" class="flex block">密码输入错误，账户暂时锁定？</a></section>
             </article>
-            <h2>密码管理：</h2>
+            <h5>密码管理：</h5>
             <article class="module_list_select">
                 <section class="listItems"><a href="#" class="flex block">如何修改登录密码？</a></section>
                 <section class="listItems"><a href="#" class="flex block">输入登录密码显示空白页怎么办？</a></section>
@@ -136,22 +157,23 @@
         seajs.use('../src/iscroll', function (iScroll) {
             example1 = new iScroll(".module_dialog_help_scroller");
         });
+        function createiScroll() {
+            seajs.use('../src/iscroll', function (iScroll) {
+                example1 = example1 || new iScroll(".module_dialog_help_scroller");
+            });
+        }
     </script>
-    <a href="javascript:example1.scrollTo(0,-100,400,false);">滚动至100像素的地方</a>
-    <a href="javascript:example1.scrollTo(0,-200,400,false);">滚动至200像素的地方</a><br/>
-    <a href="javascript:example1.scrollTo(0,150,400,true);">滚动当前位置向下150像素</a>
-    <a href="javascript:example1.scrollTo(0,-150,400,true);">滚动当前位置向上150像素</a>
-    <a href="javascript:example1.destroy();">销毁该对象</a>
+
+
 </section>
 <section>
-    相关代码：
+    <h4>相关代码：</h4>
 <pre>
-    seajs.use('../src/iscroll', function (iScroll) {
-        var example1 = new iScroll("#module_dialog_help_iscrollContainer");
-    });
+seajs.use('../src/iscroll', function (iScroll) {
+    var example1 = new iScroll("#module_dialog_help_iscrollContainer");
+});
 </pre>
 </section>
-
 <h3>逐页拖动滚动</h3>
 <section>
     演示地址：<img valign="middle" src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chld=L|0&chl=http://www.google.com" alt="QR code"
@@ -159,7 +181,11 @@
               widhtHeight="100"/>
 </section>
 <section>
-    演示界面:(左右进行拖动)
+    <h4>演示界面:(左右进行拖动)</h4>
+    <a href="javascript:example2.scrollToPage(2,0,500);">滚动至第三页</a>
+    <a href="javascript:example2.scrollToPage(6,0,500);">滚动至页底</a>
+    <a href="javascript:example2.scrollToPage('prev',0,500);">向前滚动一页</a>
+    <a href="javascript:example2.scrollToPage('next',0,500);">向后滚动一页</a>
     <div id="example2">
         <ul id="thelist" data-iscroll-width="300px">
             <li><strong>1.</strong> <em>A robot may not injure a human being or, through inaction, allow a human being to come to harm.</em></li>
@@ -174,8 +200,7 @@
             <li><strong>Nikola Kesarovski's Fifth law:</strong> <em>A robot must know it is a robot.</em></li>
         </ul>
     </div>
-    <a href="javascript:example2.scrollToPage(2,0,500);">滚动至第三页</a>
-    <a href="javascript:example2.scrollToPage(6,0,500);">滚动至页底</a><br/>
+
     <script type="text/javascript">
         var example2;
         seajs.use('../src/iscroll', function (iScroll) {
@@ -186,6 +211,19 @@
             });
         });
     </script>
+</section>
+<section>
+    <h4>相关代码：</h4>
+<pre>
+var example2;
+seajs.use('../src/iscroll', function (iScroll) {
+    example2 = new iScroll("#thelist", {
+        snap:true,
+        momentum:false,
+        hScrollbar:false
+    });
+});
+</pre>
 </section>
 </body>
 </html>
