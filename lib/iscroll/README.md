@@ -29,7 +29,12 @@ momentum 惯性 enable/disable 启动/禁用 滚动的惯性 默认： true 。
 ```
 ```js
     seajs.use('../src/iscroll', function (iScroll) {
-        var example1 = new iScroll("#module_dialog_help_iscrollContainer",{ hScrollbar: false, vScrollbar: false });
+        var example1 = new iScroll(
+                        "#module_dialog_help_iscrollContainer",
+                        {
+                            hScrollbar: false,
+                            vScrollbar: false
+                        });
     });
 ```
 实例后html结构如下：
@@ -43,27 +48,42 @@ momentum 惯性 enable/disable 启动/禁用 滚动的惯性 默认： true 。
 注意：结构中className为了方便说明使用，实际场景根据使用，并不用显性通过class或者其他属性名来说明， iScroll 会自行判断。
 
 ### 方法
-scrollTo(x, y, time, relative) 滚动到指定的位置
+####scrollTo(x, y, time, relative) 滚动到指定的位置
+
 scrollTo:滚动到指定位置
+
 @param{Number} x 横轴位置
+
 @param{Number} y 纵轴位置
+
 @param{Number} time 滚动到指定位置所需的过渡时间 单位 毫秒
+
 @param{Boolean} relative 绝对位置/相对位置（可选，默认false）
+
 使用实例：myiScroll.scrollTo(0,100,500);
 
-scrollToElement:滚动到指定元素
+----------
+####scrollToElement:滚动到指定元素
+
 @param{String} element 指定元素
+
 @param{Number} time滚动到指定位置所需的过渡时间 单位 毫秒
+
 使用实例：myScroll. scrollToElement(“li:nth-child(10)”,100,500);
 
-scrollToPage:滚动到指定页（snap模式）
+------------
+####scrollToPage:滚动到指定页（snap模式）
+
 @param{String/Number} pageX 横轴的页id，“next”为当前页的下一页，“prev”为当前页的前一页
+
 @param{String/Number} pageY 纵轴的页id，“next”为当前页的下一页，“prev”为当前页的前一页
+
 @time{Number} time 滚动至指定页的过渡时间 单位 毫秒
+
 使用实例：myScroll. scrollToPage(1,0,1500);
 
 ##演示地址
-- [Demo](../lib/storage/iscroll/iscroll.html)
+- [Demo](../lib/iscroll/iscroll.html)
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
