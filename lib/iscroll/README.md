@@ -47,8 +47,8 @@ momentum 惯性 enable/disable 启动/禁用 滚动的惯性 默认： true 。
 ```
 注意：结构中className为了方便说明使用，实际场景根据使用，并不用显性通过class或者其他属性名来说明， iScroll 会自行判断。
 
-### 方法
-####scrollTo(x, y, time, relative) 滚动到指定的位置
+## 方法
+###scrollTo(x, y, time, relative) 滚动到指定的位置
 
 scrollTo:滚动到指定位置
 
@@ -63,7 +63,7 @@ scrollTo:滚动到指定位置
 使用实例：myiScroll.scrollTo(0,100,500);
 
 ----------
-####scrollToElement:滚动到指定元素
+###scrollToElement:滚动到指定元素
 
 @param{String} element 指定元素
 
@@ -72,7 +72,7 @@ scrollTo:滚动到指定位置
 使用实例：myScroll. scrollToElement(“li:nth-child(10)”,100,500);
 
 ------------
-####scrollToPage:滚动到指定页（snap模式）
+###scrollToPage:滚动到指定页（snap模式）
 
 @param{String/Number} pageX 横轴的页id，“next”为当前页的下一页，“prev”为当前页的前一页
 
