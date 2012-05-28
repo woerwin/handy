@@ -9,13 +9,12 @@
     <meta name="format-detection" content="email=no"/>
     <title>flip - handy</title>
     <style type="text/css"></style>
-
     <script src="../../../tools/seajs-and-its-friends.js"></script>
     <style type="text/css">
         .flip_container {
-            width: 190px;
+            width: 192px;
             font-size: 14px;
-            height: 143px;
+            height: 145px;
         }
 
         a {
@@ -25,9 +24,12 @@
         img {
             display: block;
             -webkit-border-radius: 5px;
+            -webkit-box-shadow : 2px 2px 2px #CCC;
         }
 
-
+        p{
+            margin: 5px 0;
+        }
         #flip2 {
             background: #eee;
             padding: 10px;
@@ -36,32 +38,42 @@
             height: 121px;
             -webkit-border-radius: 5px;
             border: 1px solid #CCC;
-            color: #999;
+            color: #666;
+            -webkit-box-shadow : 2px 2px 4px #DDD;
         }
 
     </style>
 </head>
 <body>
-<div class="flip_container" data-module-name="flip" data-module-id="mFilp">
+<h2>卡片翻转演示</h2>
+<div class="flip_container">
     <div id="flip1" data-flip-role="frontFace">
         <div>
             <a href="javascript:void(0);" data-flip-role="trigger" data-flip-action="backFace"><img src="img/2.jpg" width="190"></a>
         </div>
     </div>
     <div id="flip2" data-flip-role="backFace" style="display: none;">
-        <div>照片名：城堡</div>
-        <div>拍摄时间：2001年12月5日</div>
-        <div>拍摄地点：摩洛哥</div>
-        <div>拍摄人：***</div>
+        <p>照片名：城堡</p>
+        <p>拍摄时间：2001年12月5日</p>
+        <p>拍摄地点：摩洛哥</p>
+        <p>拍摄人：***</p>
     </div>
 </div>
-<div style="margin-top: 5px;"><a href="javascript:flip.flip('back');">查看照片明细</a></div>
-<div style="margin-top: 5px;"><a href="javascript:flip.flip('front');">查看照片</a></div>
+<div style="margin-top: 5px;"><a href="javascript:flip.flip('back');">翻转到后面</a></div>
+<div style="margin-top: 5px;"><a href="javascript:flip.flip('front');">翻转到前面</a></div>
 <script type="text/javascript">
     var flip;
     seajs.use('../src/flip', function (Flip) {
         flip = new Flip(".flip_container");
     });
 </script>
+<h3>演示地址</h3>
+<section>
+    <img valign="middle"
+        src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chld=L|0&chl=http://www.google.com"
+        alt="QR code"
+        widhtHeight="100"
+        widhtHeight="100"/>
+</section>
 </body>
 </html>
