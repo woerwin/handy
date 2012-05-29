@@ -37,9 +37,12 @@ flip 对于html结构有一定的要求，一般而言，html结构如下：
 ###data-flip-role flip的角色
 ####frontFace：设置该元素为flip的正面
 ####backFace：设置该元素为flip的反面
+####trigger: 设置该元素为触发器
+#####
 
 注释：如果在html结构中出现多个frontFace或者backFace，以第一次出现的元素为主，其余忽略
-###
+##方法
+
 
 
 ##测试用例
