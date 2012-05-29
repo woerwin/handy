@@ -38,12 +38,13 @@ flip 对于html结构有一定的要求，一般而言，html结构如下：
 ####frontFace：设置该元素为flip的正面
 ####backFace：设置该元素为flip的反面
 ####trigger: 设置该元素为触发器
-#####
+#####backFace：触发后，翻转到卡片背面（如果已经是背面，则不变化）
+#####frontFace：触发后，翻转到卡片正面
 
 注释：如果在html结构中出现多个frontFace或者backFace，以第一次出现的元素为主，其余忽略
 ##方法
-
-
+flip 进行翻转
+@direction 转向的面 只支持两个数值： front 正面。 back 背面
 
 ##测试用例
 - [runner.html](../lib/storage/tests/runner.html)
