@@ -169,6 +169,7 @@ define(function (require,exports,module){
 
 ###addShim `instance.addShim()`
 @protected 受保护的的方法，只能在父类或子类使用，切勿在类对象中调用
+
 添加 shim(垫片)，主要为了解决 android os 平台浏览器事件穿问题，这个方法在 `show` 方法调用时会被调用，如果覆盖了 `show` 方法，请勿必调用 `addShim` 方法，
 调用 `addShim` 时，会向 `element` 的父元素动态插入一个带有 `data-overlay-role="shim"` 的 div 标签，这个标签将绝对定位在 `element` 的后一层，意思就是：
 shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 iframe 做 shim 解 ie6 的浮层无法遮住表单控件问题 :-)
