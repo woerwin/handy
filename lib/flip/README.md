@@ -47,10 +47,10 @@ flip 进行翻转
 @direction 转向的面 只支持两个数值： front 正面。 back 背面
 
 ##测试用例
-- [runner.html](../lib/storage/tests/runner.html)
+- [runner.html](../lib/flip/tests/runner.html)
 
 ##演示地址
-- [Demo](../lib/storage/examples/flip.html)
+- [Demo](../lib/flip/examples/flip.html)
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
