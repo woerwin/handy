@@ -9,7 +9,14 @@
 
 ##Overlay 工作原理
 `Overlay` 只需要传入一个 `element` 参数即可工作。
-找到这个 `element` 后，`Overlay` 会动态修改它的样式，然后为它里面所有配置了以 `data-overlay` 做前缀的节点注册事件。
+找到这个 `element` 后，`Overlay` 会动态修改它的样式，
+```css
+{
+   zIndex: 9999,
+   display: 'none'
+}
+```
+然后为它里面所有配置了以 `data-overlay` 做前缀的节点注册事件。
 当显示 `Overlay` 的 `element` 时，`Overlay` 会动态的在 `element` 后面添加一个 `shim` (垫片)，这个 `shim` 的作用将用来
 [解决 android 平台下事件穿透](http://v.youku.com/v_show/id_XNDAxMTMzOTA4.html)的问题，这也是 **`Overlay`** 组件的一大亮点。
 
@@ -17,33 +24,23 @@
 
 `data-overlay-role` 表示 overlay 模块中的角色，当前只有一个可选参数 `trigger`
 
-`data-overlay-action` 表示 overlay 模块中的角色的行为，当前可选参数有 `show`、`hide`、`destroy`
+`data-overlay-action` 表示 overlay 模块中的角色的行为，当前可选参数有 `hide`、`destroy`
 
 `Overlay` 模块的 `data-overlay-role` 和 `data-overlay-action` 必需同时出现:
 ```html
 <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>
 <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
 ```
-`Overlay` 会自动为 `element` 元素中的所有定义了 Overlay data-attribute 参数的节点注册事件
+`Overlay` 会自动为 `element` 元素中的所有定义了 `Overlay data-attribute` 参数的节点注册事件
 
 ##Overlay 内部数据
-@public 公用类型
-```js
-  this.options = {
-    element: null,
-    parent: null,
-    styles: {
-       //
-    }
-  }
-```
 @protected 受保护的数据，只在当前类和 Overlay 的子类中才能使用
 ```js
   this.shim = null;// 一个 zepto 对象。为解决 android os 平台事件穿透问题而动态生成的垫片
 ```
 
 ##Overlay 的亮点
-- 有效的解决了 Android OS 平台下浮层事件[穿透问题](http://qiqicartoon.com/?p=1197)
+- 有效的解决了 Android OS 平台下浮层[事件穿透问题](http://qiqicartoon.com/?p=1197)
 
 ##代码片段
 - 将当前页面中第一个 select 显示在页面的左上角
@@ -84,7 +81,7 @@ define(function (require,exports,module){
       o.setStyles({
           '-webkit-box-shadow': '0px 0px 10px rgba(0,0,0,.7)'
       });
-      o.options.element.find('.hide').unbind('click').click(function (){
+      o.get('element').find('.hide').unbind('click').click(function (){
           o.hide();
       });
     });
@@ -100,7 +97,7 @@ define(function (require,exports,module){
         $ = require('zepto');
 
     var Confirm = Overlay.extend({
-        options: {
+        attrs: {
             message: null, // confirm 消息。如果指定了 element，message 将被忽略
             styles: {
                 position: 'absolute',
@@ -113,7 +110,7 @@ define(function (require,exports,module){
             // 调用父类的 initialize 方法
             Confirm.superclass.initialize.call(this,options);
 
-            if(this.options.element){
+            if(this.get('element')){
                 this.__mask = $('<div></div>');
             }
         },
@@ -171,6 +168,7 @@ define(function (require,exports,module){
 设置 `element` 的样式。styles 是字面量对象数据格式。支持链式调用
 
 ###addShim `instance.addShim()`
+@protected 受保护的的方法，只能在父类或子类使用，切勿在类对象中调用
 添加 shim(垫片)，主要为了解决 android os 平台浏览器事件穿问题，这个方法在 `show` 方法调用时会被调用，如果覆盖了 `show` 方法，请勿必调用 `addShim` 方法，
 调用 `addShim` 时，会向 `element` 的父元素动态插入一个带有 `data-overlay-role="shim"` 的 div 标签，这个标签将绝对定位在 `element` 的后一层，意思就是：
 shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 iframe 做 shim 解 ie6 的浮层无法遮住表单控件问题 :-)
@@ -180,7 +178,7 @@ shim 的 z-index 的值将是 element 的 z-index 值减1。这有点像用 ifra
 `Overlay` 显示后调用，`callback` 带有一个参数指向当前 `Ovelay` 对象
 ```js
   selectOverlay.on('shown',function (o){
-    o.options.element.append('已显示');//显示后向 element 末尾插入内容
+    o.get('element').append('已显示');//显示后向 element 末尾插入内容
   });
 ```
 ###hide `instance.on('hide',callback)`
