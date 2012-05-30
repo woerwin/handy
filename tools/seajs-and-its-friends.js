@@ -24,7 +24,7 @@ seajs.config({
         'overlay': handy + 'overlay/0.9.0/overlay',
         'handlebars': 'handlebars/1.0.0/handlebars',
         'widget': 'widget/0.9.6/widget',
-        '$': 'zepto/0.8.0/zepto',
+        '$': 'zepto/0.8.0/zepto'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2
