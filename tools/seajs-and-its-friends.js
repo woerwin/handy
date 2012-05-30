@@ -19,10 +19,12 @@ var handy = '../../../dist/';
 seajs.config({
     alias: {
         'events': 'events/0.9.1/events',
-        'zepto': 'zepto/0.8.0/zepto',
-        'base': 'base/0.9.1/base',
+        'base': 'base/0.9.9/base',
         'class': 'class/0.9.1/class',
-        'overlay': handy+'overlay/0.9.0/overlay'
+        'overlay': handy + 'overlay/0.9.0/overlay',
+        'handlebars': 'handlebars/1.0.0/handlebars',
+        'widget': 'widget/0.9.6/widget',
+        '$': 'zepto/0.8.0/zepto',
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2

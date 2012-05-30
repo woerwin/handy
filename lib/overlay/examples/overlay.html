@@ -92,7 +92,7 @@
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
-    seajs.use(['../src/overlay','zepto'], function (Overlay,$) {
+    seajs.use(['../src/overlay','$','handlebars'], function (Overlay,$,Handlebars) {
         // 把一个 select 显示在我的右侧
         var overlayOne = new Overlay({
             element: 'select',
@@ -127,12 +127,12 @@
             o.setStyles({
                 top: $('#J-overlay-two').offset().top - $('#J-customise-layer').offset().height
             });
-            o.options.element.css({
+            o.get('element').css({
                 '-webkit-box-shadow': '0px 0px 10px rgba(0,0,0,.7)'
             }).find('.hide').unbind('click').click(function (){
                 o.hide();
             });
-            o.options.element.find('.destroy').unbind('click').click(function (){
+            o.get('element').find('.destroy').unbind('click').click(function (){
                 o.destroy();
             });
             $.os.android && $('.tip').css('color','red').html('这个浮层在 android 平台下是可以阻止事件的穿透，'+
@@ -147,7 +147,7 @@
         // 有动画模式的 overlay
         var animoverlay = new Overlay({
             element: '<div style="background:rgba(255,255,255,.7);width:260px;height:440px;padding:10px;'+
-                     'border:1px solid gray;"><h4>一个带有动画模式的扩展</h4>'+
+                     'border:1px solid gray;border-left-width:10px;"><h4>一个带有动画模式的扩展</h4>'+
                      '<a href="javascript:void(0)" style="margin-right:40px;" '+
                      'data-overlay-role="trigger" data-overlay-action="hide">关闭</a><a href="javascript:void(0)" '+
                      'data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
@@ -159,12 +159,12 @@
             }
         });
         animoverlay.hide = function (){
-            this.options.element.animate({
+            this.get('element').animate({
                 scale: 0
             },300,'ease',$.proxy(function (){
                 // 为使用 Overlay 原型方法 show 能够准确取到 element 的宽,高的值
                 // 需要手动清除 scale(0) 的值
-                animoverlay.options.element.css({
+                animoverlay.get('element').css({
                     '-webkit-transform': 'none'
                 });
                 this.constructor.prototype.hide.call(this);
@@ -172,14 +172,14 @@
         };
         animoverlay.render();
         animoverlay.on('shown',function (o){
-            o.options.element.css({
+            o.get('element').css({
                 '-webkit-box-shadow': '0 0 20px #000',
                 '-webkit-transform': 'scale(0)'
             });
         });
         getDOM('#J-anim-overlay').addEventListener('click',function (){
             animoverlay.show();
-            animoverlay.options.element.animate({
+            animoverlay.get('element').animate({
                 scale: 1
             },300,'ease',function (){
 
