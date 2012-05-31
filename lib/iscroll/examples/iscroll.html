@@ -235,10 +235,13 @@ seajs.use('../src/iscroll', function (iScroll) {
 <pre>
 var example2;
 seajs.use('../src/iscroll', function (iScroll) {
-    example2 = new iScroll("#thelist", {
-        snap:true,
-        momentum:false,
-        hScrollbar:false
+    example2 = new iScroll({
+        element:"#thelist",
+        options:{
+            snap:true,
+            momentum:false,
+            hScrollbar:false
+        }
     });
 });
 </pre>
