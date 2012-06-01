@@ -26,7 +26,7 @@ seajs.config({
         'widget': 'widget/0.9.10/widget',                    // 90%  完善阶段
         'widget-templatable': 'widget/0.9.10/templatable',   // 90%  完善阶段
 
-        '$': 'zepto/0.8.0/zepto',
+        '$': 'zepto/1.0.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
 
         'overlay': handy + 'overlay/0.9.0/overlay'
