@@ -61,7 +61,7 @@ define(function (require){
 ```
 ###keys `Storage.keys()`
 
-返回通过 `Storage` 保存的所有 key. Array 类型
+返回通过 `Storage` 保存的所有 key, Array 类型
 
 ```js
 define(function (require){
