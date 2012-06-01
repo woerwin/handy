@@ -169,7 +169,7 @@ page:
 <div id="J-performance-show"></div>
 
 <script>
-    seajs.use(['../src/parser','zepto'],function (parser,$){
+    seajs.use(['../src/parser','$'],function (parser,$){
         
 
         var time = HandyParserData.time,
@@ -187,8 +187,8 @@ page:
 
         HandyParserData.overlay_two.on('shown',function (o){
             o.setStyles({
-                left: ($(window).width() - o.options.element.offset().width) / 2,
-                top:  ($(window).height() - o.options.element.offset().height) / 2 + window.scrollY
+                left: ($(window).width() - o.get('element').offset().width) / 2,
+                top:  ($(window).height() - o.get('element').offset().height) / 2 + window.scrollY
             });
         });
         document.querySelector('#J-showOverlay2').addEventListener('click',function (){
