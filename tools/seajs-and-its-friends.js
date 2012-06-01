@@ -17,14 +17,20 @@
 var handy = '../../../dist/';
 
 seajs.config({
+
     alias: {
-        'events': 'events/0.9.1/events',
-        'base': 'base/0.9.9/base',
-        'class': 'class/0.9.1/class',
-        'overlay': handy + 'overlay/0.9.0/overlay',
+
+        'events': 'events/0.9.1/events',                     // 100%
+        'class': 'class/0.9.1/class',                        // 100%
+        'base': 'base/0.9.14/base',                          // 90%  完善阶段
+        'widget': 'widget/0.9.10/widget',                    // 90%  完善阶段
+        'widget-templatable': 'widget/0.9.10/templatable',   // 90%  完善阶段
+
+        '$': 'zepto/0.8.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
-        'widget': 'widget/0.9.6/widget',
-        '$': 'zepto/0.8.0/zepto'
+
+        'overlay': handy + 'overlay/0.9.0/overlay'
+
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
     debug: 2
