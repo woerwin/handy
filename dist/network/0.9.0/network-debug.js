@@ -1,4 +1,6 @@
-// Networks 提供移动平台网络在线，离线的监听
+// Networks
+// ========
+// 提供移动平台网络在线，离线的监听
 define("#network/0.9.0/network", [], function(require, exports, module) {
     var Network = exports,
         loopFn = null,
@@ -56,7 +58,8 @@ define("#network/0.9.0/network", [], function(require, exports, module) {
         });
     }
 
-    // 为每个回调函数添加一个是否已调用的标识，用于处理在 setTimeout 中重复调用回调函数问题
+    // 为每个回调函数添加一个是否已调用的标识
+    // 用于处理在 setTimeout 中重复调用回调函数问题
     function addIDtoCallback(callback) {
         callback.called = false;
         return callback;

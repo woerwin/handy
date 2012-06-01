@@ -15,9 +15,9 @@
 //      返回
 //     </a>
 // </div>
-define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(require, exports, module) {
+define("#pageTransition/0.9.0/pageTransition", ["events","$"], function(require, exports, module) {
     var Events = require('events'),
-        $ = require('zepto');
+        $ = require('$');
 
     var defaults = {
         element: null
@@ -65,7 +65,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
     PageTransition.prototype.sync = function() {
         var container = $(this.options.element),
             containerW = container.css('width'),
-            pages = this.viewport.find('*['+this._DATAATTRIBUTENAMESPACE+'-role=page]');
+            pages = this.viewport.find('*[' + this._DATAATTRIBUTENAMESPACE + '-role=page]');
 
         this.viewport.css({
             width: parseInt(containerW, 10) * pages.length
@@ -82,15 +82,15 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
     };
 
     PageTransition.prototype.bindUI = function() {
-        var trigger = this.viewport.find('*['+this._DATAATTRIBUTENAMESPACE+'-role=trigger]');
+        var trigger = this.viewport.find('*[' + this._DATAATTRIBUTENAMESPACE + '-role=trigger]');
 
         trigger.unbind('click.pageTransition').bind('click.pageTransition', $.proxy(function(e) {
             e.preventDefault();
-            var action = $(e.currentTarget).attr(''+this._DATAATTRIBUTENAMESPACE+'-action');
+            var action = $(e.currentTarget).attr('' + this._DATAATTRIBUTENAMESPACE + '-action');
 
             switch (action) {
                 case 'forward':
-                    this.nextPage = $($(e.currentTarget).attr(''+this._DATAATTRIBUTENAMESPACE+'-forward'));
+                    this.nextPage = $($(e.currentTarget).attr('' + this._DATAATTRIBUTENAMESPACE + '-forward'));
                     this._nextPageParent = this.nextPage.parent();
                     this._transitionForward();
                     break;
@@ -102,7 +102,7 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
     };
 
     PageTransition.prototype.destroy = function() {
-        var trigger = this.viewport.find('*['+this._DATAATTRIBUTENAMESPACE+'-role=trigger]');
+        var trigger = this.viewport.find('*[' + this._DATAATTRIBUTENAMESPACE + '-role=trigger]');
 
         trigger.unbind('click.pageTransition');
 
@@ -195,10 +195,10 @@ define("#pageTransition/0.9.0/pageTransition", ["events","zepto"], function(requ
 
     PageTransition.prototype._insertPageViewport = function() {
         var container = $(this.options.element),
-            pageViewPort = $('<div '+this._DATAATTRIBUTENAMESPACE+'-role="viewport"></div>'),
-            page = $(container.find('*['+this._DATAATTRIBUTENAMESPACE+'-role=page]')[0]);
+            pageViewPort = $('<div ' + this._DATAATTRIBUTENAMESPACE + '-role="viewport"></div>'),
+            page = $(container.find('*[' + this._DATAATTRIBUTENAMESPACE + '-role=page]')[0]);
         page.wrapAll(pageViewPort);
-        this.viewport = $(pageViewPort,container);
+        this.viewport = $(pageViewPort, container);
         this.page = page;
 
         // 保存 PageTransition 最原始的页面，在 destroy 时，
