@@ -1,12 +1,12 @@
 // Overlay
 // -------
 // 提供基于浮层表现的 UI 组件，提供浮层的显示、隐藏、定位
-define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, module) {
+define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module) {
     var Base = require('base'),
-        $ = require('zepto');
+        $ = require('$');
 
     var Overlay = Base.extend({
-        options: {
+        attrs: {
             element: null,
             parent: $('body'), // 将 element 动态插入到 parent
             styles: { // 浮层样式
@@ -14,52 +14,65 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
                 display: 'none'
             }
         },
-        initialize: function(options) {
-            this.setOptions(options);
+        initialize: function(attrs) {
+            Overlay.superclass.initialize.call(this, attrs);
 
             // protected
             this.shim = null;
         },
         render: function() {
             // element 定义为 HTML 字符串时
-            if (this.options.element && !$(this.options.element).parent().get(0)) {
-                this.options.element = $(this.options.element).hide();
+            if (
+                this.get('element')
+                &&
+                !$(this.get('element')).parent().get(0)
+               ) {
+                this.set('element', $(this.get('element')).hide());
             }
 
-            // 复制一份用户提供的 element ，并且去除 id
-            this.options.element = $(this.options.element).appendTo(this.options.parent);
-
-            this.setStyles(this.options.styles);
-
-            this.bindUI();
+            this.set('element',
+                     $(this.get('element')).appendTo(this.get('parent'))
+                    ).setStyles(this.get('styles'))
+                     .bindUI();
 
             return this;
         },
         bindUI: function() {
-            var triggers = this.options.element.find('*[data-overlay-role="trigger"]'),
+            var triggers = this.get('element')
+                           .find('*[data-overlay-role="trigger"]'),
                 that = this;
 
             Array.prototype.slice.call(triggers);
 
             triggers.forEach(function(trigger) {
-                if (trigger && (action = $(trigger).attr('data-overlay-action'))) {
+                if (
+                    trigger
+                    &&
+                    (action = $(trigger).attr('data-overlay-action'))
+                   ) {
                     switch (action) {
                         case 'hide':
-                            $(trigger).unbind('click.overlay').bind('click.overlay', $.proxy(function(e) {
-                                e.preventDefault();
-                                this.hide();
+                            $(trigger)
+                                .unbind('click.overlay')
+                                .bind('click.overlay', $.proxy(function(e) {
+                                  e.preventDefault();
+                                  this.hide();
                             },that));
                             break;
-                        case 'show':
-                            $(trigger).unbind('click.overlay').bind('click.overlay', $.proxy(function(e) {
-                                e.preventDefault();
-                                this.show();
+                        /*case 'show':
+                            $(trigger)
+                                .unbind('click.overlay')
+                                .bind('click.overlay', $.proxy(function(e) {
+                                  e.preventDefault();
+                                  this.show();
                             },that));
-                            break;
+                            break;*/
                         case 'destroy':
-                            $(trigger).unbind('click.overlay').bind('click.overlay', $.proxy(function(e) {
-                                e.preventDefault();
-                                this.destroy();
+                            $(trigger)
+                                .unbind('click.overlay')
+                                .bind('click.overlay', $.proxy(function(e) {
+                                  e.preventDefault();
+                                  this.destroy();
                             },that));
                             break;
                     }
@@ -69,76 +82,96 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
             return this;
         },
         destroy: function() {
-            this.options.element && $(this.options.element).remove();
-            $(this.shim).remove();
-            this.options.element = null;
+            this.get('element')[0] && this.get('element').remove();
+            this.shim && this.shim.remove();
+            this.set('element', null);
             this.shim = null;
-            this.options.parent = $('body');
-            this.options.styles = {
+            this.set('parent', $('body')).set('styles', {
                 zIndex: 9999
-            };
+            });
         },
         show: function() {
-            var display = '';
+            var display = '',
+                element = this.get('element');
 
-            if ($(this.options.element).css('display') === 'block') {
+            if (element.css('display') === 'block') {
                 display = 'block';
-            }else if ($(this.options.element).css('display') === '-webkit-box') {
+            }else if (element.css('display') === '-webkit-box') {
                 display = '-webkit-box';
             }
 
-            $(this.options.element).css({
+            element.css({
                 'display': display
             });
 
-            // 本来 handy 对 overlay addShim 方法的设计是: 如果是 android 设备再添加一个 shim
+            // 本来 handy 对 overlay addShim 方法的设计是:
+            // 如果是 android 设备再添加一个 shim
             // 但后来发现某些 android 刷机用户的 UA 通过 zepto 无法准确获取
             // 所以我们去除了这层判断处理，直接添加 shim
             /*if($.os.android){
                 this.addShim();
             }*/
-            this.addShim();
-
-            this.trigger('shown', this);
+            this.addShim().trigger('shown', this);
 
             return this;
         },
         hide: function() {
-            $(this.options.element).hide();
+            this.get('element').hide();
             this.trigger('hide', this);
-            this.shim && $(this.shim).remove();
+            this.shim && this.shim.remove();
             this.shim = null;
 
             return this;
         },
         setStyles: function(styles) {
-            $(this.options.element).css(styles);
-            if(this.shim){
+            this.get('element').css(styles);
+
+            if (this.shim) {
+                var element = this.get('element'),
+                    boxModelSize = outerSize(element[0]);
+
                 this.shim.css({
-                    width: parseInt($(this.options.element).get(0).scrollWidth,10),
-                    height: parseInt($(this.options.element).get(0).scrollHeight,10),
-                    left: parseInt($(this.options.element).css('left'),10),
-                    top: parseInt($(this.options.element).css('top'),10) + window.scrollY
+                    width: parseInt(element.css('width'), 10)
+                           + boxModelSize.borderWidth.left
+                           + boxModelSize.borderWidth.right
+                           + boxModelSize.padding.left
+                           + boxModelSize.padding.right,
+                    height: parseInt(element.css('height'), 10)
+                           + boxModelSize.borderWidth.top
+                           + boxModelSize.borderWidth.bottom
+                           + boxModelSize.padding.top
+                           + boxModelSize.padding.bottom,
+                    left: parseInt(element.css('left'), 10),
+                    top: parseInt(element.css('top'), 10) + window.scrollY
                 });
             }
 
             return this;
         },
+        // @protected
         // 解决 Android OS 部分机型中事件穿透问题
         // 如果子类覆盖 show 方法，强烈建议大子类的 show 方法中调用 addShim
         addShim: function() {
             if (this.shim) {
-                return;
+                return this;
             }
 
-            var element = $(this.options.element),
-                offset = element.offset();
+            var element = this.get('element'),
+                offset = element.offset(),
+                zIndex = ((parseInt(element.css('zIndex'), 10) - 1) || 1);
 
-            var shim = $('<div data-overlay-role="shim" style="position:absolute;pointer-events:none;' +
-                         'margin:0;padding:0;border:none;background:none;-webkit-tap-highlight-color:rgba(0,0,0,0);' +
-                         'width:' + offset.width + 'px;height:' + offset.height + 'px;' +
-                         'top:' + offset.top + 'px;left:' + offset.left + 'px;' +
-                         'z-index:' + ((parseInt(element.css('zIndex'), 10) - 1) || 1) + ';"></div>');
+            var shim = $('<div data-overlay-role="shim" ' +
+                         'style="position:absolute;' +
+                         'margin:0;' +
+                         'padding:0;' +
+                         'border:none;' +
+                         'background:rgba(255,255,255,0.01);-' +
+                         'webkit-tap-highlight-color:rgba(0,0,0,0);' +
+                         'width:' + offset.width + 'px;' +
+                         'height:' + offset.height + 'px;' +
+                         'top:' + offset.top + 'px;' +
+                         'left:' + offset.left + 'px;' +
+                         'z-index:' + zIndex + ';"></div>');
             this.shim = shim.appendTo(element.parent());
 
             return this;
@@ -147,3 +180,77 @@ define("#overlay/0.9.0/overlay", ["base","zepto"], function(require, exports, mo
 
     module.exports = Overlay;
 });
+
+// By [outersize](https://github.com/mui-lychi/outerSize)
+function outerSize(element) {
+    var CSSStyleDeclaration = getComputedStyle(element),
+        margin = CSSStyleDeclaration['margin'],
+        padding = CSSStyleDeclaration['padding'],
+        bordersWidth = CSSStyleDeclaration['border-width'];
+
+    // convert to Array
+    // example ['10px','20px','30px','0px']
+    function splitStylesValue(styles) {
+        return styles.split(' ');
+    }
+
+    // remove css properties PX unit
+    function removeStylesPX(styles) {
+        var _styles = [];
+        splitStylesValue(styles).forEach(function(v) {
+            _styles.push(
+                v.replace(/(\d*)([\w|\s]*)$/, function($1,$2) {return $2;})
+                );
+        });
+
+        return _styles;
+    }
+
+    // parser css
+    function parser(styles) {
+        var l = styles.length,
+            result = {};
+
+        switch (l) {
+            case 1:
+                var fillval = styles[0];
+                fillStyles(fillval, fillval, fillval);
+                break;
+            case 2:
+                var y = styles[0],
+                    x = styles[1];
+                fillStyles(y, x);
+                break;
+            case 3:
+                var y = styles[0],
+                    x = styles[1];
+                fillStyles(x);
+                break;
+        }
+
+
+
+        styles = styles.map(function(v) {
+            return v * 1;
+        });
+
+        result['top'] = styles[0];
+        result['right'] = styles[1];
+        result['bottom'] = styles[2];
+        result['left'] = styles[3];
+
+        function fillStyles() {
+            for (var i = 0; i < arguments.length; i++) {
+                styles.push(arguments[i]);
+            }
+        }
+        return result;
+    }
+
+    return {
+        borderWidth: parser(removeStylesPX(bordersWidth)),
+        padding: parser(removeStylesPX(padding)),
+        margin: parser(removeStylesPX(margin))
+    };
+}
+

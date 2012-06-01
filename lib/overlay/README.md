@@ -1,7 +1,5 @@
 #Overlay
-提供基于浮层表现的 UI 组件
-
-提供浮层的显示、隐藏、定位
+提供基于浮层表现的 UI 组件,浮层的显示、隐藏、定位
 
 ##模块依赖
 - [base](http://github.com/alipay/arale/tree/master/lib/base)

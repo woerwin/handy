@@ -146,7 +146,7 @@
                     display: 'none'
                 });
 
-                this.options.element.css({
+                this.get('element').css({
                     '-webkit-transform': 'scale(0)',
                     display: 'none'
                 });
@@ -156,7 +156,7 @@
                     },150,'ease',function (){
                         that.sync();
                     });
-                    that.options.element.css('display','block').animate({
+                    that.get('element').css('display','block').animate({
                         scale: 1
                     },500,'ease');
                 },100);
@@ -168,13 +168,13 @@
                     display: 'block'
                 });
 
-                this.options.element.css({
+                this.get('element').css({
                     display: 'block'
                 });
                 this.mask.animate({
                     scale: 0
                 });
-                this.options.element.animate({
+                this.get('element').animate({
                     scale: 0
                 });
             }
