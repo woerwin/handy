@@ -48,16 +48,12 @@
 <body>
 <div class="box">
         <h1>Example：Storage</h1>
-        Storage 提供一套在移动平台处理数据存储的解决方案。Storage 对 localStorage 作了一层封装，目前仅支持 localStorage，不支持 sessionStorage。
-        <article class="des">
-            1、分别在下面的文本框中输入您要保存的数据，然后点击保存数据，保存成功后紧接着向 localStorage 读取刚保存的数据，并将读取结果显示在页面末尾<br />
-            2、点击清除已保存的第一组数据，将从 localStorage 中清除刚刚保存的第一组数据，并重新向 localStorage 读取数据，然显示在页面末尾<br />
-            3、点击清除已保存的所有数据，将从 localStorage 中清除您刚保存的所有数据，从 localStorage 中读取数据为空。<br />
-            4、存储数据后，您还可以在另一个页面中修改数据，此时浏览器会提醒您: "有人修改了 XXX 的数据"<br />
-            建议您使用移动设备内置浏览器访问这个页面
-        </article>
+        Storage 提供一套在移动平台处理数据存储的解决方案。<br />
+        Storage 对 localStorage 作了一层封装，目前仅支持 localStorage，不支持 sessionStorage。<br />
+        建议您在两个窗口或 Tab 打开这个 Demo 页面<br />
+        强烈建议您在移动设备内置浏览器体验这个 Demo 页面
+        <p id="J-output2" class="des"></p>
         <table width="100%">
-            <caption>第一组数据</caption>
             <tr>
                 <td>Key:</td>
                 <td><input type="text" id="J-key1"/></td>
@@ -67,116 +63,92 @@
                 <td><input type="text" id="J-value1"/></td>
             </tr>
         </table>
-        <table width="100%">
-            <caption>第二组数据</caption>
-            <tr>
-                <td>Key:</td>
-                <td><input type="text" id="J-key2"/></td>
-            </tr>
-            <tr>
-                <td>Value:</td>
-                <td><input type="text" id="J-value2"/></td>
-            </tr>
-        </table>
-        <a href="javascript:void(0)" id="J-sava">保存</a><br/>
-        <a href="javascript:void(0)" id="J-cleanTheFirst">清除已保存的第一组数据</a><br/>
+        <a href="javascript:void(0)" id="J-sava1">保存</a><br/>
+        <p id="J-output1"></p>
+
         <a href="javascript:void(0)" id="J-cleanAll">清除所有数据</a><br/>
-
-        <table width="100%">
-            <caption>修改已经保存的第一组数据</caption>
-            <tr>
-                <td><input type="text" id="J-key1-new"/><a href="javascript:void(0)" id="J-updateTheFirst">修改</a></td>
-            </tr>
-        </table>
-
-        <p id="J-output"></p>
 </div>
 <script>
     var getDom = function (dom) {
         return document.querySelector(dom);
     };
 
-    seajs.use('../src/storage', function (Storage) {
+    seajs.use(['../src/storage','$'], function (Storage,$) {
         if (!Storage.available) {
             return alert('您的浏览器不支持数据存储。');
         }
 
+        // 初始化页面时，从本地取历史保存数据
+        var html = '';
+        Storage.keys().forEach(function (key,i){
+            if(i === 0){
+                html += '历史保存的数据：<br />';
+            }
+            html += key + ': ' + Storage.get(key) + '<br />';
+        });
+        getDom('#J-output2').innerHTML = html;
+
         var html = '',
             theFirstKey = null,
-            theSecondKey = null;
+            title = null;
 
-        getDom('#J-sava').addEventListener('click', function (e) {
-            theFirstKey = getDom('#J-key1').value;
-            theSecondKey = getDom('#J-key2').value;
+        getDom('#J-sava1').addEventListener('click', function (e) {
+            theFirstKey = getDom('#J-key1').value;;
 
-            if(!theFirstKey && !theSecondKey){
+            if(!theFirstKey){
                 return alert('请输入您要保存的数据');
             }
 
-            Storage.on(theFirstKey+':change',function (e){
-              alert('有人修改了 '+theFirstKey+' 的数据！');
+            Storage.off().on('change:' + theFirstKey,function (e){
               var data = {};
               data[theFirstKey] = e.newValue + '<span style="color:#f50;"> 数据已更新</span>';
-              output(data);
-            });
-
-            Storage.on('clear',function (){
+              output(data,getDom('#J-output1'));
+            }).on('remove:' + theFirstKey,function (e){
+               alert(e.key + ' 成功删除。');
+            }).on('clear',function (){
                 alert('数据被全部清除');
             });
 
             Storage.set(theFirstKey, getDom('#J-value1').value);
-            Storage.set(theSecondKey, getDom('#J-value2').value);
 
             var data = {};
             data[theFirstKey] = Storage.get(theFirstKey);
-            data[theSecondKey] = Storage.get(theSecondKey);
-            output(data);
-        }, false);
-
-        getDom('#J-cleanTheFirst').addEventListener('click', function (e) {
-            Storage.remove(theFirstKey);
-            var key = Storage.keys()[0],
-                    data = Storage.get(key),
-                    param = {};
-
-            if (key) {
-                param[key] = data;
-            }
-
-            output(param);
+            output(data,getDom('#J-output1'));
         }, false);
 
         getDom('#J-cleanAll').addEventListener('click', function (e) {
-            if(!theFirstKey && !theSecondKey){
-                return alert('您还没有保存数据');
-            }
-
+            title = null;
             Storage.clear();
             var key = Storage.keys();
 
             if (key.length === 0) {
-                output({'提示':'数据已清空'});
+                getDom('#J-output1').innerHTML = '';
+                output({'提示':'数据已清空'},getDom('#J-output1').innerHTML = '');
             }
         }, false);
 
-        getDom('#J-updateTheFirst').addEventListener('click',function (e){
-            var newValue = getDom('#J-key1-new').value;
-            Storage.set(theFirstKey,newValue);
-            var data = {};
-            data[theFirstKey] = Storage.get(theFirstKey);
-            output(data);
-        },false);
-
-        function output(data) {
-            var html = '<span>您刚存储的数据：</span><br />';
+        function output(data,dom) {
+            var html = '';
+            if(!title){
+                html = '<span>您刚存储的数据：</span><br />';
+                title = true;
+            }
 
             for (i in data) {
                 if(i && data[i]){
-                  html += '<sapn>' + i + ' : ' + data[i] + '</span><br />';
+                  if($(dom).find('.'+ i +'').get(0)){
+                      $(dom).find('.'+ i +'').remove();
+                  }
+                  html += '<p class="'+ i +'"><span>'+ i +': </span>'+ data[i] +'  <a data-key="'+ i +'" href="javascript:void(0)">Remove</a><span style="font-size:12px;color:gray;padding-left:20px;">您可以在另一个窗口修改 '+i+' 的值</span></p>';
                 }
             }
 
-            getDom('#J-output').innerHTML = html;
+            dom.innerHTML +=  html;
+
+            $(dom).find('a').click(function (e){
+                Storage.remove($(e.currentTarget).attr('data-key'))
+                $(e.currentTarget).parent().remove();
+            });
         }
     });
 </script>

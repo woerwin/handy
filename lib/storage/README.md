@@ -86,7 +86,7 @@ define(function (require){
     Storage.keys();//['name'];
 });
 ```
-`remove` 方法调用时会触发 `Storage.on(key:remove)` 事件
+`remove` 方法调用时会触发 `Storage.on(remove:key)` 事件
 
 ###clear `Storage.clear()`
 清除通过 `Storage` 存储的所有数据
@@ -107,13 +107,13 @@ define(function (require){
 
 ###`Storage` 混入了 [`event`](http://github.com/alipay/arale/tree/master/lib/events) 模块，因此有一套自定义事件机制。
 
-###监听某条数据被修改 `Storage.on(key:change,callback)`
+###监听某条数据被修改 `Storage.on(change:key,callback)`
 
 ```js
 define(function (require){
     var Storage = require('storage');
     Storage.set('name','handy');
-    Storage.on('name:change',function (e){
+    Storage.on('change:name',function (e){
         alert('有人修改了'+e.key);
         alert(e.key+'之前的数据是：'+e.oldValue);
         alert(e.key+'修改后的数据是：'+e.newValue);
@@ -122,13 +122,13 @@ define(function (require){
 ```
 如果要尝试 `Storage.on`，你需要打开两个浏览器窗口 (A,B)，在 A 窗口保存一条数据，在 B 窗口修改 A 窗口所保存的数据(请注意一定要修改同名的 key )
 
-###监听某条数据被删除 `Storage.on(key:remove,callback)`
+###监听某条数据被删除 `Storage.on(remove:key,callback)`
 
 ```js
 define(function (require){
     var Storage = require('storage');
     Storage.set('name','handy');
-    Storage.on('name:remove',function (e){
+    Storage.on('remove:name',function (e){
         alert('有人修改了'+e.key);
     });
 });
