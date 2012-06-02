@@ -6,7 +6,7 @@
 - [zepto](http://github.com/alipay/arale/tree/master/lib/zepto)
 
 ##Overlay 工作原理
-![handy overlay](overlay/docs/assets/handy-overlay-shim.jpg)
+![handy overlay](/alipay/handy/raw/master/overlay/docs/assets/handy-overlay-shim.jpg)
 
 `Overlay` 只需要传入一个 `element` 参数即可工作。
 找到这个 `element` 后，`Overlay` 会动态修改它的样式，
