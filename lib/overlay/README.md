@@ -6,8 +6,6 @@
 - [zepto](http://github.com/alipay/arale/tree/master/lib/zepto)
 
 ##Overlay 工作原理
-![handy overlay](/alipay/handy/raw/master/lib/overlay/docs/assets/handy-overlay-shim.jpg)
-
 `Overlay` 只需要传入一个 `element` 参数即可工作。
 找到这个 `element` 后，`Overlay` 会动态修改它的样式，
 ```css
@@ -19,6 +17,7 @@
 然后为它里面所有配置了以 `data-overlay` 做前缀的节点注册事件。
 当显示 `Overlay` 的 `element` 时，`Overlay` 会动态的在 `element` 后面添加一个 `shim` (垫片)，这个 `shim` 的作用将用来
 [解决 android 平台下事件穿透](http://v.youku.com/v_show/id_XNDAxMTMzOTA4.html)的问题，这也是 **`Overlay`** 组件的一大亮点。
+![handy overlay](/alipay/handy/raw/master/lib/overlay/docs/assets/handy-overlay-shim.jpg)
 
 `Overlay` 带有一套 data-attribute：
 
