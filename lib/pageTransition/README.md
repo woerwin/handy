@@ -106,7 +106,7 @@ define(function (require){
 ###transition `pageTransition.transition(DOM Element)`
 执行一次页面过渡。其实就是调用 `forward` 行为
 
-参数 `DOM Element` 可以传入选择器 / DOM 对象 / zepto 对象
+参数 `DOM Element` 可以传入选择器 / DOM 对象 / zepto 对象，必须带有 `data-pageTransition-role="page"` 属性
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
