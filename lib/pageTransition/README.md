@@ -11,7 +11,8 @@
 - 由于 `zepto` 仅兼容 `iOS` 和 `Android OS` ，因此 `PageTransition` 当前也仅兼容这两个平台，未来的版本会兼容到 `windows phone7`
 
 ##PageTransition 工作原理
-![handy pageTransition](/alipay/handy/raw/master/lib/pageTransition/docs/assets/handy.pageTransition.structure.jpg)
+![handy pageTransition](/alipay/handy/raw/master/lib/pageTransition/docs/assets/handy.pageTransition.structure.jpeg)
+
 `PageTransition` 包含了一套简单的 `data-attribute` 配置机制，有一部分参数的配置将通过 `data-attribute` 完成。
 
 `PageTransition` 默认把您需要过渡的每个元素看做为一个 `role` (角色)为 `page` 的页面，
