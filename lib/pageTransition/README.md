@@ -69,6 +69,12 @@ define(function (require){
 ```
 `pageTransition` 只需要传入 `element` 参数，然后调用 `render` 方法。
 
+上面的代码完成了一个简单的 `pageTransition` 的配置。调用 `render` 方法后，`pageTransition` 自动在 `＃J-page-box` 中插入 `<div data-pageTransition-role="viewport">`，然后再将
+`<section data-pageTransition-role="page">` 插入到刚才的视口中，接着为 section 标签中的 a 元素绑定 click 事件，当这个链接触发 click 事件时，`pageTransition` 会从超链接的
+`data-pageTransition-forward` 属性中找到下一张页面的引用，动态将 `#J-nextPage` 插入(appendTo)到视口，过渡效果结束后，重新绑定 UI 事件，然后将隐藏的 section 元素放到 `#J-nextPage`
+的父元素中并隐藏，坦白说就是把当前页面与下一张页面换个位置罢了。
+
+
 每配置一个 `trigger` ，必须要定义它的 `data-pageTransition-role` 和 `data-pageTransition-action`，如果 action 是 forward，必须要指定 data-pageTransition-forward。
 
 您还可以在每个页面中添加多个行为
