@@ -147,7 +147,7 @@ seajs.use('../src/confirm', function (Confirm) {
 `Confirm` 会自动为 `element` 元素中的所有定义了 `Confirm data-attribute` 属性的节点注册事件。
 
 ##sync `instance.sync()`
-在浏览器窗口或设备方向发生变化时用于更新 confirm 浮层的布局
+在浏览器窗口或设备方向发生变化时用于更新 `Confirm` 浮层的布局
 ```js
 window.addEventListener('orientationchange',function (){
     confirm.sync();
