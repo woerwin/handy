@@ -168,13 +168,13 @@ define(function (require){
 
   pageTransition.on('transitionStart',function (type,page,o){
       console.log(type);// forward or back
-      console.log(page);// 当前 DOM Element
+      console.log(page);// zepto object
       console.log(o);// 当前实例化对象
   });
 
   pageTransition.on('transitionEnd',function (type,page,o){
         console.log(type);// forward or back
-        console.log(page);// 当前 DOM Element
+        console.log(page);// zepto object
         console.log(o);// 当前实例化对象
     });
 });
