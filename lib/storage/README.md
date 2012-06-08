@@ -1,5 +1,5 @@
 #Storage
-提供一套移动平台浏览器端数据存储解决方案
+提供移动设备浏览器端数据存储解决方案
 
 ##模块依赖
 - [event](http://github.com/alipay/arale/tree/master/lib/events)
@@ -18,7 +18,7 @@ define(function (require,exports,module){
 });
 ```
 ###available `Storage.available`
-`available` 返回 Boolean，如果浏览器支持 `localStorage` 或 `sessionStorage` 返回 `true`，否则返回 `false`。
+`available` 返回 Boolean，如果浏览器支持 localStorage 或 sessionStorage 返回 true，否则返回 false。
 
 ```js
 define(function (require){
@@ -41,17 +41,15 @@ define(function (require){
     Storage.set('name','handy');
 });
 ```
-上面的代码将通过 localStorage 向本地存储一条 key 为 name，value 为 handy 的数据，
+上面的代码在本地存储一条 key 为 name，value 为 handy 的数据，
 
-`Storage` 当前只允许存储 `String` 数据。
+`Storage` 当前只允许存储 String 类型的数据。
 
-当 `value` 参数为 null 时，`Storage` 会调用 `remove` 方法
+当 value 参数为 null 时，自动调用 `remove` 方法
 
 ###get `Storage.get(key)`
 
-通过指定的 `key` 获取一条数据
-
-`get` 方法返回一条数据
+通过指定的 `key` 获取一条 String 类型的数据
 
 ```js
 define(function (require){
@@ -61,7 +59,7 @@ define(function (require){
 ```
 ###keys `Storage.keys()`
 
-返回通过 `Storage` 保存的所有 key, Array 类型
+返回已存储的所有 key, Array 类型
 
 ```js
 define(function (require){
@@ -73,7 +71,7 @@ define(function (require){
 });
 ```
 ###remove `Storage.remove(key)`
-删除指定的 key 及 key 对应的 value
+通过指定的 key 删除对应的数据
 
 ```js
 define(function (require){
@@ -86,10 +84,10 @@ define(function (require){
     Storage.keys();//['name'];
 });
 ```
-`remove` 方法调用时会触发 `Storage.on(remove:key)` 事件
+`remove` 方法调用时会触发 [`Storage.on(remove:key)`](#removeEvent) 事件
 
 ###clear `Storage.clear()`
-清除通过 `Storage` 存储的所有数据
+清除已存储的所有数据
 
 ```js
 define(function (require){
@@ -102,10 +100,10 @@ define(function (require){
     Storage.keys();//[]
 });
 ```
-值得注意 `clear` 只清除通过 `Storage` 存储的数据，并不是指清除 `localStorage` 和 `sessionStorage` 对象中的所有数据
-`clear` 方法调用时会触发 `Storage.on('clear')` 事件
+值得注意 `clear` 只清除通过 `Storage` 存储的数据，并不是清除 `localStorage` 和 `sessionStorage` 对象中的所有数据
+`clear` 方法调用时会触发 ]`Storage.on('clear')`](#clearEvent) 事件
 
-###`Storage` 混入了 [`event`](http://github.com/alipay/arale/tree/master/lib/events) 模块，因此有一套自定义事件机制。
+###`Storage` 混入了 [`event`](http://github.com/alipay/arale/tree/master/lib/events) 模块，因此它也有一套自定义事件机制。
 
 ###监听某条数据被修改 `Storage.on(change:key,callback)`
 
@@ -120,8 +118,8 @@ define(function (require){
     });
 });
 ```
-如果要尝试 `Storage.on`，你需要打开两个浏览器窗口 (A,B)，在 A 窗口保存一条数据，在 B 窗口修改 A 窗口所保存的数据(请注意一定要修改同名的 key )
-
+如果要测试 `Storage` 的回调事件，你需要打开两个浏览器窗口 (A,B)，在 A 窗口保存一条数据，在 B 窗口修改 A 窗口保存的数据(请注意一定要修改同名的 key )
+<a name="removeEvent"></a>
 ###监听某条数据被删除 `Storage.on(remove:key,callback)`
 
 ```js
@@ -133,6 +131,7 @@ define(function (require){
     });
 });
 ```
+<a name="clearEvent"></a>
 ###监听 `Storage` 保存的所有数据被清除 `Storage.on('clear',callback)`
 
 ```js
