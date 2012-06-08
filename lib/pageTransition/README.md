@@ -1,5 +1,5 @@
 #PageTransition
-提供一个模拟 iOS 原生应用页面过渡效果的 UI 组件
+提供移动设备浏览器端模拟 iOS 原生应用页面过渡效果的 UI 组件
 
 - PageTransition 暂时只提供水平过渡效果
 
@@ -11,6 +11,7 @@
 - 由于 `zepto` 仅兼容 `iOS` 和 `Android OS` ，因此 `PageTransition` 当前也仅兼容这两个平台，未来的版本会兼容到 `windows phone7`
 
 ##PageTransition 工作原理
+![handy pageTransition](/alipay/handy/raw/master/lib/pageTransition/docs/assets/handy.pageTransition.structure.jpg)
 `PageTransition` 包含了一套简单的 `data-attribute` 配置机制，有一部分参数的配置将通过 `data-attribute` 完成。
 
 `PageTransition` 默认把您需要过渡的每个元素看做为一个 `role` (角色)为 `page` 的页面，
