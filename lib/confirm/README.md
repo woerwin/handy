@@ -123,20 +123,16 @@ seajs.use('../src/confirm', function (Confirm) {
 
 ##API 参考
 ###参数说明
-`element` Confirm 的浮层。参数数据类型 DOM Element、CSS Selector、Zepto Object、HTML String('&lt;div&gt;XXX&lt;/div&gt;')
-
-`parent` element 将渲染 (appendTo) 到这个节点里，默认是 `$('body')`。参数数据类型和 element 一样
-
-`styles` element 的样式集，对象字面量格式，默认的值是:
+`styles` `element` 的样式集，对象字面量格式，默认的值是:
 ```js
   styles: {
-      zIndex: 9999,
-      display: 'none'
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      margin: 0
   }
 ```
-这和 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay) 的参数是一样的
-
-`Confirm` 带有一套 data-attribute，它也继承了 `Overlay` data-attribute：
+`Confirm` 带有一套 data-attribute，它也**继承了 `Overlay` data-attribute**：
 
 `data-confirm-role` 表示 confirm 模块中的角色，当前只有一个可选参数 `trigger`
 
@@ -148,7 +144,7 @@ seajs.use('../src/confirm', function (Confirm) {
 <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
 <a href="javascript:void(0)" data-confirm-role="trigger" data-confirm-action="confirm">确定</a>
 ```
-`Confirm` 会自动为 `element` 元素中的所有定义了 Confirm data-attribute 参数的节点注册事件。
+`Confirm` 会自动为 `element` 元素中的所有定义了 `Confirm data-attribute` 属性的节点注册事件。
 
 ##sync `instance.sync()`
 在浏览器窗口或设备方向发生变化时用于更新 confirm 浮层的布局
