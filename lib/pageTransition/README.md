@@ -90,7 +90,7 @@ define(function (require){
 渲染 `pageTransition` 实例化对象
 
 ###getPage `pageTransition.getPage()`
-返回 `pageTransition` 的当前页面，是一个 `DOM Element`
+返回 `pageTransition` 的当前页面，一个 zepto object
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
@@ -99,7 +99,7 @@ define(function (require){
             });
   pageTransition.render();
 
-  console.log(pageTransition.getPage().innerHTML);//...
+  console.log(pageTransition.getPage().html());//...
 });
 ```
 
