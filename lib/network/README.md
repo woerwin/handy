@@ -1,5 +1,5 @@
 #Network
-提供移动平台的网络在线，离线的监听
+提供移动设备浏览器端网络在线，离线的监听
 
 ##平台兼容性
 - windows phone 7 IE 在切换网络状态时无法更新网络连接状态
@@ -23,7 +23,7 @@ define(function (require){
     });
 });
 ```
-每次调用 `Network.online` ，`Network` 都会保存传入的 callback，网络状态发生改变时，执行 `callback` 对列
+每次调用 `Network.online` ，`Network` 都会保存传入的 callback，网络连接时，执行 `callback` 对列
 ```js
 define(function (require){
     var Network = require('network');
@@ -35,7 +35,7 @@ define(function (require){
     });
 });
 ```
-上面的代码，在网络连接时，将依次执行 `console.log('online')` `document.querySelector('#J-network-tip').style.display = 'none';`
+上面的代码，在网络连接时，将依次执行 console.log('online') 和 document.querySelector('#J-network-tip').style.display = 'none'
 
 ###offline  `Network.offline(callback)`
 网络断开时调用
@@ -47,7 +47,7 @@ define(function (require){
     });
 });
 ```
-每次调用 `Network.offline` ，`Network` 都会保存传入的 callback，网络状态发生改变时，执行 `callback` 对列
+每次调用 `Network.offline` ，`Network` 都会保存传入的 callback，网络断开时，执行 `callback` 对列
 ```js
 define(function (require){
     var Network = require('network');
@@ -75,7 +75,7 @@ define(function (require){
     Network.destroy();
 });
 ```
-每 `require('network')` 一次 `Network` 将自动运行一个函数递归 (setTimeout)，每 200 毫秒递归查询一次网络状态的变化，
+每次 `require('network')`， `Network` 将自动运行一个函数递归 (setTimeout)，每 200 毫秒递归查询一次网络状态的变化，
 如果您的某块业务不需要 `Network` 递归查询，或者您的 webapp 需要退出的话，您应该调用 `Network.destroy()`
 
 ###测试用例
