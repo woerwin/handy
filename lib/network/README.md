@@ -59,7 +59,7 @@ define(function (require){
     });
 });
 ```
-上面的代码，在网络断开时，将依次执行 `console.log('offline')` `document.querySelector('#J-network-tip').style.display = 'none';`
+上面的代码，在网络断开时，将依次执行 console.log('offline') 和 document.querySelector('#J-network-tip').style.display = 'none'
 
 ###destroy `Network.destroy()`
 销毁 Network 的生命周期
