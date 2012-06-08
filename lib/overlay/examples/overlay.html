@@ -110,8 +110,6 @@
             overlayTwo.show();
         },false);
 
-
-
         // 在我的上方显示一个浮层
         var overlayTwo = new Overlay({
             element: '#J-customise-layer',
@@ -141,8 +139,6 @@
         overlayTwo.on('hide',function (o){
             $.os.android && $('.tip').css('color','red').html('浮层隐藏，后面的元素可正常点击');
         });
-
-
 
         // 有动画模式的 overlay
         var animoverlay = new Overlay({
