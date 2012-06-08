@@ -66,6 +66,8 @@
         <p id="J-output1"></p>
 
         <a href="javascript:void(0)" id="J-cleanAll">清除所有数据</a><br/>
+
+    <a href="javascript:void(0)" id="J-getKeys">获取已存储所有的 key</a>
 </div>
 <script>
     var getDom = function (dom) {
@@ -86,6 +88,11 @@
             html += key + ': ' + Storage.get(key) + '<br />';
         });
         getDom('#J-output2').innerHTML = html;
+        if(Storage.keys().length >= 1){
+            Storage.on('clear',function (){
+                alert('数据被全部清除');
+            })
+        }
 
         var html = '',
             theFirstKey = null,
@@ -124,6 +131,11 @@
                 getDom('#J-output1').innerHTML = '';
                 output({'提示':'数据已清空'},getDom('#J-output1').innerHTML = '');
             }
+        }, false);
+
+        getDom('#J-getKeys').addEventListener('click', function (e) {
+            var keys = Storage.keys();
+            alert(keys);
         }, false);
 
         function output(data,dom) {
