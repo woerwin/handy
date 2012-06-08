@@ -101,7 +101,7 @@ define(function (require){
 });
 ```
 值得注意 `clear` 只清除通过 `Storage` 存储的数据，并不是清除 `localStorage` 和 `sessionStorage` 对象中的所有数据
-`clear` 方法调用时会触发 ]`Storage.on('clear')`](#clearEvent) 事件
+`clear` 方法调用时会触发 [`Storage.on('clear')`](#clearEvent) 事件
 
 ###`Storage` 混入了 [`event`](http://github.com/alipay/arale/tree/master/lib/events) 模块，因此它也有一套自定义事件机制。
 
