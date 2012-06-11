@@ -22,17 +22,13 @@ define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module
         },
         render: function() {
             // element 定义为 HTML 字符串时
-            if (
-                this.get('element')
-                &&
-                !$(this.get('element')).parent().get(0)
-               ) {
+            var el = this.get('element');
+            if (el && !$(el).parent().get(0)) {
                 this.set('element', $(this.get('element')).hide());
             }
 
-            this.set('element',
-                     $(this.get('element')).appendTo(this.get('parent'))
-                    ).setStyles(this.get('styles'))
+            this.set('element', $(el).appendTo(this.get('parent')))
+                     .setStyles(this.get('styles'))
                      .bindUI();
 
             return this;
@@ -45,15 +41,11 @@ define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module
             Array.prototype.slice.call(triggers);
 
             triggers.forEach(function(trigger) {
-                if (
-                    trigger
-                    &&
-                    (action = $(trigger).attr('data-overlay-action'))
-                   ) {
+                var t = trigger;
+                if (t && (action = $(t).attr('data-overlay-action'))) {
                     switch (action) {
                         case 'hide':
-                            $(trigger)
-                                .unbind('click.overlay')
+                            $(t).unbind('click.overlay')
                                 .bind('click.overlay', $.proxy(function(e) {
                                   e.preventDefault();
                                   this.hide();
@@ -68,8 +60,7 @@ define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module
                             },that));
                             break;*/
                         case 'destroy':
-                            $(trigger)
-                                .unbind('click.overlay')
+                            $(t).unbind('click.overlay')
                                 .bind('click.overlay', $.proxy(function(e) {
                                   e.preventDefault();
                                   this.destroy();
@@ -131,16 +122,16 @@ define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module
                     boxModelSize = outerSize(element[0]);
 
                 this.shim.css({
-                    width: parseInt(element.css('width'), 10)
-                           + boxModelSize.borderWidth.left
-                           + boxModelSize.borderWidth.right
-                           + boxModelSize.padding.left
-                           + boxModelSize.padding.right,
-                    height: parseInt(element.css('height'), 10)
-                           + boxModelSize.borderWidth.top
-                           + boxModelSize.borderWidth.bottom
-                           + boxModelSize.padding.top
-                           + boxModelSize.padding.bottom,
+                    width: parseInt(element.css('width'), 10) +
+                           boxModelSize.borderWidth.left +
+                           boxModelSize.borderWidth.right +
+                           boxModelSize.padding.left +
+                           boxModelSize.padding.right,
+                    height: parseInt(element.css('height'), 10) +
+                           boxModelSize.borderWidth.top +
+                           boxModelSize.borderWidth.bottom +
+                           boxModelSize.padding.top +
+                           boxModelSize.padding.bottom,
                     left: parseInt(element.css('left'), 10),
                     top: parseInt(element.css('top'), 10) + window.scrollY
                 });
@@ -199,7 +190,7 @@ function outerSize(element) {
         var _styles = [];
         splitStylesValue(styles).forEach(function(v) {
             _styles.push(
-                v.replace(/(\d*)([\w|\s]*)$/, function($1,$2) {return $2;})
+                v.replace(/(\d*)([\w|\s]*)$/, function($1, $2) {return $2;})
                 );
         });
 
