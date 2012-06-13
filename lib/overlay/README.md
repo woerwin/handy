@@ -35,7 +35,7 @@ Overlay 会自动为它里面所有配置了以 `data-overlay` 做前缀的属�
 
 ##演示地址
 - [Demo](../lib/overlay/examples/overlay.html)
-- [Arale Overlay Demo](http://github.com/alipay/arale/tree/master/lib/overlay/example/overlay.html)
+- [Arale Overlay Demo](http://github.com/alipay/arale/tree/master/lib/overlay/examples/overlay.html)
 
 ##反馈意见
 欢迎创建 [GitHub Issue](http://github.com/alipay/handy/issues/new) 来提交反馈
