@@ -19,6 +19,7 @@ var handy = '../../../dist/';
 seajs.config({
 
     alias: {
+        'jasmine': 'jasmine/1.1.0/jasmine-html',
 
         'events': 'events/0.9.1/events',                     // 100%
         'class': 'class/0.9.2/class',                        // 100%

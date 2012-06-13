@@ -42,7 +42,7 @@
         var shown = false;
         var shim = null;
         $('#J-show').click(function (){
-            if(shown){return;}
+            if(shown || !$.os.android){return;}
             shown = true;
             shim = new Shim($('<div id="J-shim">我可以遮住后面的表单控件</div>')
                     .css({
@@ -59,7 +59,7 @@
             shim.sync();
         });
         $('#J-hide').click(function (){
-            if(!shown){return;}
+            if(!shown || !$.os.android){return;}
             shown = false;
             $('#J-shim').remove();
             shim.destroy();
