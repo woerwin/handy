@@ -2,8 +2,10 @@
 提供基于浮层表现的 UI 组件,浮层的显示、隐藏、定位
 
 ##模块依赖
-- [base](http://github.com/alipay/arale/tree/master/lib/base)
+- [widget](http://github.com/alipay/arale/tree/master/lib/widget)
 - [zepto](http://github.com/alipay/arale/tree/master/lib/zepto)
+- [position](position)
+- [android-shim](android-shim)
 
 ##Overlay 工作原理
 `Overlay` 只需要传入一个 `element` 参数即可工作。

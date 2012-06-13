@@ -24,14 +24,15 @@ seajs.config({
         'events': 'events/0.9.1/events',                     // 100%
         'class': 'class/0.9.2/class',                        // 100%
         'base': 'base/0.9.15/base',                          // 90%  完善阶段
-        'widget': 'widget/0.9.13/widget',                    // 90%  完善阶段
-        'widget-templatable': 'widget/0.9.13/templatable',   // 90%  完善阶段
+        'widget': 'widget/0.9.15/widget',                    // 90%  完善阶段
+        'widget-templatable': 'widget/0.9.15/templatable',   // 90%  完善阶段
 
         '$': 'zepto/1.0.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
 
         'overlay': handy + 'overlay/0.9.0/overlay',
-        'position': handy + 'position/0.9.0/position'
+        'position': handy + 'position/0.9.0/position',
+        'android-shim': handy + 'android-shim/0.9.0/android-shim'
 
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],

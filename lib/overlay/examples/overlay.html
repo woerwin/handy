@@ -78,7 +78,7 @@
   <span class="tip">建议您使用 android 观察这个示例</span><br />
   <br /><br /><br />
   <input type="submit" value="有动画的 overlay" id="J-anim-overlay" />
-  <select style="display:-webkit-box;">
+  <select style="display:none;">
       <option>one</option>
       <option>two</option>
   </select><br />
@@ -92,20 +92,19 @@
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
-    seajs.use(['../src/overlay','$'], function (Overlay,$) {
+    seajs.use(['../src/overlay','$','position'], function (Overlay,$,Position) {
         // 把一个 select 显示在我的右侧
         var overlayOne = new Overlay({
             element: 'select',
-            styles: {
-                position: 'absolute',
-                left: $('#J-overlay-one').offset().left+$('#J-overlay-one').offset().width,
-                top: $('#J-overlay-one').offset().top
+            align: {
+                baseElement: '#J-overlay-one',
+                baseXY: ['100%',0]
             }
         });
-        overlayOne.render();
         getDOM('#J-overlay-one').addEventListener('click',function (){
             overlayOne.show();
         },false);
+
         getDOM('#J-overlay-two').addEventListener('click',function (){
             overlayTwo.show();
         },false);
@@ -113,69 +112,63 @@
         // 在我的上方显示一个浮层
         var overlayTwo = new Overlay({
             element: '#J-customise-layer',
-            styles: {
-                zIndex: 88888,
-                position: 'absolute',
-                left: $('#J-overlay-two').offset().left,
-                top: $('#J-overlay-two').offset().top - $('#J-customise-layer').offset().height
+            zIndex: 88888,
+            position: 'absolute',
+            align: {
+                selfXY: [0,'100%'],
+                baseElement: '#J-overlay-two'
             }
         });
         overlayTwo.render();
-        overlayTwo.on('shown',function (o){
-            o.setStyles({
-                top: $('#J-overlay-two').offset().top - $('#J-customise-layer').offset().height
-            });
-            o.get('element').css({
+        overlayTwo.after('show',function (o){
+            $(o.get('element')).css({
                 '-webkit-box-shadow': '0px 0px 10px rgba(0,0,0,.7)'
             }).find('.hide').unbind('click').click(function (){
                 o.hide();
             });
-            o.get('element').find('.destroy').unbind('click').click(function (){
+            $(o.get('element')).find('.destroy').unbind('click').click(function (){
                 o.destroy();
             });
             $.os.android && $('.tip').css('color','red').html('这个浮层在 android 平台下是可以阻止事件的穿透，'+
                                                               '你无法点击后面的表单控件<br />');
         });
-        overlayTwo.on('hide',function (o){
+        overlayTwo.after('hide',function (o){
             $.os.android && $('.tip').css('color','red').html('浮层隐藏，后面的元素可正常点击');
         });
 
         // 有动画模式的 overlay
-        var animoverlay = new Overlay({
-            element: '<div style="background:rgba(255,255,255,.7);width:260px;height:440px;padding:10px;'+
+        var AnimOverlay = Overlay.extend({
+            hide: function (){
+                this.element.animate({
+                    scale: 0
+                },300,'ease',$.proxy(function (){
+                    // 为使用 Overlay 原型方法 show 能够准确取到 element 的宽,高的值
+                    // 需要手动清除 scale(0) 的值
+                    this.element.css({
+                        '-webkit-transform': 'none'
+                    });
+
+                },this));
+                this.set('visible', false);
+            }
+        });
+        var animoverlay = new AnimOverlay({
+            template: '<div style="background:rgba(255,255,255,.7);width:260px;height:240px;padding:10px;'+
                      'border:1px solid gray;"><h4>一个带有动画模式的扩展</h4>'+
                      '<a href="javascript:void(0)" style="margin-right:40px;" '+
                      'data-overlay-role="trigger" data-overlay-action="hide">关闭</a><a href="javascript:void(0)" '+
                      'data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
-            styles: {
-                position: 'absolute',
-                left: ($(window).width() - 280) / 2,
-                top: ($(window).height() - 440) / 2 + window.scrollY,
-                zIndex: 99999
-            }
+            position: 'absolute',
+            zIndex: 99999
         });
-        animoverlay.hide = function (){
-            this.get('element').animate({
-                scale: 0
-            },300,'ease',$.proxy(function (){
-                // 为使用 Overlay 原型方法 show 能够准确取到 element 的宽,高的值
-                // 需要手动清除 scale(0) 的值
-                animoverlay.get('element').css({
-                    '-webkit-transform': 'none'
-                });
-                this.constructor.prototype.hide.call(this);
-            },this));
-        };
-        animoverlay.render();
-        animoverlay.on('shown',function (o){
-            o.get('element').css({
+        animoverlay.after('show',function (o){
+            o.element.css({
                 '-webkit-box-shadow': '0 0 20px #000',
                 '-webkit-transform': 'scale(0)'
             });
         });
         getDOM('#J-anim-overlay').addEventListener('click',function (){
-            animoverlay.show();
-            animoverlay.get('element').animate({
+            animoverlay.show().element.animate({
                 scale: 1
             },300,'ease',function (){
 

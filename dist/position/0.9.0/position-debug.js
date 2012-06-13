@@ -1,10 +1,9 @@
-define("#position/0.9.0/position", ["$"], function(require, exports) {
+define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
 
     // Position
     // --------
     // 定位工具组件，将一个 DOM 节点相对对另一个 DOM 节点进行定位操作。
     // 代码易改，人生难得
-    // 颂赞根据 mobile 特性做修改 2012-06-12
 
     var Position = exports,
         VIEWPORT = { _id: 'VIEWPORT', nodeType: 1 },
@@ -190,8 +189,7 @@ define("#position/0.9.0/position", ["$"], function(require, exports) {
 
     // 获取 offsetParent 的位置
     function getParentOffset(element) {
-        // zepto 没有 offsetParent() 方法
-        // 直接使用 node.offsetParent
+        // zepto 没有
         var parent = element[0].offsetParent;
 
         if(!parent){return {
@@ -200,7 +198,7 @@ define("#position/0.9.0/position", ["$"], function(require, exports) {
         };}
 
         if (parent[0] === document.documentElement) {
-            parent = $(document.querySelector('body'));
+            parent = $(document.body);
         }
 
         // 获取 offsetParent 的 offset
