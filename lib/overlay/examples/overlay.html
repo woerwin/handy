@@ -92,7 +92,7 @@
 <script>
     function getDOM(dom){return document.querySelector(dom);}
 
-    seajs.use(['../src/overlay','$','handlebars'], function (Overlay,$,Handlebars) {
+    seajs.use(['../src/overlay','$'], function (Overlay,$) {
         // 把一个 select 显示在我的右侧
         var overlayOne = new Overlay({
             element: 'select',
