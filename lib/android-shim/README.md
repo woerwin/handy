@@ -11,7 +11,7 @@ shim 的 z-index 的值将是目标元素 的 z-index 值减 1。这有点像 [i
 
 建议您阅读 [Android javascript 事件穿透解决方案](http://qiqicartoon.com/?p=1197)
 
-##android-shim 的使用方法与 [arale iframe-shim](http://github.com/alipay/arale/tree/master/lib/events) 相同
+##android-shim 的使用方法与 [arale iframe-shim](http://github.com/alipay/arale/tree/master/lib/iframe-shim) 相同
 
 ##注意事项
 - android-shim 自动判断当前是否是 Android OS ，非 Android OS 设备，不会动态添加添加 shim，因此您勿需再做判断
