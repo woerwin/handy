@@ -1,52 +1,42 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="format-detection" content="telephone=no" />
-<meta name="format-detection" content="email=no" />
-<title>Position Example</title>
-<script src="../../../tools/seajs-and-its-friends.js"></script>
-<style>
-    body{
-        padding:0;
-        margin:0;
-        font-size:14px;
-    }
-    h2{
-        font-weight:normal;
-        font-size:14px;
-    }
-    .example {
-        border:3px dashed #ccc;
-        margin:30px 50px;
-        color:#777;
-        font-size:16px;
-    }
-    h2 {
-        color:#2296CC;
-        font-size:16px;
-        margin-left:10px;
-        font-family: consolas;
-    }
-    .elem1 {
-        border:1px solid green;
-        background-color:#C7FFBB;
-    }
-    .elem2 {
-        border:20px solid #999;
-        background-color:#eee;
-        height:200px;
-        margin:50px 0 0 100px;
-        line-height:200px;
-        text-align:center;
-    }
-</style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="format-detection" content="email=no"/>
+    <title>Position Example</title>
+    <script src="../../../tools/seajs-and-its-friends.js"></script>
+    <style>
+        .example {
+            border:3px dashed #ccc;
+            margin:30px 50px;
+            color:#777;
+            font-size:16px;
+        }
+        h2 {
+            color:#2296CC;
+            font-size:16px;
+            margin-left:10px;
+            font-family: consolas;
+        }
+        .elem1 {
+            border:1px solid green;
+            background-color:#C7FFBB;
+        }
+        .elem2 {
+            border:20px solid #999;
+            background-color:#eee;
+            height:200px;
+            margin:50px 0 0 100px;
+            line-height:200px;
+            text-align:center;
+        }
+    </style>
 </head>
 <body>
-<h1 style="text-align:center;">强烈建议您在移动设备内置浏览器访问这个页面。</h1>
 <div class="example">
     <h2>1. 基本情况：Position.pin(a1, {element: b1, x: 50, y: 50});</h2>
     <div id="a1" class="elem1">目标元素a1</div>
@@ -61,7 +51,7 @@
 </div>
 <div class="example">
     <h2>3. 目标元素带偏移量：Position.pin({element: a3, x: -50, y: -50}, {element: b3});</h2>
-    <div id="b3" class="elem2">基准元素b3</div>    
+    <div id="b3" class="elem2">基准元素b3</div>
     <div id="a3" class="elem1">目标元素a3</div>
 </div>
 <div class="example">
@@ -71,13 +61,13 @@
 </div>
 <div class="example">
     <h2>5. 定位到元素中央：Position.center(a5, b5);</h2>
-    <div id="b5" class="elem2">基准元素b5</div>    
+    <div id="b5" class="elem2">基准元素b5</div>
     <div id="a5" class="elem1">目标元素a5</div>
 </div>
 <div class="example">
     <h2>6. 相对可见区域定位：Position.pin(a6, {x: 50,y: 50});</h2>
     <div id="a6" class="elem1">目标元素a6</div>
-    <input type="button" id="J_rePosition6" value="点击重定位">	
+    <input type="button" id="J_rePosition6" value="点击重定位">
 </div>
 <div class="example">
     <h2>7. 定位到屏幕中央：Position.center(a7);</h2>
@@ -99,46 +89,46 @@
 </div>
 
 <script>
-seajs.use(['../src/position', '$'], function(Position, $) {
-    $(function() {
-        var id = function(_id) { return document.getElementById(_id) },
-            a1 = id('a1'),
-            b1 = id('b1'),
-            a2 = id('a2'),
-            b2 = id('b2'),
-            a3 = id('a3'),
-            b3 = id('b3'),
-            a4 = id('a4'),
-            b4 = id('b4'),
-            a5 = id('a5'),
-            b5 = id('b5'),
-            a6 = id('a6'),
-            b6 = id('b6'),
-            a7 = id('a7'),
-            b7 = id('b7'),
-            a8 = id('a8'),
-            b8 = id('b8'),
-            a9 = id('a9'),
-            a10 = id('a10');
+    seajs.use(['../src/position', '$'], function(Position, $) {
+        $(function() {
+            var id = function(_id) { return document.getElementById(_id) },
+                    a1 = id('a1'),
+                    b1 = id('b1'),
+                    a2 = id('a2'),
+                    b2 = id('b2'),
+                    a3 = id('a3'),
+                    b3 = id('b3'),
+                    a4 = id('a4'),
+                    b4 = id('b4'),
+                    a5 = id('a5'),
+                    b5 = id('b5'),
+                    a6 = id('a6'),
+                    b6 = id('b6'),
+                    a7 = id('a7'),
+                    b7 = id('b7'),
+                    a8 = id('a8'),
+                    b8 = id('b8'),
+                    a9 = id('a9'),
+                    a10 = id('a10');
 
-        Position.pin(a1, {element: b1, x: '50px', y: '50px'});
-        Position.pin(a2, {element: b2, x: 50, y: 50});
-        Position.pin({element: a3, x: -50, y: -50}, {element: b3});
-        Position.pin({element: a4, x: 'center', y: '50%'}, {element: b4, x: '100%', y: '50.5%'});
-        Position.center(a5, b5);
-        Position.pin(a6, {x: 50,y: 50});
-        id('J_rePosition6').onclick = function() {
+            Position.pin(a1, {element: b1, x: '50px', y: '50px'});
+            Position.pin(a2, {element: b2, x: 50, y: 50});
+            Position.pin({element: a3, x: -50, y: -50}, {element: b3});
+            Position.pin({element: a4, x: 'center', y: '50%'}, {element: b4, x: '100%', y: '50.5%'});
+            Position.center(a5, b5);
             Position.pin(a6, {x: 50,y: 50});
-        };
-        Position.center(a7);
-        id('J_rePosition7').onclick = function() {
+            id('J_rePosition6').onclick = function() {
+                Position.pin(a6, {x: 50,y: 50});
+            };
             Position.center(a7);
-        };
-        Position.pin(a8, {element: $('#b8'), x: '100%+50px', y: '50%-50'});
-        Position.pin(a9, {element: a9, x: '100%', y: 0});
-        Position.pin(a10, { x: 400, y: 0 });
+            id('J_rePosition7').onclick = function() {
+                Position.center(a7);
+            };
+            Position.pin(a8, {element: $('#b8'), x: '100%+50px', y: '50%-50'});
+            Position.pin(a9, {element: a9, x: '100%', y: 0});
+            Position.pin(a10, { x: 400, y: 0 });
+        });
     });
-});
 </script>
 </body>
 </html>

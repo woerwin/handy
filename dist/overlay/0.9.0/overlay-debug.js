@@ -1,41 +1,52 @@
-// Overlay
-// -------
-// 提供基于浮层表现的 UI 组件，提供浮层的显示、隐藏、定位
-define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module) {
-    var Base = require('base'),
-        $ = require('$');
+define("#overlay/0.9.0/overlay-debug", ["$","position","android-shim","widget"], function(require, exports, module) {
 
-    var Overlay = Base.extend({
+    var $ = require('$'),
+        Position = require('position'),
+        Shim = require('android-shim'),
+        Widget = require('widget');
+
+    // Overlay
+    // -------
+    // Overlay 组件的核心特点是可定位（Positionable）和可层叠（Stackable），是一切悬浮类
+    // UI 组件的基类。
+
+    var Overlay = Widget.extend({
+
         attrs: {
-            element: null,
-            parent: $('body'), // 将 element 动态插入到 parent
-            styles: { // 浮层样式
-                zIndex: 9999,
-                display: 'none'
-            }
-        },
-        initialize: function(attrs) {
-            Overlay.superclass.initialize.call(this, attrs);
+            // 基本属性
+            width: '',
+            height: '',
+            zIndex: 99,
+            visible: false,
 
-            // protected
-            this.shim = null;
+            // 定位配置
+            align: {
+                // element 的定位点，默认为左上角
+                selfXY: [0, 0],
+                // 基准定位元素，默认为当前可视区域
+                baseElement: Position.VIEWPORT,
+                // 基准定位元素的定位点，默认为左上角
+                baseXY: [0, 0]
+            },
+
+            // 父元素
+            parentNode: document.body
         },
+
         render: function() {
-            // element 定义为 HTML 字符串时
-            var el = this.get('element');
-            if (el && !$(el).parent().get(0)) {
-                this.set('element', $(this.get('element')).hide());
-            }
+            // 让用户传入的 config 生效并插入到文档流中
+            Overlay.superclass.render.call(this);
 
-            this.set('element', $(el).appendTo(this.get('parent')))
-                     .setStyles(this.get('styles'))
-                     .bindUI();
+            // 在插入到文档流后，重新定位一次
+            this._setPosition();
+
+            this.bindUI();
 
             return this;
         },
+
         bindUI: function() {
-            var triggers = this.get('element')
-                           .find('*[data-overlay-role="trigger"]'),
+            var triggers = this.element.find('*[data-overlay-role="trigger"]'),
                 that = this;
 
             Array.prototype.slice.call(triggers);
@@ -47,23 +58,23 @@ define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module
                         case 'hide':
                             $(t).unbind('click.overlay')
                                 .bind('click.overlay', $.proxy(function(e) {
-                                  e.preventDefault();
-                                  this.hide();
+                                e.preventDefault();
+                                this.hide();
                             },that));
                             break;
                         /*case 'show':
-                            $(trigger)
-                                .unbind('click.overlay')
-                                .bind('click.overlay', $.proxy(function(e) {
-                                  e.preventDefault();
-                                  this.show();
-                            },that));
-                            break;*/
+                         $(trigger)
+                         .unbind('click.overlay')
+                         .bind('click.overlay', $.proxy(function(e) {
+                         e.preventDefault();
+                         this.show();
+                         },that));
+                         break;*/
                         case 'destroy':
                             $(t).unbind('click.overlay')
                                 .bind('click.overlay', $.proxy(function(e) {
-                                  e.preventDefault();
-                                  this.destroy();
+                                e.preventDefault();
+                                this.destroy();
                             },that));
                             break;
                     }
@@ -72,176 +83,116 @@ define("#overlay/0.9.0/overlay", ["base","$"], function(require, exports, module
 
             return this;
         },
+
         destroy: function() {
-            this.get('element')[0] && this.get('element').remove();
-            this.shim && this.shim.remove();
-            this.set('element', null);
-            this.shim = null;
-            this.set('parent', $('body')).set('styles', {
-                zIndex: 9999
-            });
+            this.element.remove();
+            Overlay.superclass.destroy.call(this);
         },
+
         show: function() {
-            var display = '',
-                element = this.get('element');
-
-            if (element.css('display') === 'block') {
-                display = 'block';
-            }else if (element.css('display') === '-webkit-box') {
-                display = '-webkit-box';
+            // 若从未渲染，则调用 render
+            if (!this.rendered) {
+                this.render();
             }
 
-            element.css({
-                'display': display
+            this.set('visible', true);
+            return this;
+        },
+
+        hide: function() {
+            this.set('visible', false);
+            return this;
+        },
+
+        setup: function() {
+            // 加载 iframe 遮罩层并与 overlay 保持同步
+            this._setupShim();
+        },
+
+        // 进行定位
+        _setPosition: function(align) {
+            // 不在文档流中，定位无效
+            if (!isInDocument(this.element[0])) return;
+
+            align || (align = this.get('align'));
+            var isHidden = this.element.css('display') === 'none';
+
+            // 在定位时，为避免元素高度不定，先显示出来
+            if (isHidden) {
+                this.element.css({ visibility: 'hidden', display: 'block' });
+            }
+
+            Position.pin({
+                element: this.element,
+                x: align.selfXY[0],
+                y: align.selfXY[1]
+            }, {
+                element: align.baseElement,
+                x: align.baseXY[0],
+                y: align.baseXY[1]
             });
 
-            // 本来 handy 对 overlay addShim 方法的设计是:
-            // 如果是 android 设备再添加一个 shim
-            // 但后来发现某些 android 刷机用户的 UA 通过 zepto 无法准确获取
-            // 所以我们去除了这层判断处理，直接添加 shim
-            /*if($.os.android){
-                this.addShim();
-            }*/
-            this.addShim().trigger('shown', this);
-
-            return this;
-        },
-        hide: function() {
-            this.get('element').hide();
-            this.trigger('hide', this);
-            this.shim && this.shim.remove();
-            this.shim = null;
-
-            return this;
-        },
-        setStyles: function(styles) {
-            this.get('element').css(styles);
-
-            if (this.shim) {
-                var element = this.get('element'),
-                    boxModelSize = outerSize(element[0]);
-
-                this.shim.css({
-                    width: parseInt(element.css('width'), 10) +
-                           boxModelSize.borderWidth.left +
-                           boxModelSize.borderWidth.right +
-                           boxModelSize.padding.left +
-                           boxModelSize.padding.right,
-                    height: parseInt(element.css('height'), 10) +
-                           boxModelSize.borderWidth.top +
-                           boxModelSize.borderWidth.bottom +
-                           boxModelSize.padding.top +
-                           boxModelSize.padding.bottom,
-                    left: parseInt(element.css('left'), 10),
-                    top: parseInt(element.css('top'), 10) + window.scrollY
-                });
+            // 定位完成后，还原
+            if (isHidden) {
+                this.element.css({ visibility: '', display: 'none' });
             }
 
             return this;
         },
-        // @protected
-        // 解决 Android OS 部分机型中事件穿透问题
-        // 如果子类覆盖 show 方法，强烈建议大子类的 show 方法中调用 addShim
-        addShim: function() {
-            if (this.shim) {
-                return this;
+
+        // 加载 iframe 遮罩层并与 overlay 保持同步
+        _setupShim: function() {
+            var shim = new Shim(this.element);
+            this.after('show hide', shim.sync, shim);
+            this.before('destroy',shim.destroy,shim);
+
+            // 除了 parentNode 之外的其他属性发生变化时，都触发 shim 同步
+            var attrs = Overlay.prototype.attrs;
+            for (var attr in attrs) {
+                if (attrs.hasOwnProperty(attr)) {
+                    if (attr === 'parentNode') continue;
+                    this.on('change:' + attr, shim.sync, shim);
+                }
             }
+        },
 
-            var element = this.get('element'),
-                offset = element.offset(),
-                zIndex = ((parseInt(element.css('zIndex'), 10) - 1) || 1);
 
-            var shim = $('<div data-overlay-role="shim" ' +
-                         'style="position:absolute;' +
-                         'margin:0;' +
-                         'padding:0;' +
-                         'border:none;' +
-                         'background:rgba(255,255,255,0.01);-' +
-                         'webkit-tap-highlight-color:rgba(0,0,0,0);' +
-                         'width:' + offset.width + 'px;' +
-                         'height:' + offset.height + 'px;' +
-                         'top:' + offset.top + 'px;' +
-                         'left:' + offset.left + 'px;' +
-                         'z-index:' + zIndex + ';"></div>');
-            this.shim = shim.appendTo(element.parent());
+        // 用于 set 属性后的界面更新
 
-            return this;
+        _onRenderWidth: function(val) {
+            this.element.css('width', val);
+        },
+
+        _onRenderHeight: function(val) {
+            this.element.css('height', val);
+        },
+
+        _onRenderZIndex: function(val) {
+            this.element.css('zIndex', val);
+        },
+
+        _onRenderAlign: function(val) {
+            this._setPosition(val);
+        },
+
+        _onRenderVisible: function(val) {
+            this.element[val ? 'show' : 'hide']();
         }
+
     });
 
     module.exports = Overlay;
+
+
+    // Helpers
+    // -------
+    function contains(a, b){
+        return a.contains ?
+            a != b && a.contains(b) :
+            !!(a.compareDocumentPosition(b) & 16);
+    }
+    function isInDocument(element) {
+        return contains(document.documentElement, element);
+    }
+
 });
-
-// By [outersize](https://github.com/mui-lychi/outerSize)
-function outerSize(element) {
-    var CSSStyleDeclaration = getComputedStyle(element),
-        margin = CSSStyleDeclaration['margin'],
-        padding = CSSStyleDeclaration['padding'],
-        bordersWidth = CSSStyleDeclaration['border-width'];
-
-    // convert to Array
-    // example ['10px','20px','30px','0px']
-    function splitStylesValue(styles) {
-        return styles.split(' ');
-    }
-
-    // remove css properties PX unit
-    function removeStylesPX(styles) {
-        var _styles = [];
-        splitStylesValue(styles).forEach(function(v) {
-            _styles.push(
-                v.replace(/(\d*)([\w|\s]*)$/, function($1, $2) {return $2;})
-                );
-        });
-
-        return _styles;
-    }
-
-    // parser css
-    function parser(styles) {
-        var l = styles.length,
-            result = {};
-
-        switch (l) {
-            case 1:
-                var fillval = styles[0];
-                fillStyles(fillval, fillval, fillval);
-                break;
-            case 2:
-                var y = styles[0],
-                    x = styles[1];
-                fillStyles(y, x);
-                break;
-            case 3:
-                var y = styles[0],
-                    x = styles[1];
-                fillStyles(x);
-                break;
-        }
-
-
-
-        styles = styles.map(function(v) {
-            return v * 1;
-        });
-
-        result['top'] = styles[0];
-        result['right'] = styles[1];
-        result['bottom'] = styles[2];
-        result['left'] = styles[3];
-
-        function fillStyles() {
-            for (var i = 0; i < arguments.length; i++) {
-                styles.push(arguments[i]);
-            }
-        }
-        return result;
-    }
-
-    return {
-        borderWidth: parser(removeStylesPX(bordersWidth)),
-        padding: parser(removeStylesPX(padding)),
-        margin: parser(removeStylesPX(margin))
-    };
-}
-

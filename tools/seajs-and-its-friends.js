@@ -14,7 +14,7 @@
 
 // and its friends
 (function(){
-var handy = '../../../dist/';
+var handy = '../../../../handy/dist/';
 
 seajs.config({
 
@@ -32,7 +32,8 @@ seajs.config({
 
         'overlay': handy + 'overlay/0.9.0/overlay',
         'position': handy + 'position/0.9.0/position',
-        'android-shim': handy + 'android-shim/0.9.0/android-shim'
+        'android-shim': handy + 'android-shim/0.9.0/android-shim',
+        'mask': handy + 'overlay/0.9.0/mask'
 
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
