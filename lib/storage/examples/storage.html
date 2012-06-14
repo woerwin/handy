@@ -135,7 +135,7 @@
 
         getDom('#J-getKeys').addEventListener('click', function (e) {
             var keys = Storage.keys();
-            alert(keys);
+            keys.length >= 1 ? alert(keys) : alert('您还没有保存数据');
         }, false);
 
         function output(data,dom) {
