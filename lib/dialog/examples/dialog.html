@@ -56,7 +56,7 @@ seajs.config({
 
 seajs.use(['../src/baseDialog', '../src/animDialog'], function(BaseDialog, AnimDialog) {
     
-    var closeDialogTpl = '<div class="overlay"><button id="close">点击关闭</button><p>肯定是房间里萨的看法金克拉束带结发</p></div>';
+    var closeDialogTpl = '<div class="overlay"><button id="close">点击关闭</button><p>肯定是房间里萨的看法金克拉束带结发<a style="color:#fff;font-size:14px;padding-top:10px;" href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">点击这里也可以关闭</a></p></div>';
     var dialogTpl = '<div class="overlay"><div id="dialog-title"></div><div id="dialog-content"></div><button id="confirm">确认按钮</button><button id="close">点击关闭</button></div>';
 
     var d1 = new BaseDialog({
