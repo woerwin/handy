@@ -153,12 +153,12 @@ page:
 
 <!-- the overlay module start -->
 <div data-module-name="overlay" data-overlay-id="one">
-    <data data-overlay-styles='{"border":"1px solid #000","position":"absolute","right":0,"bottom":0,"padding":"10px","background":"#f50"}'></data>
+    <data data-overlay-align='{"baseXY":["100%","100%"],"selfXY":["100%+30","100%"]}'></data>
     <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>
     <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a>
 </div>
 <div data-module-name="overlay" data-overlay-id="two">
-    <data data-overlay-styles='{"-webkit-box-shadow":"0 0 10px #000","width":"200px","text-align":"center","height":"200px","line-height":"200px","text-shadow":"1px 1px 1px #fff","border":"1px solid #000","position":"absolute","top":0,"left":0,"padding":"10px","background":"gray","color":"#fff"}'></data>
+    <data data-overlay-align='{"baseXY":["center","center"],"selfXY":["center","center"]}'></data>
     <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">取消</a>
 </div>
 <a href="javascript:void(0)" id="J-showOverlay" style="margin:0 30px;">右下角显示一个 Overlay </a>
@@ -185,10 +185,10 @@ page:
             HandyParserData.overlay_one.show();
         },false);
 
-        HandyParserData.overlay_two.on('shown',function (o){
-            o.setStyles({
-                left: ($(window).width() - o.get('element').offset().width) / 2,
-                top:  ($(window).height() - o.get('element').offset().height) / 2 + window.scrollY
+        HandyParserData.overlay_two.after('show',function (o){
+            o.element.css({
+                left: ($(window).width() - o.element.offset().width) / 2,
+                top:  ($(window).height() - o.element.offset().height) / 2 + window.scrollY
             });
         });
         document.querySelector('#J-showOverlay2').addEventListener('click',function (){
