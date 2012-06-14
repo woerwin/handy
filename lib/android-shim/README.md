@@ -3,6 +3,10 @@
 
 这个问题主要发生在 Android OS 内置浏览器，查看 [Android OS 事件穿透问题](http://v.youku.com/v_show/id_XNDAxMTE1NTgw.html)
 
+##模块依赖
+- [zepto](http://github.com/alipay/arale/tree/master/lib/zepto)
+- [handy position](position)
+
 ##工作原理
 ![android-shim](/alipay/handy/raw/master/lib/overlay/docs/assets/handy-overlay-shim.jpg)
 
