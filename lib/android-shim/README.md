@@ -11,6 +11,8 @@ shim 的 z-index 的值将是目标元素 的 z-index 值减 1。这有点像 [i
 
 建议您阅读 [Android javascript 事件穿透解决方案](http://qiqicartoon.com/?p=1197)
 
+##android-shim 的使用方法与 [arale iframe-shim](http://github.com/alipay/arale/tree/master/lib/events) 相同
+
 ##注意事项
-- android-shim 自动判断当前是否是 Android OS ，因此您勿需再做判断
+- android-shim 自动判断当前是否是 Android OS ，非 Android OS 设备，不会动态添加添加 shim，因此您勿需再做判断
 - android-shim 不会解决浮层后面元素触发 touch 事件的反馈，也就是被点击元素周围黄色的边框，您可以通过 -webkit-tap-highlight-color 解决
