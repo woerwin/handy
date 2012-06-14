@@ -14,7 +14,7 @@ Overlay 会自动为它里面所有配置了以 `data-overlay` 做前缀的属�
 当显示 `Overlay` 的 `element` 时，`Overlay` 会动态的在 `element` 后面添加一个 [`shim` (垫片)](android-shim)，这个 `shim` 的作用将用来
 [解决 android 平台下事件穿透](http://v.youku.com/v_show/id_XNDAxMTE1NTgw.html) 的问题，这也是 **`Overlay`** 组件的一大亮点。
 
-`Overlay` 带有一套 data-attribute API：
+`Overlay` 带有一套 data-attribute API，这些 data-attribute 数据接口将被子类继承：
 
 `data-overlay-role` 表示 overlay 模块中的角色，当前只有一个可选参数 `trigger`
 
