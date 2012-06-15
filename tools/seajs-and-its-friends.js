@@ -30,10 +30,12 @@ seajs.config({
         '$': 'zepto/1.0.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
 
-        'overlay': handy + 'overlay/0.9.0/overlay',
+        'overlay': handy + 'overlay/0.9.1/overlay',
         'position': handy + 'position/0.9.0/position',
         'android-shim': handy + 'android-shim/0.9.0/android-shim',
-        'mask': handy + 'overlay/0.9.0/mask'
+        'mask': handy + 'overlay/0.9.1/mask',
+        'baseDialog': handy + 'dialog/0.9.0/baseDialog',
+        'animDialog': handy + 'dialog/0.9.0/animDialog'
 
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],

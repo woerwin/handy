@@ -104,6 +104,9 @@
         // 自定义 UI 的 confirm
         var uiConfirm = new Confirm({
             element: '#J-confirm',
+            showEffect: {
+                type: 'none'
+            },
             message: 'handy confirm 演示',
             onConfirm: function (o){
                 alert('您点击了确定');
@@ -120,6 +123,9 @@
         // 简单的 confirm
         var confirm = new Confirm({
             message: 'handy confirm 演示',
+            showEffect: {
+                type: 'none'
+            },
             onConfirm: function (o){
                 alert('您点击了确定')
             },
@@ -127,7 +133,16 @@
                 alert('您点击了取消')
             }
         });
-        confirm.render();
+        confirm.render().after('show',function (o){
+            o.element.css({
+                padding: 10,
+                border: '5px solid gray' ,
+                background: '#a5a5a5'
+            })
+        });
+        window.addEventListener('resize',function (){
+            confirm.set('align',confirm.get('align'));
+        },false);
         getDOM('#J-simple-confirm').addEventListener('click',function (){
             confirm.show();
         },false);
@@ -136,50 +151,7 @@
         },false);
 
         // 带有动画效果的 confirm
-        var scaleConfirm = Confirm.extend({
-            show: function (){
-                scaleConfirm.superclass.show.call(this);
-                var that = this;
-                this.mask.css({
-                    '-webkit-transform-origin': '50% 50%',
-                    '-webkit-transform': 'scale(0)',
-                    display: 'none'
-                });
-
-                this.get('element').css({
-                    '-webkit-transform': 'scale(0)',
-                    display: 'none'
-                });
-                setTimeout(function (){
-                    that.mask.css('display','block').animate({
-                        scale: 1
-                    },150,'ease',function (){
-                        that.sync();
-                    });
-                    that.get('element').css('display','block').animate({
-                        scale: 1
-                    },500,'ease');
-                },100);
-            },
-            hide: function (){
-                scaleConfirm.superclass.hide.call(this);
-
-                this.mask.css({
-                    display: 'block'
-                });
-
-                this.get('element').css({
-                    display: 'block'
-                });
-                this.mask.animate({
-                    scale: 0
-                });
-                this.get('element').animate({
-                    scale: 0
-                });
-            }
-        });
-        var uiConfirm2 = new scaleConfirm({
+        var uiConfirm2 = new Confirm({
                 element: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></div>',
                 message: 'handy confirm 演示'
             });
@@ -194,9 +166,9 @@
 
         // 当设备方向发生变化时，更新 confirm 的布局
         window.addEventListener('resize',function (){
-            confirm.sync();
-            uiConfirm.sync();
-            uiConfirm2.sync();
+            confirm.set('align',confirm.get('align'));
+            uiConfirm.set('align',confirm.get('align'));
+            uiConfirm2.set('align',confirm.get('align'));
         },false);
     });
 </script>
