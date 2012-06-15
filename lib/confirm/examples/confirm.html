@@ -104,6 +104,7 @@
         // 自定义 UI 的 confirm
         var uiConfirm = new Confirm({
             element: '#J-confirm',
+            contentElement: null,
             showEffect: {
                 type: 'none'
             },
@@ -152,7 +153,7 @@
 
         // 带有动画效果的 confirm
         var uiConfirm2 = new Confirm({
-                element: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></div>',
+                element: '<div style="background:#fff;padding:40px;"><a href="#" data-confirm-role="trigger" data-confirm-action="confirm">确定</a><a href="#" data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
                 message: 'handy confirm 演示'
             });
         uiConfirm2.render();

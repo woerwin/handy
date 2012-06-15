@@ -1,4 +1,4 @@
-define(function(require, exports, module) {
+define("#dialog/0.9.0/baseDialog-debug", ["$","overlay","mask"], function(require, exports, module) {
 
     var $ = require('$'),
         Overlay = require('overlay'),
