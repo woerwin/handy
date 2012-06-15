@@ -1,7 +1,7 @@
 #Confirm
 提供移动设备浏览器端 Confirm [模态对话框](http://zh.wikipedia.org/wiki/%E5%AF%B9%E8%AF%9D%E6%A1%86)
 
-在阅读 `Confirm` 之前建议您先阅读 [overlay](http://github.com/alipay/handy/tree/master/lib/overlay)
+在阅读 `Confirm` 之前建议您先阅读 [handy overlay](overlay)
 
 ##模块依赖
 - [overlay](http://github.com/alipay/handy/tree/master/lib/overlay)
