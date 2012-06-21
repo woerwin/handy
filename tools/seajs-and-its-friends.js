@@ -24,7 +24,7 @@ seajs.config({
         'events': 'events/0.9.1/events',                     // 100%
         'class': 'class/0.9.2/class',                        // 100%
         'base': 'base/0.9.15/base',                          // 90%  完善阶段
-        'widget': 'widget/0.9.15/widget',                    // 90%  完善阶段
+        'widget': 'widget/0.9.15/widget-debug',                    // 90%  完善阶段
         'widget-templatable': 'widget/0.9.15/templatable',   // 90%  完善阶段
 
         '$': 'zepto/1.0.0/zepto',
