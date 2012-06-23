@@ -35,7 +35,13 @@ seajs.config({
         'android-shim': handy + 'android-shim/0.9.0/android-shim',
         'mask': handy + 'overlay/0.9.1/mask',
         'baseDialog': handy + 'dialog/0.9.0/baseDialog',
-        'animDialog': handy + 'dialog/0.9.0/animDialog'
+        'animDialog': handy + 'dialog/0.9.0/animDialog',
+
+        'switchable': handy + 'switchable/0.9.5/switchable',         // 90%
+        'tabs': handy + 'switchable/0.9.5/tabs',                     // 90%
+        'slide': handy + 'switchable/0.9.5/slide',                   // 90%
+        'accordion': handy + 'switchable/0.9.5/accordion',           // 90%
+        'carousel': handy + 'switchable/0.9.5/carousel'
 
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],
