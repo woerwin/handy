@@ -1,7 +1,7 @@
 // Storage
 // =======
 // 提供一个本地数据存储机制。
-define("#storage/0.9.0/storage", ["events"], function(require, exports, module) {
+define("#storage/0.9.0/storage-debug", ["events"], function(require, exports, module) {
     var Events = require('events'),
         Storage = exports,
         keys = [],
