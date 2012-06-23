@@ -1,0 +1,1 @@
+define("#switchable/0.9.5/accordion",["./switchable"],function(a,b,c){var d=a("./switchable"),e=d.extend({attrs:{multiple:!1}});c.exports=e});
