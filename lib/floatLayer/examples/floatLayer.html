@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>floatLayer - handy</title>
+    <style type="text/css">
+        body{
+            padding:0;
+            margin:0;
+        }
+        .box {
+            width: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        caption {
+            text-align: left;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        table {
+            margin: 10px 0;
+        }
+
+        table td:first-child {
+            width: 100px;
+        }
+        .des{
+            background:#F0F1F8;
+            border:1px solid #D4D8EB;
+            padding:10px;
+            line-height:22px;
+        }
+        pre,code{
+            padding:10px;
+            background:#FCFBFA;
+            border:1px solid #EFEEED;
+            border-left-width:5px;
+        }
+        header{
+            height:40px;
+            background:rgba(0,0,0,.5);
+            color:#fff;
+            text-align:center;
+            line-height:40px;
+            font-size:20px;
+        }
+        footer{
+            height:40px;
+            background:rgba(100,0,30,.5);
+            color:#fff;
+            text-align:center;
+            line-height:40px;
+            font-size:20px;
+        }
+    </style>
+    <script src="../../../tools/seajs-and-its-friends.js"></script>
+</head>
+<body>
+<header>
+    Arale
+</header>
+开源 = 兴趣 + 坚持 + 时机 + 成就感，其中最重要的是昨天 @淘宝正明 强调的坚持。这公式，好像是万能的。蘑菇街 @岳旭强 在 QCon 上提到的成长四要素，也是这四点。 （2012.04.28）
+开源的目的，是分享。将自己好的点子分享出去，将他人好的建议吸纳进来。开源不是自我展现，也不是企业形象。开源是通过彼此的奉献，把事情做得更好。 （2012.04.28）
+预告：支付宝的前端基础类库 Arale 正在基于 SeaJS 和 jQuery 等社区全新构建 2.0 版本。这次将采取一条大胆、开放的路线：在刚开始做时，就开源开放出来，采取设计和文档先行，社区反馈与组件开发共进的方式来做。正式开发下周开始，预计第一期完成 6 月下旬。这种模式，你有兴趣参与不？
+<br />
+Arale 2.0 是支付宝公司的新一代前端基础类库。这份文档将阐述我们为什么要做 Arale 2.0, 及其总体设计思路和未来发展路线。
+
+
+## 支付万变，托付不变
+
+支付宝是一家互联网金融服务公司。对支付宝来说，“互联网”的特点是快、丰富，是支付的形式非常多样化，从 PC 端到移动端，从缴水电煤到航旅服务，与钱打交道的各种事儿在支付宝上几乎都有。“金融”的特点则是稳、安全，是用户对我们的信任。安全、稳定已经成为支付宝的立足之本。
+
+这就是支付宝前端面对的业务场景。“支付万变”要求我们能高效开发，能适应各种平台（PC, Pad, Phone 等），还要能适应各种复杂度（从简单的营销页面到极其复杂的商家服务系统等等）。“托付不变”则要求我们的代码质量要有体系化保障，上线后可有效监控，遇到问题时能快速修复，要小心不能引发任何线上故障。这两大要求碰到一块儿，对还处于童年期的前端来说，是一个不小的挑战。
+
+
+## 技术目标
+
+面临挑战，支付宝前端开发部在整个技术部的规划下，提出了前端平台化的解决思路。在前端平台的三代架构规划里，构建一套成熟的前端基础技术体系是重点任务之一。在前端基础技术体系里，Arale 2.0 承担了前端基础类库的重要角色。我们希望能在未来 2-3 年内，通过前端平台的建设，达成“支付万变、托付不变”的技术目标：
+
+- **适应性**。能适应多平台下的开发需求，能适应业务系统的各种复杂度。
+- **定制性**。能对用户进行精确分群，更好的服务用户。
+- **高效**。交付迅速，快速验证，高效改进。
+- **稳定**。保证线上 0 故障。
+
+这四大目标，是整个前端平台的技术目标。对 Arale 2.0，可分解为：
+
+1. **丰富性**。组件要多，要应有尽有。
+1. **多平台**。能与移动基础类库打通，实现技术体系共享、部分组件复用。
+1. **体系化**。编码规范、单元测试、打包部署、线上监控、应急策略等等都需要考虑。
+1. **向后走**。促进研发模式的变革，让更多前端开发工作能由后台开发工程师来承担，彻底解决前端资源瓶颈问题。
+
+<p>如何来实现这些目标呢<span>？</span></p>
+
+
+## 解决思路
+
+为了满足丰富性，我们的想法是通过**开放**来达成。在前端现有的社区里，jQuery 社区、CommonJS 社区 和 NodeJS 社区目前无疑是最活跃最富有生命力的。如果能通过一套有效的机制，将这几大社区的精品模块汇集起来，那么立刻就会拥有很多不错的组件。**开放开源，海纳百川**，这是我们的首要思路。
+
+移动端开发欣欣向荣。跨平台的梦，曾是多少语言梦寐以求的追求。得益于各种浏览器、各类运行环境对 JavaScript 的强力支持，我们终于可以在跨平台上做出一番风采了。对于跨平台，解决思路是：**复用能复用的，定制可定制的**。比如 Overlay 等组件，会要求在实现时，依赖的 DOM 操作方法必须是 jQuery 和 Zepto 的交集部分。这样 Overlay 开发出来后，就可同时适用于 PC 端和移动端。
+
+体系化的达成，解决之道是让前端基础技术体系与前端监控系统、展现研发平台等前端基础设施打通。对 Arale 2.0 来说，则是 SPM (SeaJS Package Manager) 项目。SPM 将聚焦于编码之外的事情，比如依赖分析、打包压缩、部署上线等。这样，代码上线后，我们心中才能安然有数。
+
+“向后走”是一个长远目标。前端不能当成资源用，否则我们永远会是瓶颈。公司希望能让前后端更加融合，很多前端开发的工作，特别是展现层业务逻辑的开发，可以交由后台工程师来搞定。只有如此，前端也才能发挥出更大价值：回归体验提升。在 Arale 2.0 里，“向后走”将体现在 UI 组件的设计上，我们会尽可能的让 UI 组件的设计，能满足“向后走”的研发模式。
+
+
+## 类库风格
+
+在具体开发时，我们肯定会遇到争论、纠结。下面是我们希望 Arale 2.0 能达成的整体类库风格：
+
+1. **开放：开源开放，海纳百川。**开源开放的目的是分享，更是引流，希望能利用社区的力量把事情做得更好。
+1. **简单：如无必要，勿增实体。**保持简单，追求做一件事情只有一种方法。
+1. **易用：一目了然，容易学习。**无论是 API 还是文档，都希望能具有很强的可读性、自学习性。
+
+还有两条适合内部构建组件时考虑：
+
+1. **合理抽象，最佳实践。**组件要丰富，也要合理抽象，追求最佳实践。
+1. **适度灵活，适量重复。**不过度设计，只预留必要的可扩展接口。不追求代码的零重复，更追求组件的合理解耦。
+
+
+## 支付宝前端基础技术体系图
+
+![支付宝前端基础技术体系图](/alipay/arale/blob/master/docs/assets/arale-ecosystem.png?raw=true)
+
+Arale 2.0 有广义和狭义之分。广义指上图中的整套解决方案；狭义指支付宝前端基础类库，这是我们目前正在做的。
+<footer style="position:absolute;bottom:0;left:0;width:100%;">
+    Handy
+</footer>
+<script>
+    seajs.use(['../src/floatLayer','$'], function (FloatLayer,$) {
+        new FloatLayer({
+            element: 'header'
+        });
+        new FloatLayer({
+            element: 'footer',
+            duration: 10
+        });
+    });
+</script>
+</body>
+</html>
