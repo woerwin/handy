@@ -1,6 +1,7 @@
 {
     "version": "0.9.2",
     "dist": {
-        "iscroll.js": "default"
+        "iscroll.js": "default",
+        "4.1.9/iscroll.js": "default"
     }
 }

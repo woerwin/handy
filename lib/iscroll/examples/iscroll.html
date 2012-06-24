@@ -26,7 +26,6 @@
         h3 {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px dashed #333;
         }
 
         pre {
@@ -41,8 +40,9 @@
         }
 
         #example1 {
-            width: 400px;
+            width: 300px;
             overflow: hidden;
+            margin: 0 auto;
         }
 
         .module_dialog_help_iscrollContainer {
@@ -67,6 +67,7 @@
             z-index: 1;
             overflow: hidden;
             margin-top: 10px;
+            margin: 0 auto;
 
         }
 
@@ -109,15 +110,6 @@
     <script src="../../../tools/seajs-and-its-friends.js"></script>
 </head>
 <body>
-<section>
-    演示地址：
-    <img valign="middle"
-         src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chld=L|0&chl=http://pdued.alipay.ali.com/jf/handy/lib/iscroll/examples/iscroll.html"
-         alt="QR code"
-         widhtHeight="100"
-         widhtHeight="100"/>
-
-</section>
 <h3>对于普通的滚动</h3>
 <section>
     <h4>演示界面：</h4>
@@ -176,17 +168,8 @@
             ele = null;
         }
     </script>
-
-
 </section>
-<section>
-    <h4>相关代码：</h4>
-<pre>
-seajs.use('../src/iscroll', function (iScroll) {
-    var example1 = new iScroll({element:".module_dialog_help_scroller"});
-});
-</pre>
-</section>
+
 <h3>逐页拖动滚动</h3>
 <section>
     <h4>演示界面:(左右进行拖动)</h4>
@@ -229,22 +212,6 @@ seajs.use('../src/iscroll', function (iScroll) {
             });
         });
     </script>
-</section>
-<section>
-    <h4>相关代码：</h4>
-<pre>
-var example2;
-seajs.use('../src/iscroll', function (iScroll) {
-    example2 = new iScroll({
-        element:"#thelist",
-        options:{
-            snap:true,
-            momentum:false,
-            hScrollbar:false
-        }
-    });
-});
-</pre>
 </section>
 </body>
 </html>
