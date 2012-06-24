@@ -15,6 +15,7 @@
             width: 192px;
             font-size: 14px;
             height: 145px;
+            margin:0 auto;
         }
 
         a {
@@ -59,21 +60,13 @@
         <p>拍摄人：***</p>
     </div>
 </div>
-<div style="margin-top: 5px;"><a href="javascript:flip.flip('back');">翻转到后面</a></div>
-<div style="margin-top: 5px;"><a href="javascript:flip.flip('front');">翻转到前面</a></div>
+<div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('back');">翻转到后面</a></div>
+<div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('front');">翻转到前面</a></div>
 <script type="text/javascript">
     var flip;
     seajs.use('../src/flip', function (Flip) {
         flip = new Flip({element:".flip_container"});
     });
 </script>
-<h3>演示地址</h3>
-<section>
-    <img valign="middle"
-        src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chld=L|0&chl=http://pdued.alipay.ali.com/jf/handy/lib/flip/examples/flip.html"
-        alt="QR code"
-        widhtHeight="100"
-        widhtHeight="100"/>
-</section>
 </body>
 </html>

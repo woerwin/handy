@@ -1,13 +1,12 @@
 // flip
 // =======
 // 轩与@http://weibo.com/semious
-define("#flip/0.9.5/flip", ["base","$","events"], function (require, exports, module) {
-    var Base = require('base'),
+define("#flip/0.9.5/flip-debug", ["widget","$"], function (require, exports, module) {
+    var Widget = require('widget'),
         $ = require('$'),
-        Events = require('events'),
         Flip;
 
-    module.exports = Flip = Base.extend({
+    module.exports = Flip = Widget.extend({
         attrs:{
             element:null,
             direction:"ltr", // 转动方向 默认从左往右 沿y 轴逆时针旋转,
@@ -33,26 +32,15 @@ define("#flip/0.9.5/flip", ["base","$","events"], function (require, exports, mo
             },
             triggers:[]
         },
-        initialize:function (attrs) {
-            Flip.superclass.initialize.call(this, attrs);
-
-            // 解析DOM元素
-            this.parseElement();
-            // 加载事件代理
-            this.delegateEvents();
-            // 组件设置
-            this.setup();
-        },
-
         // 解析DOM元素
         parseElement:function () {
-            this.srcNode = $(this.get("element")).get(0);
+            Flip.superclass.parseElement.call(this);
 
             // 将 html 用户定义属性进行解析为相应的属性/对象
-            this.set("frontNode", this.srcNode.querySelector('*[data-flip-role=frontFace]') || null);
-            this.set("backNode", this.srcNode.querySelector('*[data-flip-role=backFace]') || null);
+            this.set("frontNode", this.element.find('*[data-flip-role=frontFace]') || null);
+            this.set("backNode", this.element.find('*[data-flip-role=backFace]') || null);
 
-            var triggerNodes = this.srcNode.querySelectorAll('*[data-flip-role=trigger]');
+            var triggerNodes = this.element.find('*[data-flip-role=trigger]');
 
             for (i = 0; i < triggerNodes.length; i++) {
                 var t = this.get("triggers");
@@ -72,11 +60,13 @@ define("#flip/0.9.5/flip", ["base","$","events"], function (require, exports, mo
 
         // 初始化相关事件
         delegateEvents:function () {
+            Flip.superclass.delegateEvents.call(this);
+
             var i, action,
                 that = this;
 
             for (i in this.get("triggers")) {
-                action = this.get("triggers")[i].dataset.flipAction || "flipBack";
+                action = $(this.get("triggers")[i]).data('flipAction') || "flipBack";
                 switch (action) {
                     case "flipFront":
                         $(this.get("triggers")[i]).bind("click.flip", function (e) {
@@ -93,13 +83,12 @@ define("#flip/0.9.5/flip", ["base","$","events"], function (require, exports, mo
                         break;
                 }
             }
-            Events.mixTo(this);
         },
 
         //Flip 类的方法
         flip:function (face) {
             // 如果动画正在进行中或者没有源节点或者已经是该 face ，则不做任何处理
-            if (this._animating || !this.srcNode || face == this.face) {
+            if (this._animating || !this.element || face == this.face) {
                 return;
             }
             this.face = face || "back";
@@ -173,7 +162,7 @@ define("#flip/0.9.5/flip", ["base","$","events"], function (require, exports, mo
         // 初始化关键元素的 css 样式
         _initCSS:function () {
             //add CSS prefilp style
-            $(this.srcNode).css(this.get("containerCSS"));
+            this.element.css(this.get("containerCSS"));
             $(this.viewport).css(this.get("flipCSS"));
             $(this.get("frontNode")).css(this.get("faceCSS"));
             $(this.get("backNode")).css(this.get("faceCSS"));
@@ -194,11 +183,4 @@ define("#flip/0.9.5/flip", ["base","$","events"], function (require, exports, mo
             $(this.viewport).unbind("webkitTransitionEnd");
         }
     });
-
-    function reportError(mes, type) {
-        if (!type) {
-            type = 'log';
-        }
-        console[type](mes);
-    }
 });
