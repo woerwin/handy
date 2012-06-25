@@ -22,7 +22,8 @@
                 1、您可以<a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-page-box-nextPage">点击此</a>查看 PageTransition 组件所需的 HTML 结构<br />
                 2、您可以<a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-page-box-nextPage2">查看 pageTransition 组件的基本配置</a><br />
                 3、<a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-subPage-box">PageTransition 嵌套</a>
-                建议您使用移动设备内置浏览器访问这个页面
+                建议您使用移动设备内置浏览器访问这个页面<br />
+                <a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="forward" data-pageTransition-forward="#J-page-box-nextPage">下一页</a>
             </article>
         </section>
     </div>
@@ -53,7 +54,7 @@
 <pre>
 实例化配置参数：
 {
-  srcNode:
+  element:
 }
 pageTransition 还需要trigger及page参数，这些参数是通过 data-pageTransition-attribute 定义在 html 标签上的
 trigger:
@@ -96,6 +97,13 @@ page:
 </p>
 
 <a href="javascript:void(0)" id="J-getPage" style="text-align:center;display:block;padding:10px;">获取 PageTransition 当前页面</a>
+<a href="javascript:void(0)" id="J-backPage" style="text-align:center;display:block;padding:10px;">返回 PageTransition 前一页</a>
+
+<nav id="J-bottom-btns">
+    <a href="javascript:void(0)" data-pageTransition-role="1">查看 PageTransition 组件所需的 HTML 结构</a>
+    <a href="javascript:void(0)" data-pageTransition-role="2">查看 pageTransition 组件的基本配置</a>
+    <a href="javascript:void(0)" data-pageTransition-role="3">PageTransition 嵌套</a>
+</nav>
 </body>
 <script src="../../../tools/seajs-and-its-friends.js"></script>
 <script src="../../../tools/jasmine-runner.js"></script>
