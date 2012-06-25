@@ -121,7 +121,7 @@ define(function (require){
 });
 ```
 ###back `pageTransition.back()`
-返回前一页
+返回至一页
 
 ###sync `pageTransition.sync()`
 更新 UI
