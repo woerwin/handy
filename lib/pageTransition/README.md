@@ -120,6 +120,8 @@ define(function (require){
   },false);
 });
 ```
+###back `pageTransition.back()`
+返回前一页
 
 ###sync `pageTransition.sync()`
 更新 UI
