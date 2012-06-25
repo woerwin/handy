@@ -41,7 +41,9 @@ seajs.config({
         'tabs': handy + 'switchable/0.9.5/tabs',                     // 90%
         'slide': handy + 'switchable/0.9.5/slide',                   // 90%
         'accordion': handy + 'switchable/0.9.5/accordion',           // 90%
-        'carousel': handy + 'switchable/0.9.5/carousel'
+        'carousel': handy + 'switchable/0.9.5/carousel',
+
+        'storage': handy + 'storage/0.9.0/storage'
 
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text'],

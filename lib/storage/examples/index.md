@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <title>Storage - handy</title>
-    <style type="text/css">
+<style type="text/css">
         .box {
             width: auto;
             margin: 0;
@@ -42,11 +32,7 @@
             border:1px solid #EFEEED;
             border-left-width:5px;
         }
-    </style>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
-<div class="box">
+</style>
         <h1>Example：Storage</h1>
         Storage 提供移动设备浏览器端数据存储解决方案。<br />
         建议您在两个窗口或 两个 Tab 打开这个 Demo 页面<br />
@@ -63,18 +49,17 @@
             </tr>
         </table>
         <a href="javascript:void(0)" id="J-sava1">保存</a><br/>
+        <a href="javascript:void(0)" id="J-cleanAll">清除所有数据</a><br/>
+        <a href="javascript:void(0)" id="J-getKeys">获取已存储所有的 key</a>
         <p id="J-output1"></p>
 
-        <a href="javascript:void(0)" id="J-cleanAll">清除所有数据</a><br/>
 
-    <a href="javascript:void(0)" id="J-getKeys">获取已存储所有的 key</a>
-</div>
-<script>
+```javascript
     var getDom = function (dom) {
         return document.querySelector(dom);
     };
 
-    seajs.use(['../src/storage','$'], function (Storage,$) {
+    seajs.use(['storage','$'], function (Storage,$) {
         if (!Storage.available) {
             return alert('您的浏览器不支持数据存储。');
         }
@@ -162,6 +147,4 @@
             });
         }
     });
-</script>
-</body>
-</html>
+```

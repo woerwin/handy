@@ -2,17 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
         <title>storage</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
         <script type="text/javascript">
             var debug = "False";
         </script>
         
         
-        <link rel="stylesheet" href="/docs/assets/base.css" />
-        <link rel="stylesheet" href="/docs/assets/style.css" />
-        <link rel="stylesheet" href="/docs/assets/pygments.css" />
-        <script src="/tools/seajs-and-its-friends.js"></script>
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
         
         <!--[if lt IE 9]>
         <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
@@ -20,14 +24,14 @@
     </head>
     <body>
         <header id="header">
-            <h1 id="brand"><a href="/">Arale</a></h1>
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
             <nav id="nav" role="navigation">
-                <a href="/docs/storage/">Storage</a>
+                <a href="/handy/docs/storage/">Storage</a>
                 
-                <a href="/docs/storage/examples/">Examples</a>
+                <a href="/handy/docs/storage/examples/">Examples</a>
                 
                 
-                <a id="nav-test" href="/lib/storage/tests/runner.html">Test</a>
+                <a id="nav-test" href="/handy/lib/storage/tests/runner.html">Test</a>
                 
             </nav>
         </header>
@@ -187,7 +191,7 @@
         </div>
         <hr class="end" />
         <script type="text/javascript">
-            seajs.use('jquery', function($) {
+            seajs.use('$', function($) {
                 $('#nav-test').click(function() {
                     var href = $(this).attr('href');
                     var iframe = '<div class="container"><iframe src="' +
