@@ -167,6 +167,7 @@ page:
 </p>
 
 <a href="javascript:void(0)" id="J-getPage" style="text-align:center;display:block;padding:10px;">获取 PageTransition 当前页面</a>
+<a href="javascript:void(0)" id="J-backPage" style="text-align:center;display:block;padding:10px;">返回 PageTransition 前一页</a>
 
 <nav id="J-bottom-btns">
     <a href="javascript:void(0)" data-pageTransition-role="1">查看 PageTransition 组件所需的 HTML 结构</a>
@@ -191,6 +192,9 @@ page:
 
         getDom('#J-destroy').addEventListener('click',function (){
             pageTransition.destroy();
+        },false);
+        getDom('#J-backPage').addEventListener('click',function (){
+            pageTransition.back();
         },false);
         getDom('#J-subPage-destroy').addEventListener('click',function (){
             subPage.destroy();
@@ -218,7 +222,7 @@ page:
         });
         pageTransition.on('transitionEnd',function (type,page,o){
             // console.log(type,page,o)
-            if(page === document.querySelector('#J-subPage-box')){
+            if(page[0] === document.querySelector('#J-subPage-box')){
                 subPage = subPage || new PageTransition({
                     element: '#J-subPage'
                 })
