@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>storage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/docs/assets/base.css" />
+        <link rel="stylesheet" href="/docs/assets/style.css" />
+        <link rel="stylesheet" href="/docs/assets/pygments.css" />
+        <script src="/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/">Arale</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/docs/storage/">Storage</a>
+                
+                <a href="/docs/storage/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/lib/storage/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>Storage</h1>
+<p>提供移动设备浏览器端数据存储解决方案</p>
+
+<h2>模块依赖</h2>
+
+<ul>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/events">event</a></li>
+</ul>
+
+<h2>平台兼容</h2>
+
+<ul>
+<li>UC 浏览器 7.9+</li>
+</ul>
+<p>  部分 UC U3 内核的浏览器对 <code>Storage</code> 事件支持存在怪异(有时不能触发 change event)</p>
+
+<h2>使用说明</h2>
+<p><code>Storage</code> 是一个单例，可直接使用</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>available <code>Storage.available</code></h3>
+<p><code>available</code> 返回 Boolean，如果浏览器支持 localStorage 或 sessionStorage 返回 true，否则返回 false。</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">Storage</span><span class="p">.</span><span class="nx">available</span><span class="p">){</span>
+      <span class="c1">//...</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="c1">//...</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>set <code>Storage.set(key,value)</code></h3>
+<p>存储一条数据</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+<p>上面的代码在本地存储一条 key 为 name，value 为 handy 的数据，</p>
+<p><code>Storage</code> 当前只允许存储 String 类型的数据。</p>
+<p>当 value 参数为 null 时，自动调用 <code>remove</code> 方法</p>
+
+<h3>get <code>Storage.get(key)</code></h3>
+<p>通过指定的 <code>key</code> 获取一条 String 类型的数据</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">Storage</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">// handy</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>keys <code>Storage.keys()</code></h3>
+<p>返回已存储的所有 key, Array 类型</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span><span class="s1">&#39;0.9.0&#39;</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">Storage</span><span class="p">.</span><span class="nx">keys</span><span class="p">();</span><span class="c1">//[&#39;name&#39;,&#39;version&#39;]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>remove <code>Storage.remove(key)</code></h3>
+<p>通过指定的 key 删除对应的数据</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span><span class="s1">&#39;0.9.0&#39;</span><span class="p">);</span>
+
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">keys</span><span class="p">();</span><span class="c1">//[&#39;name&#39;,&#39;version&#39;];</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">keys</span><span class="p">();</span><span class="c1">//[&#39;name&#39;];</span>
+<span class="p">});</span>
+</pre></div>
+<p><code>remove</code> 方法调用时会触发 <a href="#removeEvent"><code>Storage.on(remove:key)</code></a> 事件</p>
+
+<h3>clear <code>Storage.clear()</code></h3>
+<p>清除已存储的所有数据</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span><span class="s1">&#39;0.9.0&#39;</span><span class="p">);</span>
+
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">keys</span><span class="p">();</span><span class="c1">//[&#39;name&#39;,&#39;version&#39;];</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">keys</span><span class="p">();</span><span class="c1">//[]</span>
+<span class="p">});</span>
+</pre></div>
+<p>值得注意 <code>clear</code> 只清除通过 <code>Storage</code> 存储的数据，并不是清除 <code>localStorage</code> 和 <code>sessionStorage</code> 对象中的所有数据
+<code>clear</code> 方法调用时会触发 <a href="#clearEvent"><code>Storage.on(&#39;clear&#39;)</code></a> 事件</p>
+
+<h3><code>Storage</code> 混入了 <a href="http://github.com/alipay/arale/tree/master/lib/events"><code>event</code></a> 模块，因此它也有一套自定义事件机制。</h3>
+
+<h3>监听某条数据被修改 <code>Storage.on(change:key,callback)</code></h3>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change:name&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;有人修改了&#39;</span><span class="o">+</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="o">+</span><span class="s1">&#39;之前的数据是：&#39;</span><span class="o">+</span><span class="nx">e</span><span class="p">.</span><span class="nx">oldValue</span><span class="p">);</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="o">+</span><span class="s1">&#39;修改后的数据是：&#39;</span><span class="o">+</span><span class="nx">e</span><span class="p">.</span><span class="nx">newValue</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+<p>如果要测试 <code>Storage</code> 的回调事件，你需要打开两个浏览器窗口 (A,B)，在 A 窗口保存一条数据，在 B 窗口修改 A 窗口保存的数据(请注意一定要修改同名的 key )
+<a name="removeEvent"></a></p>
+
+<h3>监听某条数据被删除 <code>Storage.on(remove:key,callback)</code></h3>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;remove:name&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;有人修改了&#39;</span><span class="o">+</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+<p><a name="clearEvent"></a></p>
+
+<h3>监听 <code>Storage</code> 保存的所有数据被清除 <code>Storage.on(&#39;clear&#39;,callback)</code></h3>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">requirze</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">Storage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;handy&#39;</span><span class="p">);</span>
+    <span class="nx">Storage</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;您通过Storage保存的数据被全部清除。&#39;</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>测试用例</h2>
+
+<ul>
+<li><a href="../lib/storage/tests/runner.html">runner.html</a></li>
+</ul>
+
+<h2>演示地址</h2>
+
+<ul>
+<li><a href="../lib/storage/examples/storage.html">Demo</a></li>
+</ul>
+
+<h2>反馈意见</h2>
+<p>欢迎创建 <a href="http://github.com/alipay/handy/issues/new">GitHub Issue</a> 来提交反馈</p>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('jquery', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>
