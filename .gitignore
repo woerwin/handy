@@ -16,15 +16,5 @@ Thumbs.db
 tools/gjslint/build/
 tools/gjslint/dist/
 tools/gjslint/closure_linter.egg-info
-lib/storage/build/
-lib/pageTransition/build/
-lib/scrollView/build/
-lib/dialog/build/
-lib/switchable/build/
-lib/overlay/build/
-lib/position/build/
-lib/flip/build/
-lib/floatLayer/build/
-lib/android-shim/build/
-lib/parser/build/
+build
 
