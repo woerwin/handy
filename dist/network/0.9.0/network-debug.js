@@ -1,7 +1,7 @@
-// Networks
+// Network
 // ========
 // 提供移动平台网络在线，离线的监听
-define("#network/0.9.0/network", [], function(require, exports, module) {
+define("#network/0.9.0/network-debug", [], function(require, exports, module) {
     var Network = exports,
         loopFn = null,
         onlineCallbacks = [],

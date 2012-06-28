@@ -1,6 +1,6 @@
-define("#android-shim/0.9.0/android-shim-debug", ["$","position"], function(require, exports, module) {
-    var $ = require('$');
-    var Position = require('position');
+define("#android-shim/0.9.0/android-shim-debug", ["#zepto/1.0.0/zepto-debug", "#position/0.9.0/position-debug"], function(require, exports, module) {
+    var $ = require("#zepto/1.0.0/zepto-debug");
+    var Position = require("#position/0.9.0/position-debug");
 
 
     // target 是需要添加垫片的目标元素，可以传 `DOM Element` 或 `Selector`
@@ -65,7 +65,7 @@ define("#android-shim/0.9.0/android-shim-debug", ["$","position"], function(requ
 
     // Helpers
     function createShim() {
-        return $('<div>').css({
+        return $('<div data-role="shim">').css({
             display: 'none',
             border: 'none',
             background: 'rgba(255,255,255,0.01)',
