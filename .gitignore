@@ -26,4 +26,5 @@ lib/position/build/
 lib/flip/build/
 lib/floatLayer/build/
 lib/android-shim/build/
+lib/parser/build/
 
