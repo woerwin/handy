@@ -169,31 +169,35 @@ page:
 <div id="J-performance-show"></div>
 
 <script>
-    seajs.use(['../src/parser','$'],function (parser,$){
-        
+    seajs.use(['parser','$'],function (parser,$){
+        var completed = function (){
+            var time = HandyParserData.time,
+                    html = '';
 
-        var time = HandyParserData.time,
-            html = '';
-            
-        html += '<p>解析 DOM 的时间：'+time.parseDOM/1000+'ms</p>';
-        html += '<p>分析数据的时间：'+time.analyzeData/1000+'ms</p>';
-        html += '<p>解析器总共消耗的时间：'+time.parse/1000+'ms</p>';
-        
-        document.querySelector('#J-performance-show').innerHTML = html;
+            html += '<p>解析 DOM 的时间：'+time.parseDOM/1000+'ms</p>';
+            html += '<p>分析数据的时间：'+time.analyzeData/1000+'ms</p>';
+            html += '<p>解析器总共消耗的时间：'+time.parse/1000+'ms</p>';
 
-        document.querySelector('#J-showOverlay').addEventListener('click',function (){
-            HandyParserData.overlay_one.show();
-        },false);
+            document.querySelector('#J-performance-show').innerHTML = html;
 
-        HandyParserData.overlay_two.after('show',function (o){
-            o.element.css({
-                left: ($(window).width() - o.element.offset().width) / 2,
-                top:  ($(window).height() - o.element.offset().height) / 2 + window.scrollY
+            document.querySelector('#J-showOverlay').addEventListener('click',function (){
+                HandyParserData.overlay_one.show();
+            },false);
+
+            HandyParserData.overlay_two.after('show',function (o){
+                o.element.css({
+                    left: ($(window).width() - o.element.offset().width) / 2,
+                    top:  ($(window).height() - o.element.offset().height) / 2 + window.scrollY
+                });
             });
+            document.querySelector('#J-showOverlay2').addEventListener('click',function (){
+                HandyParserData.overlay_two.show();
+            },false);
+        };
+        HandyParser.on('completed',function (){
+            completed();
         });
-        document.querySelector('#J-showOverlay2').addEventListener('click',function (){
-            HandyParserData.overlay_two.show();
-        },false);
+        HandyParser.start();
     });
 </script>
 </body>

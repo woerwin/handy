@@ -45,6 +45,9 @@ seajs.config({
         'slide': 'switchable/0.9.5/slide',                   // 90%
         'accordion': 'switchable/0.9.5/accordion',           // 90%
         'carousel': 'switchable/0.9.5/carousel',             // 90%
+        'flip': 'flip/0.9.5/flip',             // 90%
+        'parser': 'parser/0.9.0/parser',
+        'pageTransition': 'pageTransition/0.9.1/pageTransition'
 
 
         // Others

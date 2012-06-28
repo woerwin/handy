@@ -47,6 +47,7 @@ define("#position/0.9.0/position-debug", ["#zepto/1.0.0/zepto-debug"], function(
             pinObject.x - parentOffset.left;
 
         // 定位目标元素
+        console.log(baseObject.element)
         pinElement.css({ left: left, top: top });
     };
 

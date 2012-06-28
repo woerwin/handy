@@ -64,7 +64,7 @@
 <div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('front');">翻转到前面</a></div>
 <script type="text/javascript">
     var flip;
-    seajs.use('../src/flip', function (Flip) {
+    seajs.use('flip', function (Flip) {
         flip = new Flip({element:".flip_container"});
     });
 </script>

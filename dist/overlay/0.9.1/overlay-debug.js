@@ -176,7 +176,11 @@ define("#overlay/0.9.1/overlay-debug", ["#zepto/1.0.0/zepto-debug", "#position/0
         },
 
         _onRenderVisible: function(val) {
-            this.element[val ? 'show' : 'hide']();
+            if(val){
+                this.element.css('display','block');
+            }else{
+                this.element.css('display','none');
+            }
         }
 
     });
@@ -187,9 +191,7 @@ define("#overlay/0.9.1/overlay-debug", ["#zepto/1.0.0/zepto-debug", "#position/0
     // Helpers
     // -------
     function contains(a, b){
-        return a.contains ?
-            a != b && a.contains(b) :
-            !!(a.compareDocumentPosition(b) & 16);
+        return !!(a.compareDocumentPosition(b) & 16);
     }
     function isInDocument(element) {
         return contains(document.documentElement, element);

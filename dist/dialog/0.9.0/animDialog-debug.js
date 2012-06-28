@@ -267,7 +267,7 @@ define("#dialog/0.9.0/animDialog-debug", ["#zepto/1.0.0/zepto-debug", "#overlay/
                     overflow: 'hidden'
                 },
                 align: {
-                    baseElement: elem[0]
+                    baseXY: [elem[0].offsetLeft,elem[0].offsetTop]
                 }
             });
         }

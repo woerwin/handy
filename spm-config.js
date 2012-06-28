@@ -29,7 +29,7 @@ define({
         'tabs': 'switchable/0.9.5/tabs',
         'accordion': 'switchable/0.9.5/accordion',
         'slide': 'switchable/0.9.5/slide',
-        'carousel': 'switchable/0.9.5/carousel'
+        'carousel': 'switchable/0.9.5/tabs'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text']
 });
