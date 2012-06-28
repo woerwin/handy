@@ -1,7 +1,7 @@
-define(function(require, exports, module) {
+define("#overlay/0.9.1/mask-debug", ["#zepto/1.0.0/zepto-debug", "#overlay/0.9.1/overlay-debug", "#position/0.9.0/position-debug", "#android-shim/0.9.0/android-shim-debug", "#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug"], function(require, exports, module) {
 
-    var $ = require('$'),
-        Overlay = require('./overlay');
+    var $ = require("#zepto/1.0.0/zepto-debug"),
+        Overlay = require("#overlay/0.9.1/overlay-debug");
 
 
     // Mask

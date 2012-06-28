@@ -1,8 +1,8 @@
-define("#dialog/0.9.0/animDialog-debug", ["$","overlay","baseDialog"], function(require, exports, module) {
+define("#dialog/0.9.0/animDialog-debug", ["#zepto/1.0.0/zepto-debug", "#overlay/0.9.1/overlay-debug", "#position/0.9.0/position-debug", "#android-shim/0.9.0/android-shim-debug", "#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug", "#dialog/0.9.0/baseDialog-debug", "#overlay/0.9.1/mask-debug"], function(require, exports, module) {
 
-    var $ = require('$'),
-        Overlay = require('overlay'),
-        BaseDialog = require('baseDialog');
+    var $ = require("#zepto/1.0.0/zepto-debug"),
+        Overlay = require("#overlay/0.9.1/overlay-debug"),
+        BaseDialog = require("#dialog/0.9.0/baseDialog-debug");
 
     // AnimDialog
     // -------

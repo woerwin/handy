@@ -16,3 +16,4 @@ Thumbs.db
 tools/gjslint/build/
 tools/gjslint/dist/
 tools/gjslint/closure_linter.egg-info
+lib/*/build/
