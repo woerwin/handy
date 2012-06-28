@@ -186,7 +186,7 @@ define("#overlay/0.9.1/overlay-debug", ["$","position","android-shim","widget"],
 
     // Helpers
     // -------
-    function contains(a, b){
+    function contains(a, b){    alert(a.compareDocumentPosition)
         return a.contains ?
             a != b && a.contains(b) :
             !!(a.compareDocumentPosition(b) & 16);

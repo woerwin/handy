@@ -7,47 +7,58 @@
     m.define = f(2);
     u = o.createElement('script');
     u.id = d + 'node';
-    u.src = '../../../../arale/dist/seajs/1.1.0/sea.js';
+    u.src = '../../../dist/seajs/1.1.8/sea.js';
     l = o.getElementsByTagName('head')[0];
     l.insertBefore(u, l.firstChild);
 })(window, document, 'seajs');
 
-// and its friends
-(function(){
-var handy = '../../../../handy/dist/';
 
+// and its friends
 seajs.config({
 
     alias: {
-        'jasmine': 'jasmine/1.1.0/jasmine-html',
 
+        // 外来模块
+        '$': 'zepto/1.0.0/zepto-debug',
+        'handlebars': 'handlebars/1.0.0/handlebars',
+        'backbone': 'backbone/0.9.2/backbone',
+        'jasmine': 'jasmine/1.1.0/jasmine-html',
         'events': 'events/0.9.1/events',                     // 100%
         'class': 'class/0.9.2/class',                        // 100%
-        'base': 'base/0.9.15/base',                          // 90%  完善阶段
-        'widget': 'widget/0.9.15/widget-debug',                    // 90%  完善阶段
-        'widget-templatable': 'widget/0.9.15/templatable',   // 90%  完善阶段
+        'base': 'base/0.9.15/base',                          // 95%
+        'widget': 'widget/0.9.16/widget-mobile',                    // 95%
+        'templatable': 'widget/0.9.15/templatable-mobile',          // 95%
+        'daparser': 'widget/0.9.15/daparser-mobile',                // 95%
+        'iscroll': 'iscroll/4.1.9/iscroll',
 
-        '$': 'zepto/1.0.0/zepto',
-        'handlebars': 'handlebars/1.0.0/handlebars',
+        // Utilities
+        'android-shim': 'android-shim/0.9.0/android-shim',      // 95%
+        'position': 'position/0.9.0/position',               // 95%
 
-        'overlay': handy + 'overlay/0.9.1/overlay',
-        'position': handy + 'position/0.9.0/position',
-        'android-shim': handy + 'android-shim/0.9.0/android-shim',
-        'mask': handy + 'overlay/0.9.1/mask',
-        'baseDialog': handy + 'dialog/0.9.0/baseDialog',
-        'animDialog': handy + 'dialog/0.9.0/animDialog',
+        // Widgets
+        'overlay': 'overlay/0.9.1/overlay',                  // 95%
+        'mask': 'overlay/0.9.1/mask',                        // 95%
+        'baseDialog': 'dialog/0.9.0/baseDialog',             // 70%
+        'animDialog': 'dialog/0.9.0/animDialog',             // 70%
+        'switchable': 'switchable/0.9.5/switchable',         // 90%
+        'tabs': 'switchable/0.9.5/tabs',                     // 90%
+        'slide': 'switchable/0.9.5/slide',                   // 90%
+        'accordion': 'switchable/0.9.5/accordion',           // 90%
+        'carousel': 'switchable/0.9.5/carousel',             // 90%
 
-        'switchable': handy + 'switchable/0.9.5/switchable',         // 90%
-        'tabs': handy + 'switchable/0.9.5/tabs',                     // 90%
-        'slide': handy + 'switchable/0.9.5/slide',                   // 90%
-        'accordion': handy + 'switchable/0.9.5/accordion',           // 90%
-        'carousel': handy + 'switchable/0.9.5/carousel',
 
-        'storage': handy + 'storage/0.9.0/storage'
+        // Others
+        /* spm */
+        /* araledoc */
 
+
+        // 二期组件
+        // ua
+        // placeholder
+        // popup
+        // tooltip
+        // 等待详细规划和讨论
     },
-    preload: [this.JSON ? '' : 'json', 'plugin-text'],
-    debug: 2
-});
-})();
 
+    preload: [this.JSON ? '' : 'json', 'seajs/plugin-text']
+});

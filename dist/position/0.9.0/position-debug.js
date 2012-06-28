@@ -1,5 +1,4 @@
-define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
-
+define("#position/0.9.0/position-debug", ["#zepto/1.0.0/zepto-debug"], function(require, exports) {
     // Position
     // --------
     // 定位工具组件，将一个 DOM 节点相对对另一个 DOM 节点进行定位操作。
@@ -7,7 +6,7 @@ define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
 
     var Position = exports,
         VIEWPORT = { _id: 'VIEWPORT', nodeType: 1 },
-        $ = require('$'),
+        $ = require("#zepto/1.0.0/zepto-debug"),
         isPinFixed = false;
 
     // 将目标元素相对于基准元素进行定位
@@ -42,10 +41,10 @@ define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
 
         // 计算目标元素的位置
         var top = baseOffset.top + baseObject.y -
-                pinObject.y - parentOffset.top;
+            pinObject.y - parentOffset.top;
 
         var left = baseOffset.left + baseObject.x -
-                pinObject.x - parentOffset.left;
+            pinObject.x - parentOffset.left;
 
         // 定位目标元素
         pinElement.css({ left: left, top: top });
@@ -83,7 +82,15 @@ define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
             posObject = { element: posObject };
         }
 
-        var element = toElement(posObject.element) || VIEWPORT;
+        var element = null;
+        if(toString.call(posObject.element) === '[object String]'){
+            element = $(posObject.element)[0] ;
+        }else if(toString.call(posObject.element) === '[object Array]'){
+            element = posObject.element[0];
+        }else{
+            element = VIEWPORT;
+        }
+
         if (element.nodeType !== 1) {
             throw new Error('posObject.element is invalid.');
         }
@@ -158,8 +165,8 @@ define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
         // 处理 alias
         if (/\D/.test(x)) {
             x = x.replace(/(?:top|left)/gi, '0%')
-                 .replace(/center/gi, '50%')
-                 .replace(/(?:bottom|right)/gi, '100%');
+                .replace(/center/gi, '50%')
+                .replace(/(?:bottom|right)/gi, '100%');
         }
 
         // 将百分比转为像素值
@@ -209,7 +216,7 @@ define("#position/0.9.0/position-debug", ["$"], function(require, exports) {
         //
         // 以上两种情况直接赋为 0
         var offset = (parent === document.querySelector('body')) ?
-            { left: 0, top: 0 } : $(parent).offset();
+        { left: 0, top: 0 } : $(parent).offset();
 
         // 根据基准元素 offsetParent 的 border 宽度，来修正 offsetParent 的基准位置
         offset.top += numberize($(parent).css('border-top-width'));

@@ -1,6 +1,3 @@
 {
-    "version": "0.9.1",
-    "dist": {
-        "pageTransition.js": "default"
-    }
+    "version": "0.9.1"
 }

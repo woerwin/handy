@@ -1,7 +1,3 @@
 {
-    "version": "0.9.0",
-    "dist": {
-        "baseDialog.js": "default",
-        "animDialog.js": "default"
-    }
+    "version": "0.9.0"
 }
