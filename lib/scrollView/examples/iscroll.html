@@ -154,11 +154,11 @@
     <script type="text/javascript">
         var example1;
         seajs.use('../src/scrollView', function(iScroll) {
-            //example1 = new iScroll({element:".module_dialog_help_scroller"});
+            example1 = new iScroll({element:".module_dialog_help_scroller"});
         });
         function createiScroll() {
             seajs.use('../src/scrollView', function(iScroll) {
-                //example1 = example1 || new iScroll({element:".module_dialog_help_scroller"});
+                example1 = example1 || new iScroll({element:".module_dialog_help_scroller"});
             });
         }
         function appendChildNode() {
