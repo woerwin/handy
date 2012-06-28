@@ -1,9 +1,9 @@
 // flip
 // =======
 // 轩与@http://weibo.com/semious
-define("#flip/0.9.5/flip-debug", ["widget","$"], function (require, exports, module) {
-    var Widget = require('widget'),
-        $ = require('$'),
+define("#flip/0.9.5/flip-debug", ["#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#zepto/1.0.0/zepto-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug"], function (require, exports, module) {
+    var Widget = require("#widget/0.9.16/widget-mobile-debug"),
+        $ = require("#zepto/1.0.0/zepto-debug"),
         Flip;
 
     module.exports = Flip = Widget.extend({
