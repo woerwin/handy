@@ -79,7 +79,7 @@ define("#widget/0.9.16/daparser-mobile-debug", ["#zepto/0.9.0/zepto-debug"], fun
 
         // ref: https://developer.mozilla.org/en/DOM/element.dataset
         if (element.dataset) {
-            // 转换成普通对象返回
+            // ���换成普通对象返回
             return $.extend({}, element.dataset);
         }
 

@@ -79,7 +79,7 @@ define("#widget/0.9.16/daparser-debug", ["#jquery/1.7.2/jquery-debug"], function
 
         // ref: https://developer.mozilla.org/en/DOM/element.dataset
         if (element.dataset) {
-            // 转换成普通对象返回
+            // 转���成普通对象返回
             return $.extend({}, element.dataset);
         }
 
