@@ -1,0 +1,1 @@
+define("#switchable/0.9.5/plugins/multiple",["#switchable/0.9.5/const"],function(e,t,n){var r=e("#switchable/0.9.5/const");n.exports={isNeeded:function(){return this.get("multiple")},methods:{_switchTrigger:function(e){this.triggers.eq(e).toggleClass(r.ACTIVE_CLASS)},_triggerIsValid:function(){return!0},_switchPanel:function(e){e.toPanels.toggle()}}}});

@@ -1,0 +1,1 @@
+define("#switchable/0.9.5/const",[],function(e,t){var n="ui-switchable";t.UI_SWITCHABLE=n,t.NAV_CLASS=n+"-nav",t.CONTENT_CLASS=n+"-content",t.TRIGGER_CLASS=n+"-trigger",t.PANEL_CLASS=n+"-panel",t.ACTIVE_CLASS=n+"-active",t.PREV_BTN_CLASS=n+"-prev-btn",t.NEXT_BTN_CLASS=n+"-next-btn",t.DISABLED_BTN_CLASS=n+"-disabled-btn"});
