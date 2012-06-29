@@ -138,6 +138,14 @@ define("#parser/0.9.0/parser-debug", ["#events/0.9.1/events-debug"], function(re
         modulesCount++;
 
         if(modulesCount === parsedData.length){
+            parseEnd = new Date().getTime();
+
+            HandyParserData['time'] = {
+                parseDOM: parseDOMEnd - parseDOMStart,
+                analyzeData: analyzeDataEnd - analyzeDataStart,
+                parse: parseEnd - parseStart
+            };
+
             HandyParser.trigger('completed',HandyParser,HandyParserData);
         }
     }
@@ -442,14 +450,6 @@ define("#parser/0.9.0/parser-debug", ["#events/0.9.1/events-debug"], function(re
 
        return result;
    }
-
-   parseEnd = new Date().getTime();
-
-   HandyParserData['time'] = {
-       parseDOM: parseDOMEnd - parseDOMStart,
-       analyzeData: analyzeDataEnd - analyzeDataStart,
-       parse: parseEnd - parseStart
-   };
 
    module.exports = HandyParser;
 });
