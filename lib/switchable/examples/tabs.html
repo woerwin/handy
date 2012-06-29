@@ -52,13 +52,6 @@
 </style>
 
 <script src="../../../tools/seajs-and-its-friends.js"></script>
-<script>
-    seajs.config({
-        alias: {
-            'tabs-src': '../src/tabs'
-        }
-    });
-</script>
 </head>
 <body>
 
@@ -93,7 +86,7 @@
 <script>
     var T, $, tabs;
 
-    seajs.use(['$', 'tabs-src'], function($, Tabs) {
+    seajs.use(['$', 'tabs'], function($, Tabs) {
         T = Tabs;
 
         tabs = new Tabs({

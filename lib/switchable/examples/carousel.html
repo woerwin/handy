@@ -127,15 +127,8 @@
 </div>
 
 <script src="../../../tools/seajs-and-its-friends.js"></script>
-<script type="text/javascript">
-    seajs.config({
-        alias: {
-            'carousel-src': '../src/carousel'
-        }
-    });
-</script>
 <script>
-seajs.use(['$','carousel-src'], function($,carousel) {
+seajs.use(['$','carousel'], function($,carousel) {
     new  carousel({
         element: '#demo4' ,
         viewSize: [200]

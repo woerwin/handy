@@ -73,14 +73,7 @@
 
 <script src="../../../tools/seajs-and-its-friends.js"></script>
 <script>
-    seajs.config({
-        alias: {
-            'accordion-src': '../src/accordion'
-        }
-    });
-</script>
-<script>
-seajs.use(['$', 'accordion-src'], function($, Accordion) {
+seajs.use(['$', 'accordion'], function($, Accordion) {
     new Accordion({
         element: '#accordion1',
         triggers: '#accordion1 .ui-switchable-trigger' ,

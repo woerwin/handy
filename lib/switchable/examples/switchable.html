@@ -153,21 +153,9 @@
 
 <script src="../../../tools/seajs-and-its-friends.js"></script>
 <script>
-    seajs.config({
-        alias: {
-            'tabs-src': '../src/tabs',
-            'slide-src': '../src/slide',
-            'accordion-src': '../src/accordion',
-            'carousel-src': '../src/carousel'
-        },
-        debug: 0
-    });
-</script>
-
-<script>
     var T, $, tabs, slide;
 
-    seajs.use(['$', 'tabs-src', 'slide-src'], function(jQuery, Tabs, Slide) {
+    seajs.use(['$', 'tabs', 'slide'], function(jQuery, Tabs, Slide) {
         T = Tabs;
         $ = jQuery;
 

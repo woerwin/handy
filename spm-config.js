@@ -2,7 +2,7 @@
 define({
     alias: {
         // 外部
-        '$': 'zepto/1.0.0/zepto',
+        '$': 'zepto/0.9.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
         'backbone': 'backbone/0.9.2/backbone',
         'jasmine': 'jasmine/1.1.0/jasmine-html',
@@ -29,7 +29,7 @@ define({
         'tabs': 'switchable/0.9.5/tabs',
         'accordion': 'switchable/0.9.5/accordion',
         'slide': 'switchable/0.9.5/slide',
-        'carousel': 'switchable/0.9.5/tabs'
+        'carousel': 'switchable/0.9.5/carousel'
     },
     preload: [this.JSON ? '' : 'json', 'plugin-text']
 });

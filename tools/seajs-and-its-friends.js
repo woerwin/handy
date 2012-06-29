@@ -19,7 +19,7 @@ seajs.config({
     alias: {
 
         // 外来模块
-        '$': 'zepto/1.0.0/zepto-debug',
+        '$': 'zepto/0.9.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
         'backbone': 'backbone/0.9.2/backbone',
         'jasmine': 'jasmine/1.1.0/jasmine-html',
