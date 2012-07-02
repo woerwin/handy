@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <title>Network - handy</title>
-    <style type="text/css">
+<style type="text/css">
         .box {
             width: auto;
             margin: 0;
@@ -44,10 +34,8 @@
         }
         .green{color:green;}
         .red{color:red;}
-    </style>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
+</style>
+
 <div class="box">
     <section>
         <h1>Example：Network</h1>
@@ -59,10 +47,11 @@
         </div>
         <a href="javascript:void(0)" id="J-stop">停止网络状态检测</a>
 </div>
-<script>
+
+```javascript
     function getDOM(dom){return document.querySelector(dom);}
 
-    seajs.use('../src/network', function (Network) {
+    seajs.use('network', function (Network) {
         var startTime = new Date().getTime();
 
         Network.online(function (){
@@ -77,6 +66,4 @@
             Network.destroy();
         },false);
     });
-</script>
-</body>
-</html>
+```

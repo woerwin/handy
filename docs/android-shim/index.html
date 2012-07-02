@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>android-shim</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/android-shim/">Android-Shim</a>
+                
+                <a href="/handy/docs/android-shim/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/android-shim/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>android-shim</h1>
+<p>提供阻止 Android OS 内置浏览器浮层组件 touch event 穿透问题</p>
+<p>这个问题主要发生在 Android OS 内置浏览器，查看 <a href="http://v.youku.com/v_show/id_XNDAxMTE1NTgw.html">Android OS 事件穿透问题</a></p>
+
+<h2>模块依赖</h2>
+
+<ul>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/zepto">zepto</a></li>
+<li><a href="position">handy position</a></li>
+</ul>
+
+<h2>工作原理</h2>
+<p><img src="/alipay/handy/raw/master/lib/overlay/docs/assets/handy-overlay-shim.jpg" alt="android-shim"/></p>
+<p>它会在指定元素的后面插入一个 div 标签，意思就是：
+shim 的 z-index 的值将是目标元素 的 z-index 值减 1。这有点像 <a href="http://github.com/alipay/arale/tree/master/lib/iframe-shim">iframe-shim</a> :-)</p>
+<p>建议您阅读 <a href="http://qiqicartoon.com/?p=1197">Android javascript 事件穿透解决方案</a></p>
+
+<h2>android-shim 的使用方法与 <a href="http://github.com/alipay/arale/tree/master/lib/iframe-shim">arale iframe-shim</a> 相同</h2>
+
+<h2>注意事项</h2>
+
+<ul>
+<li>android-shim 自动判断当前是否是 Android OS ，非 Android OS 设备，不会动态添加添加 shim，因此您勿需再做判断</li>
+<li>android-shim 不会解决浮层后面元素触发 touch 事件的反馈，也就是被点击元素周围黄色的边框，您可以通过 -webkit-tap-highlight-color 解决</li>
+</ul>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

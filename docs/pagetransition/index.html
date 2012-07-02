@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>pageTransition</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/pageTransition/">Pagetransition</a>
+                
+                <a href="/handy/docs/pageTransition/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/pageTransition/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>PageTransition</h1>
+<p>提供移动设备浏览器端模拟 iOS 原生应用页面过渡效果的 UI 组件</p>
+
+<ul>
+<li>PageTransition 暂时只提供水平过渡效果</li>
+</ul>
+
+<h2>模块依赖</h2>
+
+<ul>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/events">event</a></li>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/zepto">zepto</a></li>
+</ul>
+
+<h2>平台兼容</h2>
+
+<ul>
+<li>由于 <code>zepto</code> 仅兼容 <code>iOS</code> 和 <code>Android OS</code> ，因此 <code>PageTransition</code> 当前也仅兼容这两个平台，未来的版本会兼容到 <code>windows phone7</code></li>
+</ul>
+
+<h2>PageTransition 工作原理</h2>
+<p><img src="/alipay/handy/raw/master/lib/pageTransition/docs/assets/handy.pageTransition.structure.jpg" alt="handy.pageTransition.structure"/></p>
+<p><code>PageTransition</code> 支持 <code>data-attribute</code> API，部分参数的配置将通过 <code>data-attribute</code> 完成。它把需要过渡的每个节点看做为一个 <code>role</code> (角色)为 <code>page</code> 的页面，
+把触发器(也叫触点)看做为一个 <code>role</code> 为 <code>trigger</code> 的触发器对象，具体的行为通过 <code>action</code> 参数指定，然后通过 <code>data-pageTransition</code> 前缀配置这些参数。</p>
+<p>在 <code>Handy</code> 中，每个组件的 <code>data-attribute</code> 属性将由 data 前缀 + 组件名(小驼峰格式) + 具体的属性名构成,<code>pageTransition</code> 的 data-attribute 参数列表：
+<code>js
+data-pageTransition-role=&quot;page&quot; // 一个页面
+data-pageTransition-role=&quot;trigger&quot; // 一个触发器
+data-pageTransition-action=&quot;forward&quot; // 触发器的行为(向前过渡)，可选的还有 back
+data-pageTransition-forward=&quot;#J-nextPage&quot; // 某个触发器需要向前过渡的目标元素，当点击触发器时，
+                                          // PageTransition 会在当前的触发器上查找需要过渡的目标元素
+</code>
+它首先会在用户传入的 <code>element</code> 中查找带有 <code>data-pageTransition-role=&quot;page&quot;</code> 的元素，接着将查找到的<strong>第一个</strong> <code>page</code> 元素做为初始化页面，其它的 <code>data-pageTransition-role=&quot;page&quot;</code> 将被忽略，然后向这个初始化页面的父层动态插入一个带有 <code>data-pageTransition-role=&quot;viewport&quot;</code> 属性的元素，这个元素就是它的视口，接着它会在当前视口下查找<strong>所有</strong>带有 <code>data-pageTransition-role=&quot;trigger&quot;</code> 的元素，为它们绑定 <code>click.pageTransition</code> 事件，每个视口都是独立的，
+因此您可能在 <code>PageTransition</code> 的页面中嵌套 <code>PageTransition</code> 。</p>
+<p>当调用 <code>forward</code> 行为时，<code>PageTransition</code> 会动态向视口的末尾插入 (append) 触发器的 <code>data-pageTransition-forward</code> 属性指向的目标节点，
+这个目标节点需要通过 <code>data-pageTransition-role=&quot;page&quot;</code> 属性告诉 <code>PageTransition</code>：我也是一个页面，你可以在你的视口中对我做任何操作(过渡、绑定事件等)，所以如果想在这个元素中绑定 <code>PageTransition</code> 行为(比如返回上一步)，你可以使用 <code>data-pageTransition-role=&quot;trigger&quot; data-pageTransition-action=&quot;back&quot;</code>，这和上述描述相同，
+过渡结束后，会从视口中清除多余的页面，始终保持视口中只有一个页面，当然这些被清除的页面会被保存下来，以便带有 <code>data-pageTransition-role=&quot;back&quot;</code> 的触发器返回上一步，
+在调用 <code>back</code> 行为时的处理和 <code>forward</code> 相似，只是动态的向视口的首部插入(prepend)插入被保存的上一张页面</p>
+<p><code>PageTransition</code> 过渡效果使用了 margin-left 动画，并没有使用 translate-x ，</p>
+<p>由此带来的体验问题是：<a href="http://qiqicartoon.com/?p=1023" target="_blank">动画运动不够平滑</a></p>
+<p>既然 margin-left 在移动平台的动画不够平滑，为何还要使用 margin-left 呢？您可以参考 <a href="http://qiqicartoon.com/?p=785" target="_blank">Android平台中CSS3 transition和animation问题</a></p>
+
+<h2>使用说明</h2>
+<p><code>pageTransition</code> 所需的 HTML 结构：</p>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;J-page-box&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;section</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;page&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;javascript:void(0)&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;trigger&quot;</span> <span class="na">data-pageTransition-action=</span><span class="s">&quot;forward&quot;</span> <span class="na">data-pageTransition-forward=</span><span class="s">&quot;#J-nextPage&quot;</span><span class="nt">&gt;</span>下一张<span class="nt">&lt;/a&gt;</span>
+          定义了一个 trigger ，它带有 forward 行为，它要过渡的目标元素为 id＝J-nextPage
+        <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;J-nextPage&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;page&quot;</span><span class="nt">&gt;</span>通过 data-pageTransition-role=&quot;page&quot; 告诉 PageTransition，请把我看作一个页面
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;javascript:void(0)&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;trigger&quot;</span> <span class="na">data-pageTransition-action=</span><span class="s">&quot;back&quot;</span><span class="nt">&gt;</span>返回<span class="nt">&lt;/a&gt;</span>
+  当指定 data-pageTransition-action=&quot;back&quot; 时不需要指定 data-pageTransition-back ，PageTransition 会自动保存前一张页面
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>实例化 <code>PageTransition</code></p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">PageTransition</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pageTransition&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">pageTransition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PageTransition</span><span class="p">({</span>
+              <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-page-box&#39;</span>
+          <span class="p">});</span>
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+<p><code>pageTransition</code> 只需要传入 <code>element</code> 参数，然后调用 <code>render</code> 方法。</p>
+<p>上面的代码完成了一个简单的 <code>pageTransition</code> 的配置。调用 <code>render</code> 方法后，<code>pageTransition</code> 自动在 <code>＃J-page-box</code> 中插入 <code>&lt;div data-pageTransition-role=&quot;viewport&quot;&gt;</code>，然后再将
+<code>&lt;section data-pageTransition-role=&quot;page&quot;&gt;</code> 插入到刚才的视口中，接着为 section 标签中的 a 元素绑定 click 事件，当这个链接触发 click 事件时，<code>pageTransition</code> 会从超链接的
+<code>data-pageTransition-forward</code> 属性中找到下一张页面的引用，动态将 <code>#J-nextPage</code> 插入(appendTo)到视口，过渡效果结束后，重新绑定 UI 事件，然后将过渡出视口的 section 元素(处于不可见)放到 <code>#J-nextPage</code>
+的父元素中并隐藏，坦白说就是把当前页面与下一张页面换个位置罢了。</p>
+<p>每配置一个 <code>trigger</code> ，必须要定义它的 <code>data-pageTransition-role</code> 和 <code>data-pageTransition-action</code>，如果 action 是 forward，必须要指定 data-pageTransition-forward。</p>
+<p>您还可以在每个页面中添加多个行为</p>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;J-nextPage&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;page&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;javascript:void(0)&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;trigger&quot;</span> <span class="na">data-pageTransition-action=</span><span class="s">&quot;back&quot;</span><span class="nt">&gt;</span>返回<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;javascript:void(0)&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;trigger&quot;</span> <span class="na">data-pageTransition-action=</span><span class="s">&quot;forward&quot;</span> <span class="na">data-pageTransition-forward=</span><span class="s">&quot;#J-nextPage2&quot;</span><span class="nt">&gt;</span>下一张<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;javascript:void(0)&quot;</span> <span class="na">data-pageTransition-role=</span><span class="s">&quot;trigger&quot;</span> <span class="na">data-pageTransition-action=</span><span class="s">&quot;back&quot;</span><span class="nt">&gt;</span>点击这里也可以返回<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<h3>render <code>pageTransition.render()</code></h3>
+<p>渲染 <code>pageTransition</code> 实例化对象</p>
+
+<h3>getPage <code>pageTransition.getPage()</code></h3>
+<p>返回 <code>pageTransition</code> 的当前页面，一个 zepto object
+&ldquo;js
+define(function (require){
+  var PageTransition = require(&#39;pageTransition&#39;);
+  var pageTransition = new PageTransition({
+                element: &#39;#J-page-box&#39;
+            });
+  pageTransition.render();</p>
+<p>  console.log(pageTransition.getPage().html());//&hellip;
+});
+&rdquo;</p>
+
+<h3>transition <code>pageTransition.transition(DOM Element)</code></h3>
+<p>执行一次页面过渡。其实就是调用 <code>forward</code> 行为</p>
+<p>参数 <code>DOM Element</code> 可以传入选择器 / DOM 对象 / zepto 对象，必须带有 <code>data-pageTransition-role=&quot;page&quot;</code> 属性
+&ldquo;js
+define(function (require){
+  var PageTransition = require(&#39;pageTransition&#39;);
+  var pageTransition = new PageTransition({
+                element: &#39;#J-page-box&#39;
+            });
+  pageTransition.render();</p>
+<p>  document.querySelector(&#39;#J-next&#39;).addEventListener(&#39;click&#39;,function (){
+      pageTransition.transition(&#39;#J-nextPage&#39;);
+  },false);
+});
+&rdquo;</p>
+
+<h3>back <code>pageTransition.back()</code></h3>
+<p>后退至一页</p>
+
+<h3>sync <code>pageTransition.sync()</code></h3>
+<p>更新 UI</p>
+<p>调用 <code>sync</code> 方法时，对 <code>pageTransition</code> 的视口及页面做样式更新
+&ldquo;js
+define(function (require){
+  var pageTransition = new require(&#39;pageTransition&#39;)({
+                element: &#39;#J-page-box&#39;
+            });
+  pageTransition.render();</p>
+<p>  window.addEventListener(&#39;resize&#39;,function (){
+      pageTransition.sync();
+  },false);
+});
+&rdquo;<code>
+**最佳实践:您应该在设备方向或窗口发生变化时，调用</code>sync 方法**</p>
+
+<h3>destroy <code>pageTransition.destroy()</code></h3>
+<p>销毁 <code>pageTransition</code> 对象，释放内存
+&ldquo;js
+define(function (require){
+  var pageTransition = new require(&#39;pageTransition&#39;)({
+                element: &#39;#J-page-box&#39;
+            });
+  pageTransition.render();</p>
+<p>  document.querySelector(&#39;#J-destroy&#39;).addEventListener(&#39;click&#39;,function (){
+      pageTransition.destroy();
+  },false);
+});
+&rdquo;<code>
+调用</code>destroy<code>方法，</code>pageTransition<code>对象中的数据将被清除，
+同时动态添加的样式也会被清除，</code>pageTransition 视口中的页面也将全部释放到各自原来的容器中</p>
+
+<h3>自定义事件</h3>
+
+<h4>transitionStart <code>pageTransition.on(&#39;transitionStart&#39;,callback)</code></h4>
+
+<h4>transitionEnd <code>pageTransition.on(&#39;transitionEnd&#39;,callback)</code></h4>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">pageTransition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pageTransition&#39;</span><span class="p">)({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-page-box&#39;</span>
+            <span class="p">});</span>
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionStart&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span><span class="nx">page</span><span class="p">,</span><span class="nx">o</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span><span class="c1">// forward or back</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">page</span><span class="p">);</span><span class="c1">// zepto object</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span><span class="c1">// 当前实例化对象</span>
+  <span class="p">});</span>
+
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionEnd&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span><span class="nx">page</span><span class="p">,</span><span class="nx">o</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span><span class="c1">// forward or back</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">page</span><span class="p">);</span><span class="c1">// zepto object</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span><span class="c1">// 当前实例化对象</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+<p>自定义事件回调将带有三个参数：过渡类型、当前页面、当前对象。</p>
+
+<ul>
+<li><strong>PageTransition 支持深层嵌套。意思是你可以在 PageTransition 中嵌套另一个 PageTransition</strong></li>
+</ul>
+
+<h2>测试用例</h2>
+
+<ul>
+<li><a href="../lib/pageTransition/tests/runner.html">runner.html</a></li>
+</ul>
+
+<h2>演示地址</h2>
+
+<ul>
+<li><a href="../lib/pageTransition/examples/pageTransition.html">Demo</a></li>
+</ul>
+
+<h2>反馈意见</h2>
+<p>欢迎创建 <a href="http://github.com/alipay/handy/issues/new">GitHub Issue</a> 来提交反馈</p>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

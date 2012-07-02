@@ -1,23 +1,7 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="format-detection" content="email=no"/>
-<title>Tabs Example</title>
-<title>Switchable Auto-render Examples</title>
 <style>
     * {
         margin: 0;
         padding: 0;
-    }
-
-    body {
-        padding: 5px;
-        font: 14px/1.5 'Xin Gothic', 'PT Sans', 'Hiragino Sans GB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
     li {
@@ -28,7 +12,6 @@
         text-decoration: none;
     }
 
-    body { padding: 20px 50px 50px; }
     h2 { margin: 30px 0 10px; font-size: 17px; }
     .loading { background: #EBF5FA url(assets/loading.gif) no-repeat 50% 50%; }
 
@@ -42,9 +25,7 @@
         font-size: 14px;
     }
 </style>
-</head>
 
-<body>
 <h2>Accordion - 手风琴</h2>
 <style>
     #accordion1 {width:200px;border:1px solid #ccc;}
@@ -71,8 +52,7 @@
     <div class="ui-switchable-panel last-panel" style="display:none;">内容D<br/>内容D<br/>内容D</div>
 </div>
 
-<script src="../../../tools/seajs-and-its-friends.js"></script>
-<script>
+```javascript
 seajs.use(['$', 'accordion'], function($, Accordion) {
     new Accordion({
         element: '#accordion1',
@@ -80,6 +60,4 @@ seajs.use(['$', 'accordion'], function($, Accordion) {
         panels: '.ui-switchable-panel'
     });
 });
-</script>
-</body>
-</html>
+```

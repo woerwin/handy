@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>floatLayer</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/floatLayer/">Floatlayer</a>
+                
+                <a href="/handy/docs/floatLayer/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/floatLayer/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>FloatLayer</h1>
+<p>提供移动设备浏览器端 UI 层的浮动、固定功能</p>
+
+<h2>模块依赖</h2>
+<p>没有模块依赖</p>
+
+<h2>使用说明</h2>
+
+<h3>参数</h3>
+<p>element 选择器或 DOM Element，暂且不支持 zepto 对象</p>
+<p>duration 动画时间间隔。整数类型
+<code>js
+define(function (require,exports,module){
+    var FloatLayer = require(&#39;floatLayer&#39;);
+    new FloatLayer({
+      element: &#39;header&#39;
+    });
+    new FloatLayer({
+      element: &#39;footer&#39;,
+      duration: &#39;1000&#39;
+    });
+});
+</code></p>
+
+<h3>sync <code>FloatLayer.sync()</code></h3>
+<p>同步指定元素的位置，使其保持位置不变。<code>FloatLayer</code> 在实例化时，默认会调用一次 <code>sync</code> 方法，同时向 window 对象注册 scroll 事件，
+当用户拖动页面时，<code>FloatLayer</code> 会自动同步 <code>element</code> 的 webkitTransform，更新位置。
+<code>FloatLayer</code> 不会使其绝对定位，也不会使用 left/top 的值更新 element 的坐标值</p>
+
+<h2>测试用例</h2>
+
+<ul>
+<li><a href="../lib/floatLayer/tests/runner.html">runner.html</a></li>
+</ul>
+
+<h2>演示地址</h2>
+
+<ul>
+<li><a href="../lib/floatLayer/examples/floatLayer.html">Demo</a></li>
+</ul>
+
+<h2>反馈意见</h2>
+<p>欢迎创建 <a href="http://github.com/alipay/handy/issues/new">GitHub Issue</a> 来提交反馈</p>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>switchable</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/switchable/">Switchable</a>
+                
+                <a href="/handy/docs/switchable/examples/">Examples</a>
+                
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+
+<div class="container">
+    <nav id="subnav">
+        
+        <a href="accordion.html">accordion</a>
+        
+        <a href="carousel.html">carousel</a>
+        
+        <a href="index.html">index</a>
+        
+        <a href="tabs.html">tabs</a>
+        
+    </nav>
+</div>
+
+
+            
+            <div class="container">
+                <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    li a {
+        text-decoration: none;
+    }
+
+    h2 {
+        margin: 30px 0 10px; font-size: 17px;
+    }
+
+    p.code-switch {
+        color: #09f; cursor: pointer; margin-top: 10px;
+    }
+    pre.code {
+        color: #444;
+        cursor: auto;
+        border-left: 2px solid #7F96AA;
+        margin-top: 5px;
+        padding: 0 10px 20px 10px;
+        font-size: 14px;
+    }
+</style>
+<p><h2>Tabs - 普通标签页</h2>
+<style>
+    #demo1 {
+        position: relative; width: 300px; padding-top: 29px;
+    }
+    #demo1 .ui-switchable-nav-test {
+        position: absolute; left: 20px; margin-top: -29px; z-index: 99;
+    }
+    #demo1 .ui-switchable-nav-test li {
+        float: left;
+        width: 50px;
+        line-height: 21px;
+        text-align: center;
+        background: #AEC7E5;
+        margin-right: 3px;
+        padding-top: 8px;
+        cursor: pointer;
+    }
+    #demo1 .ui-switchable-nav-test li.ui-switchable-active {
+        background:blue;color:#fff;
+    }
+    #demo1 .ui-switchable-content-test {
+        position: relative;
+        height: 120px;
+        padding: 20px;
+        border: 1px solid #AEC7E5;
+    }
+</style>
+<div id="demo1" class="section">
+    <ul class="ui-switchable-nav-test" data-role="nav">
+        <li data-role="trigger">标题 A</li>
+        <li data-role="trigger">标题 B</li>
+        <li data-role="trigger">标题 C</li>
+    </ul>
+    <div class="ui-switchable-content-test" data-role="content">
+        <div>内容 A</div>
+        <div style="display: none">内容 B</div>
+        <div style="display: none">内容 C</div>
+    </div>
+</div></p>
+<p><h2>Slide - 卡盘轮播</h2>
+<style>
+    #demo2 {
+        position: relative; width: 300px; height: 176px; border: 1px solid #B6D1E6; overflow: hidden;
+    }
+    #demo2 .ui-switchable-nav {
+        position: absolute; bottom: 5px; right: 5px; z-index: 99;
+    }
+    #demo2 .ui-switchable-nav li {
+        float: left;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        margin-left: -1px;
+        background-color: #FCF2CF;
+        border: 1px solid #F47500;
+        color: #D94B01;
+        text-align: center;
+        cursor: pointer;
+    }
+    #demo2 .ui-switchable-nav li.ui-switchable-active {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        margin-top: -1px;
+        color: #FFF;
+        background-color: #FFB442;
+        font-weight: bold;
+    }
+    #demo2 .ui-switchable-content-test li {
+        height: 176px; width: 710px; overflow: hidden;
+    }
+    /* for countdown plugin */
+    #demo2 .ui-switchable-nav li,
+    #demo2 .ui-switchable-trigger-content {
+        position: relative;
+    }
+    #demo2 .ui-switchable-trigger-mask {
+        position: absolute;
+        right: 0;
+        width: 18px;
+        height: 18px;
+        background-color: #FF9415;
+        visibility: hidden
+    }
+    #demo2 .ui-switchable-active .ui-switchable-trigger-mask {
+        visibility: visible
+    }</p>
+
+<pre><code>.hidden {
+    display: none
+}</code></pre>
+<p></style>
+<div id="demo2" class="section" data-effect="fade" data-easing="easeOutStrong">
+    <ol class="ui-switchable-content-test" data-role="content">
+        <li><a href="http://fun.alipay.com/buy/index.htm?src=5buy03" target="_blank"><img alt="" src="https://i.alipayobjects.com/e/201205/2lOsygtTn7.jpg"/></a></li>
+        <li class="hidden"><a target="_blank" href="http://fun.alipay.com/hkwhb/index.htm?_adType=aedacbacdeajaefcehdg"><img alt="" width="710" height="175" border="0" src="https://i.alipayobjects.com/e/201205/3H1Kii949r.jpg"/></a></li>
+        <li class="hidden"><a target="_blank" href="http://fun.alipay.com/lvmama/index.htm"><img alt="" width="710" height="175" border="0" src="https://i.alipayobjects.com/e/201206/2muugwqegL.png"/></a></li>
+        <li class="hidden"><a href="http://fun.alipay.com/sj/index.htm" target="_blank"><img alt="" src="https://i.alipayobjects.com/e/201205/37t81c9HYx.jpg"/></a></li>
+    </ol>
+</div></p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">tabs</span><span class="p">,</span> <span class="nx">slide</span><span class="p">;</span>
+
+    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;tabs&#39;</span><span class="p">,</span> <span class="s1">&#39;slide&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="nx">Tabs</span><span class="p">,</span> <span class="nx">Slide</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">T</span> <span class="o">=</span> <span class="nx">Tabs</span><span class="p">;</span>
+        <span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">;</span>
+
+        <span class="nx">tabs</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tabs</span><span class="p">({</span>
+            <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#demo1&#39;</span><span class="p">,</span>
+            <span class="nx">activeIndex</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nx">effect</span><span class="o">:</span> <span class="s1">&#39;fade&#39;</span>
+        <span class="p">});</span>
+
+        <span class="nx">slide</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Slide</span><span class="p">({</span>
+            <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#demo2&#39;</span><span class="p">,</span>
+            <span class="nx">effect</span><span class="o">:</span> <span class="s1">&#39;scrolly&#39;</span><span class="p">,</span>
+            <span class="nx">interval</span><span class="o">:</span> <span class="mi">2000</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</pre></div>
+
+<script type="text/javascript">
+    var T, $, tabs, slide;
+
+    seajs.use(['$', 'tabs', 'slide'], function(jQuery, Tabs, Slide) {
+        T = Tabs;
+        $ = jQuery;
+
+        tabs = new Tabs({
+            element: '#demo1',
+            activeIndex: 1,
+            effect: 'fade'
+        });
+
+        slide = new Slide({
+            element: '#demo2',
+            effect: 'scrolly',
+            interval: 2000
+        });
+    });
+</script>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -48,7 +48,10 @@ seajs.config({
         'flip': 'flip/0.9.5/flip',             // 90%
         'parser': 'parser/0.9.0/parser',
         'pageTransition': 'pageTransition/0.9.1/pageTransition',
-        'storage': 'storage/0.9.0/storage'
+        'storage': 'storage/0.9.0/storage',
+        'scrollView': 'scrollView/0.9.2/scrollView',
+        'network': 'network/0.9.0/network',
+        'floatLayer': 'floatLayer/0.9.0/floatLayer'
 
 
         // Others

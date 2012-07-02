@@ -1,0 +1,484 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>dialog</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/dialog/">Dialog</a>
+                
+                <a href="/handy/docs/dialog/examples/">Examples</a>
+                
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+
+
+            
+            <div class="container">
+                <style>
+    * {
+        margin:0;
+        padding:0;
+    }
+    .overlay {
+        width: 100px;
+        height: 300px;
+        background: green;
+    }
+    input,select {
+        display:block;
+        margin:10px;
+    }
+</style>
+<p><input type="button" id="trigger1" value="基本对话框" />
+<select>
+    <option value="1">one</option>
+</select>
+<input type="button" id="trigger2" value="淡入淡出对话框" />
+<input type="button" id="trigger3" value="水平展开对话框" />
+<input type="button" id="trigger4" value="垂直展开对话框" />
+<input type="button" id="trigger5" value="从左移入对话框" />
+<input type="button" id="trigger6" value="从右移入对话框" />
+<input type="button" id="trigger7" value="从上移入对话框" />
+<input type="button" id="trigger8" value="从下移入对话框" />
+<input type="button" id="trigger8-1" value="混合动画对话框一" />
+<input type="button" id="trigger8-2" value="混合动画对话框二" /></p>
+<p><input type="button" id="trigger9" value="ajax对话框" />
+<input type="button" id="trigger10" value="iframe对话框" /></p>
+<div class="highlight"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;baseDialog&#39;</span><span class="p">,</span> <span class="s1">&#39;animDialog&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">BaseDialog</span><span class="p">,</span> <span class="nx">AnimDialog</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">closeDialogTpl</span> <span class="o">=</span> <span class="s1">&#39;&lt;div class=&quot;overlay&quot;&gt;&lt;button id=&quot;close&quot;&gt;点击关闭&lt;/button&gt;&lt;p&gt;肯定是房间里萨的看法金克拉束带结发&lt;a style=&quot;color:#fff;font-size:14px;padding-top:10px;&quot; href=&quot;javascript:void(0)&quot; data-overlay-role=&quot;trigger&quot; data-overlay-action=&quot;hide&quot;&gt;点击这里也可以关闭&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">dialogTpl</span> <span class="o">=</span> <span class="s1">&#39;&lt;div class=&quot;overlay&quot;&gt;&lt;div id=&quot;dialog-title&quot;&gt;&lt;/div&gt;&lt;div id=&quot;dialog-content&quot;&gt;&lt;/div&gt;&lt;button id=&quot;confirm&quot;&gt;确认按钮&lt;/button&gt;&lt;button id=&quot;close&quot;&gt;点击关闭&lt;/button&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BaseDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger1&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">dialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">confirmElement</span><span class="o">:</span> <span class="s1">&#39;#confirm&#39;</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">titleElement</span><span class="o">:</span> <span class="s1">&#39;#dialog-title&#39;</span><span class="p">,</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;我是标题&#39;</span><span class="p">,</span>
+        <span class="nx">contentElement</span><span class="o">:</span> <span class="s1">&#39;#dialog-content&#39;</span><span class="p">,</span>
+        <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;我是内容&#39;</span><span class="p">,</span>
+        <span class="nx">onConfirm</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;点击了确定按钮&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onClose</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;点击了关闭按钮&#39;</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">hasMask</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">});</span>
+    <span class="nx">d1</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;改变的内容&#39;</span><span class="p">);</span>
+    <span class="nx">d1</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger2&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;fade&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger3&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d4</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger4&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;up&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d5</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger5&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d6</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger6&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d7</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger7&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;up&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d8</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger8&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;down&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d8_1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger8-1&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">showEffect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;down&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">hideEffect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;fade&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d8_2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger8-2&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">closeDialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">showEffect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">hideEffect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span>
+            <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">d9</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BaseDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger9&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="nx">dialogTpl</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">titleElement</span><span class="o">:</span> <span class="s1">&#39;#dialog-title&#39;</span><span class="p">,</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;我真是标题&#39;</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">contentElement</span><span class="o">:</span> <span class="s1">&#39;#dialog-content&#39;</span><span class="p">,</span>
+        <span class="nx">ajaxUrl</span><span class="o">:</span> <span class="s1">&#39;https://www.alipay.com/&#39;</span><span class="p">,</span>        
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">d10</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BaseDialog</span><span class="p">({</span>
+        <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;#trigger10&#39;</span><span class="p">,</span>
+        <span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;&lt;div class=&quot;overlay&quot;&gt;&lt;div id=&quot;dialog-title&quot;&gt;&lt;/div&gt;&lt;iframe src=&quot;&quot;&gt;&lt;/iframe&gt;&lt;button id=&quot;close&quot;&gt;点击关闭&lt;/button&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nx">closeElement</span><span class="o">:</span> <span class="s1">&#39;#close&#39;</span><span class="p">,</span>
+        <span class="nx">titleElement</span><span class="o">:</span> <span class="s1">&#39;#dialog-title&#39;</span><span class="p">,</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;我真是标题啊&#39;</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">iframeUrl</span><span class="o">:</span> <span class="s1">&#39;https://www.alipay.com/&#39;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<script type="text/javascript">
+seajs.use(['baseDialog', 'animDialog'], function(BaseDialog, AnimDialog) {
+
+    var closeDialogTpl = '<div class="overlay"><button id="close">点击关闭</button><p>肯定是房间里萨的看法金克拉束带结发<a style="color:#fff;font-size:14px;padding-top:10px;" href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">点击这里也可以关闭</a></p></div>';
+    var dialogTpl = '<div class="overlay"><div id="dialog-title"></div><div id="dialog-content"></div><button id="confirm">确认按钮</button><button id="close">点击关闭</button></div>';
+
+    var d1 = new BaseDialog({
+        trigger: '#trigger1',
+        template: dialogTpl,
+        width: 100,
+        height: 200,
+        confirmElement: '#confirm',
+        closeElement: '#close',
+        titleElement: '#dialog-title',
+        title: '我是标题',
+        contentElement: '#dialog-content',
+        content: '我是内容',
+        onConfirm: function() {
+            alert('点击了确定按钮');
+        },
+        onClose: function() {
+            alert('点击了关闭按钮');
+        },
+        align: {
+            baseXY: [200, 200]
+        },
+        hasMask: true
+    });
+    d1.set('content', '改变的内容');
+    d1.set('width', 150);
+
+    var d2 = new AnimDialog({
+        trigger: '#trigger2',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 20]
+        },
+        effect: {
+            type: 'fade'
+        }
+    });
+    var d3 = new AnimDialog({
+        trigger: '#trigger3',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 30]
+        },
+        effect: {
+            type: 'slide',
+            from: 'left'
+        }
+    });
+    var d4 = new AnimDialog({
+        trigger: '#trigger4',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 200]
+        },
+        effect: {
+            type: 'slide',
+            from: 'up'
+        }
+    });
+    var d5 = new AnimDialog({
+        trigger: '#trigger5',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 30]
+        },
+        effect: {
+            type: 'move',
+            from: 'left'
+        }
+    });
+    var d6 = new AnimDialog({
+        trigger: '#trigger6',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 40]
+        },
+        effect: {
+            type: 'move',
+            from: 'right'
+        }
+    });
+    var d7 = new AnimDialog({
+        trigger: '#trigger7',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [20, 60]
+        },
+        effect: {
+            type: 'move',
+            from: 'up'
+        }
+    });
+    var d8 = new AnimDialog({
+        trigger: '#trigger8',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 200]
+        },
+        effect: {
+            type: 'move',
+            from: 'down'
+        }
+    });
+    var d8_1 = new AnimDialog({
+        trigger: '#trigger8-1',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 200]
+        },
+        showEffect: {
+            type: 'move',
+            from: 'down'
+        },
+        hideEffect: {
+            type: 'fade'
+        }
+    });
+    var d8_2 = new AnimDialog({
+        trigger: '#trigger8-2',
+        template: closeDialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        align: {
+            baseXY: [10, 200]
+        },
+        showEffect: {
+            type: 'none'
+        },
+        hideEffect: {
+            type: 'move',
+            from: 'left'
+        }
+    });
+
+    var d9 = new BaseDialog({
+        trigger: '#trigger9',
+        template: dialogTpl,
+        width: 100,
+        height: 200,
+        closeElement: '#close',
+        titleElement: '#dialog-title',
+        title: function() {
+            return '我真是标题';
+        },
+        contentElement: '#dialog-content',
+        ajaxUrl: 'https://www.alipay.com/',        
+        align: {
+            baseXY: [10, 200]
+        }
+    });
+    var d10 = new BaseDialog({
+        trigger: '#trigger10',
+        template: '<div class="overlay"><div id="dialog-title"></div><iframe src=""></iframe><button id="close">点击关闭</button></div>',
+        width: 'auto',
+        height: 200,
+        closeElement: '#close',
+        titleElement: '#dialog-title',
+        title: function() {
+            return '我真是标题啊';
+        },
+        align: {
+            baseXY: [10, 200]
+        },
+        iframeUrl: 'https://www.alipay.com/'
+    });
+});
+</script>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

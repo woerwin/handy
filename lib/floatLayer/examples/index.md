@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <title>floatLayer - handy</title>
-    <style type="text/css">
+<style type="text/css">
         body{
             padding:0;
             margin:0;
@@ -46,14 +36,6 @@
             border:1px solid #EFEEED;
             border-left-width:5px;
         }
-        header{
-            height:40px;
-            background:rgba(0,0,0,.5);
-            color:#fff;
-            text-align:center;
-            line-height:40px;
-            font-size:20px;
-        }
         footer{
             height:40px;
             background:rgba(100,0,30,.5);
@@ -63,12 +45,7 @@
             font-size:20px;
         }
     </style>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
-<header>
-    Arale
-</header>
+
 开源 = 兴趣 + 坚持 + 时机 + 成就感，其中最重要的是昨天 @淘宝正明 强调的坚持。这公式，好像是万能的。蘑菇街 @岳旭强 在 QCon 上提到的成长四要素，也是这四点。 （2012.04.28）
 开源的目的，是分享。将自己好的点子分享出去，将他人好的建议吸纳进来。开源不是自我展现，也不是企业形象。开源是通过彼此的奉献，把事情做得更好。 （2012.04.28）
 预告：支付宝的前端基础类库 Arale 正在基于 SeaJS 和 jQuery 等社区全新构建 2.0 版本。这次将采取一条大胆、开放的路线：在刚开始做时，就开源开放出来，采取设计和文档先行，社区反馈与组件开发共进的方式来做。正式开发下周开始，预计第一期完成 6 月下旬。这种模式，你有兴趣参与不？
@@ -132,19 +109,11 @@ Arale 2.0 是支付宝公司的新一代前端基础类库。这份文档将阐�
 ![支付宝前端基础技术体系图](/alipay/arale/blob/master/docs/assets/arale-ecosystem.png?raw=true)
 
 Arale 2.0 有广义和狭义之分。广义指上图中的整套解决方案；狭义指支付宝前端基础类库，这是我们目前正在做的。
-<footer style="position:absolute;bottom:0;left:0;width:100%;">
-    Handy
-</footer>
-<script>
-    seajs.use(['../src/floatLayer','$'], function (FloatLayer,$) {
+
+```javascript
+    seajs.use(['floatLayer','$'], function (FloatLayer,$) {
         new FloatLayer({
-            element: 'header'
-        });
-        new FloatLayer({
-            element: 'footer',
-            duration: 10
+            element: '#header'
         });
     });
-</script>
-</body>
-</html>
+```

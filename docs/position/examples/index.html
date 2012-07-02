@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>position</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/position/">Position</a>
+                
+                <a href="/handy/docs/position/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/position/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+
+
+            
+            <div class="container">
+                <style>
+        .example {
+            border:3px dashed #ccc;
+            margin:30px 50px;
+            color:#777;
+            font-size:16px;
+        }
+        h2 {
+            color:#2296CC;
+            font-size:16px;
+            margin-left:10px;
+            font-family: consolas;
+        }
+        .elem1 {
+            border:1px solid green;
+            background-color:#C7FFBB;
+        }
+        .elem2 {
+            border:20px solid #999;
+            background-color:#eee;
+            height:200px;
+            margin:50px 0 0 100px;
+            line-height:200px;
+            text-align:center;
+        }
+</style>
+
+<div class="example">
+    <h2>1. 基本情况：Position.pin(a1, {element: b1, x: 50, y: 50});</h2>
+    <div id="a1" class="elem1">目标元素a1</div>
+    <div id="b1" class="elem2">基准元素b1</div>
+</div>
+<div class="example">
+    <h2>2. 目标元素的offsetParent不为body：Position.pin(a2, {element: b2, x: 50, y: 50});</h2>
+    <div style="position:relative;margin:20px;border:20px red solid;padding:10px;">
+        <div id="a2" style="position:absolute;top:0;left:0;" class="elem1">目标元素a2</div>
+        <div id="b2" class="elem2">基准元素b2</div>
+    </div>
+</div>
+<div class="example">
+    <h2>3. 目标元素带偏移量：Position.pin({element: a3, x: -50, y: -50}, {element: b3});</h2>
+    <div id="b3" class="elem2">基准元素b3</div>
+    <div id="a3" class="elem1">目标元素a3</div>
+</div>
+<div class="example">
+    <h2>4. 偏移量为left|center|top|%的情况：Position.pin({element: a4, x: &lsquo;center&rsquo;, y: &lsquo;50%&rsquo;}, {element: b4, x: &lsquo;100%&rsquo;, y: &lsquo;50%&rsquo;});</h2>
+    <div id="b4" class="elem2">基准元素b4</div>
+    <div id="a4" class="elem1">目标元素a4</div>
+</div>
+<div class="example">
+    <h2>5. 定位到元素中央：Position.center(a5, b5);</h2>
+    <div id="b5" class="elem2">基准元素b5</div>
+    <div id="a5" class="elem1">目标元素a5</div>
+</div>
+<div class="example">
+    <h2>6. 相对可见区域定位：Position.pin(a6, {x: 50,y: 50});</h2>
+    <div id="a6" class="elem1">目标元素a6</div>
+    <input type="button" id="J_rePosition6" value="点击重定位">
+</div>
+<div class="example">
+    <h2>7. 定位到屏幕中央：Position.center(a7);</h2>
+    <div id="a7" class="elem1">目标元素a7</div>
+    <input type="button" id="J_rePosition7" value="点击重定位">
+</div>
+<div class="example">
+    <h2>8. 处理类似于100%+20px这样的定位：Position.pin(a8, {element: b8, x: &lsquo;100%+50px&rsquo;, y: &lsquo;50%-50&rsquo;});</h2>
+    <div id="a8" class="elem1">目标元素a8</div>
+    <div id="b8" class="elem2">基准元素b8</div>
+</div>
+<div class="example">
+    <h2>9. 相对于自身定位：Position.pin(a9, {element: a9, x: &lsquo;100%&rsquo;, y: &lsquo;-100%&rsquo;});</h2>
+    <div id="a9" class="elem1">目标元素a9</div>
+</div>
+<div class="example">
+    <h2>10. 定位fixed元素：Position.pin(a10, { x: 400, y: 0 });</h2>
+    <div id="a10" class="elem1" style="position:fixed;">目标元素a10</div>
+</div>
+<div class="highlight"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Position</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">_id</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">_id</span><span class="p">)</span> <span class="p">},</span>
+                    <span class="nx">a1</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a1&#39;</span><span class="p">),</span>
+                    <span class="nx">b1</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b1&#39;</span><span class="p">),</span>
+                    <span class="nx">a2</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a2&#39;</span><span class="p">),</span>
+                    <span class="nx">b2</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">),</span>
+                    <span class="nx">a3</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a3&#39;</span><span class="p">),</span>
+                    <span class="nx">b3</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b3&#39;</span><span class="p">),</span>
+                    <span class="nx">a4</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a4&#39;</span><span class="p">),</span>
+                    <span class="nx">b4</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b4&#39;</span><span class="p">),</span>
+                    <span class="nx">a5</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a5&#39;</span><span class="p">),</span>
+                    <span class="nx">b5</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b5&#39;</span><span class="p">),</span>
+                    <span class="nx">a6</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a6&#39;</span><span class="p">),</span>
+                    <span class="nx">b6</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b6&#39;</span><span class="p">),</span>
+                    <span class="nx">a7</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a7&#39;</span><span class="p">),</span>
+                    <span class="nx">b7</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b7&#39;</span><span class="p">),</span>
+                    <span class="nx">a8</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a8&#39;</span><span class="p">),</span>
+                    <span class="nx">b8</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;b8&#39;</span><span class="p">),</span>
+                    <span class="nx">a9</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a9&#39;</span><span class="p">),</span>
+                    <span class="nx">a10</span> <span class="o">=</span> <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;a10&#39;</span><span class="p">);</span>
+
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a1</span><span class="p">,</span> <span class="p">{</span><span class="nx">element</span><span class="o">:</span> <span class="nx">b1</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;50px&#39;</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="s1">&#39;50px&#39;</span><span class="p">});</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a2</span><span class="p">,</span> <span class="p">{</span><span class="nx">element</span><span class="o">:</span> <span class="nx">b2</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">50</span><span class="p">});</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">({</span><span class="nx">element</span><span class="o">:</span> <span class="nx">a3</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="o">-</span><span class="mi">50</span><span class="p">},</span> <span class="p">{</span><span class="nx">element</span><span class="o">:</span> <span class="nx">b3</span><span class="p">});</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">({</span><span class="nx">element</span><span class="o">:</span> <span class="nx">a4</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="s1">&#39;50%&#39;</span><span class="p">},</span> <span class="p">{</span><span class="nx">element</span><span class="o">:</span> <span class="nx">b4</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="s1">&#39;50.5%&#39;</span><span class="p">});</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="nx">a5</span><span class="p">,</span> <span class="nx">b5</span><span class="p">);</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a6</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span> <span class="mi">50</span><span class="p">});</span>
+            <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;J_rePosition6&#39;</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a6</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span> <span class="mi">50</span><span class="p">});</span>
+            <span class="p">};</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="nx">a7</span><span class="p">);</span>
+            <span class="nx">id</span><span class="p">(</span><span class="s1">&#39;J_rePosition7&#39;</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">Position</span><span class="p">.</span><span class="nx">center</span><span class="p">(</span><span class="nx">a7</span><span class="p">);</span>
+            <span class="p">};</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a8</span><span class="p">,</span> <span class="p">{</span><span class="nx">element</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#b8&#39;</span><span class="p">),</span> <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;100%+50px&#39;</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="s1">&#39;50%-50&#39;</span><span class="p">});</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a9</span><span class="p">,</span> <span class="p">{</span><span class="nx">element</span><span class="o">:</span> <span class="nx">a9</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">});</span>
+            <span class="nx">Position</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">a10</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span> <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</pre></div>
+
+<script type="text/javascript">
+    seajs.use(['position', '$'], function(Position, $) {
+        $(function() {
+            var id = function(_id) { return document.getElementById(_id) },
+                    a1 = id('a1'),
+                    b1 = id('b1'),
+                    a2 = id('a2'),
+                    b2 = id('b2'),
+                    a3 = id('a3'),
+                    b3 = id('b3'),
+                    a4 = id('a4'),
+                    b4 = id('b4'),
+                    a5 = id('a5'),
+                    b5 = id('b5'),
+                    a6 = id('a6'),
+                    b6 = id('b6'),
+                    a7 = id('a7'),
+                    b7 = id('b7'),
+                    a8 = id('a8'),
+                    b8 = id('b8'),
+                    a9 = id('a9'),
+                    a10 = id('a10');
+
+            Position.pin(a1, {element: b1, x: '50px', y: '50px'});
+            Position.pin(a2, {element: b2, x: 50, y: 50});
+            Position.pin({element: a3, x: -50, y: -50}, {element: b3});
+            Position.pin({element: a4, x: 'center', y: '50%'}, {element: b4, x: '100%', y: '50.5%'});
+            Position.center(a5, b5);
+            Position.pin(a6, {x: 50,y: 50});
+            id('J_rePosition6').onclick = function() {
+                Position.pin(a6, {x: 50,y: 50});
+            };
+            Position.center(a7);
+            id('J_rePosition7').onclick = function() {
+                Position.center(a7);
+            };
+            Position.pin(a8, {element: $('#b8'), x: '100%+50px', y: '50%-50'});
+            Position.pin(a9, {element: a9, x: '100%', y: 0});
+            Position.pin(a10, { x: 400, y: 0 });
+        });
+    });
+</script>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

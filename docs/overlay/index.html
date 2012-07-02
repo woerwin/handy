@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>overlay</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/overlay/">Overlay</a>
+                
+                <a href="/handy/docs/overlay/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/overlay/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>Overlay</h1>
+<p>提供基于浮层表现的 UI 组件,浮层的显示、隐藏、定位</p>
+<p>建议您先阅读 <a href="http://github.com/alipay/arale/tree/master/lib/overlay">arale overlay</a></p>
+
+<h2>模块依赖</h2>
+
+<ul>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/widget">widget</a></li>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/zepto">zepto</a></li>
+<li><a href="position">handy position</a></li>
+<li><a href="android-shim">android-shim</a></li>
+</ul>
+
+<h2>Overlay 工作原理</h2>
+<p>Overlay 会自动为它里面所有配置了以 <code>data-overlay</code> 做前缀的属性的节点注册事件。
+当显示 <code>Overlay</code> 的 <code>element</code> 时，<code>Overlay</code> 会动态的在 <code>element</code> 后面添加一个 <a href="android-shim"><code>shim</code> (垫片)</a>，这个 <code>shim</code> 的作用将用来
+<a href="http://v.youku.com/v_show/id_XNDAxMTE1NTgw.html">解决 android 平台下事件穿透</a> 的问题，这也是 <strong><code>Overlay</code></strong> 组件的一大亮点。</p>
+<p><code>Overlay</code> 带有一套 data-attribute API，这些 data-attribute 数据接口将被子类继承：</p>
+<p><code>data-overlay-role</code> 表示 overlay 模块中的角色，当前只有一个可选参数 <code>trigger</code></p>
+<p><code>data-overlay-action</code> 表示 overlay 模块中角色的行为，当前可选参数有 <code>hide</code>、<code>destroy</code></p>
+<p><code>Overlay</code> 模块的 <code>data-overlay-role</code> 和 <code>data-overlay-action</code> 必需同时出现:
+<code>html
+&lt;a href=&quot;javascript:void(0)&quot; data-overlay-role=&quot;trigger&quot; data-overlay-action=&quot;hide&quot;&gt;关闭&lt;/a&gt;
+&lt;a href=&quot;javascript:void(0)&quot; data-overlay-role=&quot;trigger&quot; data-overlay-action=&quot;destroy&quot;&gt;销毁&lt;/a&gt;
+</code>
+<code>Overlay</code> 会自动为 <code>element</code> 元素中的所有定义了 <code>Overlay data-attribute</code> 参数的节点注册事件</p>
+
+<h2>Overlay 的亮点</h2>
+
+<ul>
+<li>解决了 Android OS 平台<a href="http://qiqicartoon.com/?p=1197">浮层事件穿透问题</a></li>
+</ul>
+
+<h2>测试用例</h2>
+
+<ul>
+<li><a href="../lib/overlay/tests/runner.html">runner.html</a></li>
+</ul>
+
+<h2>演示地址</h2>
+
+<ul>
+<li><a href="../lib/overlay/examples/overlay.html">Demo</a></li>
+<li><a href="http://github.com/alipay/arale/tree/master/lib/overlay/examples/overlay.html">Arale Overlay Demo</a></li>
+</ul>
+
+<h2>反馈意见</h2>
+<p>欢迎创建 <a href="http://github.com/alipay/handy/issues/new">GitHub Issue</a> 来提交反馈</p>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

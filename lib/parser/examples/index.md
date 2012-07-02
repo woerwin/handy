@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>  
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta name="format-detection" content="email=no" />
-	<title>jParser 一个神秘的HTML5 data-attribute解析器</title>
-	<style type="text/css">
+<style type="text/css">
         a{
             text-decoration:none;
         }
@@ -87,11 +77,7 @@
             padding:10px;
             border:1px solid #000;
         }
-    </style>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
-<!-- the pageTransition module start -->
+</style>
 <div class="box">
     <div id="J-page-box" data-module-name="pageTransition" data-pageTransition-id="abcd">
         <section data-pageTransition-role="page">
@@ -149,9 +135,6 @@ page:
 </pre>
         </article>
 </article>
-<!-- the pageTransition module end -->
-
-<!-- the overlay module start -->
 <div data-module-name="overlay" data-overlay-id="one">
     <data data-overlay-align='{"baseXY":["100%","100%"],"selfXY":["100%+30","100%"]}'></data>
     <a href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">关闭</a>
@@ -163,12 +146,11 @@ page:
 </div>
 <a href="javascript:void(0)" id="J-showOverlay" style="margin:0 30px;">右下角显示一个 Overlay </a>
 <a href="javascript:void(0)" id="J-showOverlay2" style="margin:0 30px;">在中央显示一个 Overlay </a>
-<!-- the overlay module end -->
 </div>
 
 <div id="J-performance-show"></div>
 
-<script>
+```javascript
     seajs.use(['parser','$'],function (parser,$){
         var completed = function (){
             var time = HandyParserData.time,
@@ -199,6 +181,4 @@ page:
         });
         HandyParser.start();
     });
-</script>
-</body>
-</html>
+```

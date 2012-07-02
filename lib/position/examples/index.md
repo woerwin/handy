@@ -1,15 +1,4 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="format-detection" content="email=no"/>
-    <title>Position Example</title>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-    <style>
+<style>
         .example {
             border:3px dashed #ccc;
             margin:30px 50px;
@@ -34,9 +23,8 @@
             line-height:200px;
             text-align:center;
         }
-    </style>
-</head>
-<body>
+</style>
+
 <div class="example">
     <h2>1. 基本情况：Position.pin(a1, {element: b1, x: 50, y: 50});</h2>
     <div id="a1" class="elem1">目标元素a1</div>
@@ -88,7 +76,7 @@
     <div id="a10" class="elem1" style="position:fixed;">目标元素a10</div>
 </div>
 
-<script>
+```javascript
     seajs.use(['position', '$'], function(Position, $) {
         $(function() {
             var id = function(_id) { return document.getElementById(_id) },
@@ -129,6 +117,4 @@
             Position.pin(a10, { x: 400, y: 0 });
         });
     });
-</script>
-</body>
-</html>
+```

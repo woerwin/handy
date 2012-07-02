@@ -1,4 +1,4 @@
-define('#backbone/0.9.2/backbone', ['underscore', '$'], function(require, exports) {
+define('#backbone/0.9.2/backbone', ['#underscore/1.3.3/underscore', '#zepto/0.9.0/zepto'], function(require, exports) {
 
   var previousUnderscore = this._;
   var previousJQuery = this.jQuery;

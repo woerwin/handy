@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <title>PageTransition - handy</title>
-    <style type="text/css">
+<style type="text/css">
         a{
             text-decoration:none;
         }
@@ -76,10 +66,8 @@
             background:#000;
             padding:5px;
         }
-    </style>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
+</style>
+
 <div class="box">
     <div id="J-page-box">
         <section data-pageTransition-role="page">
@@ -174,12 +162,13 @@ page:
     <a href="javascript:void(0)" data-pageTransition-role="2">查看 pageTransition 组件的基本配置</a>
     <a href="javascript:void(0)" data-pageTransition-role="3">PageTransition 嵌套</a>
 </nav>
-<script>
+
+```javascript
     var getDom = function (dom) {
         return document.querySelector(dom);
     };
 
-    seajs.use(['../src/pageTransition'], function (PageTransition) {
+    seajs.use(['pageTransition'], function (PageTransition) {
         var pageTransition = new PageTransition({
             element: '#J-page-box'
         }),
@@ -230,6 +219,4 @@ page:
             }
         });
     });
-</script>
-</body>
-</html>
+```

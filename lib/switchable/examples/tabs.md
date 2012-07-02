@@ -1,13 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="format-detection" content="email=no"/>
-<title>Tabs Example</title>
 <style>
     #demo1 {
         font: 14px/1.5 'Xin Gothic', 'PT Sans', 'Hiragino Sans GB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -51,11 +41,7 @@
     }
 </style>
 
-<script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
-
-    <div class="s-section">
+<div class="s-section">
 
         <div id="demo1" class="s-demo">
             <ul class="ui-switchable-nav">
@@ -83,7 +69,7 @@
         </div>
     </div>
 
-<script>
+```javascript
     var T, $, tabs;
 
     seajs.use(['$', 'tabs'], function($, Tabs) {
@@ -98,7 +84,4 @@
         });
 
     });
-</script>
-
-</body>
-</html>
+```

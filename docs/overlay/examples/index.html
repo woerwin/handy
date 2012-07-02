@@ -1,0 +1,327 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>overlay</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/overlay/">Overlay</a>
+                
+                <a href="/handy/docs/overlay/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/overlay/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+
+<div class="container">
+    <nav id="subnav">
+        
+        <a href="index.html">index</a>
+        
+        <a href="mask.html">mask</a>
+        
+    </nav>
+</div>
+
+
+            
+            <div class="container">
+                <style type="text/css">
+        .box {
+            width: auto;
+            margin: 0;
+            padding: 20px;
+        }
+
+        caption {
+            text-align: left;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        table {
+            margin: 10px 0;
+        }
+
+        table td:first-child {
+            width: 100px;
+        }
+        .des{
+            background:#F0F1F8;
+            border:1px solid #D4D8EB;
+            padding:10px;
+            line-height:22px;
+        }
+        pre,code{
+            padding:10px;
+            background:#FCFBFA;
+            border:1px solid #EFEEED;
+            border-left-width:5px;
+        }
+        .green{color:green;}
+        .red{color:red;}
+        .J-confirm{
+            background:#d4d4d4;
+            padding:10px;
+            border:1px solid gray;
+            color:#fff;
+        }
+        .J-confirm a{
+            color: #f50;
+        }
+        a{
+            text-decoration:none;
+            margin-bottom:20px;
+        }
+        body{
+            margin:0;
+            padding:0;
+        }
+</style>
+
+<div class="box">
+  <a href="javascript:void(0)" id="J-overlay-one">把一个 select 显示在我的右侧</a>
+  <a href="http://weibo.com/askmarket#1337321564730" target="_blank">
+    <img src="http://tp4.sinaimg.cn/1660497691/50/1290994036/1" alt="颂赞" />
+  </a>
+  <br /><br /><br />
+  <input type="radio" /><br />
+  <input type="checkbox" /><br />
+  <input type="text" /><br />
+  <a href="javascript:void(0)" id="J-overlay-two">在我的上方显示一个浮层</a><br />
+  <span class="tip">建议您使用 android 观察这个示例</span><br />
+  <br /><br /><br />
+  <input type="submit" value="有动画的 overlay" id="J-anim-overlay" />
+  <select style="display:none;">
+      <option>one</option>
+      <option>two</option>
+  </select><br />
+  <div style="color:#fff;text-align:left;background:rgba(0,0,0,0.4);padding:30px 150px 100px 10px;border:1px solid gray;" id="J-customise-layer">
+      自定义浮层
+      <br />
+      <a href="javascript:void(0)" class="hide" style="margin-right:30px;">隐藏</a>
+      <a href="javascript:void(0)" class="destroy">销毁</a>
+  </div>
+</div>
+<div class="highlight"><pre><span class="kd">function</span> <span class="nx">getDOM</span><span class="p">(</span><span class="nx">dom</span><span class="p">){</span><span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="nx">dom</span><span class="p">);}</span>
+
+    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;overlay&#39;</span><span class="p">,</span><span class="s1">&#39;$&#39;</span><span class="p">,</span><span class="s1">&#39;position&#39;</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Overlay</span><span class="p">,</span><span class="nx">$</span><span class="p">,</span><span class="nx">Position</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 把一个 select 显示在我的右侧</span>
+        <span class="kd">var</span> <span class="nx">overlayOne</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Overlay</span><span class="p">({</span>
+            <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;select&#39;</span><span class="p">,</span>
+            <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">baseElement</span><span class="o">:</span> <span class="s1">&#39;#J-overlay-one&#39;</span><span class="p">,</span>
+                <span class="nx">baseXY</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">getDOM</span><span class="p">(</span><span class="s1">&#39;#J-overlay-one&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+            <span class="nx">overlayOne</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+        <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+
+        <span class="nx">getDOM</span><span class="p">(</span><span class="s1">&#39;#J-overlay-two&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+            <span class="nx">overlayTwo</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+        <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+
+        <span class="c1">// 在我的上方显示一个浮层</span>
+        <span class="kd">var</span> <span class="nx">overlayTwo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Overlay</span><span class="p">({</span>
+            <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-customise-layer&#39;</span><span class="p">,</span>
+            <span class="nx">zIndex</span><span class="o">:</span> <span class="mi">88888</span><span class="p">,</span>
+            <span class="nx">position</span><span class="o">:</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span>
+            <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">selfXY</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;100%&#39;</span><span class="p">],</span>
+                <span class="nx">baseElement</span><span class="o">:</span> <span class="s1">&#39;#J-overlay-two&#39;</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">overlayTwo</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+        <span class="nx">overlayTwo</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">o</span><span class="p">){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">)).</span><span class="nx">css</span><span class="p">({</span>
+                <span class="s1">&#39;-webkit-box-shadow&#39;</span><span class="o">:</span> <span class="s1">&#39;0px 0px 10px rgba(0,0,0,.7)&#39;</span>
+            <span class="p">}).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.hide&#39;</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+                <span class="nx">o</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+            <span class="p">});</span>
+            <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">)).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.destroy&#39;</span><span class="p">).</span><span class="nx">unbind</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+                <span class="nx">o</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+            <span class="p">});</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">android</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.tip&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;这个浮层在 android 平台下是可以阻止事件的穿透，&#39;</span><span class="o">+</span>
+                                                              <span class="s1">&#39;你无法点击后面的表单控件&lt;br /&gt;&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">overlayTwo</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">o</span><span class="p">){</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">android</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.tip&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;浮层隐藏，后面的元素可正常点击&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+
+        <span class="c1">// 有动画模式的 overlay</span>
+        <span class="kd">var</span> <span class="nx">AnimOverlay</span> <span class="o">=</span> <span class="nx">Overlay</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+            <span class="nx">hide</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(){</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
+                    <span class="nx">scale</span><span class="o">:</span> <span class="mi">0</span>
+                <span class="p">},</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;ease&#39;</span><span class="p">,</span><span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+                    <span class="c1">// 为使用 Overlay 原型方法 show 能够准确取到 element 的宽,高的值</span>
+                    <span class="c1">// 需要手动清除 scale(0) 的值</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+                        <span class="s1">&#39;-webkit-transform&#39;</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>
+                    <span class="p">});</span>
+
+                <span class="p">},</span><span class="k">this</span><span class="p">));</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="kd">var</span> <span class="nx">animoverlay</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnimOverlay</span><span class="p">({</span>
+            <span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;&lt;div style=&quot;background:rgba(255,255,255,.7);width:260px;height:240px;padding:10px;&#39;</span><span class="o">+</span>
+                     <span class="s1">&#39;border:1px solid gray;&quot;&gt;&lt;h4&gt;一个带有动画模式的扩展&lt;/h4&gt;&#39;</span><span class="o">+</span>
+                     <span class="s1">&#39;&lt;a href=&quot;javascript:void(0)&quot; style=&quot;margin-right:40px;&quot; &#39;</span><span class="o">+</span>
+                     <span class="s1">&#39;data-overlay-role=&quot;trigger&quot; data-overlay-action=&quot;hide&quot;&gt;关闭&lt;/a&gt;&lt;a href=&quot;javascript:void(0)&quot; &#39;</span><span class="o">+</span>
+                     <span class="s1">&#39;data-overlay-role=&quot;trigger&quot; data-overlay-action=&quot;destroy&quot;&gt;销毁&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">,</span>
+            <span class="nx">position</span><span class="o">:</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span>
+            <span class="nx">zIndex</span><span class="o">:</span> <span class="mi">99999</span>
+        <span class="p">});</span>
+        <span class="nx">animoverlay</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">o</span><span class="p">){</span>
+            <span class="nx">o</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+                <span class="s1">&#39;-webkit-box-shadow&#39;</span><span class="o">:</span> <span class="s1">&#39;0 0 20px #000&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;-webkit-transform&#39;</span><span class="o">:</span> <span class="s1">&#39;scale(0)&#39;</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+        <span class="nx">getDOM</span><span class="p">(</span><span class="s1">&#39;#J-anim-overlay&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+            <span class="nx">animoverlay</span><span class="p">.</span><span class="nx">show</span><span class="p">().</span><span class="nx">element</span><span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
+                <span class="nx">scale</span><span class="o">:</span> <span class="mi">1</span>
+            <span class="p">},</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;ease&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+
+            <span class="p">});</span>
+        <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">});</span>
+</pre></div>
+
+<script type="text/javascript">
+    function getDOM(dom){return document.querySelector(dom);}
+
+    seajs.use(['overlay','$','position'], function (Overlay,$,Position) {
+        // 把一个 select 显示在我的右侧
+        var overlayOne = new Overlay({
+            element: 'select',
+            align: {
+                baseElement: '#J-overlay-one',
+                baseXY: ['100%',0]
+            }
+        });
+        getDOM('#J-overlay-one').addEventListener('click',function (){
+            overlayOne.show();
+        },false);
+
+        getDOM('#J-overlay-two').addEventListener('click',function (){
+            overlayTwo.show();
+        },false);
+
+        // 在我的上方显示一个浮层
+        var overlayTwo = new Overlay({
+            element: '#J-customise-layer',
+            zIndex: 88888,
+            position: 'absolute',
+            align: {
+                selfXY: [0,'100%'],
+                baseElement: '#J-overlay-two'
+            }
+        });
+        overlayTwo.render();
+        overlayTwo.after('show',function (o){
+            $(o.get('element')).css({
+                '-webkit-box-shadow': '0px 0px 10px rgba(0,0,0,.7)'
+            }).find('.hide').unbind('click').click(function (){
+                o.hide();
+            });
+            $(o.get('element')).find('.destroy').unbind('click').click(function (){
+                o.destroy();
+            });
+            $.os.android && $('.tip').css('color','red').html('这个浮层在 android 平台下是可以阻止事件的穿透，'+
+                                                              '你无法点击后面的表单控件<br />');
+        });
+        overlayTwo.after('hide',function (o){
+            $.os.android && $('.tip').css('color','red').html('浮层隐藏，后面的元素可正常点击');
+        });
+
+        // 有动画模式的 overlay
+        var AnimOverlay = Overlay.extend({
+            hide: function (){
+                this.element.animate({
+                    scale: 0
+                },300,'ease',$.proxy(function (){
+                    // 为使用 Overlay 原型方法 show 能够准确取到 element 的宽,高的值
+                    // 需要手动清除 scale(0) 的值
+                    this.element.css({
+                        '-webkit-transform': 'none'
+                    });
+
+                },this));
+                this.set('visible', false);
+            }
+        });
+        var animoverlay = new AnimOverlay({
+            template: '<div style="background:rgba(255,255,255,.7);width:260px;height:240px;padding:10px;'+
+                     'border:1px solid gray;"><h4>一个带有动画模式的扩展</h4>'+
+                     '<a href="javascript:void(0)" style="margin-right:40px;" '+
+                     'data-overlay-role="trigger" data-overlay-action="hide">关闭</a><a href="javascript:void(0)" '+
+                     'data-overlay-role="trigger" data-overlay-action="destroy">销毁</a></div>',
+            position: 'absolute',
+            zIndex: 99999
+        });
+        animoverlay.after('show',function (o){
+            o.element.css({
+                '-webkit-box-shadow': '0 0 20px #000',
+                '-webkit-transform': 'scale(0)'
+            });
+        });
+        getDOM('#J-anim-overlay').addEventListener('click',function (){
+            animoverlay.show().element.animate({
+                scale: 1
+            },300,'ease',function (){
+
+            });
+        },false);
+    });
+</script>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

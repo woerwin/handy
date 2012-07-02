@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>android-shim</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/android-shim/">Android-Shim</a>
+                
+                <a href="/handy/docs/android-shim/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/android-shim/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+
+
+            
+            <div class="container">
+                <style>
+    body{
+        padding: 0;
+        margin: 0;
+        text-align:center;
+    }
+    a{
+        text-decoration:none;
+    }
+</style>
+<p><h1>您应该使用 Android OS 内置浏览器访问这个页面</h1>
+<a id="J-show" href="javascript:void(0)">显示一个 shim</a>
+<a id="J-hide" href="javascript:void(0)" style="margin-left:30px;">销毁一个 shim</a>
+<br />    <br /><br />
+<select>
+    <option value="one">one</option>
+    <option value="two">two</option>
+</select>
+<br />
+<input type="radio" />
+<br />
+<input type="text" />
+<br />
+<input type="checkbox" /><br />
+<a href="http://qiqicartoon.com" target="_blank">知托付-颂赞</a>
+</body></p>
+<div class="highlight"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;android-shim&#39;</span><span class="p">,</span><span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Shim</span><span class="p">,</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">shown</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">shim</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#J-show&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">shown</span> <span class="o">||</span> <span class="o">!</span><span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">android</span><span class="p">){</span><span class="k">return</span><span class="p">;}</span>
+            <span class="nx">shown</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="nx">shim</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shim</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div id=&quot;J-shim&quot;&gt;我可以遮住后面的表单控件&lt;/div&gt;&#39;</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+                        <span class="nx">left</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">).</span><span class="nx">offset</span><span class="p">().</span><span class="nx">left</span><span class="p">,</span>
+                        <span class="nx">top</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">).</span><span class="nx">offset</span><span class="p">().</span><span class="nx">top</span> <span class="p">,</span>
+                        <span class="nx">position</span><span class="o">:</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span>
+                        <span class="nx">zIndex</span><span class="o">:</span> <span class="mi">3</span>  <span class="p">,</span>
+                        <span class="nx">background</span><span class="o">:</span> <span class="s1">&#39;rgba(0,0,0,.5)&#39;</span><span class="p">,</span>
+                        <span class="nx">padding</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="nx">height</span><span class="o">:</span><span class="mi">150</span><span class="p">,</span>
+                        <span class="nx">color</span> <span class="o">:</span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+                    <span class="p">})</span>
+                    <span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">));</span>
+            <span class="nx">shim</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+        <span class="p">});</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#J-hide&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">shown</span> <span class="o">||</span> <span class="o">!</span><span class="nx">$</span><span class="p">.</span><span class="nx">os</span><span class="p">.</span><span class="nx">android</span><span class="p">){</span><span class="k">return</span><span class="p">;}</span>
+            <span class="nx">shown</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#J-shim&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+            <span class="nx">shim</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">})</span>
+</pre></div>
+
+<script type="text/javascript">
+    seajs.use(['android-shim','$'], function (Shim,$) {
+        var shown = false;
+        var shim = null;
+        $('#J-show').click(function (){
+            if(shown || !$.os.android){return;}
+            shown = true;
+            shim = new Shim($('<div id="J-shim">我可以遮住后面的表单控件</div>')
+                    .css({
+                        left: $('select').offset().left,
+                        top: $('select').offset().top ,
+                        position: 'absolute',
+                        zIndex: 3  ,
+                        background: 'rgba(0,0,0,.5)',
+                        padding:5,
+                        height:150,
+                        color :'#fff',
+                    })
+                    .appendTo('body'));
+            shim.sync();
+        });
+        $('#J-hide').click(function (){
+            if(!shown || !$.os.android){return;}
+            shown = false;
+            $('#J-shim').remove();
+            shim.destroy();
+        });
+    })
+</script>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

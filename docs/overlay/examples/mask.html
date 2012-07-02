@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>overlay</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/overlay/">Overlay</a>
+                
+                <a href="/handy/docs/overlay/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/overlay/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+
+<div class="container">
+    <nav id="subnav">
+        
+        <a href="index.html">index</a>
+        
+        <a href="mask.html">mask</a>
+        
+    </nav>
+</div>
+
+
+            
+            <div class="container">
+                <style>
+    * {
+        margin:0;
+        padding:0;
+    }
+    body {
+        height:1000px;
+        padding: 0;
+        margin: 0;
+    }
+    .example {
+        border:3px dashed #ccc;
+        margin:30px 50px;
+        color:#777;
+        font-size:16px;
+    }
+    h2 {
+        color:#2296CC;
+        font-size:16px;
+        margin:10px;
+        font-family: consolas;
+    }
+</style>
+
+<div class="example">
+    <h2>1. 显示默认遮罩层：mask.show();</h2>
+    <button id="a">点击显示默认遮罩层</button>
+</div>
+<div class="example">
+    <h2>2. 显示修改的遮罩层：mask.set(&lsquo;backgroundColor&rsquo;, &lsquo;green&rsquo;).set(&lsquo;opacity&rsquo;, &lsquo;0.3&rsquo;).show();;</h2>
+    <button id="b">点击显示修改的遮罩层</button>
+</div>
+<div class="highlight"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;mask&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mask</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">new</span> <span class="nx">mask</span><span class="p">().</span><span class="nx">show</span><span class="p">();</span>
+        <span class="p">};</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">_mask</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mask</span><span class="p">({</span>
+                <span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;&lt;div style=&quot;-webkit-box-pack:center;dipslay:-webkit-box;&quot;&gt;&lt;a style=&quot;background:#000;padding:5px;color:#fff;text-decoration:none;&quot; href=&quot;javascript:void(0)&quot; data-module-name=&quot;overlay&quot; data-overlay-role=&quot;trigger&quot; data-overlay-action=&quot;hide&quot;&gt;关闭&lt;/a&gt;&lt;/div&gt;&#39;</span>
+            <span class="p">});</span>
+            <span class="nx">_mask</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;backgroundColor&#39;</span><span class="p">,</span> <span class="s1">&#39;rgba(13,40,322,.3)&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+        <span class="p">};</span>
+
+    <span class="p">});</span>
+</pre></div>
+
+<script type="text/javascript">
+    seajs.use('mask', function(mask) {
+
+        document.getElementById('a').onclick = function() {
+            new mask().show();
+        };
+        document.getElementById('b').onclick = function() {
+            var _mask = new mask({
+                template: '<div style="-webkit-box-pack:center;dipslay:-webkit-box;"><a style="background:#000;padding:5px;color:#fff;text-decoration:none;" href="javascript:void(0)" data-module-name="overlay" data-overlay-role="trigger" data-overlay-action="hide">关闭</a></div>'
+            });
+            _mask.set('backgroundColor', 'rgba(13,40,322,.3)').show();
+        };
+
+    });
+</script>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

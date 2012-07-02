@@ -1,22 +1,7 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="format-detection" content="email=no"/>
-<title>Switchable Auto-render Examples</title>
 <style>
     * {
         margin: 0;
         padding: 0;
-    }
-
-    body {
-        padding: 5px;
-        font: 14px/1.5 'Xin Gothic', 'PT Sans', 'Hiragino Sans GB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
     li {
@@ -27,7 +12,6 @@
         text-decoration: none;
     }
 
-    body { padding: 20px 50px 50px; }
     h2 { margin: 30px 0 10px; font-size: 17px; }
     .loading { background: #EBF5FA url(assets/loading.gif) no-repeat 50% 50%; }
 
@@ -41,8 +25,7 @@
         font-size: 14px;
     }
 </style>
-</head>
-<body>
+
 <h2>Carousel - 旋转木马</h2>
 <style>
     .scrollable {
@@ -126,14 +109,11 @@
     </div>
 </div>
 
-<script src="../../../tools/seajs-and-its-friends.js"></script>
-<script>
+```javascript
 seajs.use(['$','carousel'], function($,carousel) {
     new  carousel({
         element: '#demo4' ,
         viewSize: [200]
     });
 });
-</script>
-</body>
-</html>
+```

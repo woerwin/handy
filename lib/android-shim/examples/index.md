@@ -1,14 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="format-detection" content="telephone=no" />
-<meta name="format-detection" content="email=no" />
-<title>android-shim Example</title>
-<script src="../../../tools/seajs-and-its-friends.js"></script>
 <style>
     body{
         padding: 0;
@@ -19,8 +8,7 @@
         text-decoration:none;
     }
 </style>
-</head>
-<body>
+
 <h1>您应该使用 Android OS 内置浏览器访问这个页面</h1>
 <a id="J-show" href="javascript:void(0)">显示一个 shim</a>
 <a id="J-hide" href="javascript:void(0)" style="margin-left:30px;">销毁一个 shim</a>
@@ -37,8 +25,9 @@
 <input type="checkbox" /><br />
 <a href="http://qiqicartoon.com" target="_blank">知托付-颂赞</a>
 </body>
-<script>
-    seajs.use(['../src/android-shim','$'], function (Shim,$) {
+
+```javascript
+    seajs.use(['android-shim','$'], function (Shim,$) {
         var shown = false;
         var shim = null;
         $('#J-show').click(function (){
@@ -65,6 +54,5 @@
             shim.destroy();
         });
     })
-</script>
-</html>
+```
 

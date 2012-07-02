@@ -1,14 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="format-detection" content="email=no"/>
-<title>Dialog Example</title>
-<script src="../../../tools/seajs-and-its-friends.js"></script>
 <style>
     * {
         margin:0;
@@ -24,36 +13,25 @@
         margin:10px;
     }
 </style>
-</head>
-<body>
-    <input type="button" id="trigger1" value="基本对话框" />
-    <select>
-        <option value="1">one</option>
-    </select>
-    <input type="button" id="trigger2" value="淡入淡出对话框" />
-    <input type="button" id="trigger3" value="水平展开对话框" />
-    <input type="button" id="trigger4" value="垂直展开对话框" />
-    <input type="button" id="trigger5" value="从左移入对话框" />
-    <input type="button" id="trigger6" value="从右移入对话框" />
-    <input type="button" id="trigger7" value="从上移入对话框" />
-    <input type="button" id="trigger8" value="从下移入对话框" />
-    <input type="button" id="trigger8-1" value="混合动画对话框一" />
-    <input type="button" id="trigger8-2" value="混合动画对话框二" />        
-    
-    <input type="button" id="trigger9" value="ajax对话框" />
-    <input type="button" id="trigger10" value="iframe对话框" />    
-    
-<script>
 
-// for debug
-seajs.config({
-    /*
-    map: [
-        [/^(.+)\/widget\.js.*$/, '$1/../../../lib/widget/src/widget.js']
-        ]
-    */
-});
+<input type="button" id="trigger1" value="基本对话框" />
+<select>
+    <option value="1">one</option>
+</select>
+<input type="button" id="trigger2" value="淡入淡出对话框" />
+<input type="button" id="trigger3" value="水平展开对话框" />
+<input type="button" id="trigger4" value="垂直展开对话框" />
+<input type="button" id="trigger5" value="从左移入对话框" />
+<input type="button" id="trigger6" value="从右移入对话框" />
+<input type="button" id="trigger7" value="从上移入对话框" />
+<input type="button" id="trigger8" value="从下移入对话框" />
+<input type="button" id="trigger8-1" value="混合动画对话框一" />
+<input type="button" id="trigger8-2" value="混合动画对话框二" />
 
+<input type="button" id="trigger9" value="ajax对话框" />
+<input type="button" id="trigger10" value="iframe对话框" />
+    
+```javascript
 seajs.use(['baseDialog', 'animDialog'], function(BaseDialog, AnimDialog) {
     
     var closeDialogTpl = '<div class="overlay"><button id="close">点击关闭</button><p>肯定是房间里萨的看法金克拉束带结发<a style="color:#fff;font-size:14px;padding-top:10px;" href="javascript:void(0)" data-overlay-role="trigger" data-overlay-action="hide">点击这里也可以关闭</a></p></div>';
@@ -248,8 +226,6 @@ seajs.use(['baseDialog', 'animDialog'], function(BaseDialog, AnimDialog) {
         iframeUrl: 'https://www.alipay.com/'
     });
 });
-</script>
-</body>
-</html>
+```
 
 

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>parser</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/parser/">Parser</a>
+                
+                <a href="/handy/docs/parser/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/parser/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>parser</h1>
+
+<h1></h1>
+<p>一个非常轻巧的 HTML5 data-attribute 解析器。</p>
+
+<h2>工作原理</h2>
+<p><code>parser</code> 的工作原理非常简单。当页面成功加载 <code>parser</code> 后，<code>parser</code> 会自动遍历所有带有 <code>data-module-name</code> 属性的节点，
+然后在这些节点上查找当前模块所需的数据，<code>parser</code>
+会对这些数据做处理，最后形成一个 moduleName : moduleData 的 JSON 数据
+<code>js
+{
+  &#39;tooltip&#39; : [{},{}],
+  &#39;pageTransition&#39; : [{}]
+  ...
+}
+</code>
+<code>parser</code> 再根据处理后的数据做细分处理，细分处理的最终目的是得到以下数据：
+<code>js
+[
+  {
+    moduleData: {},
+    moduleId: &#39;&#39;,
+    moduleName: &#39;pageTransition&#39;
+  },
+  {
+    moduleData: {},
+    moduleId: &#39;&#39;,
+    moduleName: &#39;tooltip&#39;
+  },
+  {
+    moduleData: {},
+    moduleId: &#39;tooltip2&#39;,
+    moduleName: &#39;tooltip&#39;
+  }
+  ...
+]
+</code>
+完成所有数据的细分处理后，<code>parser</code> 自动从指定的目录加载 <a href="https://github.com/alipay/handy/tree/master/lib">Handy 模块</a>，
+然后自动实例化，并立刻调用实例化对象的 <code>render</code> 方法。<code>Handy</code> 将把每个实例化对象 push 到 <code>window.HandyParserData</code> 属性中，因此用户可以通过 <code>HandyParserData</code> 获取这些实例化对象做更复杂的业务逻辑处理。</p>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

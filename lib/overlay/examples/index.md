@@ -1,14 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <title>Overlay - handy</title>
-    <style type="text/css">
+<style type="text/css">
         .box {
             width: auto;
             margin: 0;
@@ -61,10 +51,8 @@
             margin:0;
             padding:0;
         }
-    </style>
-    <script src="../../../tools/seajs-and-its-friends.js"></script>
-</head>
-<body>
+</style>
+
 <div class="box">
   <a href="javascript:void(0)" id="J-overlay-one">把一个 select 显示在我的右侧</a>
   <a href="http://weibo.com/askmarket#1337321564730" target="_blank">
@@ -89,7 +77,8 @@
       <a href="javascript:void(0)" class="destroy">销毁</a>
   </div>
 </div>
-<script>
+
+```javascript
     function getDOM(dom){return document.querySelector(dom);}
 
     seajs.use(['overlay','$','position'], function (Overlay,$,Position) {
@@ -175,6 +164,4 @@
             });
         },false);
     });
-</script>
-</body>
-</html>
+```
