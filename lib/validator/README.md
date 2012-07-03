@@ -58,12 +58,14 @@ HTML
 
 JS
 
+```javascript
     seajs.use(['widget', '$'], function(Widget, $) {
         $(function() {
             // 初始化所有使用`data-widget`指定的组件。
             Widget.autoRenderAll();
         });
     });
+```
 
 ###JS API
 
@@ -94,6 +96,7 @@ HTML
 
 JS
 
+```javascript
     seajs.use(['validator', '$'], function(Validator, $) {
         $(function() {
             var validator = new Validator({
@@ -119,6 +122,7 @@ JS
             });
         });
     });
+```
 
 ##Documentation
 

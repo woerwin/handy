@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>validator</title>
+        <script type="text/javascript">
+            var debug = "False";
+        </script>
+        
+        
+        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
+        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
+        <script src="/handy/tools/seajs-and-its-friends.js"></script>
+        
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="header">
+            <h1 id="brand"><a href="/handy">Handy</a></h1>
+            <nav id="nav" role="navigation">
+                <a href="/handy/docs/validator/">Validator</a>
+                
+                <a href="/handy/docs/validator/examples/">Examples</a>
+                
+                
+                <a id="nav-test" href="/handy/lib/validator/tests/runner.html">Test</a>
+                
+            </nav>
+        </header>
+
+        <div id="main">
+            
+            
+            <div class="container">
+                <h1>Validator</h1>
+<p>Validator 是表单校验组件。</p>
+
+<h2>模块依赖</h2>
+
+<ul>
+<li>  <a href="seajs">seajs</a></li>
+<li>  <a href="widget">widget</a></li>
+<li>  <a href="jquery">jquery</a> | <a href="zepto">zepto</a></li>
+</ul>
+
+<h2>Feature List</h2>
+
+<ul>
+<li><p>  HTML5 form API。</p></li>
+<li><p>  data-attribute API。</p></li>
+<li><p>  异步校验。</p></li>
+<li><p>  校验规则的组合，与、或、非。</p></li>
+<li><p>  校验规则的 dynamic binding，和 unbinding。 </p></li>
+<li><p>  (TODO)关联性校验/级联校验。例如当满足一个条件时校验某种规则，满足另外的条件校验其他规则。</p></li>
+</ul>
+
+<h2>How to Use</h2>
+<p>提供两种方式调用：</p>
+
+<ul>
+<li>  DOM。利用 html5 form API 和 data-attribute 在 DOM 中完成调用。</li>
+<li>  JS API。在 javascript 代码中完成 validator 配置和调用。</li>
+</ul>
+
+<h3>DOM调用</h3>
+<p>HTML</p>
+
+<pre><code>&lt;form data-widget=&quot;validator&quot; class=&quot;ui-form&quot;&gt;
+    &lt;div class=&quot;ui-form-item&quot;&gt;
+        &lt;label for=&quot;username&quot; class=&quot;ui-label&quot;&gt;&lt;span class=&quot;ui-form-required&quot;&gt;*&lt;/span&gt;用户名：&lt;/label&gt;
+        &lt;input id=&quot;username&quot; name=&quot;username&quot; class=&quot;ui-input&quot; required type=&quot;email&quot; minlength=&quot;1&quot; maxlength=&quot;20&quot; /&gt;
+        &lt;div class=&quot;ui-form-explain&quot;&gt;用户名为电子邮箱。&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;ui-form-item ui-form-item-error&quot;&gt;
+        &lt;label for=&quot;password&quot; class=&quot;ui-label&quot;&gt;&lt;span class=&quot;ui-form-required&quot;&gt;*&lt;/span&gt;密码：&lt;/label&gt;
+        &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; class=&quot;ui-input&quot; minlength=&quot;5&quot; /&gt;
+        &lt;div class=&quot;ui-form-explain&quot;&gt;密码的长度必须大于或等于5。&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;ui-form-item&quot;&gt;
+        &lt;label for=&quot;password-confirmation&quot; class=&quot;ui-label&quot;&gt;&lt;span class=&quot;ui-form-required&quot;&gt;*&lt;/span&gt;重复输入密码：&lt;/label&gt;
+        &lt;input id=&quot;password-confirmation&quot; name=&quot;password-confirmation&quot; type=&quot;password&quot; class=&quot;ui-input&quot; data-rule=&quot;confirmation{target: '#password'}&quot; /&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;ui-form-item&quot;&gt;
+        &lt;span class=&quot;ui-button-morange ui-button&quot;&gt;&lt;input class=&quot;ui-button-text&quot; value=&quot;确定&quot; type=&quot;submit&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+<p>JS</p>
+<div class="highlight"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;widget&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Widget</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// 初始化所有使用`data-widget`指定的组件。</span>
+            <span class="nx">Widget</span><span class="p">.</span><span class="nx">autoRenderAll</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</pre></div>
+
+<h3>JS API</h3>
+<p>HTML</p>
+
+<pre><code>&lt;form class=&quot;ui-form&quot;&gt;
+    &lt;div class=&quot;ui-form-item&quot;&gt;
+        &lt;label for=&quot;username&quot; class=&quot;ui-label&quot;&gt;&lt;span class=&quot;ui-form-required&quot;&gt;*&lt;/span&gt;用户名：&lt;/label&gt;
+        &lt;input id=&quot;username&quot; name=&quot;username&quot; class=&quot;ui-input&quot; /&gt;
+        &lt;div class=&quot;ui-form-explain&quot;&gt;用户名为电子邮箱。&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;ui-form-item ui-form-item-error&quot;&gt;
+        &lt;label for=&quot;password&quot; class=&quot;ui-label&quot;&gt;&lt;span class=&quot;ui-form-required&quot;&gt;*&lt;/span&gt;密码：&lt;/label&gt;
+        &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; class=&quot;ui-input&quot; /&gt;
+        &lt;div class=&quot;ui-form-explain&quot;&gt;密码的长度必须大于或等于5。&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;ui-form-item&quot;&gt;
+        &lt;label for=&quot;password-confirmation&quot; class=&quot;ui-label&quot;&gt;&lt;span class=&quot;ui-form-required&quot;&gt;*&lt;/span&gt;重复输入密码：&lt;/label&gt;
+        &lt;input id=&quot;password-confirmation&quot; name=&quot;password-confirmation&quot; type=&quot;password&quot; class=&quot;ui-input&quot; /&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;ui-form-item&quot;&gt;
+        &lt;span class=&quot;ui-button-morange ui-button&quot;&gt;&lt;input class=&quot;ui-button-text&quot; value=&quot;确定&quot; type=&quot;submit&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+<p>JS</p>
+<div class="highlight"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">&#39;validator&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Validator</span><span class="p">,</span> <span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">validator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Validator</span><span class="p">({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;form&#39;</span>
+            <span class="p">});</span>
+
+            <span class="nx">validator</span><span class="p">.</span><span class="nx">addItem</span><span class="p">({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;[name=username]&#39;</span><span class="p">,</span>
+                <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">rule</span><span class="o">:</span> <span class="s1">&#39;email minlength{min:1} maxlength{max:20}&#39;</span>
+            <span class="p">})</span>
+
+            <span class="p">.</span><span class="nx">addItem</span><span class="p">({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;[name=password]&#39;</span><span class="p">,</span>
+                <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">rule</span><span class="o">:</span> <span class="s1">&#39;minlength{min:5}&#39;</span>
+            <span class="p">})</span>
+
+            <span class="p">.</span><span class="nx">addItem</span><span class="p">({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;[name=password-confirmation]&#39;</span><span class="p">,</span>
+                <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">rule</span><span class="o">:</span> <span class="s1">&#39;confirmation{target: &quot;#password&quot;}&#39;</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+</pre></div>
+
+<h2>Documentation</h2>
+
+<ul>
+<li>  <a href="validator/docs/rules.md">校验规则</a></li>
+<li>  <a href="validator/docs/api.md">JS API</a></li>
+<li>  <a href="validator/docs/validate-with-html.md">Validate with HTML</a></li>
+<li>  <a href="validator/docs/how-to-extend-validator-core.md">基于 validator-core 自定义 UI 反馈</a></li>
+</ul>
+
+            </div>
+            
+        </div>
+        <hr class="end" />
+        <script type="text/javascript">
+            seajs.use('$', function($) {
+                $('#nav-test').click(function() {
+                    var href = $(this).attr('href');
+                    var iframe = '<div class="container"><iframe src="' +
+                        href + '" frameborder="0" width="100%" height="640">' +
+                        '</iframe></div>';
+                    $('#main').html(iframe);
+                    !!history.pushState && history.pushState(null, 'Test', href);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

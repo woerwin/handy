@@ -51,7 +51,8 @@ seajs.config({
         'storage': 'storage/0.9.0/storage',
         'scrollView': 'scrollView/0.9.2/scrollView',
         'network': 'network/0.9.0/network',
-        'floatLayer': 'floatLayer/0.9.0/floatLayer'
+        'floatLayer': 'floatLayer/0.9.0/floatLayer',
+        'validator': 'validator/0.8.1/validator'
 
 
         // Others

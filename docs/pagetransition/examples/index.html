@@ -239,7 +239,7 @@ trigger:
             <span class="p">}</span>
         <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
         <span class="nx">getDom</span><span class="p">(</span><span class="s1">&#39;#J-getPage&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="nx">pageTransition</span><span class="p">.</span><span class="nx">getPage</span><span class="p">().</span><span class="nx">innerHTML</span><span class="p">)</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">pageTransition</span><span class="p">.</span><span class="nx">getPage</span><span class="p">().</span><span class="nx">html</span><span class="p">())</span>
         <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
 
         <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionStart&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span><span class="nx">page</span><span class="p">,</span><span class="nx">o</span><span class="p">){</span>
@@ -297,7 +297,7 @@ trigger:
             }
         },false);
         getDom('#J-getPage').addEventListener('click',function (e){
-            alert(pageTransition.getPage().innerHTML)
+            alert(pageTransition.getPage().html())
         },false);
 
         pageTransition.on('transitionStart',function (type,page,o){

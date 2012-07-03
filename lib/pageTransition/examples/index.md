@@ -203,7 +203,7 @@ page:
             }
         },false);
         getDom('#J-getPage').addEventListener('click',function (e){
-            alert(pageTransition.getPage().innerHTML)
+            alert(pageTransition.getPage().html())
         },false);
 
         pageTransition.on('transitionStart',function (type,page,o){
