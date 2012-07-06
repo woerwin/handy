@@ -30,6 +30,7 @@ iScroll 的滚动效果主要通过css中translate数值的改变来实现滑动
         <div class="content"></div>
     <div>
 ```
+
 ```js
     seajs.use('../src/iscroll', function (iScroll) {
         var example1 = new iScroll(

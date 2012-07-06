@@ -26,6 +26,7 @@ flip 对于html结构有一定的要求，一般而言，html结构如下：
 ```
 在以上的结构中，data-flip-role是必须设置的选项，注明是哪个面，被该表明的标签需要是块级元素，并且会被自动绝对定位，不过此样式会自动加载，在初始的html中，并不需要
 设置，不过为了防止backface的元素在 组件初始化中会渲染在游览器中，造成会用户的视觉干扰，建议默认将其元素diplay设置为none。
+
 ```js
     seajs.use('../src/flip', function (Flip) {
         flip = new Flip(".flip_container");

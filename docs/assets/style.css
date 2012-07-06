@@ -12,7 +12,6 @@ a:hover {
     height: 46px;
     width: 100%;
     zoom: 1;
-    overflow:hidden;
 }
 #header:after {
     display: block;

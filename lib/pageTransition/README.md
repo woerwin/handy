@@ -17,6 +17,7 @@
 把触发器(也叫触点)看做为一个 `role` 为 `trigger` 的触发器对象，具体的行为通过 `action` 参数指定，然后通过 `data-pageTransition` 前缀配置这些参数。
 
 在 `Handy` 中，每个组件的 `data-attribute` 属性将由 data 前缀 + 组件名(小驼峰格式) + 具体的属性名构成,`pageTransition` 的 data-attribute 参数列表：
+
 ```js
 data-pageTransition-role="page" // 一个页面
 data-pageTransition-role="trigger" // 一个触发器
@@ -91,6 +92,7 @@ define(function (require){
 
 ###getPage `pageTransition.getPage()`
 返回 `pageTransition` 的当前页面，一个 zepto object
+
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
@@ -107,6 +109,7 @@ define(function (require){
 执行一次页面过渡。其实就是调用 `forward` 行为
 
 参数 `DOM Element` 可以传入选择器 / DOM 对象 / zepto 对象，必须带有 `data-pageTransition-role="page"` 属性
+
 ```js
 define(function (require){
   var PageTransition = require('pageTransition');
@@ -127,6 +130,7 @@ define(function (require){
 更新 UI
 
 调用 `sync` 方法时，对 `pageTransition` 的视口及页面做样式更新
+
 ```js
 define(function (require){
   var pageTransition = new require('pageTransition')({
@@ -143,6 +147,7 @@ define(function (require){
 
 ###destroy `pageTransition.destroy()`
 销毁 `pageTransition` 对象，释放内存
+
 ```js
 define(function (require){
   var pageTransition = new require('pageTransition')({
@@ -161,6 +166,7 @@ define(function (require){
 ###自定义事件
 ####transitionStart `pageTransition.on('transitionStart',callback)`
 ####transitionEnd `pageTransition.on('transitionEnd',callback)`
+
 ```js
 define(function (require){
   var pageTransition = new require('pageTransition')({

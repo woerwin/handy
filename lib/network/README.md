@@ -15,6 +15,7 @@ define(function (require){
 
 ###online `Network.online(callback)`
 网络连接时调用
+
 ```js
 define(function (require){
     var Network = require('network');
@@ -24,6 +25,7 @@ define(function (require){
 });
 ```
 每次调用 `Network.online` ，`Network` 都会保存传入的 callback，网络连接时，执行 `callback` 对列
+
 ```js
 define(function (require){
     var Network = require('network');
@@ -39,6 +41,7 @@ define(function (require){
 
 ###offline  `Network.offline(callback)`
 网络断开时调用
+
 ```js
 define(function (require){
     var Network = require('network');
@@ -48,6 +51,7 @@ define(function (require){
 });
 ```
 每次调用 `Network.offline` ，`Network` 都会保存传入的 callback，网络断开时，执行 `callback` 对列
+
 ```js
 define(function (require){
     var Network = require('network');
@@ -63,6 +67,7 @@ define(function (require){
 
 ###destroy `Network.destroy()`
 销毁 Network 的生命周期
+
 ```js
 define(function (require){
     var Network = require('network');

@@ -9,6 +9,7 @@
 element 选择器或 DOM Element，暂且不支持 zepto 对象
 
 duration 动画时间间隔。整数类型
+
 ```js
 define(function (require,exports,module){
     var FloatLayer = require('floatLayer');

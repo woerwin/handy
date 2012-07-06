@@ -64,15 +64,14 @@
 <p><img src="/alipay/handy/raw/master/lib/pageTransition/docs/assets/handy.pageTransition.structure.jpg" alt="handy.pageTransition.structure"/></p>
 <p><code>PageTransition</code> 支持 <code>data-attribute</code> API，部分参数的配置将通过 <code>data-attribute</code> 完成。它把需要过渡的每个节点看做为一个 <code>role</code> (角色)为 <code>page</code> 的页面，
 把触发器(也叫触点)看做为一个 <code>role</code> 为 <code>trigger</code> 的触发器对象，具体的行为通过 <code>action</code> 参数指定，然后通过 <code>data-pageTransition</code> 前缀配置这些参数。</p>
-<p>在 <code>Handy</code> 中，每个组件的 <code>data-attribute</code> 属性将由 data 前缀 + 组件名(小驼峰格式) + 具体的属性名构成,<code>pageTransition</code> 的 data-attribute 参数列表：
-<code>js
-data-pageTransition-role=&quot;page&quot; // 一个页面
-data-pageTransition-role=&quot;trigger&quot; // 一个触发器
-data-pageTransition-action=&quot;forward&quot; // 触发器的行为(向前过渡)，可选的还有 back
-data-pageTransition-forward=&quot;#J-nextPage&quot; // 某个触发器需要向前过渡的目标元素，当点击触发器时，
-                                          // PageTransition 会在当前的触发器上查找需要过渡的目标元素
-</code>
-它首先会在用户传入的 <code>element</code> 中查找带有 <code>data-pageTransition-role=&quot;page&quot;</code> 的元素，接着将查找到的<strong>第一个</strong> <code>page</code> 元素做为初始化页面，其它的 <code>data-pageTransition-role=&quot;page&quot;</code> 将被忽略，然后向这个初始化页面的父层动态插入一个带有 <code>data-pageTransition-role=&quot;viewport&quot;</code> 属性的元素，这个元素就是它的视口，接着它会在当前视口下查找<strong>所有</strong>带有 <code>data-pageTransition-role=&quot;trigger&quot;</code> 的元素，为它们绑定 <code>click.pageTransition</code> 事件，每个视口都是独立的，
+<p>在 <code>Handy</code> 中，每个组件的 <code>data-attribute</code> 属性将由 data 前缀 + 组件名(小驼峰格式) + 具体的属性名构成,<code>pageTransition</code> 的 data-attribute 参数列表：</p>
+<div class="highlight"><pre><span class="nx">data</span><span class="o">-</span><span class="nx">pageTransition</span><span class="o">-</span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;page&quot;</span> <span class="c1">// 一个页面</span>
+<span class="nx">data</span><span class="o">-</span><span class="nx">pageTransition</span><span class="o">-</span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;trigger&quot;</span> <span class="c1">// 一个触发器</span>
+<span class="nx">data</span><span class="o">-</span><span class="nx">pageTransition</span><span class="o">-</span><span class="nx">action</span><span class="o">=</span><span class="s2">&quot;forward&quot;</span> <span class="c1">// 触发器的行为(向前过渡)，可选的还有 back</span>
+<span class="nx">data</span><span class="o">-</span><span class="nx">pageTransition</span><span class="o">-</span><span class="nx">forward</span><span class="o">=</span><span class="s2">&quot;#J-nextPage&quot;</span> <span class="c1">// 某个触发器需要向前过渡的目标元素，当点击触发器时，</span>
+                                          <span class="c1">// PageTransition 会在当前的触发器上查找需要过渡的目标元素</span>
+</pre></div>
+<p>它首先会在用户传入的 <code>element</code> 中查找带有 <code>data-pageTransition-role=&quot;page&quot;</code> 的元素，接着将查找到的<strong>第一个</strong> <code>page</code> 元素做为初始化页面，其它的 <code>data-pageTransition-role=&quot;page&quot;</code> 将被忽略，然后向这个初始化页面的父层动态插入一个带有 <code>data-pageTransition-role=&quot;viewport&quot;</code> 属性的元素，这个元素就是它的视口，接着它会在当前视口下查找<strong>所有</strong>带有 <code>data-pageTransition-role=&quot;trigger&quot;</code> 的元素，为它们绑定 <code>click.pageTransition</code> 事件，每个视口都是独立的，
 因此您可能在 <code>PageTransition</code> 的页面中嵌套 <code>PageTransition</code> 。</p>
 <p>当调用 <code>forward</code> 行为时，<code>PageTransition</code> 会动态向视口的末尾插入 (append) 触发器的 <code>data-pageTransition-forward</code> 属性指向的目标节点，
 这个目标节点需要通过 <code>data-pageTransition-role=&quot;page&quot;</code> 属性告诉 <code>PageTransition</code>：我也是一个页面，你可以在你的视口中对我做任何操作(过渡、绑定事件等)，所以如果想在这个元素中绑定 <code>PageTransition</code> 行为(比如返回上一步)，你可以使用 <code>data-pageTransition-role=&quot;trigger&quot; data-pageTransition-action=&quot;back&quot;</code>，这和上述描述相同，
@@ -123,68 +122,68 @@ data-pageTransition-forward=&quot;#J-nextPage&quot; // 某个触发器需要向�
 <p>渲染 <code>pageTransition</code> 实例化对象</p>
 
 <h3>getPage <code>pageTransition.getPage()</code></h3>
-<p>返回 <code>pageTransition</code> 的当前页面，一个 zepto object
-&ldquo;js
-define(function (require){
-  var PageTransition = require(&#39;pageTransition&#39;);
-  var pageTransition = new PageTransition({
-                element: &#39;#J-page-box&#39;
-            });
-  pageTransition.render();</p>
-<p>  console.log(pageTransition.getPage().html());//&hellip;
-});
-&rdquo;</p>
+<p>返回 <code>pageTransition</code> 的当前页面，一个 zepto object</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">PageTransition</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pageTransition&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">pageTransition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PageTransition</span><span class="p">({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-page-box&#39;</span>
+            <span class="p">});</span>
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pageTransition</span><span class="p">.</span><span class="nx">getPage</span><span class="p">().</span><span class="nx">html</span><span class="p">());</span><span class="c1">//...</span>
+<span class="p">});</span>
+</pre></div>
 
 <h3>transition <code>pageTransition.transition(DOM Element)</code></h3>
 <p>执行一次页面过渡。其实就是调用 <code>forward</code> 行为</p>
-<p>参数 <code>DOM Element</code> 可以传入选择器 / DOM 对象 / zepto 对象，必须带有 <code>data-pageTransition-role=&quot;page&quot;</code> 属性
-&ldquo;js
-define(function (require){
-  var PageTransition = require(&#39;pageTransition&#39;);
-  var pageTransition = new PageTransition({
-                element: &#39;#J-page-box&#39;
-            });
-  pageTransition.render();</p>
-<p>  document.querySelector(&#39;#J-next&#39;).addEventListener(&#39;click&#39;,function (){
-      pageTransition.transition(&#39;#J-nextPage&#39;);
-  },false);
-});
-&rdquo;</p>
+<p>参数 <code>DOM Element</code> 可以传入选择器 / DOM 对象 / zepto 对象，必须带有 <code>data-pageTransition-role=&quot;page&quot;</code> 属性</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">PageTransition</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pageTransition&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">pageTransition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PageTransition</span><span class="p">({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-page-box&#39;</span>
+            <span class="p">});</span>
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#J-next&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+      <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="s1">&#39;#J-nextPage&#39;</span><span class="p">);</span>
+  <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
 
 <h3>back <code>pageTransition.back()</code></h3>
 <p>后退至一页</p>
 
 <h3>sync <code>pageTransition.sync()</code></h3>
 <p>更新 UI</p>
-<p>调用 <code>sync</code> 方法时，对 <code>pageTransition</code> 的视口及页面做样式更新
-&ldquo;js
-define(function (require){
-  var pageTransition = new require(&#39;pageTransition&#39;)({
-                element: &#39;#J-page-box&#39;
-            });
-  pageTransition.render();</p>
-<p>  window.addEventListener(&#39;resize&#39;,function (){
-      pageTransition.sync();
-  },false);
-});
-&rdquo;<code>
-**最佳实践:您应该在设备方向或窗口发生变化时，调用</code>sync 方法**</p>
+<p>调用 <code>sync</code> 方法时，对 <code>pageTransition</code> 的视口及页面做样式更新</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">pageTransition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pageTransition&#39;</span><span class="p">)({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-page-box&#39;</span>
+            <span class="p">});</span>
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+      <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+  <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+<p><strong>最佳实践:您应该在设备方向或窗口发生变化时，调用 <code>sync</code> 方法</strong></p>
 
 <h3>destroy <code>pageTransition.destroy()</code></h3>
-<p>销毁 <code>pageTransition</code> 对象，释放内存
-&ldquo;js
-define(function (require){
-  var pageTransition = new require(&#39;pageTransition&#39;)({
-                element: &#39;#J-page-box&#39;
-            });
-  pageTransition.render();</p>
-<p>  document.querySelector(&#39;#J-destroy&#39;).addEventListener(&#39;click&#39;,function (){
-      pageTransition.destroy();
-  },false);
-});
-&rdquo;<code>
-调用</code>destroy<code>方法，</code>pageTransition<code>对象中的数据将被清除，
-同时动态添加的样式也会被清除，</code>pageTransition 视口中的页面也将全部释放到各自原来的容器中</p>
+<p>销毁 <code>pageTransition</code> 对象，释放内存</p>
+<div class="highlight"><pre><span class="nx">define</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">pageTransition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pageTransition&#39;</span><span class="p">)({</span>
+                <span class="nx">element</span><span class="o">:</span> <span class="s1">&#39;#J-page-box&#39;</span>
+            <span class="p">});</span>
+  <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#J-destroy&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">(){</span>
+      <span class="nx">pageTransition</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+  <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+<p>调用 <code>destroy</code> 方法，<code>pageTransition</code> 对象中的数据将被清除，
+同时动态添加的样式也会被清除，<code>pageTransition</code> 视口中的页面也将全部释放到各自原来的容器中</p>
 
 <h3>自定义事件</h3>
 

@@ -6,6 +6,7 @@
 `parser` 的工作原理非常简单。当页面成功加载 `parser` 后，`parser` 会自动遍历所有带有 `data-module-name` 属性的节点，
 然后在这些节点上查找当前模块所需的数据，`parser`
 会对这些数据做处理，最后形成一个 moduleName : moduleData 的 JSON 数据
+
 ```js
 {
   'tooltip' : [{},{}],
@@ -14,6 +15,7 @@
 }
 ```
 `parser` 再根据处理后的数据做细分处理，细分处理的最终目的是得到以下数据：
+
 ```js
 [
   {
