@@ -1,9 +1,9 @@
-define("#validator/0.8.2/rule-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug", "#validator/0.8.2/async-debug"], function(require, exports, module) {
+define("#validator/0.8.2/rule-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.16/widget-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#jquery/1.7.2/jquery-debug", "#widget/0.9.16/daparser-debug", "#widget/0.9.16/auto-render-debug", "#validator/0.8.2/async-debug"], function(require, exports, module) {
     var rules = {},
         messages = {},
 		$ = require("#zepto/0.9.0/zepto-debug"),
         async = require("#validator/0.8.2/async-debug"),
-        Widget = require("#widget/0.9.16/widget-mobile-debug");
+        Widget = require("#widget/0.9.16/widget-debug");
 
     var Rule = Widget.extend({
 
@@ -153,7 +153,7 @@ define("#validator/0.8.2/rule-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.
             regexp2 = /\{\{(.*)\}\}/;
 
         var arr = tpl.match(regexp1);
-        $.each(arr, function(i, v) {
+        arr && $.each(arr, function(i, v) {
             var key = v.match(regexp2)[1];
             var value = obj[$.trim(key)];
             result = result.replace(v, value);
@@ -207,7 +207,7 @@ define("#validator/0.8.2/rule-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.
         var element = options.element,
             max = options.max;
         return Number(element.val()) <= Number(max);
-    }, '{{display}}必须大于或者等于{{max}}。');
+    }, '{{display}}必须小于或者等于{{max}}。');
 
     addRule('minlength', function(options) {
         var element = options.element;

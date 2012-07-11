@@ -1,7 +1,7 @@
-define("#validator/0.8.2/item-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug", "#validator/0.8.2/utils-debug", "#validator/0.8.2/rule-debug", "#validator/0.8.2/async-debug"], function(require, exports, module) {
+define("#validator/0.8.2/item-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.16/widget-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#jquery/1.7.2/jquery-debug", "#widget/0.9.16/daparser-debug", "#widget/0.9.16/auto-render-debug", "#validator/0.8.2/utils-debug", "#validator/0.8.2/rule-debug", "#validator/0.8.2/async-debug"], function(require, exports, module) {
     var $ = require("#zepto/0.9.0/zepto-debug"),
         utils = require("#validator/0.8.2/utils-debug"),
-        Widget = require("#widget/0.9.16/widget-mobile-debug"),
+        Widget = require("#widget/0.9.16/widget-debug"),
         async = require("#validator/0.8.2/async-debug"),
         Rule = require("#validator/0.8.2/rule-debug");
 
@@ -50,7 +50,10 @@ define("#validator/0.8.2/item-debug", ["#zepto/0.9.0/zepto-debug", "#widget/0.9.
             var rules = utils.parseRules(this.get('rule')),
                 that = this;
 
-            if (!rules) return this;
+            if (!rules) {
+                callback && callback(null, '', this.element);
+                return this;
+            }
 
             _metaValidate(this.element, this.get('required'), rules, this.get('display'), function(err, msg) {
                 if (err) {

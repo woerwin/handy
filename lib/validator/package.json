@@ -14,6 +14,7 @@
         "validator.js": "default"
     },
     "alias": {
-        "$": "zepto/0.9.0/zepto"
+        "$": "zepto/0.9.0/zepto",
+        "widget": "widget/0.9.16/widget"
     }
 }
