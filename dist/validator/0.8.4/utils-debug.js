@@ -1,6 +1,6 @@
-define(function(require, exports, module) {
-    var $ = require('$'),
-        Rule = require('./rule');
+define("#validator/0.8.4/utils-debug", ["#zepto/0.9.0/zepto-debug", "#validator/0.8.4/rule-debug", "#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug", "#validator/0.8.4/async-debug"], function(require, exports, module) {
+    var $ = require("#zepto/0.9.0/zepto-debug"),
+        Rule = require("#validator/0.8.4/rule-debug");
 
     var u_count = 0;
     function unique() {
