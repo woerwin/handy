@@ -1,147 +1,147 @@
 <!DOCTYPE HTML>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-        <meta name="format-detection" content="telephone=no"/>
-        <meta name="format-detection" content="email=no"/>
-        <title>scrollView</title>
-        <script type="text/javascript">
-            var debug = "False";
-        </script>
-        
-        
-        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
-        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
-        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
-        <script src="/handy/tools/seajs-and-its-friends.js"></script>
-        
-        <!--[if lt IE 9]>
-        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <header id="header">
-            <h1 id="brand"><a href="/handy">Handy</a></h1>
-            <nav id="nav" role="navigation">
-                <a href="/handy/docs/scrollView/">Scrollview</a>
-                
-                <a href="/handy/docs/scrollView/examples/">Examples</a>
-                
-                
-                <a id="nav-test" href="/handy/lib/scrollView/tests/runner.html">Test</a>
-                
-            </nav>
-        </header>
-
-        <div id="main">
-            
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>scrollView</title>
+    <script type="text/javascript">
+        var debug = "False";
+    </script>
 
 
-            
-            <div class="container">
-                <style type="text/css">
-        pre {
-            border: 1px solid #CCC;
-            background: #EEE;
-            padding: 10px;
-        }
+    <link rel="stylesheet" href="/handy/docs/assets/base.css"/>
+    <link rel="stylesheet" href="/handy/docs/assets/style.css"/>
+    <link rel="stylesheet" href="/handy/docs/assets/pygments.css"/>
+    <script src="/handy/tools/seajs-and-its-friends.js"></script>
 
-        body > section {
-            padding: 20px;
-            border-bottom: 1px solid #CCC;
-            -webkit-box-shadow: 2px 2px 2px #ccc;
-            -webkit-border-radius: 4px;
-            background-color: #EEE;
-        }
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header id="header">
+    <h1 id="brand"><a href="/handy">Handy</a></h1>
+    <nav id="nav" role="navigation">
+        <a href="/handy/docs/scrollView/">Scrollview</a>
 
-        h3 {
-            margin-top: 20px;
-            padding-top: 20px;
-        }
+        <a href="/handy/docs/scrollView/examples/">Examples</a>
 
-        pre {
-            background-color: white;
-            -webkit-box-shadow: 2px 2px 2px #ccc;
-            -webkit-border-radius: 4px;
-        }
 
-        img {
-            -webkit-border-radius: 5px;
-            -webkit-box-shadow: 2px 2px 2px #CCC;
-        }
+        <a id="nav-test" href="/handy/lib/scrollView/tests/runner.html">Test</a>
 
-        #example1 {
-            width: 300px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
+    </nav>
+</header>
 
-        .module_dialog_help_iscrollContainer {
-            border: 1px solid #CCC;
-            margin: 20px;
-            height: 300px;
-            background: #EEE;
-            border-radius: 4px;
-            position: relative; /*重要！！！*/
-            background: white;
-            -webkit-box-shadow: 2px 2px 2px #ccc;
-        }
+<div id="main">
 
-        .module_dialog_help_scroller {
-            padding: 20px;
-        }
 
-        #example2 {
-            width: 300px;
-            height: 160px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            margin-top: 10px;
-            margin: 0 auto;
+<div class="container">
+<style type="text/css">
+    pre {
+        border: 1px solid #CCC;
+        background: #EEE;
+        padding: 10px;
+    }
 
-        }
+    body > section {
+        padding: 20px;
+        border-bottom: 1px solid #CCC;
+        -webkit-box-shadow: 2px 2px 2px #ccc;
+        -webkit-border-radius: 4px;
+        background-color: #EEE;
+    }
 
-        #example2 > div {
-            background-color: white;
-            -webkit-border-radius: 10px;
-        }
+    h3 {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
 
-        #example2 #thelist {
-            width: 2100px;
-            height: 100%;
-            float: left;
-        }
+    pre {
+        background-color: white;
+        -webkit-box-shadow: 2px 2px 2px #ccc;
+        -webkit-border-radius: 4px;
+    }
 
-        #example2 ul {
-            list-style: none;
-            display: block;
-            float: left;
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
+    img {
+        -webkit-border-radius: 5px;
+        -webkit-box-shadow: 2px 2px 2px #CCC;
+    }
 
-        #example2 li {
-            box-sizing: border-box;
-            display: block;
-            float: left;
-            width: 300px;
-            height: 140px;
-            text-align: center;
-            font-family: georgia;
-            font-size: 18px;
-            line-height: 140%;
-            padding: 20px 0;
-        }
+    #example1 {
+        width: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .module_dialog_help_iscrollContainer {
+        border: 1px solid #CCC;
+        margin: 20px;
+        height: 300px;
+        background: #EEE;
+        border-radius: 4px;
+        position: relative; /*重要！！！*/
+        background: white;
+        -webkit-box-shadow: 2px 2px 2px #ccc;
+    }
+
+    .module_dialog_help_scroller {
+        padding: 20px;
+    }
+
+    #example2 {
+        width: 300px;
+        height: 160px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        margin-top: 10px;
+        margin: 0 auto;
+
+    }
+
+    #example2 > div {
+        background-color: white;
+        -webkit-border-radius: 10px;
+    }
+
+    #example2 #thelist {
+        width: 2100px;
+        height: 100%;
+        float: left;
+    }
+
+    #example2 ul {
+        list-style: none;
+        display: block;
+        float: left;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    #example2 li {
+        box-sizing: border-box;
+        display: block;
+        float: left;
+        width: 300px;
+        height: 140px;
+        text-align: center;
+        font-family: georgia;
+        font-size: 18px;
+        line-height: 140%;
+        padding: 20px 0;
+    }
 
 </style>
-<p><h3>对于普通的滚动</h3>
+<p>
+
+<h3>对于普通的滚动</h3>
 <section>
     <h4>演示界面：</h4>
     <a href="javascript:example1.scrollTo(0,-100,400,false);">滚动至100像素的地方</a><br/>
@@ -150,7 +150,7 @@
     <a href="javascript:example1.scrollTo(0,-150,400,true);">滚动当前位置向上150像素</a><br/>
     <a href="javascript:createiScroll();">创建该对象</a> <a href="javascript:example1.destroy();example1=null;">销毁该对象</a>
     <a href="javascript:appendChildNode();">增加部分节点</a>
-<article id="example1">
+    <article id="example1">
         <div class="module_dialog_help_scroller" data-iscroll-class="module_dialog_help_iscrollContainer">
             <h5>常见问题：</h5>
             <article class="module_list_select">
@@ -181,43 +181,65 @@
                 <section class="listItems"><a href="#" class="flex block">密码输入错误，账户暂时锁定？</a></section>
             </article>
         </div>
-</article></p>
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">example1</span><span class="p">;</span>
-    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;scrollView&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">iScroll</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">example1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll</span><span class="p">({</span><span class="nx">element</span><span class="o">:</span><span class="s2">&quot;.module_dialog_help_scroller&quot;</span><span class="p">});</span>
+    </article>
+    </p>
+    <div class="highlight"><pre><span class="kd">var</span> <span class="nx">example1</span><span class="p">;</span>
+    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span
+            class="s1">&#39;scrollView&#39;</span><span class="p">,</span> <span class="kd">function</span><span
+            class="p">(</span><span class="nx">iScroll</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">example1</span> <span class="o">=</span> <span class="k">new</span> <span
+            class="nx">iScroll</span><span class="p">({</span><span class="nx">element</span><span
+            class="o">:</span><span class="s2">&quot;.module_dialog_help_scroller&quot;</span><span class="p">});</span>
     <span class="p">});</span>
-    <span class="kd">function</span> <span class="nx">createiScroll</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;scrollView&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">iScroll</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">example1</span> <span class="o">=</span> <span class="nx">example1</span> <span class="o">||</span> <span class="k">new</span> <span class="nx">iScroll</span><span class="p">({</span><span class="nx">element</span><span class="o">:</span><span class="s2">&quot;.module_dialog_help_scroller&quot;</span><span class="p">});</span>
+    <span class="kd">function</span> <span class="nx">createiScroll</span><span class="p">()</span> <span
+            class="p">{</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span
+            class="s1">&#39;scrollView&#39;</span><span class="p">,</span> <span class="kd">function</span><span
+            class="p">(</span><span class="nx">iScroll</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">example1</span> <span class="o">=</span> <span class="nx">example1</span> <span class="o">||</span> <span
+            class="k">new</span> <span class="nx">iScroll</span><span class="p">({</span><span class="nx">element</span><span
+            class="o">:</span><span class="s2">&quot;.module_dialog_help_scroller&quot;</span><span class="p">});</span>
         <span class="p">});</span>
     <span class="p">}</span>
-    <span class="kd">function</span> <span class="nx">appendChildNode</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
-        <span class="nx">ele</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;add new content&quot;</span><span class="p">;</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;.module_dialog_help_scroller&quot;</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">ele</span><span class="p">);</span>
+    <span class="kd">function</span> <span class="nx">appendChildNode</span><span class="p">()</span> <span
+            class="p">{</span>
+        <span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span
+            class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span
+            class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+        <span class="nx">ele</span><span class="p">.</span><span class="nx">innerHTML</span> <span
+            class="o">=</span> <span class="s2">&quot;add new content&quot;</span><span class="p">;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span
+            class="p">(</span><span class="s2">&quot;.module_dialog_help_scroller&quot;</span><span
+            class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span
+            class="nx">ele</span><span class="p">);</span>
         <span class="nx">ele</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">}</span>
-</pre></div>
+</pre>
+    </div>
 
-<script type="text/javascript">
-    var example1;
-    seajs.use('scrollView', function(iScroll) {
-        example1 = new iScroll({element:".module_dialog_help_scroller"});
-    });
-    function createiScroll() {
-        seajs.use('scrollView', function(iScroll) {
-            example1 = example1 || new iScroll({element:".module_dialog_help_scroller"});
+    <script type="text/javascript">
+        var example1;
+        seajs.use('scrollView', function (iScroll) {
+            example1 = new iScroll({element:".module_dialog_help_scroller"});
         });
-    }
-    function appendChildNode() {
-        var ele = document.createElement("div");
-        ele.innerHTML = "add new content";
-        document.querySelector(".module_dialog_help_scroller").appendChild(ele);
-        ele = null;
-    }
-</script>
-<p></section></p>
-<p><h3>逐页拖动滚动</h3>
+        function createiScroll() {
+            seajs.use('scrollView', function (iScroll) {
+                example1 = example1 || new iScroll({element:".module_dialog_help_scroller"});
+            });
+        }
+        function appendChildNode() {
+            var ele = document.createElement("div");
+            ele.innerHTML = "add new content";
+            document.querySelector(".module_dialog_help_scroller").appendChild(ele);
+            ele = null;
+            example1.refresh();
+        }
+    </script>
+    <p></section>
+</p>
+<p>
+
+<h3>逐页拖动滚动</h3>
 <section>
     <h4>演示界面:(左右进行拖动)</h4>
     <a href="javascript:example2.scrollToPage(2,0,500);">滚动至第三页</a>
@@ -225,70 +247,79 @@
     <a href="javascript:example2.scrollToPage('prev',0,500);">向前滚动一页</a>
     <a href="javascript:example2.scrollToPage('next',0,500);">向后滚动一页</a></p>
 
-<div id="example2">
-    <ul id="thelist" data-iscroll-width="300px">
-        <li><strong>1.</strong> <em>A robot may not injure a human being or, through inaction, allow a human being
-            to come to harm.</em></li>
-        <li><strong>2.</strong> <em>A robot must obey any orders given to it by human beings, except where such
-            orders would conflict with the
-            First Law.</em></li>
-        <li><strong>3.</strong> <em>A robot must protect its own existence as long as such protection does not
-            conflict with the First or
-            Second Law.</em></li>
-        <li><strong>Zeroth Law:</strong> <em>A robot may not harm humanity, or, by inaction, allow humanity to come
-            to harm.</em></li>
-        <li><strong>Lyuben Dilov&rsquo;s Forth law:</strong> <em>A robot must establish its identity as a robot in all
-            cases.</em></li>
-        <li><strong>Harry Harrison&rsquo;s Forth law:</strong> <em>A robot must reproduce. As long as such reproduction
-            does not interfere with the
-            First or Second or Third Law.</em></li>
-        <li><strong>Nikola Kesarovski&rsquo;s Fifth law:</strong> <em>A robot must know it is a robot.</em></li>
-    </ul>
-</div>
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">example2</span><span class="p">;</span>
-    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;scrollView&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">iScroll</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">example2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll</span><span class="p">({</span>
-            <span class="nx">element</span><span class="o">:</span><span class="s2">&quot;#thelist&quot;</span><span class="p">,</span>
+    <div id="example2">
+        <ul id="thelist" data-iscroll-width="300px">
+            <li><strong>1.</strong> <em>A robot may not injure a human being or, through inaction, allow a human being
+                to come to harm.</em></li>
+            <li><strong>2.</strong> <em>A robot must obey any orders given to it by human beings, except where such
+                orders would conflict with the
+                First Law.</em></li>
+            <li><strong>3.</strong> <em>A robot must protect its own existence as long as such protection does not
+                conflict with the First or
+                Second Law.</em></li>
+            <li><strong>Zeroth Law:</strong> <em>A robot may not harm humanity, or, by inaction, allow humanity to come
+                to harm.</em></li>
+            <li><strong>Lyuben Dilov&rsquo;s Forth law:</strong> <em>A robot must establish its identity as a robot in
+                all
+                cases.</em></li>
+            <li><strong>Harry Harrison&rsquo;s Forth law:</strong> <em>A robot must reproduce. As long as such
+                reproduction
+                does not interfere with the
+                First or Second or Third Law.</em></li>
+            <li><strong>Nikola Kesarovski&rsquo;s Fifth law:</strong> <em>A robot must know it is a robot.</em></li>
+        </ul>
+    </div>
+    <div class="highlight"><pre><span class="kd">var</span> <span class="nx">example2</span><span class="p">;</span>
+    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span
+            class="s1">&#39;scrollView&#39;</span><span class="p">,</span> <span class="kd">function</span><span
+            class="p">(</span><span class="nx">iScroll</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">example2</span> <span class="o">=</span> <span class="k">new</span> <span
+            class="nx">iScroll</span><span class="p">({</span>
+            <span class="nx">element</span><span class="o">:</span><span class="s2">&quot;#thelist&quot;</span><span
+            class="p">,</span>
             <span class="nx">options</span><span class="o">:</span><span class="p">{</span>
                 <span class="nx">snap</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
-                <span class="nx">momentum</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+                <span class="nx">momentum</span><span class="o">:</span><span class="kc">false</span><span
+            class="p">,</span>
                 <span class="nx">hScrollbar</span><span class="o">:</span><span class="kc">false</span>
             <span class="p">}</span>
         <span class="p">});</span>
     <span class="p">});</span>
-</pre></div>
+</pre>
+    </div>
 
+    <script type="text/javascript">
+        var example2;
+        seajs.use('scrollView', function (iScroll) {
+            example2 = new iScroll({
+                element:"#thelist",
+                options:{
+                    snap:true,
+                    momentum:false,
+                    hScrollbar:false
+                }
+            });
+        });
+    </script>
+    <p></section>
+</p>
+
+</div>
+
+</div>
+<hr class="end"/>
 <script type="text/javascript">
-   var example2;
-    seajs.use('scrollView', function(iScroll) {
-        example2 = new iScroll({
-            element:"#thelist",
-            options:{
-                snap:true,
-                momentum:false,
-                hScrollbar:false
-            }
+    seajs.use('$', function ($) {
+        $('#nav-test').click(function () {
+            var href = $(this).attr('href');
+            var iframe = '<div class="container"><iframe src="' +
+                href + '" frameborder="0" width="100%" height="640">' +
+                '</iframe></div>';
+            $('#main').html(iframe);
+            !!history.pushState && history.pushState(null, 'Test', href);
+            return false;
         });
     });
 </script>
-<p></section></p>
-
-            </div>
-            
-        </div>
-        <hr class="end" />
-        <script type="text/javascript">
-            seajs.use('$', function($) {
-                $('#nav-test').click(function() {
-                    var href = $(this).attr('href');
-                    var iframe = '<div class="container"><iframe src="' +
-                        href + '" frameborder="0" width="100%" height="640">' +
-                        '</iframe></div>';
-                    $('#main').html(iframe);
-                    !!history.pushState && history.pushState(null, 'Test', href);
-                    return false;
-                });
-            });
-        </script>
-    </body>
+</body>
 </html>
