@@ -18,7 +18,7 @@ seajs.config({
 
     alias: {
 
-        // 外来模块
+
         '$': 'zepto/0.9.0/zepto',
         'handlebars': 'handlebars/1.0.0/handlebars',
         'backbone': 'backbone/0.9.2/backbone',
@@ -53,19 +53,6 @@ seajs.config({
         'network': 'network/0.9.0/network',
         'floatLayer': 'floatLayer/0.9.0/floatLayer',
         'validator': 'validator/0.8.1/validator'
-
-
-        // Others
-        /* spm */
-        /* araledoc */
-
-
-        // 二期组件
-        // ua
-        // placeholder
-        // popup
-        // tooltip
-        // 等待详细规划和讨论
     },
 
     preload: [this.JSON ? '' : 'json', 'seajs/plugin-text']

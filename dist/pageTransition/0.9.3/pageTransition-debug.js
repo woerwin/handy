@@ -17,9 +17,9 @@
 //      返回
 //     </a>
 // </div>
-define(function(require, exports, module) {
-    var Events = require('events'),
-        $ = require('$');
+define("#pageTransition/0.9.3/pageTransition-debug", ["#events/0.9.1/events-debug", "#zepto/0.9.0/zepto-debug"], function(require, exports, module) {
+    var Events = require("#events/0.9.1/events-debug"),
+        $ = require("#zepto/0.9.0/zepto-debug");
 
     var defaults = {
         element: null,

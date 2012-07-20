@@ -1,7 +1,6 @@
 // arale alias 
 define({
     "alias": {
-        // 外部
         "$": "zepto/0.9.0/zepto",
         "handlebars": "handlebars/1.0.0/handlebars",
         "backbone": "backbone/0.9.2/backbone",
