@@ -1,23 +1,24 @@
 // flip
 // =======
 // 轩与@http://weibo.com/semious
-define("#flip/0.9.5/flip-debug", ["#widget/0.9.16/widget-mobile-debug", "#base/0.9.16/base-debug", "#class/0.9.2/class-debug", "#events/0.9.1/events-debug", "#base/0.9.16/aspect-debug", "#base/0.9.16/attribute-debug", "#zepto/0.9.0/zepto-debug", "#widget/0.9.16/daparser-mobile-debug", "#widget/0.9.16/auto-render-mobile-debug"], function (require, exports, module) {
-    var Widget = require("#widget/0.9.16/widget-mobile-debug"),
-        $ = require("#zepto/0.9.0/zepto-debug"),
+define(function (require, exports, module) {
+    var Widget = require('widget'),
+        $ = require('$'),
         Flip;
 
     module.exports = Flip = Widget.extend({
         attrs:{
             element:null,
             direction:"ltr", // 转动方向 默认从左往右 沿y 轴逆时针旋转,
+
             frontNode:null,
             backNode:null,
-            containerCSS:{
+            containerCSS3D:{
                 "-webkit-perspective":"1000",
                 "-webkit-perspective-origin":"50% 50%",
                 readonly:true
             },
-            flipCSS:{
+            flipCSS3D:{
                 "-webkit-transform-style":"preserve-3d",
                 "-webkit-transition":"-webkit-transform 0.8s ease",
                 "position":"relative",
@@ -94,11 +95,11 @@ define("#flip/0.9.5/flip-debug", ["#widget/0.9.16/widget-mobile-debug", "#base/0
             this.face = face || "back";
 
             // 开始进行翻转
-            this._startFlip();
+            this._startFlip3D();
         },
 
-        // 开始渲染界面
-        _startFlip:function () {
+        // 开始渲染3D界面
+        _startFlip3D:function () {
             var that = this;
             switch (this.get("direction")) {
                 case "ltr":
@@ -112,7 +113,6 @@ define("#flip/0.9.5/flip-debug", ["#widget/0.9.16/widget-mobile-debug", "#base/0
                             this._startCSS = { "-webkit-transform":"rotateY(0deg)"};
                             this._endCSS = {"-webkit-transform":"rotateY(180deg)"};
                             break;
-
                     }
                     break;
                 default:
@@ -162,8 +162,8 @@ define("#flip/0.9.5/flip-debug", ["#widget/0.9.16/widget-mobile-debug", "#base/0
         // 初始化关键元素的 css 样式
         _initCSS:function () {
             //add CSS prefilp style
-            this.element.css(this.get("containerCSS"));
-            $(this.viewport).css(this.get("flipCSS"));
+            this.element.css(this.get("containerCSS3D"));
+            $(this.viewport).css(this.get("flipCSS3D"));
             $(this.get("frontNode")).css(this.get("faceCSS"));
             $(this.get("backNode")).css(this.get("faceCSS"));
 

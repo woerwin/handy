@@ -1,123 +1,123 @@
 <!DOCTYPE HTML>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-        <meta name="format-detection" content="telephone=no"/>
-        <meta name="format-detection" content="email=no"/>
-        <title>flip</title>
-        <script type="text/javascript">
-            var debug = "False";
-        </script>
-        
-        
-        <link rel="stylesheet" href="/handy/docs/assets/base.css" />
-        <link rel="stylesheet" href="/handy/docs/assets/style.css" />
-        <link rel="stylesheet" href="/handy/docs/assets/pygments.css" />
-        <script src="/handy/tools/seajs-and-its-friends.js"></script>
-        
-        <!--[if lt IE 9]>
-        <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <header id="header">
-            <h1 id="brand"><a href="/handy">Handy</a></h1>
-            <nav id="nav" role="navigation">
-                <a href="/handy/docs/flip/">Flip</a>
-                
-                <a href="/handy/docs/flip/examples/">Examples</a>
-                
-                
-                <a id="nav-test" href="/handy/lib/flip/tests/runner.html">Test</a>
-                
-            </nav>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>flip</title>
+    <script type="text/javascript">
+        var debug = "False";
+    </script>
 
-        <div id="main">
-            
+    <link rel="stylesheet" href="../../../../handy/docs/assets/base.css"/>
+    <link rel="stylesheet" href="../../../../handy/docs/assets/style.css"/>
+    <link rel="stylesheet" href="../../../../handy/docs/assets/pygments.css"/>
+    <script src="../../../../handy/tools/seajs-and-its-friends.js"></script>
 
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/docs/assets/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header id="header">
+    <h1 id="brand"><a href="../../../../handy">Handy</a></h1>
+    <nav id="nav" role="navigation">
+        <a href="../../../../handy/docs/flip/">Flip</a>
+        <a href="../../../../handy/docs/flip/examples/">Examples</a>
+        <a id="nav-test" href="../../../../handy/lib/flip/tests/runner.html">Test</a>
+    </nav>
+</header>
 
-            
-            <div class="container">
-                <style type="text/css">
-        .flip_container {
-            width: 192px;
-            font-size: 14px;
-            height: 145px;
-            margin:0 auto;
-        }
+<div id="main">
+    <div class="container">
+        <style type="text/css">
+            .flip_container {
+                width: 192px;
+                font-size: 14px;
+                height: 145px;
+                margin: 0 auto;
+            }
 
-        img {
-            display: block;
-            -webkit-border-radius: 5px;
-            -webkit-box-shadow : 2px 2px 2px #CCC;
-        }
+            img {
+                display: block;
+                -webkit-border-radius: 5px;
+                -webkit-box-shadow: 2px 2px 2px #CCC;
+            }
 
-        p{
-            margin: 5px 0;
-        }
-        #flip2 {
-            background: #eee;
-            padding: 10px;
-            line-height: 1.9;
-            width: 168px;
-            height: 121px;
-            -webkit-border-radius: 5px;
-            border: 1px solid #CCC;
-            color: #666;
-            -webkit-box-shadow : 2px 2px 4px #DDD;
-        }
-</style>
-<p><h2>卡片翻转演示</h2>
-<div class="flip_container">
-    <div id="flip1" data-flip-role="frontFace">
-        <div>
-            <a href="javascript:void(0);" data-flip-role="trigger" data-flip-action="backFace" title="查看照片信息" style="width:190px;height:150px;display:block;text-align:cengter;background:#000;">
-              front
-            </a>
-        </div>
-    </div>
-    <div id="flip2" data-flip-role="backFace" style="display: none;">
-        <p>照片名：城堡</p>
-        <p>拍摄时间：2001年12月5日</p>
-        <p>拍摄地点：摩洛哥</p>
-        <p>拍摄人：***</p>
-    </div>
-</div>
-<div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('back');">翻转到后面</a></div>
-<div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('front');">翻转到前面</a></div></p>
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">flip</span><span class="p">;</span>
-    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;flip&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Flip</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">flip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Flip</span><span class="p">({</span><span class="nx">element</span><span class="o">:</span><span class="s2">&quot;.flip_container&quot;</span><span class="p">});</span>
-    <span class="p">});</span>
-</pre></div>
+            p {
+                margin: 5px 0;
+            }
 
-<script type="text/javascript">
-    var flip;
-    seajs.use('flip', function (Flip) {
-        flip = new Flip({element:".flip_container"});
-    });
-</script>
+            #flip2 {
+                background: #eee;
+                padding: 10px;
+                line-height: 1.9;
+                width: 168px;
+                height: 121px;
+                -webkit-border-radius: 5px;
+                border: 1px solid #CCC;
+                color: #666;
+                -webkit-box-shadow: 2px 2px 4px #DDD;
+            }
+        </style>
+        <p>
 
+        <h2>卡片翻转演示</h2>
+
+        <div class="flip_container">
+            <div id="flip1" data-flip-role="frontFace">
+                <div>
+                    <a href="javascript:void(0);" data-flip-role="trigger" data-flip-action="backFace" title="查看照片信息"
+                       style="width:190px;height:150px;display:block;text-align:cengter;background:#000;">
+                        front
+                    </a>
+                </div>
             </div>
-            
+            <div id="flip2" data-flip-role="backFace" style="display: none;">
+                <p>照片名：城堡</p>
+                <p>拍摄时间：2001年12月5日</p>
+                <p>拍摄地点：摩洛哥</p>
+                <p>拍摄人：***</p>
+            </div>
         </div>
-        <hr class="end" />
+        <div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('back');">翻转到后面</a></div>
+        <div style="margin-top: 5px;text-align:center;"><a href="javascript:flip && flip.flip('front');">翻转到前面</a></div>
+        </p>
+        <div class="highlight">
+            <pre><span class="kd">var</span> <span class="nx">flip</span><span class="p">;</span>
+    <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span
+                        class="s1">&#39;flip&#39;</span><span class="p">,</span> <span class="kd">function</span> <span
+                        class="p">(</span><span class="nx">Flip</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">flip</span> <span class="o">=</span> <span class="k">new</span> <span
+                        class="nx">Flip</span><span class="p">({</span><span class="nx">element</span><span
+                        class="o">:</span><span class="s2">&quot;.flip_container&quot;</span><span class="p">});</span>
+    <span class="p">});</span>
+</pre>
+        </div>
         <script type="text/javascript">
-            seajs.use('$', function($) {
-                $('#nav-test').click(function() {
-                    var href = $(this).attr('href');
-                    var iframe = '<div class="container"><iframe src="' +
-                        href + '" frameborder="0" width="100%" height="640">' +
-                        '</iframe></div>';
-                    $('#main').html(iframe);
-                    !!history.pushState && history.pushState(null, 'Test', href);
-                    return false;
-                });
+            var flip;
+            seajs.use('flip', function(Flip) {
+                flip = new Flip({element:".flip_container"});
             });
         </script>
-    </body>
+    </div>
+</div>
+<hr class="end"/>
+<script type="text/javascript">
+    seajs.use('$', function($) {
+        $('#nav-test').click(function() {
+            var href = $(this).attr('href');
+            var iframe = '<div class="container"><iframe src="' +
+                    href + '" frameborder="0" width="100%" height="640">' +
+                    '</iframe></div>';
+            $('#main').html(iframe);
+            !!history.pushState && history.pushState(null, 'Test', href);
+            return false;
+        });
+    });
+</script>
+</body>
 </html>
