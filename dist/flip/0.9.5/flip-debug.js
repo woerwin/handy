@@ -149,6 +149,11 @@ define(function(require, exports, module) {
             $(this.viewport).css(this._endCSS);
         },
 
+        // 开始渲染2D界面
+        _startFlip2D:function(){
+
+        },
+
         // 翻转结束 释放临时使用资源
         _end:function() {
             // 触发自定义事件
