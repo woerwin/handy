@@ -1,4 +1,7 @@
 {
     "version": "0.9.5",
-    "name":"flip"
+    "name":"flip",
+    "dist": {
+        "flip.js": "default"
+    }
 }
