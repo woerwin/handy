@@ -71,8 +71,8 @@
             <div id="flip1" data-flip-role="frontFace">
                 <div>
                     <a href="javascript:void(0);" data-flip-role="trigger" data-flip-action="backFace" title="查看照片信息"
-                       style="width:190px;height:150px;display:block;text-align:cengter;background:#000;">
-                        front
+                       style="width:190px;height:150px;display:block;text-align:center;background:#000;-webkit-border-radius: 5px;-webkit-shadow:2px 2px 2px #000">
+                        <img src="demo.jpeg" alt="front" width="190" height="150px" />
                     </a>
                 </div>
             </div>
@@ -89,11 +89,11 @@
         <div class="highlight">
             <pre><span class="kd">var</span> <span class="nx">flip</span><span class="p">;</span>
     <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span
-                        class="s1">&#39;flip&#39;</span><span class="p">,</span> <span class="kd">function</span> <span
-                        class="p">(</span><span class="nx">Flip</span><span class="p">)</span> <span class="p">{</span>
+                    class="s1">&#39;flip&#39;</span><span class="p">,</span> <span class="kd">function</span> <span
+                    class="p">(</span><span class="nx">Flip</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">flip</span> <span class="o">=</span> <span class="k">new</span> <span
-                        class="nx">Flip</span><span class="p">({</span><span class="nx">element</span><span
-                        class="o">:</span><span class="s2">&quot;.flip_container&quot;</span><span class="p">});</span>
+                    class="nx">Flip</span><span class="p">({</span><span class="nx">element</span><span
+                    class="o">:</span><span class="s2">&quot;.flip_container&quot;</span><span class="p">});</span>
     <span class="p">});</span>
 </pre>
         </div>
@@ -111,8 +111,8 @@
         $('#nav-test').click(function() {
             var href = $(this).attr('href');
             var iframe = '<div class="container"><iframe src="' +
-                    href + '" frameborder="0" width="100%" height="640">' +
-                    '</iframe></div>';
+                href + '" frameborder="0" width="100%" height="640">' +
+                '</iframe></div>';
             $('#main').html(iframe);
             !!history.pushState && history.pushState(null, 'Test', href);
             return false;

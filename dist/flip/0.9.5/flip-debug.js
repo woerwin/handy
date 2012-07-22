@@ -1,7 +1,7 @@
 // flip
 // =======
 // 轩与@http://weibo.com/semious
-define(function (require, exports, module) {
+define(function(require, exports, module) {
     var Widget = require('widget'),
         $ = require('$'),
         Flip;
@@ -13,9 +13,16 @@ define(function (require, exports, module) {
 
             frontNode:null,
             backNode:null,
+            contarinrCSS2D:{
+                readonly:true
+            },
             containerCSS3D:{
                 "-webkit-perspective":"1000",
                 "-webkit-perspective-origin":"50% 50%",
+                readonly:true
+            },
+            flipCSS2D:{
+                "position":"relative",
                 readonly:true
             },
             flipCSS3D:{
@@ -34,7 +41,7 @@ define(function (require, exports, module) {
             triggers:[]
         },
         // 解析DOM元素
-        parseElement:function () {
+        parseElement:function() {
             Flip.superclass.parseElement.call(this);
 
             // 将 html 用户定义属性进行解析为相应的属性/对象
@@ -54,13 +61,13 @@ define(function (require, exports, module) {
         },
 
         // 初始化 flip 组件
-        setup:function () {
+        setup:function() {
             // 初始化相应结构的CSS样式
-            this._initCSS();
+            this._init3DCSS();
         },
 
         // 初始化相关事件
-        delegateEvents:function () {
+        delegateEvents:function() {
             Flip.superclass.delegateEvents.call(this);
 
             var i, action,
@@ -70,14 +77,14 @@ define(function (require, exports, module) {
                 action = $(this.get("triggers")[i]).data('flipAction') || "flipBack";
                 switch (action) {
                     case "flipFront":
-                        $(this.get("triggers")[i]).bind("click.flip", function (e) {
+                        $(this.get("triggers")[i]).bind("click.flip", function(e) {
                             e.preventDefault();
                             that.flip("front");
                         });
                         break;
                     case "flipBack":
                     default:
-                        $(this.get("triggers")[i]).bind("click.flip", function (e) {
+                        $(this.get("triggers")[i]).bind("click.flip", function(e) {
                             e.preventDefault();
                             that.flip("back");
                         });
@@ -87,7 +94,7 @@ define(function (require, exports, module) {
         },
 
         //Flip 类的方法
-        flip:function (face) {
+        flip:function(face) {
             // 如果动画正在进行中或者没有源节点或者已经是该 face ，则不做任何处理
             if (this._animating || !this.element || face == this.face) {
                 return;
@@ -99,7 +106,7 @@ define(function (require, exports, module) {
         },
 
         // 开始渲染3D界面
-        _startFlip3D:function () {
+        _startFlip3D:function() {
             var that = this;
             switch (this.get("direction")) {
                 case "ltr":
@@ -135,7 +142,7 @@ define(function (require, exports, module) {
 
             // 触发自定义事件
             this.trigger('transitionStart', this);
-            $(this.viewport).bind("webkitTransitionEnd", function () {
+            $(this.viewport).bind("webkitTransitionEnd", function() {
                 that._end();
             });
             //为 viewport 加载终点的样式定义
@@ -143,14 +150,14 @@ define(function (require, exports, module) {
         },
 
         // 翻转结束 释放临时使用资源
-        _end:function () {
+        _end:function() {
             // 触发自定义事件
             this.trigger('transitionEnd', this);
             this._removeEvent();
             this._animating = false;
         },
 
-        _wrapFlip:function () {
+        _wrapFlip:function() {
             var container = $(this.srcNode),
                 pageViewPort = $('<div data-flip-role="viewport"></div>');
 
@@ -160,7 +167,7 @@ define(function (require, exports, module) {
         },
 
         // 初始化关键元素的 css 样式
-        _initCSS:function () {
+        _init3DCSS:function() {
             //add CSS prefilp style
             this.element.css(this.get("containerCSS3D"));
             $(this.viewport).css(this.get("flipCSS3D"));
@@ -179,7 +186,7 @@ define(function (require, exports, module) {
         },
 
         // 移除动画结束事件
-        _removeEvent:function () {
+        _removeEvent:function() {
             $(this.viewport).unbind("webkitTransitionEnd");
         }
     });
