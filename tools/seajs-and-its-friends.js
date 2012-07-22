@@ -7,7 +7,7 @@
     m.define = f(2);
     u = o.createElement('script');
     u.id = d + 'node';
-    u.src = '/handy/dist/seajs/1.1.9/sea.js';
+    u.src = '/jf/handy/dist/seajs/1.1.9/sea.js';
     l = o.getElementsByTagName('head')[0];
     l.insertBefore(u, l.firstChild);
 })(window, document, 'seajs');
@@ -45,7 +45,7 @@ seajs.config({
         'slide': 'switchable/0.9.5/slide',                   // 90%
         'accordion': 'switchable/0.9.5/accordion',           // 90%
         'carousel': 'switchable/0.9.5/carousel',             // 90%
-        'flip': 'flip/0.9.5/flip',             // 90%
+        'flip': 'flip/0.9.5/flip-debug',             // 90%
         'parser': 'parser/0.9.0/parser',
         'pageTransition': 'pageTransition/0.9.1/pageTransition',
         'storage': 'storage/0.9.0/storage',
