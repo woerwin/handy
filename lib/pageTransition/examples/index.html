@@ -1,73 +1,85 @@
-<style type="text/css">
-        a{
-            text-decoration:none;
-        }
-        .box {
-            width: auto;
-            margin: 0;
-            padding: 0;
-        }
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="format-detection" content="email=no"/>
+        <title>pageTransition</title>
+        <style type="text/css">
+            a{
+                text-decoration:none;
+            }
+            .box {
+                width: auto;
+                margin: 0;
+                padding: 0;
+            }
 
-        caption {
-            text-align: left;
-        }
+            caption {
+                text-align: left;
+            }
 
-        td {
-            text-align: left;
-        }
+            td {
+                text-align: left;
+            }
 
-        table {
-            margin: 10px 0;
-        }
+            table {
+                margin: 10px 0;
+            }
 
-        table td:first-child {
-            width: 100px;
-        }
-        .des{
-            background:#F0F1F8;
-            border:1px solid #D4D8EB;
-            padding:10px;
-            line-height:22px;
-        }
-        pre,code{
-            padding:10px;
-            background:#FCFBFA;
-            border:1px solid #EFEEED;
-            border-left-width:5px;
-        }
-        .bar{
-            height:40px;
-            background:black;
-            color:#fff;
-            text-align:center;
-            margin:0 0 20px 0;
-            font-size:14px;
-            line-height:40px;
-        }
-        body{
-            padding:0;
-            margin:0;
-        }
-        .des{
-            margin:0 30px;
-        }
-        .back{
-            font-size:14px;
-        }
-        #J-bottom-btns{
-            margin-top:50px;
-            text-align:center;
-        }
-        #J-bottom-btns a{
-            color:#fff;
-            text-align:center;
-            display:block;
-            margin-bottom:10px;
-            background:#000;
-            padding:5px;
-        }
-</style>
-
+            table td:first-child {
+                width: 100px;
+            }
+            .des{
+                background:#F0F1F8;
+                border:1px solid #D4D8EB;
+                padding:10px;
+                line-height:22px;
+            }
+            pre,code{
+                padding:10px;
+                background:#FCFBFA;
+                border:1px solid #EFEEED;
+                border-left-width:5px;
+            }
+            .bar{
+                height:40px;
+                background:black;
+                color:#fff;
+                text-align:center;
+                margin:0 0 20px 0;
+                font-size:14px;
+                line-height:40px;
+            }
+            body{
+                padding:0;
+                margin:0;
+            }
+            .des{
+                margin:0 30px;
+            }
+            .back{
+                font-size:14px;
+            }
+            #J-bottom-btns{
+                margin-top:50px;
+                text-align:center;
+            }
+            #J-bottom-btns a{
+                color:#fff;
+                text-align:center;
+                display:block;
+                margin-bottom:10px;
+                background:#000;
+                padding:5px;
+            }
+        </style>
+        <script src="../../../tools/seajs-and-its-friends.js"></script>
+</head>
+    <body>
 <div class="box">
     <div id="J-page-box">
         <section data-pageTransition-role="page">
@@ -163,7 +175,7 @@ page:
     <a href="javascript:void(0)" data-pageTransition-role="3">PageTransition 嵌套</a>
 </nav>
 
-```javascript
+<script>
     var getDom = function (dom) {
         return document.querySelector(dom);
     };
@@ -219,4 +231,6 @@ page:
             }
         });
     });
-```
+</script>
+    </body>
+</html>
