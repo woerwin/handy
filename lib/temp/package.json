@@ -1,0 +1,16 @@
+{
+    "version": "0.9.5",
+    "name": "temp",
+    "output": {
+        "donation.js": "seajs",
+    },
+    "dependencies": {
+        "zepto": "zepto/0.9.0/zepto",
+        "$": "zepto/0.9.0/zepto",
+        "handlebars": "handlebars/1.0.0/handlebars",
+        "pageTransition": "pageTransition/0.9.3/pageTransition",
+        "validator-core": "validator/0.8.4/core",
+        "overlay": "overlay/0.9.1/overlay",
+        "mask": "overlay/0.9.1/mask"
+    }
+}
