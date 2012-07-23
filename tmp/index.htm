@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>爱心捐赠</title>
+    <link type="text/css" rel="stylesheet" href="../css/default.css">
+    <style type="text/css">
+        html,body{
+            background: none;
+        }
+    </style>
+    <script src="../handy/seajs/1.2.0/sea.js"></script>
+    <script>
+        //seajs config
+        seajs.config({
+            alias: {
+                '~':'https://a.alipayobjects.com/',
+                '$': 'zepto/0.9.0/zepto',
+                'zepto': 'zepto/0.9.0/zepto',
+                'underscore': 'underscore/1.3.3/underscore',
+                'json': 'json/1.0.2/json',
+                'handlebars': 'handlebars/1.0.0/handlebars',
+                'moment': 'moment/1.6.2/moment',
+                'async': 'async/0.1.18/async',
+                'store': 'store/1.3.3/store',
+                'swfobject': 'swfobject/2.2.0/swfobject',
+                'backbone': 'backbone/0.9.2/backbone',
+                'jasmine': 'jasmine/1.1.0/jasmine-html',
+                'events': 'events/0.9.1/events',
+                'class': 'class/0.9.2/class',
+                'base': 'base/0.9.15/base',
+                'widget': 'widget/0.9.15/widget',
+                'templatable': 'widget/0.9.15/templatable',
+                'daparser': 'widget/0.9.15/daparser',
+                'cookie': 'cookie/1.0.2/cookie',
+                'easing': 'easing/0.9.2/easing',
+                'iframe-shim': 'iframe-shim/0.9.1/iframe-shim',
+                'position': 'position/0.9.0/position',
+                'validator-core': 'validator/0.8.4/core',
+                'validator': 'validator/0.8.4/validator',
+                'overlay': 'overlay/0.9.1/overlay',
+                'mask': 'overlay/0.9.1/mask',
+                'dialog': 'dialog/0.9.0/dialog',
+                'dropdown': 'triggerable/0.9.3/dropdown',
+                'tabs': 'switchable/0.9.4/tabs',
+                'slide': 'switchable/0.9.4/slide',
+                'accordion': 'switchable/0.9.4/accordion',
+                'carousel': 'switchable/0.9.4/carousel',
+                'pageTransition': 'pageTransition/0.9.2/pageTransition',
+                'iscroll': 'iscroll/0.9.2/iscroll'
+            }
+        });
+        //hybrid config
+        (function () {
+            var protocol = document.location.protocol,
+                    _server = protocol == 'file:' ? 'http://wap.n44.alipay.net' : '',
+                    config = {
+                        //如果是本地协议，则判定为客户端处理
+                        isAlipayClient: protocol == 'file:' ? true : false,
+                        //一般指当前wap服务器
+                        server: _server,
+                        //常用url
+                        URL: {
+                            alias: {
+                                'index': _server + '/home/appIndex.htm',
+                                'AppCenter': _server + '/personal/lifeHelper.htm',
+                                'login': _server + '/login.htm'
+                            }
+                        },
+                        //业务相关请求url
+                        datasource: {
+                            alias: {
+                                'donation-list': _server + '/personal/donationListH.json',
+                                'donation-detail': _server + '/personal/donationDetail.json',
+                                'donation-apply': _server + '/personal/donationApply.json',
+                                'donation-confirm': _server + '/personal/confirmDonation.json'
+                            }
+                        }
+                    };
+            window.hybridConfig = config;
+        })();
+    </script>
+
+    <script src="../js/hybridapi.js"></script>
+</head>
+<body>
+<div id="consoleMsg"></div>
+<div id="main"></div>
+
+<script id="page-box-tpl" type="text/x-handlebars-template">
+    <div id="J-page-box">
+        <div id="J-page-1" data-pageTransition-role="page"></div>
+    </div>
+    <div id="J-page-2" class="hide" data-pageTransition-role="page"></div>
+    <div id="J-page-3" class="hide" data-pageTransition-role="page"></div>
+</script>
+
+<script id="donationList-tpl" type="text/x-handlebars-template">
+    <article class="data-list contacts" id="J-donationDataList">
+        <p style="text-align:center;margin-top:120px;font-size:18px;color:#999;">加载中…</p>
+    </article>
+    <section class="hide" id="J-moreTrigger">
+        <a href="#" data-action="more">更多</a>
+        <a href="#top" data-action="top">
+            <section class="layout-flex"> <b>回顶部<span class="icon-arrow icon-top" style="display:block;position:static;"></span></b> </section>
+        </a>
+    </section>
+</script>
+
+<script id="donationListItem-tpl" type="text/x-handlebars-template">
+    <article class="box-skin">
+        <section class="box">
+            <a href="#" class="layout-flex btn-list" data-nextPage="#J-page-2" data-value="{{datavalue}}"><span class="flex">{{data.donate_show_name}}</span> <ins class="icon-arrow icon-arrow-right block"></ins></a>
+        </section>
+    </article>
+</script>
+
+<script id="noDonationItem-tpl" type="text/x-handlebars-template">
+    <p style="text-align:center;margin-top:120px;font-size:18px;color:#999;">暂时没有捐赠内容。</p>
+</script>
+
+<script id="donationDetail-tpl" type="text/x-handlebars-template">
+    <h3 class="title-top">{{title}}</h3>
+    <section class="box-alpaha pd-lr10 ">
+        <article class="t-gray">
+            <div class="donation-detail">{{detail}}</div>
+            <a href="#" class="more hide">查看详情</a>
+        </article>
+        <div class="line"></div>
+        <form action="null.htm" method="post" id="donationForm" data-nextPage="#J-page-3">
+            <div class="layout-flex mg-b8 flex-default">
+                <p style="line-height:32px;">我要捐：</p>
+                <span class="btn btn-default flex" data-donationamount="20">20元</span>
+                <ins class="space"></ins>
+                <span class="btn btn-default flex" data-donationamount="50">50元</span>
+                <ins class="space"></ins>
+                <span class="btn btn-default flex" data-donationamount="100">100元</span>
+            </div>
+            <div class="fm-item">
+                <div class="fm-field">
+                    <input type="text" class="flex" placeholder="其他金额" value="" name="amount">
+                    <ins class="space"></ins>
+                    <p>元</p>
+                </div>
+            </div>
+            <div class="fm-item">
+                <input id="J-donationApply-trigger" type="button"
+                       class="btn btn-ok" value="捐款">
+            </div>
+        </form>
+    </section>
+</script>
+
+<script id="donationApply-tpl" type="text/x-handlebars-template">
+    <h3 class="title-top">{{donate_title}}</h3>
+    <section class="box-skin">
+        <article class="box payment-list t-2em">
+            <div class="layout-flex">
+                <p>受赠与方</p>
+                <ins class="flex"></ins>
+                <p>{{ngo_name}}</p>
+            </div>
+            <div class="layout-flex">
+                <p>赠与事由</p>
+                <ins class="flex"></ins>
+                <p>{{donate_title}}</p>
+            </div>
+            <div class="layout-flex">
+                <p>赠与金额</p>
+                <ins class="flex"></ins>
+                <p>{{amount}} 元</p>
+            </div>
+        </article>
+    </section>
+    <section class="box-alpaha box-container">
+        <div class="fm-item">
+            <input type="submit" class="btn btn-ok" id="J-pay-trigger" value="确定">
+        </div>
+    </section>
+</script>
+<script>
+    var t1=0,t2=0,setConsole=function(){
+        var html='';
+        for(var i=0;i<arguments.length;i++){
+            html+=arguments[i]+',';
+        }
+        document.querySelector('#consoleMsg').innerHTML+=html;
+    };
+    seajs.use(['zepto'], function ($) {
+        t1=(new Date()).getTime();
+        setConsole([1,t1,t2,t2-t1]);
+    });
+    seajs.use(['zepto', 'handlebars'], function ($, Handlebars, PageTransition, Validator, Overlay, Mask) {
+        t2=(new Date()).getTime();
+        setConsole([2,t1,t2,t2-t1]);
+    });
+    seajs.use(['zepto', 'handlebars', 'pageTransition'], function ($, Handlebars, PageTransition, Validator, Overlay, Mask) {
+        t2=(new Date()).getTime();
+        setConsole([3,t1,t2,t2-t1]);
+    });
+    seajs.use(['zepto', 'handlebars', 'pageTransition', 'validator-core'], function ($, Handlebars, PageTransition, Validator, Overlay, Mask) {
+        t2=(new Date()).getTime();
+        setConsole([4,t1,t2,t2-t1]);
+    });
+    seajs.use(['zepto', 'handlebars', 'pageTransition', 'validator-core', 'overlay'], function ($, Handlebars, PageTransition, Validator, Overlay, Mask) {
+        t2=(new Date()).getTime();
+        setConsole([5,t1,t2,t2-t1]);
+    });
+    seajs.use(['zepto', 'handlebars', 'pageTransition', 'validator-core', 'overlay', 'mask'], function ($, Handlebars, PageTransition, Validator, Overlay, Mask) {
+        t2=(new Date()).getTime();
+        setConsole([6,t1,t2,t2-t1]);
+    });
+    //通用处理
+    seajs.use(['zepto'], function ($) {
+        //合理选用事件
+        $(document).ready(function () {
+            var TOUCH_EV = 'ontouchstart' in window ? 'click' : 'click';
+            //绑定顶部菜单
+            $('#J_menu')[TOUCH_EV](function (e) {
+                e.preventDefault();
+                var target = $('#header'),
+                        subMenus = $('#subMenus');
+                if (!target.hasClass('active')) {
+                    subMenus.css('height', '0px');
+                    subMenus.show();
+                    target.addClass('active');
+                    subMenus.animate({
+                        height: '62px'
+                    }, 200, 'ease');
+                } else {
+                    target.removeClass('active');
+                    subMenus.animate({
+                        height: '0px'
+                    }, 200, 'ease', function () {
+                        subMenus.hide();
+                    });
+                }
+            });
+            //绑定返回按钮
+            $('[data-page-action=back]').live(TOUCH_EV, function (e) {
+                e.preventDefault();
+                //此处一定要写完整路径，避免pageflow初使化有问题
+                hybridapi.pageflow.back();
+            });
+        });
+    });
+</script>
+<script src="../js/app.donation.js"></script>
+<script src="http://m.static.alipay.net:1234/target/target-script-min.js#anonymous"></script>
+</body>
+</html>
+
+
