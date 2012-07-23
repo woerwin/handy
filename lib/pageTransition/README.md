@@ -90,7 +90,7 @@ define(function (require){
 ###配置参数
  - `element` 外层容器
  - `duration` 动画帧频。默认为 300
- - `effect` 动画模式。默认为 transition，如果觉得的 transition 不满意的话，可以指定为 margin。
+ - `effect` 动画模式。默认为 transition，如果觉得 transition 不满意的话，可以指定为 margin。
  当指定 effect 为 null 时，表示无动画效果。
 
 ###render `pageTransition.render()`
