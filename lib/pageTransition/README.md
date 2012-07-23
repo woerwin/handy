@@ -87,6 +87,12 @@ define(function (require){
   <a href="javascript:void(0)" data-pageTransition-role="trigger" data-pageTransition-action="back">点击这里也可以返回</a>
 </div>
 ```
+###配置参数
+ - `element` 外层容器
+ - `duration` 动画帧频。默认为 300
+ - `effect` 动画模式。默认为 transition，如果觉得的 transition 不满意的话，可以指定为 margin。
+ 当指定 effect 为 null 时，表示无动画效果。
+
 ###render `pageTransition.render()`
 渲染 `pageTransition` 实例化对象
 
