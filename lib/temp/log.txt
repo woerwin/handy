@@ -1,0 +1,316 @@
+port----> 8000
+
+  Successfully clean project!
+
+>>>  PORCESS MODULE donation.js
+>>>  GENERATE ID    #temp/0.9.5/donation
+>>>  FOUND DEPENDENCIES "donation.js":  [ 'zepto',
+  'handlebars',
+  'pageTransition',
+  'validator-core',
+  'overlay',
+  'mask' ]
+>>>  BEGIN RESOLVE GLOBAL DEPENDENCIES ...... [ 'zepto',
+  'handlebars',
+  'pageTransition',
+  'validator-core',
+  'overlay',
+  'mask' ]
+fetch module zepto/0.9.0/zepto
+fetch module handlebars/1.0.0/handlebars
+fetch module pageTransition/0.9.3/pageTransition
+fetch module validator/0.8.4/core
+fetch module overlay/0.9.1/overlay
+fetch module overlay/0.9.1/mask
+>>>  GET http://127.0.0.1:8002/zepto/0.9.0/zepto.tgz
+>>>  GET http://127.0.0.1:8002/handlebars/1.0.0/handlebars.tgz
+>>>  GET http://127.0.0.1:8002/pageTransition/0.9.3/pageTransition.tgz
+>>>  GET http://127.0.0.1:8002/validator/0.8.4/validator.tgz
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  HTTP 200
+>>>  HTTP 200
+>>>  HTTP 200
+>>>  HTTP 200
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/validator/0.8.4/validator.tgz
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/pageTransition/0.9.3/pageTransition.tgz
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/handlebars/1.0.0/handlebars.tgz
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/zepto/0.9.0/zepto.tgz
+resetGlobalModuleId----> overlay #overlay/0.9.1/overlay
+resetGlobalModuleId----> pageTransition undefined
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+resetGlobalModuleId----> validator-core undefined
+resetGlobalModuleId----> handlebars #handlebars/1.0.0/handlebars
+resetGlobalModuleId----> mask #overlay/0.9.1/mask
+resetGlobalModuleId----> zepto undefined
+>>>  RESOLVE DEPENDENCIES "donation.js":  [ 'overlay/0.9.1/overlay',
+  '#zepto/0.9.0/zepto',
+  '#position/0.9.0/position',
+  '#android-shim/0.9.0/android-shim',
+  '#widget/0.9.16/widget-mobile',
+  '#base/0.9.16/base',
+  '#class/0.9.2/class',
+  '#events/0.9.1/events',
+  '#base/0.9.16/aspect',
+  '#base/0.9.16/attribute',
+  '#widget/0.9.16/daparser-mobile',
+  '#widget/0.9.16/auto-render-mobile',
+  'undefined',
+  'handlebars/1.0.0/handlebars',
+  'overlay/0.9.1/mask',
+  '#overlay/0.9.1/overlay' ]
+>>>  COPY FILE donation.js
+{ '#temp/0.9.5/donation': 
+   [ 'overlay/0.9.1/overlay',
+     '#zepto/0.9.0/zepto',
+     '#position/0.9.0/position',
+     '#android-shim/0.9.0/android-shim',
+     '#widget/0.9.16/widget-mobile',
+     '#base/0.9.16/base',
+     '#class/0.9.2/class',
+     '#events/0.9.1/events',
+     '#base/0.9.16/aspect',
+     '#base/0.9.16/attribute',
+     '#widget/0.9.16/daparser-mobile',
+     '#widget/0.9.16/auto-render-mobile',
+     'undefined',
+     'handlebars/1.0.0/handlebars',
+     'overlay/0.9.1/mask',
+     '#overlay/0.9.1/overlay' ] }
+
+ The plugin resources completed successfully!
+
+fetch module overlay/0.9.1/overlay-debug
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+fetch module overlay/0.9.1/overlay
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+fetch module #zepto/0.9.0/zepto-debug
+>>>  GET http://127.0.0.1:8002/zepto/0.9.0/zepto.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/zepto/0.9.0/zepto.tgz
+fetch module #zepto/0.9.0/zepto
+>>>  GET http://127.0.0.1:8002/zepto/0.9.0/zepto.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/zepto/0.9.0/zepto.tgz
+fetch module #position/0.9.0/position-debug
+>>>  GET http://127.0.0.1:8002/position/0.9.0/position.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/position/0.9.0/position.tgz
+fetch module #position/0.9.0/position
+>>>  GET http://127.0.0.1:8002/position/0.9.0/position.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/position/0.9.0/position.tgz
+fetch module #android-shim/0.9.0/android-shim-debug
+>>>  GET http://127.0.0.1:8002/android-shim/0.9.0/android-shim.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/android-shim/0.9.0/android-shim.tgz
+fetch module #android-shim/0.9.0/android-shim
+>>>  GET http://127.0.0.1:8002/android-shim/0.9.0/android-shim.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/android-shim/0.9.0/android-shim.tgz
+fetch module #widget/0.9.16/widget-mobile-debug
+>>>  GET http://127.0.0.1:8002/widget/0.9.16/widget.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/widget/0.9.16/widget.tgz
+fetch module #widget/0.9.16/widget-mobile
+>>>  GET http://127.0.0.1:8002/widget/0.9.16/widget.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/widget/0.9.16/widget.tgz
+fetch module #base/0.9.16/base-debug
+>>>  GET http://127.0.0.1:8002/base/0.9.16/base.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/base/0.9.16/base.tgz
+fetch module #base/0.9.16/base
+>>>  GET http://127.0.0.1:8002/base/0.9.16/base.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/base/0.9.16/base.tgz
+fetch module #class/0.9.2/class-debug
+>>>  GET http://127.0.0.1:8002/class/0.9.2/class.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/class/0.9.2/class.tgz
+fetch module #class/0.9.2/class
+>>>  GET http://127.0.0.1:8002/class/0.9.2/class.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/class/0.9.2/class.tgz
+fetch module #events/0.9.1/events-debug
+>>>  GET http://127.0.0.1:8002/events/0.9.1/events.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/events/0.9.1/events.tgz
+fetch module #events/0.9.1/events
+>>>  GET http://127.0.0.1:8002/events/0.9.1/events.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/events/0.9.1/events.tgz
+fetch module #base/0.9.16/aspect-debug
+>>>  GET http://127.0.0.1:8002/base/0.9.16/base.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/base/0.9.16/base.tgz
+fetch module #base/0.9.16/aspect
+>>>  GET http://127.0.0.1:8002/base/0.9.16/base.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/base/0.9.16/base.tgz
+fetch module #base/0.9.16/attribute-debug
+>>>  GET http://127.0.0.1:8002/base/0.9.16/base.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/base/0.9.16/base.tgz
+fetch module #base/0.9.16/attribute
+>>>  GET http://127.0.0.1:8002/base/0.9.16/base.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/base/0.9.16/base.tgz
+fetch module #widget/0.9.16/daparser-mobile-debug
+>>>  GET http://127.0.0.1:8002/widget/0.9.16/widget.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/widget/0.9.16/widget.tgz
+fetch module #widget/0.9.16/daparser-mobile
+>>>  GET http://127.0.0.1:8002/widget/0.9.16/widget.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/widget/0.9.16/widget.tgz
+fetch module #widget/0.9.16/auto-render-mobile-debug
+>>>  GET http://127.0.0.1:8002/widget/0.9.16/widget.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/widget/0.9.16/widget.tgz
+fetch module #widget/0.9.16/auto-render-mobile
+>>>  GET http://127.0.0.1:8002/widget/0.9.16/widget.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/widget/0.9.16/widget.tgz
+fetch module undefined-debug
+>>>  GET http://127.0.0.1:8002/undefined-debug/..tgz
+>>>  HTTP 404
+fetch module undefined
+>>>  GET http://127.0.0.1:8002/undefined/..tgz
+>>>  HTTP 404
+fetch module handlebars/1.0.0/handlebars-debug
+>>>  GET http://127.0.0.1:8002/handlebars/1.0.0/handlebars.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/handlebars/1.0.0/handlebars.tgz
+fetch module handlebars/1.0.0/handlebars
+>>>  GET http://127.0.0.1:8002/handlebars/1.0.0/handlebars.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/handlebars/1.0.0/handlebars.tgz
+fetch module overlay/0.9.1/mask-debug
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+fetch module overlay/0.9.1/mask
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+fetch module #overlay/0.9.1/overlay-debug
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+fetch module #overlay/0.9.1/overlay
+>>>  GET http://127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  HTTP 200
+>>>  UNPACK /Users/kanghui/.spm/sources/127.0.0.1:8002/overlay/0.9.1/overlay.tgz
+>>>  filter local Require ----->  require('zepto') zepto
+>>>  filter local Require 2----->  require('zepto') zepto undefined -debug { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('handlebars') handlebars
+>>>  filter local Require 2----->  require('handlebars') handlebars #handlebars/1.0.0/handlebars -debug { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('pageTransition') pageTransition
+>>>  filter local Require 2----->  require('pageTransition') pageTransition undefined -debug { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('validator-core') validator-core
+>>>  filter local Require 2----->  require('validator-core') validator-core undefined -debug { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('overlay') overlay
+>>>  filter local Require 2----->  require('overlay') overlay #overlay/0.9.1/overlay -debug { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('mask') mask
+>>>  filter local Require 2----->  require('mask') mask #overlay/0.9.1/mask -debug { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('zepto') zepto
+>>>  filter local Require 2----->  require('zepto') zepto undefined  { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('handlebars') handlebars
+>>>  filter local Require 2----->  require('handlebars') handlebars #handlebars/1.0.0/handlebars  { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('pageTransition') pageTransition
+>>>  filter local Require 2----->  require('pageTransition') pageTransition undefined  { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('validator-core') validator-core
+>>>  filter local Require 2----->  require('validator-core') validator-core undefined  { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('overlay') overlay
+>>>  filter local Require 2----->  require('overlay') overlay #overlay/0.9.1/overlay  { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+>>>  filter local Require ----->  require('mask') mask
+>>>  filter local Require 2----->  require('mask') mask #overlay/0.9.1/mask  { zepto: undefined,
+  '$': 'zepto/0.9.0/zepto',
+  handlebars: '#handlebars/1.0.0/handlebars',
+  pageTransition: undefined,
+  'validator-core': undefined,
+  overlay: '#overlay/0.9.1/overlay',
+  mask: '#overlay/0.9.1/mask' }
+
+ The plugin merge completed successfully!
+
+
+ The plugin compress completed successfully!
+
+ upload tar temp.tgz to/Users/kanghui/.spm/sources/127.0.0.1:8002/temp/0.9.5
+success upload module tar to local!
+uploadTarTo /Users/kanghui/.spm/sources/127.0.0.1:8002/temp/0.9.5/temp.tgz http://127.0.0.1:8002
