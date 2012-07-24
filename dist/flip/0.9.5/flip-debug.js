@@ -22,22 +22,29 @@ define(function(require, exports, module) {
             }
             return false;
         })(),
+
+        // Browser capabilities
+        isAndroid = (/android/gi).test(navigator.appVersion),
+        isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
+        isTouchPad = (/hp-tablet/gi).test(navigator.appVersion),
+
         has3d = prefixStyle('perspective') in dummyStyle;
+//    alert(prefixStyle('perspective') in dummyStyle);
     //释放临时节点
-    dummyStyle = null;
+
 
     module.exports = Flip = Widget.extend({
         attrs:{
             element:null,
             direction:"ltr", // 转动方向 默认从左往右 沿y 轴逆时针旋转,
-            animation:"none",
+            animation:"3D", //3D 2D none
 
             frontNode:null,
             backNode:null,
-            contarinrCSS:{
+            containerCSS:{
                 readonly:true
             },
-            contarinrCSS2D:{
+            containerCSS2D:{
                 readonly:true
             },
             containerCSS3D:{
@@ -55,17 +62,25 @@ define(function(require, exports, module) {
             },
             flipCSS3D:{
                 "-webkit-transform-style":"preserve-3d",
-                "-webkit-transition":"-webkit-transform 0.8s ease",
+                "-webkit-transition":"-webkit-transform 0.5s ease",
                 "position":"relative",
                 readonly:true
             },
-            faceCSS:{
+            frontfaceCSS:{
                 "position":"absolute",
                 "left":0,
                 "top":0,
                 "display":"block",
                 readonly:true
             },
+            backfaceCSS:{
+                "position":"absolute",
+                "left":0,
+                "top":0,
+                "display":"block",
+                readonly:true
+            },
+            face:"back",
             triggers:[]
         },
         // 解析DOM元素
@@ -90,8 +105,9 @@ define(function(require, exports, module) {
 
         // 初始化 flip 组件
         setup:function() {
-            // 初始化相应结构的3DCSS样式
-            if (this.get("animation") == "3D" && has3d) {
+            // 初始化相应结构的 3DCSS 样式
+
+            if (this.get("animation") == "3D" && has3d && !isAndroid) {
                 this._init3DCSS();
             } else {
                 this._initCSS();
@@ -128,11 +144,16 @@ define(function(require, exports, module) {
         //Flip 类的方法
         flip:function(face) {
             // 如果动画正在进行中或者没有源节点或者已经是该 face ，则不做任何处理
-            if (this._animating || !this.element || face == this.face) {
+            if (this._animating || !this.element || (face != undefined && face == this.face)) {
                 return;
             }
-            this.face = face || "back";
-            if (this.get("animation") == "3D" && has3d) {
+            if (face == undefined) {
+                this.face = this.face == "front" ? "back" : "front";
+            } else {
+                this.face = face || "back";
+            }
+
+            if (this.get("animation") == "3D" && has3d && !isAndroid) {
                 this._flip3D();
             } else {
                 this._flip();
@@ -145,17 +166,29 @@ define(function(require, exports, module) {
 
             switch (this.face) {
                 case "front":
-                    this._startFrontFaceCSS = { "display":"none"};
-                    this._endFrontFaceCSS = {"display":"block"};
-                    this._startBackFaceCSS = { "display":"block"};
-                    this._endBackFaceCSS = {"display":"none"};
+                    this._startFrontFaceCSS = {
+                        "-webkit-transition":"opacity 0.5s ease",
+                        "opacity":"0"
+                    };
+                    this._endFrontFaceCSS = {"opacity":"1"};
+                    this._startBackFaceCSS = {
+                        "-webkit-transition":"opacity 0.5s ease",
+                        "opacity":"1"
+                    };
+                    this._endBackFaceCSS = {"opacity":"0"};
                     break;
                 case "back":
                 default:
-                    this._startFrontFaceCSS = { "display":"block"};
-                    this._endFrontFaceCSS = {"dipplay":"none"};
-                    this._startBackFaceCSS = { "display":"none"};
-                    this._endBackFaceCSS = {"display":"block"};
+                    this._startFrontFaceCSS = {
+                        "-webkit-transition":"opacity 0.5s ease",
+                        "opacity":"1"
+                    };
+                    this._endFrontFaceCSS = {"opacity":"0"};
+                    this._startBackFaceCSS = {
+                        "-webkit-transition":"opacity 0.5s ease",
+                        "opacity":"0"
+                    };
+                    this._endBackFaceCSS = {"opacity":"1"};
                     break;
             }
 
@@ -241,8 +274,8 @@ define(function(require, exports, module) {
             //add CSS prefilp style
             this.element.css(this.get("containerCSS3D"));
             $(this.viewport).css(this.get("flipCSS3D"));
-            $(this.get("frontNode")).css(this.get("faceCSS"));
-            $(this.get("backNode")).css(this.get("faceCSS"));
+            $(this.get("frontNode")).css(this.get("frontfaceCSS"));
+            $(this.get("backNode")).css(this.get("backfaceCSS"));
 
             // 在节点上增加翻转所需的属性
             this.get("frontNode") && $(this.get("frontNode")).css({
@@ -259,8 +292,8 @@ define(function(require, exports, module) {
             //add CSS prefilp style
             this.element.css(this.get("containerCSS"));
             $(this.viewport).css(this.get("flipCSS"));
-            $(this.get("frontNode")).css(this.get("faceCSS"));
-            $(this.get("backNode")).css(this.get("faceCSS"));
+            $(this.get("frontNode")).css(this.get("frontfaceCSS"));
+            $(this.get("backNode")).css(this.get("backfaceCSS")).css({"opacity":"0"});
         },
 
         // 移除动画结束事件
@@ -274,4 +307,6 @@ define(function(require, exports, module) {
         style = style.charAt(0).toUpperCase() + style.substr(1);
         return vendor + style;
     }
+
+    dummyStyle = null;
 });
