@@ -37,7 +37,7 @@ define(function(require, exports, module) {
         attrs:{
             element:null,
             direction:"ltr", // 转动方向 默认从左往右 沿y 轴逆时针旋转,
-            animation:"none", //3D 2D none
+            animation:"3D", //3D 2D none
 
             frontNode:null,
             backNode:null,
