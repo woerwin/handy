@@ -37,7 +37,7 @@ define(function(require, exports, module) {
         attrs:{
             element:null,
             direction:"ltr", // 转动方向 默认从左往右 沿y 轴逆时针旋转,
-            animation:"3D", //3D 2D none
+            animation:"none", //3D 2D none
 
             frontNode:null,
             backNode:null,
@@ -54,16 +54,19 @@ define(function(require, exports, module) {
             },
             flipCSS:{
                 "position":"relative",
+                "height":"100%",
                 readonly:true
             },
             flipCSS2D:{
                 "position":"relative",
+                "height":"100%",
                 readonly:true
             },
             flipCSS3D:{
                 "-webkit-transform-style":"preserve-3d",
                 "-webkit-transition":"-webkit-transform 0.5s ease",
                 "position":"relative",
+                "height":"100%",
                 readonly:true
             },
             frontfaceCSS:{
@@ -148,7 +151,7 @@ define(function(require, exports, module) {
                 return;
             }
             if (face == undefined) {
-                this.face = this.face == "front" ? "back" : "front";
+                this.face = this.face == "back" ? "front" : "back";
             } else {
                 this.face = face || "back";
             }
