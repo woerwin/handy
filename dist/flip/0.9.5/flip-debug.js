@@ -203,7 +203,7 @@ define(function(require, exports, module) {
             setTimeout(function() {
                 $(that.get("frontNode")).css(that._endFrontFaceCSS);
                 $(that.get("backNode")).css(that._endBackFaceCSS);
-            }, 10);
+            }, 100);
         },
 
         // 开始渲染 2D 界面
