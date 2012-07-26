@@ -247,10 +247,13 @@ define(function(require, exports, module) {
             this._animating = true;
 
             // 触发自定义事件
-            this.trigger('transitionStart', this);
-            $(this.viewport).bind("webkitTransitionEnd", function() {
+//            this.trigger('transitionStart', this);
+//            $(this.viewport).bind("webkitTransitionEnd", function() {
+//                that._flip3DEnd();
+//            });
+            setTimeout(function(){
                 that._flip3DEnd();
-            });
+            },500);
             //为 viewport 加载终点的样式定义
             $(this.viewport).css(this._endCSS);
         },
