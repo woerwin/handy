@@ -110,7 +110,7 @@ define(function(require, exports, module) {
         setup:function() {
             // 初始化相应结构的 3DCSS 样式
 
-            if (this.get("animation") == "3D" && has3d && isAndroid ) {
+            if (this.get("animation") == "3D" && has3d && !isAndroid ) {
                 this._init3DCSS();
             } else {
                 this._initCSS();
@@ -156,7 +156,7 @@ define(function(require, exports, module) {
                 this.face = face || "back";
             }
 
-            if (this.get("animation") == "3D" && has3d && isAndroid ) {
+            if (this.get("animation") == "3D" && has3d && !isAndroid ) {
                 this._flip3D();
             } else {
                 this._flip();
