@@ -64,7 +64,7 @@ define(function(require, exports, module) {
             },
             flipCSS3D:{
                 "-webkit-transform-style":"preserve-3d",
-                "-webkit-transition":"-webkit-transform 0.5s ease",
+                "-webkit-transition":"-webkit-transform 0.3s ease",
                 "position":"relative",
                 "height":"100%",
                 readonly:true
@@ -170,12 +170,12 @@ define(function(require, exports, module) {
             switch (this.face) {
                 case "front":
                     this._startFrontFaceCSS = {
-                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"0"
                     };
                     this._endFrontFaceCSS = {"opacity":"1"};
                     this._startBackFaceCSS = {
-                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"1"
                     };
                     this._endBackFaceCSS = {"opacity":"0"};
@@ -183,12 +183,12 @@ define(function(require, exports, module) {
                 case "back":
                 default:
                     this._startFrontFaceCSS = {
-                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"1"
                     };
                     this._endFrontFaceCSS = {"opacity":"0"};
                     this._startBackFaceCSS = {
-                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"0"
                     };
                     this._endBackFaceCSS = {"opacity":"1"};
