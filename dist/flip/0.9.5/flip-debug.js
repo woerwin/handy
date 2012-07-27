@@ -64,7 +64,7 @@ define(function(require, exports, module) {
             },
             flipCSS3D:{
                 "-webkit-transform-style":"preserve-3d",
-                "-webkit-transition":"-webkit-transform 0.3s ease",
+                "-webkit-transition":"-webkit-transform 0.5s ease",
                 "position":"relative",
                 "height":"100%",
                 readonly:true
