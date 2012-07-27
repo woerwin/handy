@@ -64,7 +64,7 @@ define(function(require, exports, module) {
             },
             flipCSS3D:{
                 "-webkit-transform-style":"preserve-3d",
-                "-webkit-transition":"-webkit-transform 0.5s ease",
+                "-webkit-transition":"-webkit-transform 0.3s ease",
                 "position":"relative",
                 "height":"100%",
                 readonly:true
@@ -110,7 +110,7 @@ define(function(require, exports, module) {
         setup:function() {
             // 初始化相应结构的 3DCSS 样式
 
-            if (this.get("animation") == "3D" && has3d && isAndroid ) {
+            if (this.get("animation") == "3D" && has3d ) {
                 this._init3DCSS();
             } else {
                 this._initCSS();
@@ -156,7 +156,7 @@ define(function(require, exports, module) {
                 this.face = face || "back";
             }
 
-            if (this.get("animation") == "3D" && has3d && isAndroid ) {
+            if (this.get("animation") == "3D" && has3d ) {
                 this._flip3D();
             } else {
                 this._flip();
@@ -170,12 +170,12 @@ define(function(require, exports, module) {
             switch (this.face) {
                 case "front":
                     this._startFrontFaceCSS = {
-//                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"0"
                     };
                     this._endFrontFaceCSS = {"opacity":"1"};
                     this._startBackFaceCSS = {
-//                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"1"
                     };
                     this._endBackFaceCSS = {"opacity":"0"};
@@ -183,12 +183,12 @@ define(function(require, exports, module) {
                 case "back":
                 default:
                     this._startFrontFaceCSS = {
-//                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"1"
                     };
                     this._endFrontFaceCSS = {"opacity":"0"};
                     this._startBackFaceCSS = {
-//                        "-webkit-transition":"opacity 0.5s ease",
+                        "-webkit-transition":"opacity 0.3s ease",
                         "opacity":"0"
                     };
                     this._endBackFaceCSS = {"opacity":"1"};
